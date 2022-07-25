@@ -1,0 +1,916 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>前端面试题 | 三乘以十的八次幂</title><meta name="keywords" content="前端、后端"><meta name="author" content="三乘以十的八次幂"><meta name="copyright" content="三乘以十的八次幂"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1、VUE 路由原理 通过改变 URL，在不重新请求页面的情况下，更新页面视图。 更新视图但不重新请求页面，是前端路由原理的核心之一，目前在浏览器环境中这一功能的实现主要有 2 种方式： · 利用 URL 中的 hash(“#”); · 利用 History interface 在 HTML5 中新增的方法; 2、VUE 组件通信方式 父子通信： 父向子传递数据是通过 props，子向父是通过 e">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端面试题">
+<meta property="og:url" content="https://bingyangjiao.github.io/2022/07/25/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/index.html">
+<meta property="og:site_name" content="三乘以十的八次幂">
+<meta property="og:description" content="1、VUE 路由原理 通过改变 URL，在不重新请求页面的情况下，更新页面视图。 更新视图但不重新请求页面，是前端路由原理的核心之一，目前在浏览器环境中这一功能的实现主要有 2 种方式： · 利用 URL 中的 hash(“#”); · 利用 History interface 在 HTML5 中新增的方法; 2、VUE 组件通信方式 父子通信： 父向子传递数据是通过 props，子向父是通过 e">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bingyangjiao.github.io/img/13280497753579408.jpg">
+<meta property="article:published_time" content="2022-07-25T01:57:15.000Z">
+<meta property="article:modified_time" content="2022-07-25T01:58:56.473Z">
+<meta property="article:author" content="三乘以十的八次幂">
+<meta property="article:tag" content="前端、后端">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bingyangjiao.github.io/img/13280497753579408.jpg"><link rel="shortcut icon" href="/img/13279652804370799.jpg"><link rel="canonical" href="https://bingyangjiao.github.io/2022/07/25/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '前端面试题',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-07-25 09:58:56'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/mycss.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13279652804370799.jpg" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">1</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/List/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/List/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page child" href="/List/gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/_data/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于本站</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/13280497753579408.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">三乘以十的八次幂</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/List/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/List/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page child" href="/List/gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/_data/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于本站</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">前端面试题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-07-25T01:57:15.000Z" title="发表于 2022-07-25 09:57:15">2022-07-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-07-25T01:58:56.473Z" title="更新于 2022-07-25 09:58:56">2022-07-25</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="前端面试题"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>1、VUE 路由原理</p>
+<p>通过改变 URL，在不重新请求页面的情况下，更新页面视图。</p>
+<p>更新视图但不重新请求页面，是前端路由原理的核心之一，目前在浏览器环境中这一功能的实现主要有 2 种方式：</p>
+<p>· 利用 URL 中的 hash(“#”);</p>
+<p>· 利用 History interface 在 HTML5 中新增的方法;<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/img3.png" alt="zidingyitupian"></p>
+<p>2、VUE 组件通信方式</p>
+<p>父子通信：</p>
+<p>父向子传递数据是通过 props，子向父是通过 events（$emit）；通过父链 &#x2F; 子链也可以通信（$parent &#x2F; $children）；ref 也可以访问组件实例；provide &#x2F; inject API；$attrs&#x2F;$listeners</p>
+<p>兄弟通信：</p>
+<p>Bus；Vuex</p>
+<p>跨级通信：</p>
+<p>Bus；Vuex；provide &#x2F; inject API、$attrs&#x2F;$listeners</p>
+<p>3、你了解 vue 的 diff 算法吗？说说看</p>
+<p>diff 算法就是进行虚拟节点对比，并返回一个 patch 对象，用来存储两个节点</p>
+<p>不同的地方，最后用 patch 记录的消息去局部更新 Dom。</p>
+<p>其有两个特点：</p>
+<p>比较只会在同层级进行, 不会跨层级比较</p>
+<p>在 diff 比较的过程中，循环从两边向中间比较</p>
+<p>43.Dom</p>
+<p>真实 DOM，</p>
+<p>DOM 是文档对象模型，</p>
+<p>DOM 采用树形结构作为分层结构，以树节点形式表示页面中各种元素或内容在页面渲染出的每一个结点都是一个真实 DOM 结构，</p>
+<p>虚拟 DOM</p>
+<p>虚拟 Dom，本质上是以 JavaScript 对象形式存在的对 DOM 的描述。</p>
+<p>创建虚拟 DOM 目的就是为了更好将虚拟的节点渲染到页面视图中，虚拟 DOM 对象</p>
+<p>的节点与真实 DOM 的属性一一对应，为了简化视图的操作，解决跟踪状态变化的问</p>
+<p>题，于是虚拟 DOM 出现了虚拟 DOM 的好处是当状态改变时不需要立即更新 DOM</p>
+<p>，只需要创建一个虚拟树来描述 DOM，虚 DOM 内部将弄清楚如何有效的更新 DO</p>
+<p>M，虚拟 DOM 可以维护程序的状态，跟踪上一次的状态通过比较前后两次状态的差</p>
+<p>N，异更新真实 DOM</p>
+<p>4、Vue3.0 的设计目标是什么？做了那些优化</p>
+<p>复杂组件的代码变得越来越难以维护</p>
+<p>缺少一种纯净的提取机制（使得多个组件之间逻辑的复用变得清晰易于维护）</p>
+<p>类型推断不够友好，代码写的不够畅快</p>
+<p>bundle 的时间相对较长（因为使用 webpack,所以打包机制决定了打包效率）</p>
+<p>打包的体积整体变小。运行速度<strong>速度更快**</strong>****<strong>，</strong>****拥有******更灵活的代码组织能力</p>
+<p><strong>优化：</strong></p>
+<p><strong>源码，</strong></p>
+<p>vue3 整个源码是通过 monorepo 的方式维护的，根据功能将不同的模块拆分到 packages 目录下面不同的子目录中。</p>
+<p>这样使得模块拆分更细化，职责划分更明确，模块之间的依赖关系也更加明确，开发人员也更容易阅读、理解和更改所有模块源码，提高代码的可维护性</p>
+<p><strong>性能，</strong></p>
+<p>· 体积优化</p>
+<p>· 编译优化</p>
+<p>· 数据劫持优化</p>
+<p>在 vue2 中，数据劫持是通过 Object.defineProperty，这个 API 有一些缺陷，并不能检测对象属性的添加和删除</p>
+<p>相比之下，vue3 是通过 proxy 监听整个对象，那么对于删除或者赋值都可以监听到，</p>
+<p>但是 Proxy 并不能监听到内部深层次的对象变化，Vue3 的处理方式是在 getter 中去递归响应式，这样的好处是真正访问到的内部对象才会变成响应式，而不是无脑递归，减少性能的开销。</p>
+<p><strong>语法的 api</strong></p>
+<p>· 优化逻辑组织</p>
+<p>· 优化逻辑复用</p>
+<p>5、Vue3.0 所采用的 Composition Api 与 Vue2.x 使用的 Options Api 有什么不同？</p>
+<p>在逻辑组织和逻辑复用方面，Composition API 是优于 Options API</p>
+<p>因为 Composition API 几乎是函数，会有更好的类型推断。</p>
+<p>Composition API（自动删除无用代码） 代码也更容易压缩</p>
+<p>Composition API 中见不到 this 的使用，减少了 this 指向不明的情况</p>
+<p>6、说一下 vue2 和 vue3 的数据响应式原理<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/img2.png" alt="zidingyitupian"></p>
+<p>7、说说你对盒子模型的理解</p>
+<p>有两种， IE 盒子模型（怪异盒子模型）、W3C 盒子模型（标准盒子模型）；</p>
+<p>盒模型： 内容(content)、填充(padding)、边界(margin)、 边框(border)；</p>
+<p>区 别： IE 的 content 部分把 border 和 padding 计算了进去;</p>
+<p>盒子模型构成：内容(content)、内填充(padding)、 边框(border)、外边距(margin)</p>
+<p>IE8 及其以下版本浏览器，未声明 DOCTYPE，内容宽高会包含内填充和边框，称为怪异盒模型(IE 盒模型)</p>
+<p>标准(W3C)盒模型：元素宽度 &#x3D; width + padding + border + margin<br>怪异(IE)盒模型：元素宽度 &#x3D; width + margin<br>标准浏览器通过设置 css3 的 “box-sizing”:“ border-box” 属性，触发“怪异模式”解析计算宽高<br>8、css 选择器有哪些？优先级？那些属性可以继承？<br>关于 css 属性选择器常用的有：</p>
+<p>id 选择器（#box），选择 id 为 box 的元素</p>
+<p>类选择器（.one），选择类名为 one 的所有元素</p>
+<p>标签选择器（div），选择标签为 div 的所有元素</p>
+<p>伪类选择器</p>
+<p>伪元素选择器</p>
+<p>属性选择器</p>
+<p>优先级：内联 &gt; ID 选择器 &gt; 类选择器 &gt; 标签选择器</p>
+<p>关于继承属性，可以分成：</p>
+<p>字体系列属性</p>
+<p>文本系列属性</p>
+<p>元素可见性</p>
+<p>表格布局属性</p>
+<p>列表属性</p>
+<p>光标属性</p>
+<p>继承中比较特殊的几点：</p>
+<p>a 标签的字体颜色不能被继承</p>
+<p>h1-h6 标签字体的大下也是不能被继承的</p>
+<p>无继承的属性</p>
+<p>display</p>
+<p>文本属性：vertical-align、text-decoration</p>
+<p>盒子模型的属性：宽度、高度、内外边距、边框等</p>
+<p>背景属性：背景图片、颜色、位置等</p>
+<p>定位属性：浮动、清除浮动、定位 position 等</p>
+<p>9、元素的水平垂直居中的方法有哪些？如果元素不定宽高呢？</p>
+<p>实现元素水平垂直居中的方式：</p>
+<p>利用定位+<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=margin&spm=1001.2101.3001.7020">margin</a>:auto</p>
+<p>利用定位+margin:负值</p>
+<p>利用定位+transform</p>
+<p>table 布局</p>
+<p><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=flex&spm=1001.2101.3001.7020">flex</a>布局</p>
+<p>grid 布局</p>
+<p>上述方法中，不知道元素宽高大小仍能实现水平垂直居中的方法有：</p>
+<p>利用定位+margin:auto</p>
+<p>利用定位+transform</p>
+<p>利用定位+margin:负值</p>
+<p>flex 布局</p>
+<p>grid 布局</p>
+<p>10、怎么理解回流跟重绘？什么场景下会触发？</p>
+<p>重绘和回流会在我们设置节点样式时频繁出现，同时也会很大程度上影响性能。</p>
+<p>重绘是当节点需要更改外观而不会影响布局的，比如改变 color 就叫称为重绘</p>
+<p>回流是布局或者几何属性需要改变就称为回流。</p>
+<p>什么场景下会触发</p>
+<p>回流必定会发生重绘，重绘不一定会引发回流。回流所需的成本比重绘高的多，改变父节点里的子节点很可能会导致父节点的一系列回流。</p>
+<p>11、什么是响应式设计？响应式设计的基本原理是什么？如何做</p>
+<p>响应式⽹站设计（Responsive Web design）是⼀种⽹络页⾯设计布局，页⾯的设计与开发应当根据⽤户⾏为以及设备环境(系统平台、屏幕尺⼨、屏幕定向等)进⾏相应的响应和调整</p>
+<p>响应式设计的基本原理是通过媒体查询检测不同的设备屏幕尺⼨做处理，为了处理移动端，页⾯头部必须有 meta 声明 viewport</p>
+<p>实现响应式布局的⽅式有如下：</p>
+<p>媒体查询</p>
+<p>百分⽐</p>
+<p>vw&#x2F;vh</p>
+<p>rem</p>
+<p>12、如果做优化，css 提高性能的方法有哪些？</p>
+<p>加载性能：</p>
+<p>（1）css 压缩：将写好的 css 进行打包压缩，可以减少很多的体积。</p>
+<p>（2）css 单一样式：当需要下边距和左边距的时候，很多时候选择:margin:top 0 bottom 0;但 margin-bottom:bot</p>
+<p>tom;margin-left:left;执行的效率更高。</p>
+<p>（3）减少使用@import,而建议使用 link，因为后者在页面加载时一起加载，前者是等待页面加载完成之后再进行加载。</p>
+<p><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E9%80%89%E6%8B%A9%E5%99%A8&spm=1001.2101.3001.7020">选择器</a>性能：</p>
+<p>减少标签选择，多用 class 选择器。</p>
+<p>尽量少的去使用后代选择器，降低选择器的权重值。后代选择器的开销是最高的，尽量将选择器的深度降到最低，最高不要超过三层，更多的使用类来关联每一个标签元素。</p>
+<p>了解哪些属性是可以通过继承而来的，然后避免对这些属性重复指定规则。</p>
+<p>13、对前端工程师这个职位是怎样理解的？它的前景会怎么样</p>
+<p>通过各种终端来向用户展示数据，或者给用户提供一些和后台的交互接口。</p>
+<p>前景：首先，在我看来，一切和用户交互的终端都可以属于前端。并且随着现在跨端开发框架的兴起，，也使得前端的那套开发技术栈以及开发流程可以复制到 pc 端来，使得前端的范畴越来越广泛。</p>
+<p>并且，随着 AR，VR 技术的兴起，手机 app 中应用了大量的 3 维场景来提高用户体验，比如手机 app 上看房，看车，甚至是看一个城市的街景，都已经有了 3D 的场景，并且用户还能进行简单的操作。而这些都对前端提出了更高的要求</p>
+<p>14、说说 JavaScript 中的数据类型？存储上的差别？</p>
+<p>JavaScript 一共有 8 种数据类型，其中有 7 种基本数据类型：Undefined、Null、Boolean、Number、String、Symbol（es6 新增，表示独一无二的值）和 BigInt（es10 新增）；</p>
+<p>1 种引用数据类型“——Object”（Object 本质上是由一组无序的名值对组成的）。里面包含 function、Array、Date 等。JavaScript 不支持任何创建自定义类型的机制，而所有值最终都将是上述 8 种数据类型之一。</p>
+<p>引用数据类型“:” 对象 Object（包含普通对象-Object，数组对象-Array，正则对象-Re gEx p，日期对象-Date，数学函数-Math，函数对象-Function）</p>
+<p>在 JavaScript 的执行过程中， 主要有三种类型内存空间，分别是代码空间、栈空间、堆空间。其中的代码空间主要是存储可执行代码的，原始类型的数据值都是直接保存在“栈”中的，引用类型(Object)的值是存放在“堆”中的。因此在栈空间中，原始类型存储的是变量的值，而引用类型存储的是其在”堆空间”中的地址，当 JavaScript 需要访问该数据的时候，是通过栈中的引用地址来访问的</p>
+<p>15、typeof 与 instanceof 区别</p>
+<p>typeof 的返回值是一个字符串，对于基本类型，除了 null 都可以显示正确的类型</p>
+<p>typeof 对于对象，除了函数都会显示 object</p>
+<p>instanceof 返回值是布尔值，用于判断一个变量是否属于某个对象，因为内部机制是通过判断对象的原型链中是不是能找到类型的 prototype</p>
+<p>16、JavaScript 本地存储的方式由哪些？区别及应用场景？</p>
+<p>javaScript 本地缓存的方法我们主要讲述以下四种：</p>
+<p>cookie</p>
+<p>sessionStorage</p>
+<p><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=localStorage&spm=1001.2101.3001.7020">localStorage</a></p>
+<p>indexedDB</p>
+<p>关于 cookie、sessionStorage、localStorage 三者的区别主要如下：</p>
+<p>存储大小：cookie 数据大小不能超过 4k，sessionStorage 和 localStorage 虽然也有存储大小的限制，但比 cookie 大得多，可以达到 5M 或更大</p>
+<p>有效时间：localStorage 存储持久数据，浏览器关闭后数据不丢失除非主动删除数据；sessionStorage 数据在当前浏览器窗口关闭后自动删除；cookie 设置的 cookie 过期时间之前一直有效，即使窗口或浏览器关闭</p>
+<p>数据与服务器之间的交互方式，cookie 的数据会自动的传递到服务器，服务器端也可以写 cookie 到客户端；sessionStorage 和 localStorage 不会自动把数据发给服务器，仅在本地保存</p>
+<p>17、什么是防抖和节流？有什么区别？如何实现？</p>
+<p>防抖：某一高频事件不断被触发时，仅在最后一次真正执行事件处理代码。</p>
+<p>节流：某一高频事件被触发时，确保在每一个特定的时间段内被执行一次。</p>
+<p>相似点：都是为应对事件持续频繁发生，造成前端性能下降或对后端服务造成的压力。</p>
+<p>区别：节流会不断的触发，而防抖仅在最后一次触发。防抖适用于，如搜索输入框提示，仅在输入停止后进行一次提示更新，以减少后台压力。节流适用于，如窗体以拖动的方式调整大小，在每次特定的时间片结束后触发一次窗体大小调整。</p>
+<p>节流的实现：</p>
+<p>可以使用事件戳和定时器</p>
+<p>使用事件戳写法，事件会立即执行，停止触发后没有办法再次执行</p>
+<p>使用定时器的写法，自己决定多少毫秒后第一次执行，第二次事件停止触发后依然会在执行一次</p>
+<p>防抖的实现：</p>
+<p>在处理一段连续操作结束后，处理回调，利用 clearTimeout 和 setTimeout 实现</p>
+<p>18、如何通过 JS 判断一个人数组</p>
+<p>1.Es5 新增的方法 isArray)</p>
+<p>2.Instanceof 方法 是用来检测一个对象是否在其原型链原型构造函数的属性</p>
+<p>3.Constructor 方法 返回对创建此对象的数组函数的引用，就是返回对象对应 的构造函数</p>
+<p>4.jQuery 正在使用的 object.protype.toString.call(value) 写一个返回数据类型的方法</p>
+<p>19、说说你对作用域链的理解</p>
+<p>作用域 就是变量 变量作用域又称上下文</p>
+<p>作用域分为 全局，函数，块级 作用域</p>
+<p>作用域链的作用是保证执行环境里有权访问的变量和函数是有序的，作用域链的变量只能向上访问，变量访问到 window 对象即被终止，作用域链向下访问变量是不被允许的 即作用域控制着变量与函数的可见性和生命周期</p>
+<p>20、JavaScript 原型，原型链？有什么特点？</p>
+<p>*<strong>**</strong>*原型：*<strong>**</strong>*</p>
+<p>JavaScript 的所有对象中都包含了一个 [<strong>proto</strong>] 内部属性，这个属性所对应的就是该对象的原型</p>
+<p>JavaScript 的函数对象，除了原型 [<strong>proto</strong>] 之外，还预置了 prototype 属性</p>
+<p>当函数对象作为构造函数创建实例时，该 prototype 属性值将被作为实例对象的原型 [<strong>proto</strong>]。</p>
+<p>*<strong>**</strong>*原型链：*<strong>**</strong>*</p>
+<p>当一个对象调用的属性&#x2F;方法自身不存在时，就会去自己 [<strong>proto</strong>] 关联的前辈 prototype 对象上去找</p>
+<p>如果没找到，就会去该 prototype 原型 [<strong>proto</strong>] 关联的前辈 prototype 去找。依次类推，直到找到属性&#x2F;方法或 undefined 为止。从而形成了所谓的“原型链”</p>
+<p>*<strong>**</strong>*原型特点：*<strong>**</strong>*</p>
+<p>JavaScript 对象是通过引用来传递的，当修改原型时，与之相关的对象也会继承这一改变</p>
+<p>21、请解释什么是事件代理</p>
+<p>事件代理（Event Delegation），又称之为事件委托。是 JavaScript 中常用绑定事件的常用技巧。顾名思义，“事件代理”即是把原本需要绑定的事件委托给父元素，让父元素担当事件监听的职务。事件代理的原理是 DOM 元素的事件冒泡。</p>
+<p>使用事件代理的好处是可以提高性能可以大量节省内存占用，减少事件注册</p>
+<p>可以实现当新增子对象时无需再次对其绑定</p>
+<p>22、请谈谈 This 对象的理解</p>
+<p>在浏览器里，在全局范围内 this 指向 window 对象；</p>
+<p>在函数中，this 永远指向最后调用他的那个对象；</p>
+<p>构造函数中，this 指向 new 出来的那个新的对象；</p>
+<p>call、apply、bind 中的 this 被强绑定在指定的那个对象上；</p>
+<p>箭头函数中 this 比较特殊,箭头函数 this 为父作用域的 this，而箭头函数的 this 指向是静态的,声明的时候就确定了下来；</p>
+<p>23、new 操作符具体干了什么</p>
+<p>创建一个新对象,作为返回的实例对象</p>
+<p>将空对象的原型-proto-指向构造函数的 protptype 属性</p>
+<p>对象连接到构造函数原型上，并绑定 <code>this</code>（this 指向新对象）</p>
+<p>执行构造函数代码（为这个新对象添加属性）</p>
+<p>返回新对象</p>
+<p>（1）首先创建了一个新的空对象。</p>
+<p>（2）设置原型，将对象的原型设置为函数的 prototype 对象。</p>
+<p>（3）让函数的 this 指向这个对象，执行构造函数的代码（为这个新对象添加属性）。</p>
+<p>（4）判断函数的返回值类型，如果是值类型，返回创建的对象。如果是引用类型，就返回这个引用类型的对象</p>
+<p>24、null，undefined 的区别</p>
+<p>undefined：声明了变量但未赋值</p>
+<p>null 是一个空对象，对象已经被定义但是值为空值</p>
+<p>在验证 null 和 undefind 时要用&#x3D;&#x3D;&#x3D;（数据类型转化）而不是&#x3D;&#x3D;，&#x3D;&#x3D;无法分辨 null undefined</p>
+<p>25、JavaScript 代码中“use strict”；是什么意思</p>
+<p>use strict 是 es5 中的严格模式，利用严格模式使代码编写更加规范，避免不合理的语法，和一些异常操作</p>
+<p>26、同步和异步的区别</p>
+<p>同步，在任务执行过程中如果需要一段时间才能返回信息，那么这个进程就会一直等下去，直到可以返回信息再执行</p>
+<p>异步不会一直等待，不管其他进程的状态，直接进行下面的操作，提高了执行效率</p>
+<p>27、谈一谈箭头函数与普通函数的区别</p>
+<p>不能作为构造函数，不能使用 new。</p>
+<p>1：写法不一样</p>
+<p>2：普通函数存在变量提升的现象</p>
+<p>3：箭头函数是匿名函数，不能作为构造函数使用，不能使用 new。</p>
+<p>4：两者 this 的指向不同</p>
+<p>5：箭头函数的 arguments 指向它的父级函数所在作用域的 arguments</p>
+<p>6：箭头函数没有 new.target</p>
+<p>箭头函数</p>
+<p>箭头函数的 this 指向父级作用域的 this，</p>
+<p>箭头函数没有 prototype 原型.</p>
+<p>箭头函数不能作为构造函数。</p>
+<p>普通函数的 this</p>
+<p>1、普通函数最终指向调用它的对象，也就是说谁调用就指向谁。</p>
+<p>2、没有被对象调用的函数默认指向 windows</p>
+<p>28、JS 数组和对象的遍历方式，以及几种方式的比较<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/img1.png" alt="zidingyitupian"><br>29、如何解决跨域问题</p>
+<p>通过 jsonp 跨域</p>
+<p>document.domain + iframe 跨域</p>
+<p>nginx 代理跨域</p>
+<p>nodejs 中间件代理跨域</p>
+<p>后端在头部信息里面设置安全域名</p>
+<p>方式 1：6 资源共享（cors）</p>
+<p>浏览器将 CORS 请求分成两类：简单请求（simple request）和预检请求。</p>
+<p>解决方式就是服务端在响应头中加入字段：Access-Control-Allow-Origin:Origion,那么该 Origion 就可以访问了。如果该字段值为’*‘那么所有 Origion 均可访问</p>
+<p>方式 2：jsonp</p>
+<p>通常为了减轻 web 服务器的负载，我们把 js、css，img 等静态资源分离到另一台独立域名的服务器上，在 html 页面中再通过相应的标签从不同域名下加载静态资源，而被浏览器允许，基于此原理，我们可以通过动态创建 script，再请求一个带参网址实现跨域通信。</p>
+<p>不过我们又发现，Web 页面上调用 js 文件时则不受是否跨域的影响（不仅如此，我们还发现凡是拥有”src”这个属性的标签都拥有跨域的能力，比如“&lt;“script”&gt;”、“&lt;”img“&gt;”、&lt;“iframe”&gt;）</p>
+<p>于是可以判断，当前阶段如果想通过纯 web 端跨域访问数据就只有一种可能，那就是在远程服务器上设法把数据装进 js 格式的文件里，供客户端调用和进一步处理；</p>
+<p>方式 3：vue 中设置代理服务器</p>
+<p>跨域问题只存在浏览器，如果是服务器和服务器之间的通信是不存在跨域问题的</p>
+<p>可以在 vue-cli 中设置代理服务器实现跨域请求</p>
+<p>30、XML 和 JSON 的区别</p>
+<p>XML 是<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%8F%AF%E6%89%A9%E5%B1%95%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80&spm=1001.2101.3001.7020">可扩展标记语言</a>，标记语言就是通过一个一个的标记来组织数据的一种语法格式。</p>
+<p>JSON 是一种轻量级的数据交换格式，可使人们很容易地进行阅读和编写，同时也方便了机器进行解析和生成。JSON 适用于进行数据交互的场景，如网站前台与后台之间的数据交互。</p>
+<p>数据交互 json 比 xml 交互更好，容易被解析</p>
+<p>传输速度 json 比 xml 传输速度更快</p>
+<p>数据描述 json 比 xml 描述更细致</p>
+<p>体积 json 比 xml 体积小，传输速度快</p>
+<p>31、 谈谈你对 webpack 的看法</p>
+<p>webpack 是用来管理模块包的工具，在项目开发中可以打包模块依赖，对静态资源进行解析。在 web 开发过程中打包 ht js css 等静态资源，开发更加高效。对于不同类型的资源，webpack 有模块加载器对模块包分析他们之间的依赖关系，最终优化合并为静态资源</p>
+<p>32、webpack 的打包原理</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/img4.png" alt="zidingyitupian"></p>
+<p>33、 如何优化 webpack 打包速度</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/img5.jpg" alt="zidingyitupian"></p>
+<p>34、 说说 webpack 中常见的 Loader？解决了什么问题？</p>
+<p>loader 用于对模块的源代码进行转换，在 import 或‘加载’模块时<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E9%A2%84%E5%A4%84%E7%90%86&spm=1001.2101.3001.7020">预处理</a>文件</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/34.png" alt="zidingyitupian"></p>
+<p>35、说说 webpack 中常见的 Plugin？解决了什么问题？</p>
+<p>Plugin（Plug-in）是一种计算机应用程序，它和主应用程序互相交互，以提供特定的功能</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/35.png" alt="zidingyitupian"></p>
+<p>36、说说你对 promise 的了解</p>
+<p>1.异步操作的解决方案</p>
+<p>Promise 是一种异步操作的解决方案，将写法复杂的传统的回调函数和监听事件的异</p>
+<p>步操作，用同步代码的形式表达出来。避免了多级异步操作的回调函数嵌套。</p>
+<p>主要用于异步计算</p>
+<ol start="2">
+<li>作为对象，内部有三种状态</li>
+</ol>
+<p>初始状态（ pending ）。</p>
+<p>已完成（ resolve）：resolve 方法可以使 Promise 对象的状态改变成成功</p>
+<p>已拒绝（ reject ）：reject 方法则是将 Promise 对象的状态改变为失败</p>
+<p>3.常用的三种方法</p>
+<p>第一种：then 表示异步成功执行后的数据状态变为 resolve</p>
+<p>第二种：catch 表示异步失败后执行的数据状态变为 reject</p>
+<p>第三种：all 表示把多个没有关系的 Promise 封装成一个 Promise 对象，使用</p>
+<p>then 返回一个数组数据。</p>
+<p>5.在哪里使用过</p>
+<p>Ajax 异步请求的时候</p>
+<p>函数嵌套层级多的时候使用 promise，优点在于，回调函数变成了链式写法，程序的</p>
+<p>流程可以看得很清楚，而且有一整套的配套方法，可以实现许多强大的功能。</p>
+<p>36、async 函数是什么，有什么作用</p>
+<p>async 函数是使用 async 关键字声明的函数。 async 函数是<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/AsyncFunction">AsyncFunction</a>构造函数的实例， 并且其中允许使用 await 关键字。async 和 await 关键字让我们可以用一种更简洁的方式写出基于<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>的异步行为，而无需刻意地链式调用 promise。</p>
+<p>37、有使用过 vue 吗？说说你对 vue 的理解</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/37.png" alt="zidingyitupian"></p>
+<p>38、你对 SPA 单页面的理解，它的优缺点分别是什么？如何实现 SPA 应用呢</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/38.png" alt="zidingyitupian"></p>
+<p>39、 SPA 首屏加载速度慢的怎么解决？</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/39.png" alt="zidingyitupian"></p>
+<p>40、说说对 React 的理解？有哪些特性？</p>
+<p>是什么 React，用于构建用户界面的 JavaScript 库，提供了 UI 层面的解决方案，遵循组件设计模式、声明式编程范式和函数式编程概念，以使前端应用程序更高效，使用虚拟 DOM 来有效地操作 DOM，遵循从高阶组件到低阶组件的单向数据流,帮助我们将界面成了各个独立的小块，每一个块就是组件，这些组件之间可以组合、嵌套，构成整体页面.</p>
+<p>特性</p>
+<p>JSX 语法单向数据绑定虚拟 DOM，声明式编程，Component(组件化)</p>
+<p>优势</p>
+<p>高效灵活声明式的设计，简单使用组件式开发，提高代码复用率单向响应的数据流会比双向绑定的更安全，速度更快</p>
+<p>什么是高阶组件？</p>
+<p>高阶组件就是一个函数，且该函数接受一个组件作为参数，并返回一个新的组件。基本上，这是从 React 的组成性质派生的一种模式，我们称它们为“纯”组件， 因为它们可以接受任何动态提供的子组件，但它们不会修改或复制其输入组件的任何行为。</p>
+<p>什么是 JSX 和它的特性？</p>
+<p>JSX 是 JavaScript XML 的缩写，，基于 ECMAScript 的一种新特性，一种定义带属性树结构的语法；</p>
+<p>特性：</p>
+<p>自定义组件名首字母大写嵌套；在 render 函数中 return 返回的只能包含一个顶层标签，否则也会报错。求值表达式；JSX 基本语法规则，遇到 HTML 标签（以&lt;开头），就用 HTML 规则解析；遇到代码块（以{开头），就用 JS 规则解析驼峰命名 class 属性需要写成 classNameJSX 允许直接在模板插入 JS 变量。如果这个变量是一个数组，则会展开这个数组的所有成员。在 JSX 中插入用户输入是安全的，默认情况下 ReactDOM 会在渲染前，转义 JSX 中的任意值，渲染前，所有的值都被转化为字符串形式，这能预防 XSS 攻击。</p>
+<p>41、说说 Real DOM 和 Virtual DOM 的区别？优缺点？</p>
+<p>真实 DOM，</p>
+<p>DOM 是文档对象模型，</p>
+<p>DOM 采用树形结构作为分层结构，以树节点形式表示页面中各种元素或内容在页面渲染出的每一个结点都是一个真实 DOM 结构，</p>
+<p>虚拟 DOM</p>
+<p>虚拟 Dom，本质上是以 JavaScript 对象形式存在的对 DOM 的描述。</p>
+<p><strong>**区别：**</strong></p>
+<p>\1. 虚拟 dom 不会进行重绘和回流，而真实 dom 会频繁重排与重绘</p>
+<p>\2. 虚拟 dom 的总损耗是”虚拟 dom 的增删改+真实 dom 的****差异****增删改+重排“；真实 dom 的消耗是”真实 dom 全部增删改+重排“</p>
+<p>.优缺点</p>
+<p>1.真实 dom</p>
+<p>优点：</p>
+<ol>
+<li>直接操作 HTML，易用</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li><p>解析速度慢，效率低，内存占用量高</p>
+</li>
+<li><p>性能差：频繁操作真实 DOM，导致重绘、回流</p>
+</li>
+</ol>
+<p>2.虚拟 dom</p>
+<ol>
+<li><p>减少真实 dom 的频繁更新，减少重绘回流、占用内存少</p>
+</li>
+<li><p>跨平台：一套 react 代码可以多端运行</p>
+</li>
+</ol>
+<p>优点：</p>
+<p>缺点：</p>
+<p> 1.页面首次渲染时，由于多一层虚拟 dom 的计算，速度比正常慢些</p>
+<p>42、 说说 React 生命周期有哪些不同阶段？每个阶段对应的方法是？</p>
+<p>Mounting(挂载阶段)：已插入真实 DOM<br>Updating(更新阶段)：正在被重新渲染<br>Unmounting(卸载阶段)：已移出真实 DOM</p>
+<p>挂载阶段</p>
+<p>· constructor() 在 React 组件挂载之前，会调用它的构造函数。</p>
+<p>· componentWillMount: 在调用 render 方法之前调用，并且在初始挂载及后续更新时都会被调用。</p>
+<p>· componentDidMount(): 在组件挂载后（插入 DOM 树中）立即调用</p>
+<p>更新运行阶段:</p>
+<p>· componentWillReceiveProps: 在接受父组件改变后的 props 需要重新渲染组件时用</p>
+<p>· shouldComponentUpdate():用于控制组件重新渲染的生命周期，state 发生变化，组件会进入重新渲染</p>
+<p>render(): class 组件中唯一必须实现的方法。</p>
+<p><em>componentWillUpdate()</em> : shouldComponentUpdate 返回 true 以后，组件进入重新渲染完成之前进入这个函数。</p>
+<p>componentDidUpdate(): 每次 state 改变并重新渲染页面后都会进入这个生命周期</p>
+<p>卸载或销毁阶段<br>componentWillUnmount ()： 在此处完成组件的卸载和数据的销毁。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/42.png" alt="zidingyitupian"></p>
+<p>43、 说说 React 中的 setState 执行机制</p>
+<p>一个组件的显示形态可以由数据状态和外部参数所决定，而数据状态就是 state</p>
+<p>当需要修改里面的值的状态需要通过调用 setState 来改变，从而达到更新组件内部数据的作用</p>
+<p>在使用 setState 更新数据的时候，setState 的更新类型分成：</p>
+<p>异步更新</p>
+<p>同步更新</p>
+<p>44、说说对 React 中类组件和函数组件的理解？有什么区别？</p>
+<p>类组件： 类组件，顾名思义，也就是通过使用 ES6 类的编写形式去编写组件，该类必须继承 React.Component 如果想要访问父组件传递过来的参数，可通过 this.props 的方式去访问在组件中必须实现 render 方法，在 return 中返回 React 对象</p>
+<p>函数组件：</p>
+<p>函数组件接收一个单一的 props 对象并返回了一个 React 元素。函数组件的性能比类组件的性能要高，因为类组件使用的时候要实例化，而函数组件直接执行函数取返回结果即可。为了提高性能，尽量使用函数组件。</p>
+<p>编写形式</p>
+<p>状态管理</p>
+<p>生命周期 函数式组件没有生命周期，这是因为这些生命周期钩子都来自于继承的 React.Component</p>
+<p>调用方式</p>
+<p>如果是一个函数组件，调用则是执行函数即可如果是一个类组件，则需要将组件进行实例化，然后调用实例对象的 render 方法：<strong>获取渲染的值</strong></p>
+<p> 45、 说说对 React Hooks 的理解？解决了什么问题？ </p>
+<p>它可以让你在不编写 class 的情况下使用 state 以及其他的 React 特性</p>
+<p>难以重用和共享组件中的与状态相关的逻辑</p>
+<p>逻辑复杂的组件难以开发与维护，当我们的组件需要处理多个互不相关的 local state 时，每个生命周期函数中可能会包含着各种互不相关的逻辑在里面</p>
+<p>类组件中的 this 增加学习成本，类组件在基于现有工具的优化上存在些许问题</p>
+<p>由于业务变动，函数组件不得不改为类组件等等</p>
+<p>useState</p>
+<p>useEffect</p>
+<p>useReducer</p>
+<p>useCallback</p>
+<p>useMemo</p>
+<p>useRef</p>
+<p>46、说说你对Redux的理解？其工作原理？</p>
+<p>在react中每个组件的state是由自身进行管理，包括组件定义自身的state、组件之间的通信通过props传递、使用Context实现数据共享等，如果让每个组件都存储自身相关的状态，理论上来讲不会影响应用的运行，但在开发及后期我们将比较难以维护，所以我们可以把数据进行集中式的管理，redux就是一个实现上述集中管理的容器的工具，<code>redux</code>并不是只应用在<code>react</code>中，还与其他界面库一起使用，如<code>Vue</code></p>
+<p> React的组件需要获取或者修改页面的数据，通过dispatch方法调用actions进入到Reducer函数中修改state的数据内容，state更新后，通知组件更新页面即可。 </p>
+<p>47、说说 React 性能优化的手段有哪些</p>
+<p>（1） 避免使用内联函数</p>
+<p>（2） 使用react fragments避免额外标记</p>
+<p>（3） 使用immutable</p>
+<p>（4） 懒加载组件</p>
+<p>（5） 事件绑定方式</p>
+<p>（6） 服务端渲染</p>
+<p>48、vue、react、angular 区别</p>
+<p><em><strong>*一、Angular*</strong></em></p>
+<p>Angular是一个JavaScript框架，是一个以 JavaScript 编写的库，一个客户端的JavaScript MVC框架，用于开发动态Web应用程序。它最初是作为Google的一个项目启动的，但现在它是开源框架。</p>
+<p>Angular特性：</p>
+<p>由自己实现一套模板编译规则，数据变化依赖脏检查，</p>
+<p>基本属性包括：数据双向绑定、基本模板指令、自定义指令、表单验证、路由操作、依赖注入、过滤器、内置服务、自定义服务、组件、模块。</p>
+<p>运行效率较低，数据变更检测方式。</p>
+<p>学习angular会迫使你学习特有的预发，上手成本很大，代码看起来很干净</p>
+<p>依赖注入，即一个对象将依赖项提供给另一个对象（客户端）的模式。导致更多的灵活性和更干净的代码。</p>
+<p>Angular 最适合单页应用（SPA），因为它可能太臃肿而不能用于微服务。</p>
+<p>框架比较臃肿，每次用啥功能要引入一大堆东西</p>
+<p>Angular错误提示不够清晰明显，对于初级开发者，很难看懂Angular的错误提示。（个人认为这是最大的不好之处，当初学习这个遇到很多坑啊），而且定位bug很难。</p>
+<p>面向对象编程的思想，Angular由后端开发人员设计的前端框架。</p>
+<p><em><strong>*二、React*</strong></em></p>
+<p>React是 Facebook 推出的一个用来构建用户界面的 JavaScript 库。 React主要用于构建UI，很多人认为 React 是 MVC 中的 V（视图）。React 拥有较高的性能，代码逻辑非常简单，越来越多的人已开始关注和使用它。</p>
+<p>React特性：</p>
+<p>单向绑定，先更新model,然后渲染UI元素，数据在一个方向流动，使得调试更加容易。代码冗余，各种生命周期太麻烦，刚开始接触好难记。</p>
+<p>用了虚拟DOM。（对虚拟DOM的理解刚开始我不是很理解概念，建议大家去看【深入REACT技术栈】这本书有很好的讲解）</p>
+<p>更适合大型应用和更好的可测试性</p>
+<p>Web端和移动端原生APP通吃</p>
+<p>更大的生态系统，更多的支持和好用的工具</p>
+<p>组件生命周期</p>
+<p><em><strong>*三、Vue*</strong></em></p>
+<p>Vue是一套用于构建用户界面的渐进式JavaScript框架。与其它大型框架不同的是，Vue被设计为可以自底向上逐层应用。Vue的核心库只关注视图层，方便与第三方库或既有项目整合。</p>
+<p>Vue.js是一套构建用户界面的渐进式框架。与其他重量级框架不同的是，Vue采用自底向上增量开发的设计。Vue的核心库只关注视图层，并且非常容易学习，非常容易与其它库或已有项目整合。</p>
+<p>Vue特性：</p>
+<p>模板和渲染函数的弹性选择</p>
+<p>简单的语法和项目配置</p>
+<p>更快的渲染速度和更小的体积四</p>
+<p>生命周期</p>
+<p> <em><strong>*vue和angular和react的区别*</strong></em></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><em><strong>*vue*</strong></em></th>
+<th><em><strong>*React*</strong></em></th>
+<th><em><strong>*angular*</strong></em></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><em><strong>*控制器*</strong></em></td>
+<td>无</td>
+<td>无</td>
+<td>有</td>
+</tr>
+<tr>
+<td><em><strong>*过滤器*</strong></em></td>
+<td>无</td>
+<td>无</td>
+<td>有</td>
+</tr>
+<tr>
+<td><em><strong>*指令*</strong></em></td>
+<td>有</td>
+<td>无</td>
+<td>有</td>
+</tr>
+<tr>
+<td><em><strong>*渲染指令*</strong></em></td>
+<td>有</td>
+<td>无</td>
+<td>有</td>
+</tr>
+<tr>
+<td><em><strong>*数据绑定*</strong></em></td>
+<td>双向</td>
+<td>单向</td>
+<td>双向</td>
+</tr>
+</tbody></table>
+<p>49、说说你对 TypeScript 中泛型的理解？应用场景？</p>
+<p>泛型程序设计（generic programming）是程序设计语言的一种风格或范式</p>
+<p>泛型允许我们在强类型程序设计语言中编写代码时使用一些以后才指定的类型，在实例化时作为参数指明这些类型 在typescript中，定义函数，接口或者类的时候，不预先定义好具体的类型，而在使用的时候在指定类型的一种特性.这 种情况下就可以使用泛型</p>
+<p>灵活的使用泛型定义类型，是掌握typescript 必经之路</p>
+<p>50、说说你对微信小程序的理解？优缺点？</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/50.png"></p>
+<p>51、对发布订阅、观察者模式的理解？区别？</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/51.png" alt="img"> </p>
+<p>52、 项目做过哪些性能优化</p>
+<p><a href="#t0">一、 加载优化（减少http请求数）</a></p>
+<p><a href="#t1">二、图片优化</a></p>
+<p><a href="#t2">三、使用CDN</a></p>
+<p><a href="#t3">四、开启Gzip（代码压缩）</a></p>
+<p><a href="#t4">六、减少不必要的Cookie</a></p>
+<p><a href="#t5">七、脚本优化</a></p>
+<p><a href="#t6">八、前端代码结构的优化</a></p>
+<p><a href="#t7">九、SEO优化</a></p>
+<p>53、 描述浏览器的渲染过程，DOM树和渲染树的区别</p>
+<p>浏览器的渲染过程：</p>
+<p>解析 HTML 构建 DOM(DOM 树)，并行请求 css&#x2F;image&#x2F;js</p>
+<p>CSS 文件下载完成，开始构建 CSSOM(CSS 树)</p>
+<p>CSSOM 构建结束后，和 DOM 一起生成 Render Tree(渲染树)</p>
+<p>布局(Layout)：计算出每个节点在屏幕中的位置</p>
+<p>显示(Painting)：通过显卡把页面画到屏幕上</p>
+<p>DOM 树 和 渲染树 的区别：</p>
+<p>DOM 树与 HTML 标签一一对应，包括 head 和隐藏元素</p>
+<p>渲染树不包括 head 和隐藏元素，大段文本的每一个行都是独立节点，每一个节点都有对应的 css 属性</p>
+<p>54、你认为什么样的前端代码是好的</p>
+<p>55、从浏览器地址栏输入url到显示页面的步骤</p>
+<ol>
+<li><p>浏览器根据请求的 url 交给 dns 域名解析,找到真实的 ip, 向服务器发送请求; </p>
+</li>
+<li><p>服务器交给后台处理完成后返回数据,浏览器接收文件( html, js, css,图像等); </p>
+</li>
+<li><p>浏览器对加载到的资源( HTML, JS, CSS等)进行语法解析,建立对应的内部数据结构(如 HTML 的DOM );</p>
+</li>
+</ol>
+<p>56、 http 请求报文响应报文的格式</p>
+<p><em><strong>*客户端连上服务器后，向服务器发出获取某个Web资源的消息，称之为客户端向服务器发送了一个HTTP请求。*</strong></em></p>
+<p><em><strong>*HTTP请求报文主要由请求行、请求头部、请求正文3部分组成。例如，GET &#x2F;index.html HTTP&#x2F;1.1*</strong></em></p>
+<p><em><strong>*谓响应其实就是服务器对请求处理的结果，或者如果浏览器请求的直接就是一个静态资源的话，响应的就是这个资源本身。*</strong></em></p>
+<p><em><strong>*HTTP响应报文主要由状态行、响应头部、响应正文3部分组成。*</strong></em></p>
+<p>57、 Token cookie session 区别</p>
+<p>session的中文翻译是“会话”，当用户打开某个web应用时，便与web服务器产生一次session。服务器使用session把用户的信息临时保存在了服务器上，用户离开网站后session会被销毁。这种用户信息存储方式相对cookie来说更安全，可是session有一个缺陷：如果web服务器做了<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1&spm=1001.2101.3001.7020">负载均衡</a>，那么下一个操作请求到了另一台服务器的时候session会丢失。</p>
+<p>尽力将网络流量平均分发到多个服务器上，以提高系统整体的响应速度和可用性</p>
+<p>cookie</p>
+<p>cookie是保存在本地终端的数据。cookie由服务器生成，发送给浏览器，浏览器把cookie保存到某个目录下的文本文件内，下一次请求同一网站时会把该cookie发送给服务器。由于cookie是存在客户端上的，所以浏览器加入了一些限制确保cookie不会被恶意使用，同时不会占据太多磁盘空间，所以每个域的cookie数量是有限的。</p>
+<p>token的意思是“令牌”，是用户身份的验证方式，最简单的token组成:uid(用户唯一的身份标识)、time(当前时间的时间戳)、sign(签名，由token的前几位+盐以哈希算法压缩成一定长的十六进制字符串，可以防止恶意第三方拼接token请求服务器)。还可以把不变的参数也放进token，避免多次查库</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/57.png"> </p>
+<p>58、CORS跨域的原理</p>
+<p>跨域资源共享(CORS)是一种机制，是W3C标准。它允许浏览器向跨源服务器，发出XMLHttpRequest或Fetch请求。并且整个CORS通信过程都是浏览器自动完成的，不需要用户参与</p>
+<p>59、 什么是MVVM</p>
+<p>60、 说说你对版本管理的理解？常用的版本管理工具有哪些？</p>
+<p>版本控制（Version control），是维护工程蓝图的标准做法，能追踪工程蓝图从诞生一直到定案的过程。此外，版本控制也是一种软件工程技巧，借此能在软件开发的过程中，确保由不同人所编辑的同一程序文件都得到同步</p>
+<p>版本控制系统在当今的软件开发中，被认为是理所当然的配备工具之一，根据类别可以分成：</p>
+<p>本地版本控制系统</p>
+<p>集中式版本控制系统</p>
+<p>分布式版本控制系统</p>
+<p>61、 说说你对Git的理解？</p>
+<p>Git理解：</p>
+<p>GIT就是一个共享代码库，代码放在网上统一管理，大家谁修改了代码都可以在网上改，这样可以实现多人并发开发一个大项目。</p>
+<p>但是在代码统一管理的时候有一个问题就出现了，就是两个人同时修改了一个文件，怎么协调这两者之间的修改，而不会出现一个人修改覆盖另一个人的修改。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/61.png"> </p>
+<p>62、说说 git 发生冲突的场景？如何解决？</p>
+<p>1、git冲突的场景</p>
+<p>情景一：多个分支代码合并到一个分支时；</p>
+<p>情景二：多个分支向同一个远端分支推送代码时；</p>
+<p>实际上，push操作即是将本地代码merge到远端库分支上。</p>
+<p>关于push和pull其实就分别是用本地分支合并到远程分支 和 将远程分支合并到本地分支</p>
+<p>所以这两个过程中也可能存在冲突。</p>
+<p>git的合并中产生冲突的具体情况：</p>
+<p>　　&lt;1&gt;两个分支中修改了同一个文件（不管什么地方）</p>
+<p>　　&lt;2&gt;两个分支中修改了同一个文件的名称</p>
+<p>两个分支中分别修改了不同文件中的部分，不会产生冲突，可以直接将两部分合并。</p>
+<p>2、冲突解决方法</p>
+<p>情景一：在当前分支上，直接修改冲突代码—&gt;add—&gt;commit。</p>
+<p>情景二：在本地当前分支上，修改冲突代码—&gt;add—&gt;commit—&gt;push</p>
+<p>React面试题</p>
+<p>1.说说对React的理解？有哪些特性？ </p>
+<p>是什么 React，用于构建用户界面的 JavaScript 库，提供了 UI 层面的解决方案，遵循组件设计模式、声明式编程范式和函数式编程概念，以使前端应用程序更高效，使用虚拟DOM来有效地操作DOM，遵循从高阶组件到低阶组件的单向数据流,帮助我们将界面成了各个独立的小块，每一个块就是组件，这些组件之间可以组合、嵌套，构成整体页面. </p>
+<p>特性 </p>
+<p>JSX语法单向数据绑定虚拟DOM，声明式编程，Component(组件化) </p>
+<p>优势 </p>
+<p>高效灵活声明式的设计，简单使用组件式开发，提高代码复用率单向响应的数据流会比双向绑定的更安全，速度更快 </p>
+<p>19.什么是高阶组件？ </p>
+<p>高阶组件就是一个函数，且该函数接受一个组件作为参数，并返回一个新的组件。基本上，这是从React的组成性质派生的一种模式，我们称它们为“纯”组件， 因为它们可以接受任何动态提供的子组件，但它们不会修改或复制其输入组件的任何行为。 </p>
+<p>高阶组件（HOC）是 React 中用于复用组件逻辑的一种高级技巧高阶组件的参数为一个组件返回一个新的组件组件是将 props 转换为 UI，而高阶组件是将组件转换为另一个组件 </p>
+<p>3.什么是JSX和它的特性？ </p>
+<p>JSX 是JavaScript XML的缩写，，基于ECMAScript的一种新特性，一种定义带属性树结构的语法； </p>
+<p>特性： </p>
+<p>自定义组件名首字母大写嵌套；在render函数中return返回的只能包含一个顶层标签，否则也会报错。求值表达式；JSX基本语法规则，遇到HTML标签（以&lt;开头），就用HTML规则解析；遇到代码块（以{开头），就用JS规则解析驼峰命名class属性需要写成classNameJSX允许直接在模板插入JS变量。如果这个变量是一个数组，则会展开这个数组的所有成员。在JSX中插入用户输入是安全的，默认情况下ReactDOM会在渲染前，转义JSX中的任意值，渲染前，所有的值都被转化为字符串形式，这能预防XSS攻击。 </p>
+<p>2.区分Real DOM和Virtual DOM </p>
+<p>Real DOM </p>
+<p>Real DOM，真实DOM， 意思为文档对象模型，是一个结构化文本的抽象，在页面渲染出的每一个结点都是一个真实DOM结构更新缓慢可以直接更新 HTML如果元素更新，则创建新DOMDOM操作代价很高消耗的内存较多 </p>
+<p>Virtual DOM </p>
+<p>Virtual Dom，本质上是以 JavaScript 对象形式存在的对 DOM 的描述。创建虚拟DOM目的就是为了更好将虚拟的节点渲染到页面视图中，虚拟DOM对象的节点与真实DOM的属性一一照应更新更快无法直接更新 HTML如果元素更新，则更新 JSXDOM 操作非常简单很少的内存消耗 </p>
+<p>5.了解 Virtual DOM 吗？解释一下它的工作原理。 </p>
+<p>Virtual DOM 是一个轻量级的 JavaScript 对象，它最初只是 real DOM 的副本。它是一个节点树，它将元素、它们的属性和内容作为对象及其属性。 React 的渲染函数从 React 组件中创建一个节点树。然后它响应数据模型中的变化来更新该树，该变化是由用户或系统完成的各种动作引起的。 </p>
+<p>Virtual DOM 工作过程有三个简单的步骤： </p>
+<p>每当底层数据发生改变时，整个 UI 都将在 Virtual DOM 描述中重新渲染。然后计算之前 DOM 表示与新表示的之间的差异。完成计算后，将只用实际更改的内容更新 real DOM。 </p>
+<p>4.类组件和函数组件之间有什么区别？ </p>
+<p>类组件： </p>
+<p>无论是使用函数或是类来声明一个组件，它决不能修改它自己的 props。所有 React 组件都必须是纯函数，并禁止修改其自身 props。React是单项数据流，父组件改变了属性，那么子组件视图会更新。属性 props是外界传递过来的，状态 state是组件本身的，状态可以在组件中任意修改组件的属性和状态改变都会更新视图。 </p>
+<p>函数组件： </p>
+<p>函数组件接收一个单一的 props 对象并返回了一个React元素函数组件的性能比类组件的性能要高，因为类组件使用的时候要实例化，而函数组件直接执行函数取返回结果即可。为了提高性能，尽量使用函数组件。 </p>
+<p>6.说说对 State 和 Props的理解，有什么区别？ </p>
+<p>State </p>
+<p>一个组件的显示形态可以由数据状态和外部参数所决定，而数据状态就是state，一般在 constructor 中初始化当需要修改里面的值的状态需要通过调用setState来改变，从而达到更新组件内部数据的作用，并且重新调用组件render方法setState还可以接受第二个参数，它是一个函数，会在setState调用完成并且组件开始重新渲染时被调用，可以用来监听渲染是否完成 </p>
+<p>Props </p>
+<p>React的核心思想就是组件化思想，页面会被切分成一些独立的、可复用的组件，组件从概念上看就是一个函数，可以接受一个参数作为输入值，这个参数就是props，所以可以把props理解为从外部传入组件内部的数据react具有单向数据流的特性，所以他的主要作用是从父组件向子组件中传递数据props除了可以传字符串，数字，还可以传递对象，数组甚至是回调函数在子组件中，props在内部不可变的，如果想要改变它看，只能通过外部组件传入新的props来重新渲染子组件，否则子组件的props和展示形式不会改变 </p>
+<p>相同点 </p>
+<p>两者都是 JavaScript 对象两者都是用于保存信息props 和 state 都能触发渲染更新 </p>
+<p>区别 </p>
+<p>props 是外部传递给组件的，而 state 是在组件内被组件自己管理的，一般在 constructor 中初始化props 在组件内部是不可修改的，但 state 在组件内部可以进行修改state 是多变的、可以修改 </p>
+<p>7.说说对React refs 的理解？应用场景？ </p>
+<p>是什么 </p>
+<p>React 中的 Refs提供了一种方式，允许我们访问 DOM节点或在 render方法中创建的 React元素。 本质为ReactDOM.render()返回的组件实例，如果是渲染组件则返回的是组件实例，如果渲染dom则返回的是具体的dom节点。 </p>
+<p>如何使用 </p>
+<p>传入字符串，使用时通过 this.refs.传入的字符串的格式获取对应的元素传入对象，对象是通过 React.createRef() 方式创建出来，使用时获取到创建的对象中存在 current 属性就是对应的元素传入函数，该函数会在 DOM 被挂载时进行回调，这个函数会传入一个 元素对象，可以自己保存，使用时，直接拿到之前保存的元素对象即可传入hook，hook是通过 useRef() 方式创建，使用时通过生成hook对象的 current 属性就是对应的元素 </p>
+<p>应用场景 </p>
+<p>在某些情况下，我们会通过使用refs来更新组件，但这种方式并不推荐，过多使用refs，会使组件的实例或者是DOM结构暴露，违反组件封装的原则； </p>
+<p>但下面的场景使用refs非常有用： </p>
+<p>对Dom元素的焦点控制、内容选择、控制对Dom元素的内容设置及媒体播放对Dom元素的操作和对组件实例的操作集成第三方 DOM 库 </p>
+<p>8..setState是同步还是异步 </p>
+<p>setState本身并不是异步，之所以会有一种异步方法的表现形式，归根结底还是因为react框架本身的性能机制所导致的。因为每次调用setState都会触发更新，异步操作是为了提高性能，将多个状态合并一起更新，减少re-render调用。 </p>
+<p>实现同步： </p>
+<p> setState提供了一个回调函数供开发者使用，在回调函数中，我们可以实时的获取到更新之后的数据。 state &#x3D; { number:1 }; componentDidMount(){ this.setState({number:3},()&#x3D;&gt;{ console.log(this.state.number) &#x2F;&#x2F; 3 }) }  利用setTimeout state &#x3D; { number:1 }; componentDidMount(){ setTimeout(()&#x3D;&gt;{ this.setState({number:3}) console.log(this.state.number) &#x2F;&#x2F;3 },0) }  还有在原生事件环境下 state &#x3D; { number:1 }; componentDidMount() { document.body.addEventListener(‘click’, this.changeVal, false); } changeVal &#x3D; () &#x3D;&gt; { this.setState({ number: 3 }) console.log(this.state.number) &#x2F;&#x2F;3 }  </p>
+<p>9.super()和super(props)有什么区别？ </p>
+<p> 在ES6中，通过extends关键字实现类的继承,super关键字实现调用父类，super代替的是父类的构建函数，使用super(xx)相当于调用sup.prototype.constructor.call(this.xx)，如果在子类中不使用super关键字，则会引发报错 super()就是将父类中的this对象继承给子类的，没有super()子类就得不到this对象 </p>
+<p> 在React中，类组件是基于es6的规范实现的，继承React.Component，因此如果用到constructor就必须写super()才初始化this，在调用super()的时候，我们一般都需要传入props作为参数，如果不传进去，React内部也会将其定义在组件实例中，所以无论有没有constructor，在render中this.props都是可以使用的，这是React自动附带的，但是也不建议使用super()代替super(props)，因为在React会在类组件构造函数生成实例后再给this.props赋值，所以在不传递props在super的情况下，调用this.props为undefined,而传入props的则都能正常访问，确保了 this.props 在构造函数执行完毕之前已被赋值，更符合逻辑 </p>
+<p>总结 </p>
+<p>在React中，类组件基于ES6，所以在constructor中必须使用super在调用super过程，无论是否传入props，React内部都会将porps赋值给组件实例porps属性中如果只调用了super()，那么this.props在super()和构造函数结束之间仍是undefined </p>
+<p>说说对React事件机制的理解？ </p>
+<p>是什么 React基于浏览器的事件机制自身实现了一套事件机制，包括事件注册、事件的合成、事件冒泡、事件派发等，在React中这套事件机制被称之为合成事件; </p>
+<p>合成事件是 React模拟原生 DOM事件所有能力的一个事件对象，即浏览器原生事件的跨浏览器包装器 </p>
+<p>执行顺序 </p>
+<p>React 所有事件都挂载在 document 对象上当真实 DOM 元素触发事件，会冒泡到 document 对象后，再处理 React 事件所以会先执行原生事件，然后处理 React 事件最后真正执行 document 上挂载的事件 </p>
+<p>总结 </p>
+<p>React 上注册的事件最终会绑定在document这个 DOM 上，而不是 React 组件对应的 DOM(减少内存开销就是因为所有的事件都绑定在 document 上，其他节点没有绑定事件)React 自身实现了一套事件冒泡机制，所以这也就是为什么我们 event.stopPropagation()无效的原因。React 通过队列的形式，从触发的组件向父组件回溯，然后调用他们 JSX 中定义的 callbackReact 有一套自己的合成事件 SyntheticEvent </p>
+<p>10.了解更多详情请点击React事件机制的理解 </p>
+<p>React事件绑定的方式有哪些？区别？ </p>
+<p> render方法中使用bind  render方法中使用箭头函数  constructor中bind  定义阶段使用箭头函数绑定</p>
+<p>区别 </p>
+<p>编写方面：方式一、方式二写法简单，方式三的编写过于冗杂性能方面：方式一和方式二在每次组件render的时候都会生成新的方法实例，性能问题欠缺。若该函数作为属性值传给子组件的时候，都会导致额外的渲染。而方式三、方式四只会生成一个方法实例综合上述，方式四（箭头函数绑定）是最优的事件绑定方式 </p>
+<p>11.React组件生命周期有几个阶段 </p>
+<p> 初始渲染阶段：这是组件即将开始其生命之旅并进入 DOM 的阶段。 getDefaultProps:获取实例的默认属性 getInitialState:获取每个实例的初始化状态 componentWillMount：组件即将被装载、渲染到页面上 render:组件在这里生成虚拟的 DOM 节点 componentDidMount:组件真正在被装载之后  更新阶段：一旦组件被添加到 DOM，它只有在 prop 或状态发生变化时才可能更新和重新渲染。这些只发生在这个阶段。 componentWillReceiveProps:组件将要接收到属性的时候调用 shouldComponentUpdate:组件接受到新属性或者新状态的时候（可以返回 false，接收数据后不更新，阻止 render 调用，后面的函数不会被继续执行了） componentWillUpdate:组件即将更新不能修改属性和状态 render:组件重新描绘 componentDidUpdate:组件已经更新  卸载阶段：这是组件生命周期的最后阶段，组件被销毁并从 DOM 中删除。 componentWillUnmount:组件即将销毁  </p>
+<p>12.详细解释 React 组件的生命周期方法 </p>
+<p>componentWillMount() – 在渲染之前执行，在客户端和服务器端都会执行。componentDidMount() – 仅在第一次渲染后在客户端执行。componentWillReceiveProps() – 当从父类接收到 props 并且在调用另一个渲染器之前调用。shouldComponentUpdate() – 根据特定条件返回 true 或 false。如果你希望更新组件，请返回true ，不想更新组件则返回 false就会阻止render渲染。默认情况下，它返回 true。componentWillUpdate() – 在 DOM 中进行渲染之前调用。componentDidUpdate() – 在渲染发生后立即调用。componentWillUnmount() – 从 DOM 卸载组件后调用。用于清理内存空间。 </p>
+<p>13.react在哪个生命周期做优化 </p>
+<p>shouldComponentUpdate，这个方法用来判断是否需要调用 render 方法重绘 dom。 因为 dom 的描绘非常消耗性能，如果我们能在这个方法中能够写出更优化的 dom diff 算法，可以极大的提高性能。 </p>
+<p>点击React学习笔记四——受控组件和非受控组件查看详解 </p>
+<p>受控组件和非受控组件的区别 </p>
+<p>受控组件是React控制的组件,input等表单输入框值不存在于 DOM 中，而是以我们的组件状态存在。每当我们想要更新值时，我们就像以前一样调用setState。 </p>
+<p>不受控制组件是您的表单数据由 DOM 处理，而不是React 组件，Refs 用于获取其当前值； </p>
+<p>14.React组件事件代理的原理 </p>
+<p>和原生HTML定义事件的唯一区别就是JSX采用驼峰写法来描述事件名称，大括号中仍然是标准的JavaScript表达式，返回一个事件处理函数。在JSX中你不需要关心什么时机去移除事件绑定，因为React会在对应的真实DOM节点移除时就自动解除了事件绑定。 </p>
+<p>React并不会真正的绑定事件到每一个具体的元素上，而是采用事件代理的模式：在根节点document上为每种事件添加唯一的Listener，然后通过事件的target找到真实的触发元素。这样从触发元素到顶层节点之间的所有节点如果有绑定这个事件，React都会触发对应的事件处理函数。这就是所谓的React模拟事件系统。 </p>
+<p>15.为什么虚拟 dom 会提高性能 </p>
+<p>虚拟dom(virtual dom) 是 JS对象，是一个真实dom的JS对象；虚拟 dom 相当于在 js 和真实 dom 中间加了一个缓存，利用 dom diff 算法避免了没有必要的 dom 操作，从而提高性能。 </p>
+<p>用 JavaScript 对象结构表示 DOM 树的结构；然后用这个树构建一个真正的 DOM 树，插到文档当中当状态变更的时候，重新构造一棵新的对象树。然后用新的树和旧的树进行比较，记录两棵树差异把 2 所记录的差异应用到步骤 1 所构建的真正的 DOM 树上，视图就更新了。 </p>
+<p>16.React中的key有什么作用？ </p>
+<p>跟Vue一样，React 也存在diff算法，而元素key属性的作用是用于判断元素是新创建的还是被移动的元素，从而减少不必要的Diff，因此key的值需要为每一个元素赋予一个确定的标识。 </p>
+<p>如果列表数据渲染中，在数据后面插入一条数据，key作用并不大；前面的元素在diff算法中，前面的元素由于是完全相同的，并不会产生删除创建操作，在最后一个比较的时候，则需要插入到新的DOM树中。因此，在这种情况下，元素有无key属性意义并不大。如果列表数据渲染中，在前面插入数据时，当拥有key的时候，react根据key属性匹配原有树上的子元素以及最新树上的子元素，只需要将元素插入到最前面位置，当没有key的时候，所有的li标签都需要进行修改并不是拥有key值代表性能越高，如果说只是文本内容改变了，不写key反而性能和效率更高，主要是因为不写key是将所有的文本内容替换一下，节点不会发生变化，而写key则涉及到了节点的增和删，发现旧key不存在了，则将其删除，新key在之前没有，则插入，这就增加性能的开销 </p>
+<p>总结 </p>
+<p>良好使用key属性是性能优化的非常关键的一步，注意事项为： </p>
+<p>key 应该是唯一的key不要使用随机值（随机数在下一次 render 时，会重新生成一个数字）避免使用 index 作为 key </p>
+<p>17.react的diff算法是怎么完成的 </p>
+<p>把树形结构按照层级分解，只比较同级元素通过给列表结构的每个单元添加的唯一 key值进行区分同层次的子节点的比较。React 只会匹配相同 class 的 component（这里面的 class 指的是组件的名字）合并操作，调用 component 的 setState 方法的时候, React 将其标记为 dirty. 到每一个事件循环结束, React 检查所有标记 dirty 的 component 重新绘制。选择性渲染。开发人员可以重写 shouldComponentUpdate 提高 diff 的性能。 </p>
+<p>18.react组件之间如何通信 </p>
+<p>父子：父传子：props； 子传父：子调用父组件中的函数并传参；兄弟：利用redux实现和利用父组件所有关系都通用的方法：利用PubSub.js订阅 </p>
+<p>点击React学习笔记十二——组件之间的通信方式查看详细内容 </p>
+<p>20.说说对React Hooks的理解？解决了什么问题？ </p>
+<p>Hook 是 React 16.8 的新增特性。它可以让你在不编写 class 的情况下使用 state 以及其他的 React 特性，因此，现在的函数组件也可以是有状态的组件，内部也可以维护自身的状态以及做一些逻辑方面的处理； </p>
+<p>最常见的hooks有：useState、useEffect </p>
+<p>hooks的出现，使函数组件的功能得到了扩充，拥有了类组件相似的功能； </p>
+<p>点击React学习笔记十一——扩展知识点（setState &#x2F; lazyLoad &#x2F; Hook &#x2F; Fragment &#x2F; Context）查看其中的Hook知识点详解 </p>
+<p>说说react中引入css的方式有哪几种？区别？ </p>
+<p>组件式开发选择合适的css解决方案尤为重要，而在react中，引入CSS就不如Vue方便简洁，其引入css的方式有很多种，各有利弊； </p>
+<p>在组件内直接使用组件中引入 .css 文件组件中引入 .module.css 文件CSS in JS </p>
+<p>点击 react中引入css的方式查看以上几种引入方式的代码案例 </p>
+<p>区别 </p>
+<p>在组件内直接使用css该方式编写方便，容易能够根据状态修改样式属性，但是大量的演示编写容易导致代码混乱组件中引入 .css 文件符合我们日常的编写习惯，但是作用域是全局的，样式之间会层叠引入.module.css 文件能够解决局部作用域问题，但是不方便动态修改样式，需要使用内联的方式进行样式的编写通过css in js 这种方法，可以满足大部分场景的应用，可以类似于预处理器一样样式嵌套、定义、修改状态等至于使用react用哪种方案引入css，并没有一个绝对的答案，可以根据各自情况选择合适的方案 </p>
+<p>21.在React中组件间过渡动画如何实现？ </p>
+<p>在react中，react-transition-group是一种很好的解决方案，其为元素添加enter，enter-active，exit，exit-active这一系列勾子，可以帮助我们方便的实现组件的入场和离场动画 </p>
+<p>其主要提供了三个主要的组件： </p>
+<p>CSSTransition：在前端开发中，结合 CSS 来完成过渡动画效果SwitchTransition：两个组件显示和隐藏切换时，使用该组件TransitionGroup：将多个动画组件包裹在其中，一般用于列表中元素的动画 </p>
+<p>在React中组件间过渡动画查看以上过度组件案例详解 </p>
+<p>React context是什么？ </p>
+<p>简单说就是，当你不想在组件树中通过逐层传递props或者state的方式来传递数据时，可以使用Context来实现跨层级的组件数据传递。  使用props或者state传递数据，数据自顶下流。  使用Context，可以跨越组件进行数据传递。 </p>
+<p>22.说说你对Redux的理解？其工作原理？ </p>
+<p>redux将所有的状态进行集中管理，当需要更新状态的时候，仅需要对这个管理集中处理，而不用去关心状态是如何分发到每一个组件内部的，redux是一个实现集中管理的容器，遵循三大基本原则：单一数据源、state 是只读的、使用纯函数来执行修改； 注意的是，redux并不是只应用在react中，还与其他界面库一起使用，如Vue； </p>
+<p>工作原理 redux要求我们把数据都放在 store公共存储空间，一个组件改变了 store 里的数据内容，其他组件就能感知到 store的变化，再来取数据，从而间接的实现了这些数据传递的功能 </p>
+<p>工作流程图如下所示：  根据流程图，可以想象，React Components 是借书的用户， Action Creactor 是借书时说的话(借什么书)， Store 是图书馆管理员，Reducer 是记录本(借什么书，还什么书，在哪儿，需要查一下)， state 是书籍信息； </p>
+<p>整个流程就是借书的用户需要先存在，然后需要借书，需要一句话来描述借什么书，图书馆管理员听到后需要查一下记录本，了解图书的位置，最后图书馆管理员会把这本书给到这个借书人 </p>
+<p>转换为代码是，React Components 需要获取一些数据, 然后它就告知 Store 需要获取数据，这就是就是 Action Creactor , Store 接收到之后去 Reducer 查一下， Reducer 会告诉 Store 应该给这个组件什么数据 </p>
+<p>如何使用 </p>
+<p>点击Redux的理解和使用查看详解和使用案例 </p>
+<p>23.Redux遵循的三个原则是什么？ </p>
+<p>单一事实来源：整个应用的状态存储在单个 store 中的对象&#x2F;状态树里。单一状态树可以更容易地跟踪随时间的变化，并调试或检查应用程序。状态是只读的：改变状态的唯一方法是去触发一个动作。动作是描述变化的普通 JS 对象。就像 state 是数据的最小表示一样，该操作是对数据更改的最小表示。使用纯函数进行更改：为了指定状态树如何通过操作进行转换，你需要纯函数。纯函数是那些返回值仅取决于其参数值的函数。 </p>
+<p>24.数据如何通过 Redux 流动？ </p>
+<p>react-redux的两个最主要功能 </p>
+<p>Provider：提供包含store的contextconnect：连接容器组件和傻瓜组件；connect接收两个参数mapStateToProps和mapDispatchToProps。mapStateToProps把Store上的状态转化为内层傻瓜组件的prop,mapDispatchToProps把内层傻瓜组件中的用户动作转化为派送给Store的动作 </p>
+<p>Redux中异步的请求怎么处理 </p>
+<p>redux使用redux-thunk中间件处理异步状态管理请求；redux-thunk 允许我们 dispatch 一个包含异步处理逻辑函数（thunk）；我们可以借助这种简单的机制在 redux 中处理异步逻辑； </p>
+<p>25.介绍Redux中间件 </p>
+<p>什么是中间件： </p>
+<p>中间件其实就是一个函数，中间件允许我们扩展redux应用程序 。具体体现在对action的处理能力上，当组件触发一个action后，这个action会优先被中间件处理，当中间件处理完后，中间件再把action传递给reducer，让reducer继续处理这个action </p>
+<p>加入中间件的redux工作流程：  常用中间件： </p>
+<p>redux-thunkredux-sagaredux-actions </p>
+<p>你在React项目中是如何使用Redux的 项目结构是如何划分的？ </p>
+<p>在Redux介绍中，我们了解到redux是用于数据状态管理，而react是一个视图层面的库。如果将两者连接在一起，可以使用官方推荐react-redux库，其具有高效且灵活的特性； </p>
+<p>react-redux将组件分成： </p>
+<p>容器组件：存在逻辑处理UI 组件：只负责现显示和交互，内部不处理逻辑，状态由外部控制 </p>
+<p>通过redux将整个应用状态存储到store中，组件可以派发dispatch行为action给store，其他组件通过订阅store中的状态state来更新自身的视图 </p>
+<p>点击如何使用和项目结构划分查看详解 </p>
+<p>26.为什么 React Router 中使用 Switch 关键字 ？ </p>
+<p>由于router和switch对于路由的渲染策略不同，对router来说，如果有的链接既可以被路由A匹配，又可以被路由B匹配，那么Router会同时渲染它们对于switch来说，它只会渲染符合条件的第一个路径，避免重复匹配</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://bingyangjiao.github.io">三乘以十的八次幂</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://bingyangjiao.github.io/2022/07/25/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/">https://bingyangjiao.github.io/2022/07/25/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://bingyangjiao.github.io" target="_blank">三乘以十的八次幂</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/13280497753579408.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081333.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081333.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081350.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081350.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13279652804370799.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="avatar"/></div><div class="author-info__name">三乘以十的八次幂</div><div class="author-info__description">死亡如风，常伴吾身</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">1</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/BINGYANGJIAO/bingyangjiao.github.io"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/BINGYANGJIAO/bingyangjiao.github.io" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:781250021@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">兴趣爱好才是最大的动力，何不与我共同攀知识高峰，品翘楚美人！</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/07/25/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端面试题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="前端面试题"/></a><div class="content"><a class="title" href="/2022/07/25/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端面试题">前端面试题</a><time datetime="2022-07-25T01:57:15.000Z" title="发表于 2022-07-25 09:57:15">2022-07-25</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 三乘以十的八次幂</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="2963148865" data-server="netease" data-type="playlist" data-mini="true" data-fixed="true" data-preload="auto" data-autoplay="true"> </div><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "e0515f76-f737-4f77-ad57-761c3dc58f50";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (false) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (false) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
