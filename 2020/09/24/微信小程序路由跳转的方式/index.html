@@ -1,0 +1,299 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>微信小程序路由跳转的方式 | 三乘以十的八次幂</title><meta name="keywords" content="微信小程序"><meta name="author" content="三乘以十的八次幂"><meta name="copyright" content="三乘以十的八次幂"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、是什么微信小程序拥有web网页和Application共同的特征，我们的页面都不是孤立存在的，而是通过和其他页面进行交互，来共同完成系统的功能 在微信小程序中，每个页面可以看成是一个pageModel，pageModel全部以栈的形式进行管理 二、有哪些常见的微信小程序页面跳转方式有如下：  wx.navigateTo(Object) wx.redirectTo(Object) wx.swit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信小程序路由跳转的方式">
+<meta property="og:url" content="https://jiaobingyang.gitee.io/2020/09/24/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%B7%AF%E7%94%B1%E8%B7%B3%E8%BD%AC%E7%9A%84%E6%96%B9%E5%BC%8F/index.html">
+<meta property="og:site_name" content="三乘以十的八次幂">
+<meta property="og:description" content="一、是什么微信小程序拥有web网页和Application共同的特征，我们的页面都不是孤立存在的，而是通过和其他页面进行交互，来共同完成系统的功能 在微信小程序中，每个页面可以看成是一个pageModel，pageModel全部以栈的形式进行管理 二、有哪些常见的微信小程序页面跳转方式有如下：  wx.navigateTo(Object) wx.redirectTo(Object) wx.swit">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jiaobingyang.gitee.io/img/13280497753579408.jpg">
+<meta property="article:published_time" content="2020-09-24T09:36:14.000Z">
+<meta property="article:modified_time" content="2022-06-20T13:21:02.204Z">
+<meta property="article:author" content="三乘以十的八次幂">
+<meta property="article:tag" content="微信小程序">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jiaobingyang.gitee.io/img/13280497753579408.jpg"><link rel="shortcut icon" href="/img/13279652804370799.jpg"><link rel="canonical" href="https://jiaobingyang.gitee.io/2020/09/24/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%B7%AF%E7%94%B1%E8%B7%B3%E8%BD%AC%E7%9A%84%E6%96%B9%E5%BC%8F/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '微信小程序路由跳转的方式',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-06-20 21:21:02'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/mycss.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13279652804370799.jpg" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">99</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/List/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/List/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page child" href="/List/gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/_data/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于本站</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/13280497753579408.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">三乘以十的八次幂</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/List/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/List/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page child" href="/List/gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/_data/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于本站</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">微信小程序路由跳转的方式</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-09-24T09:36:14.000Z" title="发表于 2020-09-24 17:36:14">2020-09-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-06-20T13:21:02.204Z" title="更新于 2022-06-20 21:21:02">2022-06-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="微信小程序路由跳转的方式"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p>微信小程序拥有<code>web</code>网页和<code>Application</code>共同的特征，我们的页面都不是孤立存在的，而是通过和其他页面进行交互，来共同完成系统的功能</p>
+<p>在微信小程序中，每个页面可以看成是一个<code>pageModel</code>，<code>pageModel</code>全部以栈的形式进行管理</p>
+<h2 id="二、有哪些"><a href="#二、有哪些" class="headerlink" title="二、有哪些"></a>二、有哪些</h2><p>常见的微信小程序页面跳转方式有如下：</p>
+<ul>
+<li>wx.navigateTo(Object)</li>
+<li>wx.redirectTo(Object)</li>
+<li>wx.switchTab(Object)</li>
+<li>wx.navigateBack(Object)</li>
+<li>wx.reLaunch(Object)</li>
+</ul>
+<h3 id="wx-navigateTo-Object"><a href="#wx-navigateTo-Object" class="headerlink" title="wx.navigateTo(Object)"></a>wx.navigateTo(Object)</h3><p><code>wx.navigateTo()</code>用于保留当前页面、跳转到应用内的某个页面，使用 <code>wx.navigateBack</code>可以返回到原页面</p>
+<p>对于页面不是特别多的小程序，通常推荐使用 <code>wx.navigateTo</code>进行跳转， 以便返回原页面，以提高加载速度。当页面特别多时，则不推荐使用</p>
+<p>参数表如下所示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://static.vue-js.com/5e524ea0-31a5-11ec-8e64-91fdec0f05a1.png" alt="img"></p>
+<p>流程图如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://static.vue-js.com/68f033e0-31a5-11ec-8e64-91fdec0f05a1.png" alt="img"></p>
+<h3 id="wx-redirectTo-Object"><a href="#wx-redirectTo-Object" class="headerlink" title="wx.redirectTo(Object)"></a>wx.redirectTo(Object)</h3><p>重定向，当页面过多时，被保留页面会挤占微信分配给小程序的内存，或是达到微信所限制的 10 层页面栈的情况下，我们应该考虑选择 <code>wx.redirectTo</code></p>
+<p><code>wx.redirectTo()</code>用于关闭当前页面，跳转到应用内的某个页面</p>
+<p>这样的跳转，可以避免跳转前页面占据运行内存，但返回时页面需要重新加载，增加了返回页面的显示时间</p>
+<p>参数表如下所示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://static.vue-js.com/76066c20-31a5-11ec-8e64-91fdec0f05a1.png" alt="img"></p>
+<p>流程图如下所示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://static.vue-js.com/828c4b40-31a5-11ec-a752-75723a64e8f5.png" alt="img"></p>
+<h3 id="wx-switchTab-Object"><a href="#wx-switchTab-Object" class="headerlink" title="wx.switchTab(Object)"></a>wx.switchTab(Object)</h3><p>跳转到 <code>tabBar</code>页面，并关闭其他所有非 <code>tabBar</code> 页面</p>
+<p>参数表如下所示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://static.vue-js.com/968869d0-31a5-11ec-a752-75723a64e8f5.png" alt="img"></p>
+<h3 id="wx-navigateBack-Object"><a href="#wx-navigateBack-Object" class="headerlink" title="wx.navigateBack(Object)"></a>wx.navigateBack(Object)</h3><p><code>wx.navigateBack()</code> 用于关闭当前页面，并返回上一页面或多级页面，开发者可通过 <code>getCurrentPages()</code> 获取当前的页面栈，决定需要返回几层则设置对象的<code>delta</code>属性即可</p>
+<p>参数表如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://static.vue-js.com/a28d8030-31a5-11ec-a752-75723a64e8f5.png" alt="img"></p>
+<h3 id="wx-reLaunch-Object"><a href="#wx-reLaunch-Object" class="headerlink" title="wx.reLaunch(Object)"></a>wx.reLaunch(Object)</h3><p>关闭所有页面，打开到应用内的某个页面，返回的时候跳到首页</p>
+<p>流程图如下所示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://static.vue-js.com/accca3a0-31a5-11ec-8e64-91fdec0f05a1.png" alt="img"></p>
+<p>参数表如下所示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://static.vue-js.com/b98c7e80-31a5-11ec-8e64-91fdec0f05a1.png" alt="img"></p>
+<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><p>关于上述五种跳转方式，做下总结：</p>
+<ul>
+<li>navigateTo 保留当前页面，跳转到应用内的某个页面，使用 wx.navigateBack 可以返回到原页</li>
+<li>redirectTo 关闭当前页面，跳转到应用内的某个页面</li>
+<li>switchTab 跳转到 tabBar 页面，同时关闭其他非 tabBar 页面</li>
+<li>navigateBack 返回上一页面</li>
+<li>reLanch 关闭所有页面，打开到应用内的某个页面</li>
+</ul>
+<p>其中关于它们的页面栈的关系如下：</p>
+<ul>
+<li>avigateTo 新页面入栈</li>
+<li>redirectTo 当前页面出栈，新页面入栈</li>
+<li>navigateBack 页面不断出栈，直到目标返回页，新页面入栈</li>
+<li>switchTab 页面全部出栈，只留下新的 Tab 页面</li>
+<li>reLanch 页面全部出栈，只留下新的页面</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://jiaobingyang.gitee.io">三乘以十的八次幂</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://jiaobingyang.gitee.io/2020/09/24/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%B7%AF%E7%94%B1%E8%B7%B3%E8%BD%AC%E7%9A%84%E6%96%B9%E5%BC%8F/">https://jiaobingyang.gitee.io/2020/09/24/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%B7%AF%E7%94%B1%E8%B7%B3%E8%BD%AC%E7%9A%84%E6%96%B9%E5%BC%8F/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://jiaobingyang.gitee.io" target="_blank">三乘以十的八次幂</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></div><div class="post_share"><div class="social-share" data-image="/img/13280497753579408.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081333.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081333.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081350.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081350.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/03/07/css%E4%B8%ADgrid%E5%B8%83%E5%B1%80/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.baidu.com/it/u=2952638880,3324182124&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=800&amp;h=500" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">css中grid布局</div></div></a></div><div class="next-post pull-right"><a href="/2020/09/24/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">微信小程序生命周期</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/09/24/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" title="微信小程序生命周期"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-24</div><div class="title">微信小程序生命周期</div></div></a></div><div><a href="/2021/07/24/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BE%E7%BD%AE%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="微信小程序设置背景图片不显示问题解决方法"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-24</div><div class="title">微信小程序设置背景图片不显示问题解决方法</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13279652804370799.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="avatar"/></div><div class="author-info__name">三乘以十的八次幂</div><div class="author-info__description">死亡如风，常伴吾身</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">99</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/BINGYANGJIAO/bingyangjiao.github.io"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/BINGYANGJIAO/bingyangjiao.github.io" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:781250021@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">兴趣爱好才是最大的动力，何不与我共同攀知识高峰，品翘楚美人！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.</span> <span class="toc-text">一、是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="toc-number">2.</span> <span class="toc-text">二、有哪些</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#wx-navigateTo-Object"><span class="toc-number">2.1.</span> <span class="toc-text">wx.navigateTo(Object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#wx-redirectTo-Object"><span class="toc-number">2.2.</span> <span class="toc-text">wx.redirectTo(Object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#wx-switchTab-Object"><span class="toc-number">2.3.</span> <span class="toc-text">wx.switchTab(Object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#wx-navigateBack-Object"><span class="toc-number">2.4.</span> <span class="toc-text">wx.navigateBack(Object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#wx-reLaunch-Object"><span class="toc-number">2.5.</span> <span class="toc-text">wx.reLaunch(Object)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%80%BB%E7%BB%93"><span class="toc-number">3.</span> <span class="toc-text">三、总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/09/27/%E6%97%A5%E5%B8%B8%E9%9D%A2%E8%AF%95%E9%A2%98/" title="日积月累"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="日积月累"/></a><div class="content"><a class="title" href="/2022/09/27/%E6%97%A5%E5%B8%B8%E9%9D%A2%E8%AF%95%E9%A2%98/" title="日积月累">日积月累</a><time datetime="2022-09-27T12:26:26.000Z" title="发表于 2022-09-27 20:26:26">2022-09-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/06/%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端基础"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="前端基础"/></a><div class="content"><a class="title" href="/2022/07/06/%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端基础">前端基础</a><time datetime="2022-07-06T06:40:34.000Z" title="发表于 2022-07-06 14:40:34">2022-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/28/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端进阶"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="前端进阶"/></a><div class="content"><a class="title" href="/2022/06/28/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端进阶">前端进阶</a><time datetime="2022-06-27T23:33:45.000Z" title="发表于 2022-06-28 07:33:45">2022-06-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/23/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" title="事件循环"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="事件循环"/></a><div class="content"><a class="title" href="/2022/05/23/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" title="事件循环">事件循环</a><time datetime="2022-05-23T09:10:37.000Z" title="发表于 2022-05-23 17:10:37">2022-05-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/23/%E6%A8%A1%E5%9D%97%E5%8C%96/" title="模块化"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="模块化"/></a><div class="content"><a class="title" href="/2022/03/23/%E6%A8%A1%E5%9D%97%E5%8C%96/" title="模块化">模块化</a><time datetime="2022-03-23T08:50:18.000Z" title="发表于 2022-03-23 16:50:18">2022-03-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 三乘以十的八次幂</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="2963148865" data-server="netease" data-type="playlist" data-mini="true" data-fixed="true" data-preload="auto" data-autoplay="true"> </div><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "e0515f76-f737-4f77-ad57-761c3dc58f50";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (false) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (false) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

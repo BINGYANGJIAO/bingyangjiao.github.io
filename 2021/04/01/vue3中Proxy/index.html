@@ -1,0 +1,319 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>vue3中Proxy | 三乘以十的八次幂</title><meta name="keywords" content="vue"><meta name="author" content="三乘以十的八次幂"><meta name="copyright" content="三乘以十的八次幂"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、Object.defineProperty定义：Object.defineProperty() 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象 为什么能实现响应式通过defineProperty 两个属性，get及set  get  属性的 getter 函数，当访问该属性时，会调用此函数。执行时不传入任何参数，但是会传入 this 对象（由于继承关系，这里的t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue3中Proxy">
+<meta property="og:url" content="https://jiaobingyang.gitee.io/2021/04/01/vue3%E4%B8%ADProxy/index.html">
+<meta property="og:site_name" content="三乘以十的八次幂">
+<meta property="og:description" content="一、Object.defineProperty定义：Object.defineProperty() 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象 为什么能实现响应式通过defineProperty 两个属性，get及set  get  属性的 getter 函数，当访问该属性时，会调用此函数。执行时不传入任何参数，但是会传入 this 对象（由于继承关系，这里的t">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jiaobingyang.gitee.io/img/13280497753579408.jpg">
+<meta property="article:published_time" content="2021-04-01T14:49:10.000Z">
+<meta property="article:modified_time" content="2022-06-10T02:32:27.675Z">
+<meta property="article:author" content="三乘以十的八次幂">
+<meta property="article:tag" content="vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jiaobingyang.gitee.io/img/13280497753579408.jpg"><link rel="shortcut icon" href="/img/13279652804370799.jpg"><link rel="canonical" href="https://jiaobingyang.gitee.io/2021/04/01/vue3%E4%B8%ADProxy/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'vue3中Proxy',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-06-10 10:32:27'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/mycss.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13279652804370799.jpg" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">99</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/List/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/List/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page child" href="/List/gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/_data/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于本站</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/13280497753579408.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">三乘以十的八次幂</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/List/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/List/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page child" href="/List/gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/_data/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于本站</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">vue3中Proxy</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-04-01T14:49:10.000Z" title="发表于 2021-04-01 22:49:10">2021-04-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-06-10T02:32:27.675Z" title="更新于 2022-06-10 10:32:27">2022-06-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/vue/">vue</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="vue3中Proxy"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="一、Object-defineProperty"><a href="#一、Object-defineProperty" class="headerlink" title="一、Object.defineProperty"></a>一、Object.defineProperty</h2><p>定义：<code>Object.defineProperty()</code> 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象</p>
+<h5 id="为什么能实现响应式"><a href="#为什么能实现响应式" class="headerlink" title="为什么能实现响应式"></a>为什么能实现响应式</h5><p>通过<code>defineProperty</code> 两个属性，<code>get</code>及<code>set</code></p>
+<ul>
+<li>get</li>
+</ul>
+<p>属性的 getter 函数，当访问该属性时，会调用此函数。执行时不传入任何参数，但是会传入 this 对象（由于继承关系，这里的this并不一定是定义该属性的对象）。该函数的返回值会被用作属性的值</p>
+<ul>
+<li>set</li>
+</ul>
+<p>属性的 setter 函数，当属性值被修改时，会调用此函数。该方法接受一个参数（也就是被赋予的新值），会传入赋值时的 this 对象。默认为 undefined</p>
+<p>下面通过代码展示：</p>
+<p>定义一个响应式函数<code>defineReactive</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">update</span>(<span class="params"></span>) &#123;</span><br><span class="line">    app.<span class="property">innerText</span> = obj.<span class="property">foo</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">defineReactive</span>(<span class="params">obj, key, val</span>) &#123;</span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(obj, key, &#123;</span><br><span class="line">        <span class="title function_">get</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`get <span class="subst">$&#123;key&#125;</span>:<span class="subst">$&#123;val&#125;</span>`</span>);</span><br><span class="line">            <span class="keyword">return</span> val</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="title function_">set</span>(<span class="params">newVal</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (newVal !== val) &#123;</span><br><span class="line">                val = newVal</span><br><span class="line">                <span class="title function_">update</span>()</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>调用<code>defineReactive</code>，数据发生变化触发<code>update</code>方法，实现数据响应式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;&#125;</span><br><span class="line"><span class="title function_">defineReactive</span>(obj, <span class="string">&#x27;foo&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    obj.<span class="property">foo</span> = <span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">toLocaleTimeString</span>()</span><br><span class="line">&#125;,<span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在对象存在多个<code>key</code>情况下，需要进行遍历</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">observe</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> obj !== <span class="string">&#x27;object&#x27;</span> || obj == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">keys</span>(obj).<span class="title function_">forEach</span>(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="title function_">defineReactive</span>(obj, key, obj[key])</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果存在嵌套对象的情况，还需要在<code>defineReactive</code>中进行递归</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">defineReactive</span>(<span class="params">obj, key, val</span>) &#123;</span><br><span class="line">    <span class="title function_">observe</span>(val)</span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(obj, key, &#123;</span><br><span class="line">        <span class="title function_">get</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`get <span class="subst">$&#123;key&#125;</span>:<span class="subst">$&#123;val&#125;</span>`</span>);</span><br><span class="line">            <span class="keyword">return</span> val</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="title function_">set</span>(<span class="params">newVal</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (newVal !== val) &#123;</span><br><span class="line">                val = newVal</span><br><span class="line">                <span class="title function_">update</span>()</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当给<code>key</code>赋值为对象的时候，还需要在<code>set</code>属性中进行递归</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">set</span>(<span class="params">newVal</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (newVal !== val) &#123;</span><br><span class="line">        <span class="title function_">observe</span>(newVal) <span class="comment">// 新值是对象的情况</span></span><br><span class="line">        <span class="title function_">notifyUpdate</span>()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述例子能够实现对一个对象的基本响应式，但仍然存在诸多问题</p>
+<p>现在对一个对象进行删除与添加属性操作，无法劫持到</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">foo</span>: <span class="string">&quot;foo&quot;</span>,</span><br><span class="line">    <span class="attr">bar</span>: <span class="string">&quot;bar&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">observe</span>(obj)</span><br><span class="line"><span class="keyword">delete</span> obj.<span class="property">foo</span> <span class="comment">// no ok</span></span><br><span class="line">obj.<span class="property">jar</span> = <span class="string">&#x27;xxx&#x27;</span> <span class="comment">// no ok</span></span><br></pre></td></tr></table></figure>
+
+<p>当我们对一个数组进行监听的时候，并不那么好使了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arrData = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line">arrData.<span class="title function_">forEach</span>(<span class="function">(<span class="params">val,index</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="title function_">defineProperty</span>(arrData,index,val)</span><br><span class="line">&#125;)</span><br><span class="line">arrData.<span class="title function_">push</span>() <span class="comment">// no ok</span></span><br><span class="line">arrData.<span class="title function_">pop</span>()  <span class="comment">// no ok</span></span><br><span class="line">arrDate[<span class="number">0</span>] = <span class="number">99</span> <span class="comment">// ok</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到数据的<code>api</code>无法劫持到，从而无法实现数据响应式，</p>
+<p>所以在<code>Vue2</code>中，增加了<code>set</code>、<code>delete</code> API，并且对数组<code>api</code>方法进行一个重写</p>
+<p>还有一个问题则是，如果存在深层的嵌套对象关系，需要深层的进行监听，造成了性能的极大问题</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
+<li>检测不到对象属性的添加和删除</li>
+<li>数组<code>API</code>方法无法监听到</li>
+<li>需要对每个属性进行遍历监听，如果嵌套对象，需要深层监听，造成性能问题</li>
+</ul>
+<h2 id="二、proxy"><a href="#二、proxy" class="headerlink" title="二、proxy"></a>二、proxy</h2><p><code>Proxy</code>的监听是针对一个对象的，那么对这个对象的所有操作会进入监听操作，这就完全可以代理所有属性了</p>
+<p>在<code>ES6</code>系列中，我们详细讲解过<code>Proxy</code>的使用，就不再述说了</p>
+<p>下面通过代码进行展示：</p>
+<p>定义一个响应式方法<code>reactive</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">reactive</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> obj !== <span class="string">&#x27;object&#x27;</span> &amp;&amp; obj != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> obj</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Proxy相当于在对象外层加拦截</span></span><br><span class="line">    <span class="keyword">const</span> observed = <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123;</span><br><span class="line">        <span class="title function_">get</span>(<span class="params">target, key, receiver</span>) &#123;</span><br><span class="line">            <span class="keyword">const</span> res = <span class="title class_">Reflect</span>.<span class="title function_">get</span>(target, key, receiver)</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`获取<span class="subst">$&#123;key&#125;</span>:<span class="subst">$&#123;res&#125;</span>`</span>)</span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="title function_">set</span>(<span class="params">target, key, value, receiver</span>) &#123;</span><br><span class="line">            <span class="keyword">const</span> res = <span class="title class_">Reflect</span>.<span class="title function_">set</span>(target, key, value, receiver)</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`设置<span class="subst">$&#123;key&#125;</span>:<span class="subst">$&#123;value&#125;</span>`</span>)</span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="title function_">deleteProperty</span>(<span class="params">target, key</span>) &#123;</span><br><span class="line">            <span class="keyword">const</span> res = <span class="title class_">Reflect</span>.<span class="title function_">deleteProperty</span>(target, key)</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`删除<span class="subst">$&#123;key&#125;</span>:<span class="subst">$&#123;res&#125;</span>`</span>)</span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> observed</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试一下简单数据的操作，发现都能劫持</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> state = <span class="title function_">reactive</span>(&#123;</span><br><span class="line">    <span class="attr">foo</span>: <span class="string">&#x27;foo&#x27;</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 1.获取</span></span><br><span class="line">state.<span class="property">foo</span> <span class="comment">// ok</span></span><br><span class="line"><span class="comment">// 2.设置已存在属性</span></span><br><span class="line">state.<span class="property">foo</span> = <span class="string">&#x27;fooooooo&#x27;</span> <span class="comment">// ok</span></span><br><span class="line"><span class="comment">// 3.设置不存在属性</span></span><br><span class="line">state.<span class="property">dong</span> = <span class="string">&#x27;dong&#x27;</span> <span class="comment">// ok</span></span><br><span class="line"><span class="comment">// 4.删除属性</span></span><br><span class="line"><span class="keyword">delete</span> state.<span class="property">dong</span> <span class="comment">// ok</span></span><br></pre></td></tr></table></figure>
+
+<p>再测试嵌套对象情况，这时候发现就不那么 OK 了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> state = <span class="title function_">reactive</span>(&#123;</span><br><span class="line">    <span class="attr">bar</span>: &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置嵌套对象属性</span></span><br><span class="line">state.<span class="property">bar</span>.<span class="property">a</span> = <span class="number">10</span> <span class="comment">// no ok</span></span><br></pre></td></tr></table></figure>
+
+<p>如果要解决，需要在<code>get</code>之上再进行一层代理</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">reactive</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> obj !== <span class="string">&#x27;object&#x27;</span> &amp;&amp; obj != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> obj</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Proxy相当于在对象外层加拦截</span></span><br><span class="line">    <span class="keyword">const</span> observed = <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123;</span><br><span class="line">        <span class="title function_">get</span>(<span class="params">target, key, receiver</span>) &#123;</span><br><span class="line">            <span class="keyword">const</span> res = <span class="title class_">Reflect</span>.<span class="title function_">get</span>(target, key, receiver)</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`获取<span class="subst">$&#123;key&#125;</span>:<span class="subst">$&#123;res&#125;</span>`</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="title function_">isObject</span>(res) ? <span class="title function_">reactive</span>(res) : res</span><br><span class="line">        &#125;,</span><br><span class="line">    <span class="keyword">return</span> observed</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><p><code>Object.defineProperty</code>只能遍历对象属性进行劫持</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">observe</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> obj !== <span class="string">&#x27;object&#x27;</span> || obj == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">keys</span>(obj).<span class="title function_">forEach</span>(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="title function_">defineReactive</span>(obj, key, obj[key])</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Proxy</code>直接可以劫持整个对象，并返回一个新对象，我们可以只操作新的对象达到响应式目的</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">reactive</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> obj !== <span class="string">&#x27;object&#x27;</span> &amp;&amp; obj != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> obj</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Proxy相当于在对象外层加拦截</span></span><br><span class="line">    <span class="keyword">const</span> observed = <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123;</span><br><span class="line">        <span class="title function_">get</span>(<span class="params">target, key, receiver</span>) &#123;</span><br><span class="line">            <span class="keyword">const</span> res = <span class="title class_">Reflect</span>.<span class="title function_">get</span>(target, key, receiver)</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`获取<span class="subst">$&#123;key&#125;</span>:<span class="subst">$&#123;res&#125;</span>`</span>)</span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="title function_">set</span>(<span class="params">target, key, value, receiver</span>) &#123;</span><br><span class="line">            <span class="keyword">const</span> res = <span class="title class_">Reflect</span>.<span class="title function_">set</span>(target, key, value, receiver)</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`设置<span class="subst">$&#123;key&#125;</span>:<span class="subst">$&#123;value&#125;</span>`</span>)</span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="title function_">deleteProperty</span>(<span class="params">target, key</span>) &#123;</span><br><span class="line">            <span class="keyword">const</span> res = <span class="title class_">Reflect</span>.<span class="title function_">deleteProperty</span>(target, key)</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`删除<span class="subst">$&#123;key&#125;</span>:<span class="subst">$&#123;res&#125;</span>`</span>)</span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> observed</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Proxy</code>可以直接监听数组的变化（<code>push</code>、<code>shift</code>、<code>splice</code>）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="keyword">const</span> proxtObj = <span class="title function_">reactive</span>(obj)</span><br><span class="line">obj.<span class="title function_">psuh</span>(<span class="number">4</span>) <span class="comment">// ok</span></span><br></pre></td></tr></table></figure>
+
+<p><code>Proxy</code>有多达13种拦截方法,不限于<code>apply</code>、<code>ownKeys</code>、<code>deleteProperty</code>、<code>has</code>等等，这是<code>Object.defineProperty</code>不具备的</p>
+<p>正因为<code>defineProperty</code>自身的缺陷，导致<code>Vue2</code>在实现响应式过程需要实现其他的方法辅助（如重写数组方法、增加额外<code>set</code>、<code>delete</code>方法）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数组重写</span></span><br><span class="line"><span class="keyword">const</span> originalProto = <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span></span><br><span class="line"><span class="keyword">const</span> arrayProto = <span class="title class_">Object</span>.<span class="title function_">create</span>(originalProto)</span><br><span class="line">[<span class="string">&#x27;push&#x27;</span>, <span class="string">&#x27;pop&#x27;</span>, <span class="string">&#x27;shift&#x27;</span>, <span class="string">&#x27;unshift&#x27;</span>, <span class="string">&#x27;splice&#x27;</span>, <span class="string">&#x27;reverse&#x27;</span>, <span class="string">&#x27;sort&#x27;</span>].<span class="title function_">forEach</span>(<span class="function"><span class="params">method</span> =&gt;</span> &#123;</span><br><span class="line">  arrayProto[method] = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    originalProto[method].<span class="title function_">apply</span>(<span class="variable language_">this</span>.<span class="property">arguments</span>)</span><br><span class="line">    dep.<span class="title function_">notice</span>()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// set、delete</span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">set</span>(obj,<span class="string">&#x27;bar&#x27;</span>,<span class="string">&#x27;newbar&#x27;</span>)</span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">delete</span>(obj),<span class="string">&#x27;bar&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><code>Proxy</code> 不兼容IE，也没有 <code>polyfill</code>, <code>defineProperty</code> 能支持到IE9</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://jiaobingyang.gitee.io">三乘以十的八次幂</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://jiaobingyang.gitee.io/2021/04/01/vue3%E4%B8%ADProxy/">https://jiaobingyang.gitee.io/2021/04/01/vue3%E4%B8%ADProxy/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://jiaobingyang.gitee.io" target="_blank">三乘以十的八次幂</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/vue/">vue</a></div><div class="post_share"><div class="social-share" data-image="/img/13280497753579408.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081333.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081333.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081350.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081350.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/04/23/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%92%8C%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">垃圾回收和内存泄漏</div></div></a></div><div class="next-post pull-right"><a href="/2021/03/07/css%E4%B8%ADgrid%E5%B8%83%E5%B1%80/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.baidu.com/it/u=2952638880,3324182124&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=800&amp;h=500" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">css中grid布局</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2018/04/03/v-if%E5%92%8Cv-for%E4%B8%8D%E8%A6%81%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8/" title="v-if和v-for不要一起使用"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.baidu.com/it/u=362794117,3156058908&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-04-03</div><div class="title">v-if和v-for不要一起使用</div></div></a></div><div><a href="/2018/04/03/v-show%E5%92%8Cv-if%E7%9A%84%E5%8C%BA%E5%88%AB/" title="v-show和v-if的区别"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.baidu.com/it/u=3298561477,3595898657&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-04-03</div><div class="title">v-show和v-if的区别</div></div></a></div><div><a href="/2018/04/20/vuex/" title="vuex"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.baidu.com/it/u=2006610853,1238299865&fm=253&fmt=auto&app=138&f=JPEG?w=852&h=479" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-04-20</div><div class="title">vuex</div></div></a></div><div><a href="/2018/05/03/vue%E4%B8%BA%E4%BD%95%E4%BD%BF%E7%94%A8%E8%99%9A%E6%8B%9Fdom/" title="vue为何使用虚拟dom"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.baidu.com/it/u=3456674077,1997483478&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-05-03</div><div class="title">vue为何使用虚拟dom</div></div></a></div><div><a href="/2021/05/25/vue%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/" title="vue响应式原理"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img1.baidu.com/it/u=1966616150,2146512490&fm=253&fmt=auto&app=138&f=JPEG?w=751&h=500" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-25</div><div class="title">vue响应式原理</div></div></a></div><div><a href="/2018/04/01/vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" title="vue生命周期"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img0.baidu.com/it/u=2287769419,267238363&fm=253&fmt=auto&app=138&f=JPEG?w=658&h=411" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-04-01</div><div class="title">vue生命周期</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13279652804370799.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="avatar"/></div><div class="author-info__name">三乘以十的八次幂</div><div class="author-info__description">死亡如风，常伴吾身</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">99</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/BINGYANGJIAO/bingyangjiao.github.io"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/BINGYANGJIAO/bingyangjiao.github.io" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:781250021@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">兴趣爱好才是最大的动力，何不与我共同攀知识高峰，品翘楚美人！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81Object-defineProperty"><span class="toc-number">1.</span> <span class="toc-text">一、Object.defineProperty</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E5%AE%9E%E7%8E%B0%E5%93%8D%E5%BA%94%E5%BC%8F"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">为什么能实现响应式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">1.1.</span> <span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81proxy"><span class="toc-number">2.</span> <span class="toc-text">二、proxy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%80%BB%E7%BB%93"><span class="toc-number">3.</span> <span class="toc-text">三、总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/09/27/%E6%97%A5%E5%B8%B8%E9%9D%A2%E8%AF%95%E9%A2%98/" title="日积月累"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="日积月累"/></a><div class="content"><a class="title" href="/2022/09/27/%E6%97%A5%E5%B8%B8%E9%9D%A2%E8%AF%95%E9%A2%98/" title="日积月累">日积月累</a><time datetime="2022-09-27T12:26:26.000Z" title="发表于 2022-09-27 20:26:26">2022-09-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/06/%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端基础"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="前端基础"/></a><div class="content"><a class="title" href="/2022/07/06/%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端基础">前端基础</a><time datetime="2022-07-06T06:40:34.000Z" title="发表于 2022-07-06 14:40:34">2022-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/28/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端进阶"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="前端进阶"/></a><div class="content"><a class="title" href="/2022/06/28/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端进阶">前端进阶</a><time datetime="2022-06-27T23:33:45.000Z" title="发表于 2022-06-28 07:33:45">2022-06-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/23/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" title="事件循环"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="事件循环"/></a><div class="content"><a class="title" href="/2022/05/23/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" title="事件循环">事件循环</a><time datetime="2022-05-23T09:10:37.000Z" title="发表于 2022-05-23 17:10:37">2022-05-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/23/%E6%A8%A1%E5%9D%97%E5%8C%96/" title="模块化"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="模块化"/></a><div class="content"><a class="title" href="/2022/03/23/%E6%A8%A1%E5%9D%97%E5%8C%96/" title="模块化">模块化</a><time datetime="2022-03-23T08:50:18.000Z" title="发表于 2022-03-23 16:50:18">2022-03-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 三乘以十的八次幂</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="2963148865" data-server="netease" data-type="playlist" data-mini="true" data-fixed="true" data-preload="auto" data-autoplay="true"> </div><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "e0515f76-f737-4f77-ad57-761c3dc58f50";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (false) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (false) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

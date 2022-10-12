@@ -1,0 +1,366 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>面向对象编程 | 三乘以十的八次幂</title><meta name="keywords" content="python"><meta name="author" content="三乘以十的八次幂"><meta name="copyright" content="三乘以十的八次幂"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、面向对象与面向过程 面向过程：根据业务逻辑从上到下写代码。 面向对象：将变量与函数绑定到一起，分类进行封装，每个程序只要负责分配给自己的分类，这样能够更快速的开发程序，减少了重复代码。  面向过程编程最易被初学者接受，其往往用一长段代码来实现指定功能，开发过程的思路是将数据与函数按照执行的逻辑顺序组织在一起，数据与函数分开考虑，面向过程基本是由函数组成的。 面向过程编程面向过程编程的关注点在于">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面向对象编程">
+<meta property="og:url" content="https://jiaobingyang.gitee.io/2017/06/20/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/index.html">
+<meta property="og:site_name" content="三乘以十的八次幂">
+<meta property="og:description" content="一、面向对象与面向过程 面向过程：根据业务逻辑从上到下写代码。 面向对象：将变量与函数绑定到一起，分类进行封装，每个程序只要负责分配给自己的分类，这样能够更快速的开发程序，减少了重复代码。  面向过程编程最易被初学者接受，其往往用一长段代码来实现指定功能，开发过程的思路是将数据与函数按照执行的逻辑顺序组织在一起，数据与函数分开考虑，面向过程基本是由函数组成的。 面向过程编程面向过程编程的关注点在于">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img2.baidu.com/it/u=2952638880,3324182124&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500">
+<meta property="article:published_time" content="2017-06-20T03:48:17.000Z">
+<meta property="article:modified_time" content="2022-05-28T04:00:27.116Z">
+<meta property="article:author" content="三乘以十的八次幂">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img2.baidu.com/it/u=2952638880,3324182124&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500"><link rel="shortcut icon" href="/img/13279652804370799.jpg"><link rel="canonical" href="https://jiaobingyang.gitee.io/2017/06/20/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '面向对象编程',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-05-28 12:00:27'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/mycss.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13279652804370799.jpg" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">99</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/List/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/List/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page child" href="/List/gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/_data/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于本站</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img2.baidu.com/it/u=2952638880,3324182124&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=800&amp;h=500')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">三乘以十的八次幂</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/List/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/List/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page child" href="/List/gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/_data/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于本站</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">面向对象编程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2017-06-20T03:48:17.000Z" title="发表于 2017-06-20 11:48:17">2017-06-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-28T04:00:27.116Z" title="更新于 2022-05-28 12:00:27">2022-05-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/python/">python</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="面向对象编程"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="一、面向对象与面向过程"><a href="#一、面向对象与面向过程" class="headerlink" title="一、面向对象与面向过程"></a>一、面向对象与面向过程</h2><ul>
+<li>面向过程：根据业务逻辑从上到下写代码。</li>
+<li>面向对象：将变量与函数绑定到一起，分类进行封装，每个程序只要负责分配给自己的分类，这样能够更快速的开发程序，减少了重复代码。</li>
+</ul>
+<p>面向过程编程最易被初学者接受，其往往用一长段代码来实现指定功能，开发过程的思路是将数据与函数按照执行的逻辑顺序组织在一起，数据与函数分开考虑，面向过程基本是由函数组成的。</p>
+<h3 id="面向过程编程"><a href="#面向过程编程" class="headerlink" title="面向过程编程"></a>面向过程编程</h3><p>面向过程编程的关注点在于怎么做</p>
+<ul>
+<li>把完成某一个需求的 所有步骤 从头到尾 逐步实现</li>
+<li>根据开发需求，将某些 功能独立 的代码 封装 成一个又一个 函数</li>
+<li>最后完成的代码，就是顺序地调用 不同的函数</li>
+</ul>
+<p>特点:</p>
+<ul>
+<li>注重步骤与过程，不注重职责分工</li>
+<li>如果需求复杂，代码会变得很复杂</li>
+<li>开发复杂项目，没有固定的套路，开发难度很大！</li>
+</ul>
+<h3 id="面向对象基本概念"><a href="#面向对象基本概念" class="headerlink" title="面向对象基本概念"></a>面向对象基本概念</h3><p>面向对象编程（Object Oriented Programming，OOP，面向对象程序设计）和面相过程编程，是两种不同的编程方式。</p>
+<p>面向对象编程的关注点在于谁来做</p>
+<blockquote>
+<p>相比较函数，面向对象是更大的封装，根据职责在 一个对象中封装多个方法</p>
+</blockquote>
+<ul>
+<li>在完成某一个需求前，首先确定职责 —— 要做的事情（方法）</li>
+<li>根据 职责 确定不同的 对象，在对象内部封装不同的方法（多个）</li>
+<li>最后完成的代码，就是顺序地调用不同对象的相应方法。</li>
+</ul>
+<p>特点:</p>
+<ul>
+<li>注重 对象和职责，不同的对象承担不同的职责。</li>
+<li>更加适合应对复杂的需求变化，是专门应对复杂项目开发，提供的固定套路。</li>
+<li>需要在面向过程基础上，再学习一些面向对象的语法。</li>
+</ul>
+<h2 id="类和对象"><a href="#类和对象" class="headerlink" title="类和对象"></a>类和对象</h2><p><strong>类</strong>和<strong>对象</strong>是面向对象编程的两个核心概念。</p>
+<h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><p>类是对一群具有相同特征或者行为 的事物的一个统称，是抽象的，不能直接使用</p>
+<ul>
+<li>特征其实就是一个变量，在类里我们称之为属性。</li>
+<li>行为其实就是一个函数，在类里我们称之为方法。</li>
+<li>类其实就是由 <strong>属性</strong> 和 <strong>方法</strong> 组成的一个抽象概念。</li>
+</ul>
+<p>类就相当于制造飞机时的图纸，是一个模板。这个模板只规定了飞机的某些特征(例如大小，颜色，型号等等)和行为(例如起飞，降落，飞行等等)，它并不是一个具体的飞机，而是对飞机的一个抽象概念。它出现的目的，是为了让我们的创建飞机对象。</p>
+<h3 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h3><p>对象是由类创建出来的一个具体存在，可以直接使用。由哪一个类创建出来的 对象，就拥有在哪一个类中定义的属性和方法。 <strong>对象</strong> 就相当于用图纸制造的飞机。在开发中，应该先有类，在类里定义好属性和行为，再根据类来创建对象。</p>
+<h3 id="类和对象的关系"><a href="#类和对象的关系" class="headerlink" title="类和对象的关系"></a>类和对象的关系</h3><ul>
+<li>类是模板，对象是根据类这个模板创建出来的，应该先有类，再有对象。</li>
+<li>使用同一个类，能够创建出很多对象。</li>
+<li>类中定义了什么属性和方法，对象中就有什么属性和方法。</li>
+<li>不同对象对应的属性值也会不同。</li>
+</ul>
+<p>例如：定义了一个狗类，这个狗类有以下属性：</p>
+<ul>
+<li>品种</li>
+<li>颜色</li>
+<li>性别</li>
+<li>名字</li>
+</ul>
+<p>现在根据这个类创建出了两条狗，这两条狗分别是 <code>哈士奇、灰色、母、二哈</code> 和 <code>中华田园犬、黄色、公、旺财</code>。我们发现，这两条狗都具有 品种、颜色、性别和名字这些属性，但是每条狗对应的属性值却不一样。</p>
+<h3 id="类的设计"><a href="#类的设计" class="headerlink" title="类的设计"></a>类的设计</h3><p>在程序开发中，要设计一个类，通常需要满足一下三个要素：</p>
+<ol>
+<li><strong>类名</strong> 这类事物的名字，安照大驼峰命名法(每个单词的首字母大写)起名。</li>
+<li><strong>属性</strong> 这类事物具有什么样的特征。</li>
+<li><strong>方法</strong> 这类事物具有什么样的行为。</li>
+</ol>
+<h3 id="定义类名"><a href="#定义类名" class="headerlink" title="定义类名"></a>定义类名</h3><p>名词提炼法:分析整个业务流程，出现的名词，通常就是找到的类。</p>
+<h3 id="属性和方法的确定"><a href="#属性和方法的确定" class="headerlink" title="属性和方法的确定"></a>属性和方法的确定</h3><ul>
+<li>对对象的特征描述，可以定义成属性</li>
+<li>对象具有的行为（动词）可以定义成方法</li>
+</ul>
+<h2 id="面向对象基本语法"><a href="#面向对象基本语法" class="headerlink" title="面向对象基本语法"></a>面向对象基本语法</h2><p>在Python中，对象几乎是无处不在的，我们可以使用<code>dir</code>内置函数来查看这个对象里的方法。</p>
+<h3 id="定义简单的类（只包含方法）"><a href="#定义简单的类（只包含方法）" class="headerlink" title="定义简单的类（只包含方法）"></a>定义简单的类（只包含方法）</h3><blockquote>
+<p>面向对象是更大的封装，在一个类中封装多个方法，这样通过这个类创建出来的对象，就可以直接调用这些方法了！</p>
+</blockquote>
+<h3 id="定义类"><a href="#定义类" class="headerlink" title="定义类"></a>定义类</h3><p>在Python中要定义一个只包含方法的类，语法格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class 类名:</span><br><span class="line">    def 方法1(self,参数列表):</span><br><span class="line">        pass</span><br><span class="line">    def 方法2(self,参数列表):</span><br><span class="line">        pass</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<blockquote>
+<ol>
+<li>方法的定义格式和函数一样。</li>
+<li>方法里的第一个参数必须是self。.</li>
+<li>类名要遵守大驼峰命名法。</li>
+</ol>
+</blockquote>
+<h3 id="创建实例对象"><a href="#创建实例对象" class="headerlink" title="创建实例对象"></a>创建实例对象</h3><p>当一个类定义完成之后，要使用这个类来创建对象，语法格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象变量名 = 类名()</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><p>需求</p>
+<ul>
+<li>小猫 爱 吃 鱼，小猫 要 喝 水</li>
+</ul>
+<p>分析</p>
+<ul>
+<li>定义一个猫类 Cat</li>
+<li>定义两个方法 eat 和 drink</li>
+<li>按照需求 —— 不需要定义属性</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Cat:</span><br><span class="line">    &quot;&quot;&quot;这是个猫类&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">    def eat(self):</span><br><span class="line">        print(&quot;小猫在吃东西&quot;)</span><br><span class="line"></span><br><span class="line">    def drink(self):</span><br><span class="line">        print(&quot;小猫在喝水&quot;)</span><br><span class="line"></span><br><span class="line">tom = Cat()  # 创建了一个Cat对象</span><br><span class="line">tom.eat()</span><br><span class="line">tom.drink()</span><br><span class="line"></span><br><span class="line">hello_kitty = Cat()  # 又创建了一个新的Cat对象</span><br><span class="line">hello_kitty.eat()</span><br><span class="line">hello_kitty.drink(</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h2 id="self的使用"><a href="#self的使用" class="headerlink" title="self的使用"></a>self的使用</h2><h3 id="给对象添加属性"><a href="#给对象添加属性" class="headerlink" title="给对象添加属性"></a>给对象添加属性</h3><p>python支持动态属性，当一个对象创建好了以后，直接使用 <code>对象.属性名 = 属性值</code> 就可以很方便的给对象添加一个属性。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tom = Cat()</span><br><span class="line">tom.name = &#x27;Tom&#x27;  # 可以直接给 tom 对象添加一个 name 属性</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>这种方法很方便，但是，不建议使用这种方式给对象添加属性。</p>
+<h3 id="self的概念"><a href="#self的概念" class="headerlink" title="self的概念"></a>self的概念</h3><p>哪个对象调用了方法，方法里的<code>self</code>指的就是谁。 通过 <code>self.属性名</code> 可以访问到这个对象的属性；通过 <code>self.方法名()</code> 可以调用这个对象的方法。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Cat:</span><br><span class="line">    def eat(self):</span><br><span class="line">        print(&quot;%s爱吃鱼&quot; %self.name)</span><br><span class="line"></span><br><span class="line">tom = Cat()</span><br><span class="line">tom.name = &#x27;Tom&#x27;  # 给 tom 对象添加了一个name属性</span><br><span class="line">tom.eat()  # Tom爱吃鱼</span><br><span class="line"></span><br><span class="line">lazy_cat = Cat()</span><br><span class="line">lazy_cat.name = &quot;大懒猫&quot;</span><br><span class="line">lazy_cat.eat() # 大懒猫爱吃鱼</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h3 id="直接给对象添加属性的缺点"><a href="#直接给对象添加属性的缺点" class="headerlink" title="直接给对象添加属性的缺点"></a>直接给对象添加属性的缺点</h3><p>上述代码中，我们是先创建对象，然后再给对象添加 <code>name</code> 属性，但是这样做会有问题。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tom = Cat()</span><br><span class="line">tom.eat()</span><br><span class="line">tom.name = &quot;Tom&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>程序运行时会报错：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AttributeError: &#x27;Cat&#x27; object has no attribute &#x27;name&#x27;</span><br><span class="line">错误提示：&#x27;Cat&#x27;对象没有 &#x27;name&#x27; 属性</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>在日常开发中，不推荐在类的外部直接给对象添加属性这种方式。对象应该具有哪些属性，我们应该封装在类的内部。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://jiaobingyang.gitee.io">三乘以十的八次幂</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://jiaobingyang.gitee.io/2017/06/20/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/">https://jiaobingyang.gitee.io/2017/06/20/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://jiaobingyang.gitee.io" target="_blank">三乘以十的八次幂</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/python/">python</a></div><div class="post_share"><div class="social-share" data-image="https://img2.baidu.com/it/u=2952638880,3324182124&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=800&amp;h=500" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081333.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081333.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081350.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081350.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2017/07/15/DOM/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.baidu.com/it/u=203840827,1100704486&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=PNG?w=500&amp;h=313" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">DOM</div></div></a></div><div class="next-post pull-right"><a href="/2017/06/01/css%E5%AE%9A%E4%BD%8D/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">css定位</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%881-3%EF%BC%89/" title="数据分析（1-3）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.baidu.com/it/u=2952638880,3324182124&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-30</div><div class="title">数据分析（1-3）</div></div></a></div><div><a href="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%887%EF%BC%89/" title="数据分析（7）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.baidu.com/it/u=86028500,1800130667&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-30</div><div class="title">数据分析（7）</div></div></a></div><div><a href="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%885%EF%BC%89/" title="数据分析（5）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.baidu.com/it/u=3843742074,4293285046&fm=253&fmt=auto&app=138&f=JPEG?w=822&h=500" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-30</div><div class="title">数据分析（5）</div></div></a></div><div><a href="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%889%EF%BC%89/" title="数据分析（9）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img0.baidu.com/it/u=3159172942,2257139948&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=470" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-30</div><div class="title">数据分析（9）</div></div></a></div><div><a href="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/" title="数据分析（8）Numpy"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img1.baidu.com/it/u=3796649019,1786443255&fm=253&fmt=auto&app=138&f=JPEG?w=700&h=455" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-30</div><div class="title">数据分析（8）Numpy</div></div></a></div><div><a href="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/" title="数据分析（4）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img0.baidu.com/it/u=3046384215,884063302&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=233" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-30</div><div class="title">数据分析（4）</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13279652804370799.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="avatar"/></div><div class="author-info__name">三乘以十的八次幂</div><div class="author-info__description">死亡如风，常伴吾身</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">99</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/BINGYANGJIAO/bingyangjiao.github.io"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/BINGYANGJIAO/bingyangjiao.github.io" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:781250021@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">兴趣爱好才是最大的动力，何不与我共同攀知识高峰，品翘楚美人！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8E%E9%9D%A2%E5%90%91%E8%BF%87%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">一、面向对象与面向过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%A2%E5%90%91%E8%BF%87%E7%A8%8B%E7%BC%96%E7%A8%8B"><span class="toc-number">1.1.</span> <span class="toc-text">面向过程编程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.2.</span> <span class="toc-text">面向对象基本概念</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1"><span class="toc-number">2.</span> <span class="toc-text">类和对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB"><span class="toc-number">2.1.</span> <span class="toc-text">类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1"><span class="toc-number">2.2.</span> <span class="toc-text">对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">2.3.</span> <span class="toc-text">类和对象的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.4.</span> <span class="toc-text">类的设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%90%8D"><span class="toc-number">2.5.</span> <span class="toc-text">定义类名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95%E7%9A%84%E7%A1%AE%E5%AE%9A"><span class="toc-number">2.6.</span> <span class="toc-text">属性和方法的确定</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">面向对象基本语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E7%AE%80%E5%8D%95%E7%9A%84%E7%B1%BB%EF%BC%88%E5%8F%AA%E5%8C%85%E5%90%AB%E6%96%B9%E6%B3%95%EF%BC%89"><span class="toc-number">3.1.</span> <span class="toc-text">定义简单的类（只包含方法）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E7%B1%BB"><span class="toc-number">3.2.</span> <span class="toc-text">定义类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BE%8B%E5%AF%B9%E8%B1%A1"><span class="toc-number">3.3.</span> <span class="toc-text">创建实例对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B"><span class="toc-number">3.4.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#self%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">self的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%99%E5%AF%B9%E8%B1%A1%E6%B7%BB%E5%8A%A0%E5%B1%9E%E6%80%A7"><span class="toc-number">4.1.</span> <span class="toc-text">给对象添加属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#self%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">4.2.</span> <span class="toc-text">self的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B4%E6%8E%A5%E7%BB%99%E5%AF%B9%E8%B1%A1%E6%B7%BB%E5%8A%A0%E5%B1%9E%E6%80%A7%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="toc-number">4.3.</span> <span class="toc-text">直接给对象添加属性的缺点</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/09/27/%E6%97%A5%E5%B8%B8%E9%9D%A2%E8%AF%95%E9%A2%98/" title="日积月累"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="日积月累"/></a><div class="content"><a class="title" href="/2022/09/27/%E6%97%A5%E5%B8%B8%E9%9D%A2%E8%AF%95%E9%A2%98/" title="日积月累">日积月累</a><time datetime="2022-09-27T12:26:26.000Z" title="发表于 2022-09-27 20:26:26">2022-09-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/06/%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端基础"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="前端基础"/></a><div class="content"><a class="title" href="/2022/07/06/%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端基础">前端基础</a><time datetime="2022-07-06T06:40:34.000Z" title="发表于 2022-07-06 14:40:34">2022-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/28/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端进阶"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="前端进阶"/></a><div class="content"><a class="title" href="/2022/06/28/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端进阶">前端进阶</a><time datetime="2022-06-27T23:33:45.000Z" title="发表于 2022-06-28 07:33:45">2022-06-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/23/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" title="事件循环"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="事件循环"/></a><div class="content"><a class="title" href="/2022/05/23/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" title="事件循环">事件循环</a><time datetime="2022-05-23T09:10:37.000Z" title="发表于 2022-05-23 17:10:37">2022-05-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/23/%E6%A8%A1%E5%9D%97%E5%8C%96/" title="模块化"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="模块化"/></a><div class="content"><a class="title" href="/2022/03/23/%E6%A8%A1%E5%9D%97%E5%8C%96/" title="模块化">模块化</a><time datetime="2022-03-23T08:50:18.000Z" title="发表于 2022-03-23 16:50:18">2022-03-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 三乘以十的八次幂</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="2963148865" data-server="netease" data-type="playlist" data-mini="true" data-fixed="true" data-preload="auto" data-autoplay="true"> </div><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "e0515f76-f737-4f77-ad57-761c3dc58f50";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (false) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (false) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

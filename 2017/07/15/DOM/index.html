@@ -1,0 +1,531 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>DOM | 三乘以十的八次幂</title><meta name="keywords" content="DOM"><meta name="author" content="三乘以十的八次幂"><meta name="copyright" content="三乘以十的八次幂"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="DOM简介Document Object Model  文档对象模型 DOM包含了所有HTML元素的属性和方法，以及访问操作他们的方式； 认识dom树和dom节点什么是Dom操作？  DOM是一个使程序和脚本有能力动态地访问和更新文档的内容、结构以及样式的平台和语言中立的接口  在HTML和JavaScript的学习中，DOM操作可谓时重中之重   Dom树 DOM节点的分类：DOM节点分为三大类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DOM">
+<meta property="og:url" content="https://jiaobingyang.gitee.io/2017/07/15/DOM/index.html">
+<meta property="og:site_name" content="三乘以十的八次幂">
+<meta property="og:description" content="DOM简介Document Object Model  文档对象模型 DOM包含了所有HTML元素的属性和方法，以及访问操作他们的方式； 认识dom树和dom节点什么是Dom操作？  DOM是一个使程序和脚本有能力动态地访问和更新文档的内容、结构以及样式的平台和语言中立的接口  在HTML和JavaScript的学习中，DOM操作可谓时重中之重   Dom树 DOM节点的分类：DOM节点分为三大类">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img2.baidu.com/it/u=203840827,1100704486&fm=253&fmt=auto&app=138&f=PNG?w=500&h=313">
+<meta property="article:published_time" content="2017-07-15T13:19:55.000Z">
+<meta property="article:modified_time" content="2022-05-28T02:29:45.829Z">
+<meta property="article:author" content="三乘以十的八次幂">
+<meta property="article:tag" content="DOM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img2.baidu.com/it/u=203840827,1100704486&fm=253&fmt=auto&app=138&f=PNG?w=500&h=313"><link rel="shortcut icon" href="/img/13279652804370799.jpg"><link rel="canonical" href="https://jiaobingyang.gitee.io/2017/07/15/DOM/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'DOM',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-05-28 10:29:45'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/mycss.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13279652804370799.jpg" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">99</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/List/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/List/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page child" href="/List/gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/_data/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于本站</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img2.baidu.com/it/u=203840827,1100704486&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=PNG?w=500&amp;h=313')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">三乘以十的八次幂</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/List/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/List/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page child" href="/List/gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/_data/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于本站</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">DOM</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2017-07-15T13:19:55.000Z" title="发表于 2017-07-15 21:19:55">2017-07-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-28T02:29:45.829Z" title="更新于 2022-05-28 10:29:45">2022-05-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/DOM/">DOM</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="DOM"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Document Object Model  文档对象模型</p>
+<p>DOM包含了所有HTML元素的属性和方法，以及访问操作他们的方式；</p>
+<h2 id="认识dom树和dom节点"><a href="#认识dom树和dom节点" class="headerlink" title="认识dom树和dom节点"></a>认识dom树和dom节点</h2><p>什么是Dom操作？</p>
+<ul>
+<li><p>DOM是一个使程序和脚本有能力动态地访问和更新文档的内容、结构以及样式的平台和语言中立的接口</p>
+</li>
+<li><p>在HTML和JavaScript的学习中，DOM操作可谓时重中之重</p>
+</li>
+</ul>
+<h2 id="Dom树"><a href="#Dom树" class="headerlink" title="Dom树"></a>Dom树</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C18.png" alt="18"></p>
+<h2 id="DOM节点的分类："><a href="#DOM节点的分类：" class="headerlink" title="DOM节点的分类："></a>DOM节点的分类：</h2><p>DOM节点分为三大类：元素（标签）节点、属性节点、文本节点；</p>
+<h2 id="节点之间的关系："><a href="#节点之间的关系：" class="headerlink" title="节点之间的关系："></a>节点之间的关系：</h2><p>由DOM树我们可以看到，文本节点、属性节点属于元素节点的子节点</p>
+<p>在操作元素节点和文本节点前，一定要先获取到元素节点。</p>
+<h2 id="访问节点"><a href="#访问节点" class="headerlink" title="访问节点"></a>访问节点</h2><h3 id="通过ID名查找dom元素"><a href="#通过ID名查找dom元素" class="headerlink" title="通过ID名查找dom元素"></a>通过ID名查找dom元素</h3><p>语法：document.getElementById(“id名”)</p>
+<p>功能：找页面中对应id名的元素；</p>
+<p>返回值：dom元素</p>
+<p>返回值类型：object;</p>
+<p>说明：getELementById()前面必须的document对象（即文档对象）如果页面中没有这个id元素，返回null;</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C19.png" alt="19"></p>
+<h3 id="通过标签名找元素"><a href="#通过标签名找元素" class="headerlink" title="通过标签名找元素"></a>通过标签名找元素</h3><p>语法1：document.getElementsByTagName(“标签名”)</p>
+<p>功能：获取页面中所有指定标签；</p>
+<p>返回值：返回一个类数组（即一个集合）；换句话说，就是将页面中所有的指定标签放在一个方括号的集合里面。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C20.png" alt="20"></p>
+<p>获取具体的某个元素；</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C21.png" alt="21"></p>
+<h3 id="通过name属性找元素"><a href="#通过name属性找元素" class="headerlink" title="通过name属性找元素"></a>通过name属性找元素</h3><p>document.getElementByName: 方法可返回带有指定名称的对象的集合</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C32.png" alt="32"></p>
+<h3 id="通过指定的类名获取元素"><a href="#通过指定的类名获取元素" class="headerlink" title="通过指定的类名获取元素"></a>通过指定的类名获取元素</h3><p>语法：document.getElementsByClassName()</p>
+<p>功能：返回文档中所有指定类名的元素集合，作为 NodeList 对象。</p>
+<p>HTML 5 为 document 对象和 HTML 元素新增了 getElementsByClassName() 方法，使用该方法可以选择指定类名的元素。</p>
+<p>getElementsByClassName() 方法可以接收一个字符串参数，包含一个或多个类名，类名通过空格分隔，不分先后顺序，方法返回带有指定类的所有元素 NodeList。</p>
+<p>浏览器支持状态：IE 9+、Firefox 3.0+、Safari 3+、Chrome 和 Opera 9.5+。</p>
+<p>如果不考虑兼容早期 IE 浏览器或者怪异模式，用户可以放心使用。 </p>
+<p>示例1</p>
+<p>下面示例使用 getElementsByClassName(“red”) 方法选择文档中所有包含 red 类的元素。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;red&quot;&gt;红盒子&lt;/div&gt;</span><br><span class="line">&lt;div class=&quot;blue red&quot;&gt;蓝盒子&lt;/div&gt;</span><br><span class="line">&lt;div class=&quot;green red&quot;&gt;绿盒子&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var divs = document.getElementsByClassName(&quot;red&quot;);</span><br><span class="line">    for (var i = 0; i &lt; divs.length; i ++) &#123;</span><br><span class="line">        console.log(divs[i].innerHTML);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>示例2</p>
+<p>下面示例使用 document.getElementById(“box”) 方法先获取 <div id="box">，然后在它下面使用 getElementsByClassName(“blue red”) 选择同时包含 red 和  blue 类的元素。</div></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;box&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;blue red green&quot;&gt;blue red green&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;div class=&quot;blue red black&quot;&gt;blue red black&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var divs = document.getElementById(&quot;box&quot;).getElementsByClassName(&quot;blue red&quot;);</span><br><span class="line">    for (var i = 0; i &lt; divs.length; i ++) &#123;</span><br><span class="line">        console.log(divs[i].innerHTML);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在 document 对象上调用 getElementsByClassName() 会返回与类名匹配的所有元素，在元素上调用该方法就只会返回后代元素中匹配的元素。</p>
+<h3 id="通过样式查找单个元素"><a href="#通过样式查找单个元素" class="headerlink" title="通过样式查找单个元素"></a>通过样式查找单个元素</h3><p>语法：元素.querySelector(“css选择器”);</p>
+<p>功能：返回文档中匹配指定 CSS 选择器的一个元素</p>
+<p>返回值：DOM对象</p>
+<p>传递一个标签选择器</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C33.png" alt="33"></p>
+<p>传递一个类选择器</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C34.png" alt="34"></p>
+<p>传递一个交集选择器</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C35.png" alt="35"></p>
+<p>获取文档中有 “target” 属性的第一个 <a> 元素</a></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C36.png" alt="36"></p>
+<p>并集选择器</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C37.png" alt="37"></p>
+<h3 id="通过样式获取所有元素"><a href="#通过样式获取所有元素" class="headerlink" title="通过样式获取所有元素"></a>通过样式获取所有元素</h3><p>语法：元素.querySelectorAll(“css选择器”);语法：元素.querySelectorAll(“css选择器”);</p>
+<p>功能：该方法和document.querySelector()用法类似，不同的是它会将符合条件的元素封装到一个数组中返回。即使符合条件的元素只有一个，它也会返回数组.</p>
+<p>返回值：类数组</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C38.png" alt="38"></p>
+<h2 id="Document类型"><a href="#Document类型" class="headerlink" title="Document类型"></a>Document类型</h2><p>JavaScript 通过 Document 类型表示文档。在浏览器中，<code>document</code> 对象是 <code>HTMLDocument</code>（继承自 Document 类型）的一个实例，表示整个 HTML 页面。而且，<code>document</code> 对象是 <code>window</code> 对象的一个属性，因此可以将其作为全局对象来访问。<code>Document</code> 节点具有下列特征：</p>
+<ul>
+<li><code>nodeType</code> 的值为9；</li>
+<li><code>nodeName</code> 的值为 <code>&quot;#document&quot;</code>；</li>
+<li><code>nodeValue</code> 的值为 <code>null</code>；</li>
+<li><code>parentNode</code> 的值为 <code>null</code>；</li>
+<li><code>ownerDocument</code> 的值为 <code>null</code>；</li>
+<li>其子节点可能是一个 <code>DocumentType</code>（最多一个）、<code>Element</code>（最多一个）、<code>ProcessingInstruction</code> 或 <code>Comment</code>。</li>
+</ul>
+<p><code>Document</code> 类型可以表示 HTML 页面或者其他基于 XML 的文档。不过，最常见的应用还是作为 <code>HTMLDocument</code> 实例的 <code>document</code> 对象。通过这个文档对象，不仅可以取得与页面有关的信息，而且还能操作页面的外观及其底层结构。</p>
+<h3 id="文档的子节点"><a href="#文档的子节点" class="headerlink" title="文档的子节点"></a>文档的子节点</h3><p>虽然 DOM 标准规定 <code>Document</code> 节点的子节点可以是<code>DocumentType</code>、<code>Element</code>、<code>ProcessingInstruction</code> 或 <code>Comment</code>，但还有两个内置的访问其子节点的快捷方式。第一个就是<code>documentElement</code> 属性，该属性始终指向 HTML 页面中的 <code>html</code> 元素。另一个就是通过 <code>childNodes</code> 列表访问文档元素，但通过 <code>documentElement</code> 属性则能更快捷、更直接地访问该元素。以下面这个简单的页面为例。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这个页面在经过浏览器解析后，其文档中只包含一个子节点，即 <code>html</code> 元素。可以通过 <code>documentElement</code> 或 <code>childNodes</code> 列表来访问这个元素，如下所示。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> html = <span class="variable language_">document</span>.<span class="property">documentElement</span>;      <span class="comment">// 取得对&lt;html&gt;的引用</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(html === <span class="variable language_">document</span>.<span class="property">childNodes</span>[<span class="number">0</span>]);   <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(html === <span class="variable language_">document</span>.<span class="property">firstChild</span>);      <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>这个例子说明，<code>documentElement</code>、<code>firstChild</code> 和 <code>childNodes[0]</code> 的值相同，都指向 <code>&lt;html&gt;</code> 元素。</p>
+<p>作为 <code>HTMLDocument</code> 的实例，<code>document</code> 对象还有一个 <code>body</code> 属性，直接指向 <code>&lt;body&gt;</code> 元素。因为开发人员经常要使用这个元素，所以 <code>document.body</code> 在 JavaScript 代码中出现的频率非常高，其用法如下。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> body = <span class="variable language_">document</span>.<span class="property">body</span>;    <span class="comment">// 取得对&lt;body&gt;的引用</span></span><br></pre></td></tr></table></figure>
+
+<p>所有浏览器都支持 <code>document.documentElement</code> 和 <code>document.body</code> 属性。</p>
+<p><code>Document</code> 另一个可能的子节点是 <code>DocumentType</code>。通常将 <code>&lt;!DOCTYPE&gt;</code> 标签看成一个与文档其他部分不同的实体，可以通过 <code>doctype</code> 属性（在浏览器中是 <code>document.doctype</code> ）来访问它的信息。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> doctype = <span class="variable language_">document</span>.<span class="property">doctype</span>;     <span class="comment">// 取得对&lt;!DOCTYPE&gt;的引用</span></span><br></pre></td></tr></table></figure>
+
+<p>浏览器对 <code>document.doctype</code> 的支持差别很大，可以给出如下总结。</p>
+<ul>
+<li>IE8 及之前版本：如果存在文档类型声明，会将其错误地解释为一个注释并把它当作 <code>Comment</code> 节点；而 <code>document.doctype</code> 的值始终为 <code>null</code>。</li>
+<li>IE9+ 及 Firefox：如果存在文档类型声明，则将其作为文档的第一个子节点；<code>document.doctype</code> 是一个 <code>DocumentType</code> 节点，也可以通过 <code>document.firstChild</code> 或 <code>document.childNodes[0]</code> 访问同一个节点。</li>
+<li>Safari、Chrome 和 Opera：如果存在文档类型声明，则将其解析，但不作为文档的子节点。<code>document.doctype</code> 是一个 <code>DocumentType</code> 节点，但该节点不会出现在 <code>document.childNodes</code> 中。</li>
+</ul>
+<p>由于浏览器对 <code>document.doctype</code> 的支持不一致，因此这个属性的用处很有限。</p>
+<h3 id="文档信息"><a href="#文档信息" class="headerlink" title="文档信息"></a>文档信息</h3><p>作为 <code>HTMLDocument</code> 的一个实例，<code>document</code> 对象还有一些标准的 <code>Document</code> 对象所没有的属性。这些属性提供了 <code>document</code> 对象所表现的网页的一些信息。其中第一个属性就是 <code>title</code>，包含着 <code>&lt;title&gt;</code> 元素中的文本——显示在浏览器窗口的标题栏或标签页上。通过这个属性可以取得当前页面的标题，也可以修改当前页面的标题并反映在浏览器的标题栏中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 取得文档标题</span></span><br><span class="line"><span class="keyword">var</span> originalTitle = <span class="variable language_">document</span>.<span class="property">title</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置文档标题</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="property">title</span> = <span class="string">&quot;New page title&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>接下来要介绍的3个属性都与对网页的请求有关，它们是 <code>URL</code>、<code>domain</code> 和 <code>referrer</code>。<code>URL</code> 属性中包含页面完整的 URL（即地址栏中显示的URL），<code>domain</code> 属性中只包含页面的域名，而 <code>referrer</code> 属性中则保存着链接到当前页面的那个页面的 URL。在没有来源页面的情况下，<code>referrer</code> 属性中可能会包含空字符串。所有这些信息都存在于请求的 HTTP 头部，只不过是通过这些属性让我们能够在 JavaScrip 中访问它们而已，如下面的例子所示。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 取得完整的URL</span></span><br><span class="line"><span class="keyword">var</span> url = <span class="variable language_">document</span>.<span class="property">URL</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取得域名</span></span><br><span class="line"><span class="keyword">var</span> domain = <span class="variable language_">document</span>.<span class="property">domain</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取得来源页面的URL</span></span><br><span class="line"><span class="keyword">var</span> referrer = <span class="variable language_">document</span>.<span class="property">referrer</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="更改节点内容"><a href="#更改节点内容" class="headerlink" title="更改节点内容"></a>更改节点内容</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C22.png" alt="22"></p>
+<p>获取元素的内容</p>
+<p>语法：元素.innerHTML;</p>
+<p>说明：获取到的内容都是string 类型；</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C23.png" alt="23"></p>
+<p>修改设置元素的内容</p>
+<p>语法：元素.innerHTML &#x3D; ‘内容’</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C24.png" alt="24"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C25.png" alt="25"></p>
+<h3 id="元素的行内样式"><a href="#元素的行内样式" class="headerlink" title="元素的行内样式"></a>元素的行内样式</h3><p>获取元素的行内样式  style</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C26.png" alt="26"></p>
+<p>语法：元素.style.css属性；</p>
+<p>注意：复合属性需要转驼峰；</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C27.png" alt="27"></p>
+<h3 id="设置元素的行内样式"><a href="#设置元素的行内样式" class="headerlink" title="设置元素的行内样式"></a>设置元素的行内样式</h3><p>语法：元素.style.css属性 &#x3D; 属性值；</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C28.png" alt="28"></p>
+<h3 id="获取元素的html属性"><a href="#获取元素的html属性" class="headerlink" title="获取元素的html属性"></a>获取元素的html属性</h3><p>语法：元素.html属性</p>
+<p>Eg: 元素.id  元素.src    元素.alt    元素.value  等；</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C29.png" alt="29"></p>
+<h3 id="设置修改元素的html属性"><a href="#设置修改元素的html属性" class="headerlink" title="设置修改元素的html属性"></a>设置修改元素的html属性</h3><p>语法：元素.属性 &#x3D; 属性值；</p>
+<p>初始</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C30.png" alt="30"></p>
+<p>修改后</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C31.png" alt="31"></p>
+<h2 id="Node-属性概述"><a href="#Node-属性概述" class="headerlink" title="Node 属性概述"></a>Node 属性概述</h2><p>Node 常用属性主要有以下10个，接下来我们会着重讲解部分属性。</p>
+<ul>
+<li><code>nodeType</code>：显示节点的类型</li>
+<li><code>nodeName</code>：显示节点的名称</li>
+<li><code>nodeValue</code>：显示节点的值</li>
+<li><code>attributes</code>：获取一个属性节点</li>
+<li><code>firstChild</code>：表示某一节点的第一个节点</li>
+<li><code>lastChild</code>：表示某一节点的最后一个子节点</li>
+<li><code>childNodes</code>：表示所在节点的所有子节点</li>
+<li><code>parentNode</code>：表示所在节点的父节点</li>
+<li><code>nextSibling</code>：紧挨着当前节点的下一个节点</li>
+<li><code>previousSibling</code>：紧挨着当前节点的上一个节点</li>
+</ul>
+<h3 id="nodeName-和-nodeValue-属性"><a href="#nodeName-和-nodeValue-属性" class="headerlink" title="nodeName 和 nodeValue 属性"></a><code>nodeName</code> 和 <code>nodeValue</code> 属性</h3><p>要了解节点的具体信息，可以使用  <code>nodeName</code> 和 <code>nodeValue</code> 这两个属性。这两个属性的值完全取决于节点的类型。在使用这两个值以前，最好是像下面这样先检测一下节点的类型。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (someNode.<span class="property">nodeType</span> == <span class="number">1</span>)&#123;</span><br><span class="line">    value = someNode.<span class="property">nodeName</span>;    <span class="comment">// nodeName的值是元素的标签名</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，首先检查节点类型，看它是不是一个元素。如果是，则取得并保存 <code>nodeName</code> 的值。对于元素节点，<code>nodeName</code> 中保存的始终都是元素的标签名，而 <code>nodeValue</code> 的值则始终为 <code>null</code>。</p>
+<p>属性节点的主要特征值：nodeType 等于 2、nodeName 等于属性的名称、nodeValue 等于属性的值、parentNode 等于 null，在 HTML 中不包含子节点。属性节点继承于 Node 类型，包含以下 3 个专用属性。</p>
+<p>name：表示属性名称，等效于 nodeName。</p>
+<p>value：表示属性值，可读可写，等效于 nodeValue。</p>
+<p>specified：如果属性值是在代码中设置的，则返回 true；如果为默认值，则返回 false。</p>
+<h3 id="创建属性节点"><a href="#创建属性节点" class="headerlink" title="创建属性节点"></a>创建属性节点</h3><p>使用 document 对象的 createAttribute() 方法可以创建属性节点，具体用法如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">createAttribute</span>(name)</span><br></pre></td></tr></table></figure>
+
+<p>参数 name 表示新创建的属性的名称。</p>
+<p>示例1</p>
+<p>下面示例创建一个属性节点，名称为 align，值为 center，然后为标签 <div id="box"> 设置属性 align，最后分别使用 3 种方法读取属性 align 的值。</div></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">&quot;box&quot;</span>&gt;<span class="variable language_">document</span>.<span class="title function_">createAttribute</span>(name)&lt;/div&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">var</span> element = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;box&quot;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">var</span> attr = <span class="variable language_">document</span>.<span class="title function_">createAttribute</span>(<span class="string">&quot;align&quot;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    attr.<span class="property">value</span> = <span class="string">&quot;center&quot;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    element.<span class="title function_">setAttributeNode</span>(attr);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="variable language_">console</span>.<span class="title function_">log</span>(element.<span class="property">attributes</span>[<span class="string">&quot;align&quot;</span>].<span class="property">value</span>);  <span class="comment">//&quot;center&quot;</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="variable language_">console</span>.<span class="title function_">log</span>(element.<span class="title function_">getAttributeNode</span>(<span class="string">&quot;align&quot;</span>).<span class="property">value</span>);  <span class="comment">//&quot;center&quot;</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="variable language_">console</span>.<span class="title function_">log</span>(element.<span class="title function_">getAttribute</span>(<span class="string">&quot;align&quot;</span>));  <span class="comment">//&quot;center&quot;</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>属性节点一般位于元素的头部标签中。元素的属性列表会随着元素信息预先加载，并被存储在关联数组中。例如，针对下面 HTML 结构。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">&quot;div1&quot;</span> <span class="keyword">class</span>=<span class="string">&quot;style1&quot;</span> lang=<span class="string">&quot;en&quot;</span> title=<span class="string">&quot;div&quot;</span>&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>当 DOM 加载后，表示 HTML div 元素的变量 divElement 就会自动生成一个关联集合，它以名值对形式检索这些属性。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">divElement.<span class="property">attributes</span> = &#123;</span><br><span class="line">    id : <span class="string">&quot;div1&quot;</span>,</span><br><span class="line">    <span class="keyword">class</span> : <span class="string">&quot;style1&quot;</span>,</span><br><span class="line">    lang : <span class="string">&quot;en&quot;</span>,</span><br><span class="line">    title : <span class="string">&quot;div&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在传统 DOM 中，常用点语法通过元素直接访问 HTML 属性，如 img.src、a.href 等，这种方式虽然不标准，但是获得了所有浏览器的支持。</p>
+<p>示例2</p>
+<p>img 元素拥有 src 属性，所有图像对象都拥有一个 src 脚本属性，它与 HTML 的 src 特性关联在一起。下面两种用法都可以很好地工作在不同浏览器中。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;img id=<span class="string">&quot;img1&quot;</span> src=<span class="string">&quot;&quot;</span> /&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">var</span> img = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;img1&quot;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    img.<span class="title function_">setAttribute</span>(<span class="string">&quot;src&quot;</span>, <span class="string">&quot;http://www.w3.org&quot;</span>);  <span class="comment">//HTML 属性</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    img.<span class="property">src</span> = <span class="string">&quot;http://www.w3.org&quot;</span>;  <span class="comment">//JavaScript 属性</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>类似的还有 onclick、style 和 href 等。为了保证 <a target="_blank" rel="noopener" href="http://c.biancheng.net/java/">Java</a>Script 脚本在不同浏览器中都能很好地工作，建议采用标准用法，而且很多 HTML 属性并没有被 JavaScript 映射，所以也就无法直接通过脚本属性进行读写。</p>
+<h3 id="读取属性值"><a href="#读取属性值" class="headerlink" title="读取属性值"></a>读取属性值</h3><p>使用元素的 getAttribute() 方法可以读取指定属性的值。用法如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">getAttribute</span>(name)</span><br></pre></td></tr></table></figure>
+
+<p>参数 name 表示属性名称。</p>
+<p>使用元素的 attributes 属性、getAttributeNode() 方法可以返回对应属性节点。</p>
+<p>示例1</p>
+<p>下面示例访问红色盒子和蓝色盒子，然后读取这些元素所包含的 id 属性值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">&quot;red&quot;</span>&gt;红盒子&lt;/div&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;blue&quot;</span>&gt;</span>蓝盒子<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">var</span> red = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;red&quot;</span>);  <span class="comment">//获取红色盒子</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="variable language_">console</span>.<span class="title function_">log</span>(red.<span class="title function_">getAttribute</span>(<span class="string">&quot;id&quot;</span>));  <span class="comment">//显示红色盒子的id属性值</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">var</span> blue = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;blue&quot;</span>);  <span class="comment">//获取蓝色盒子</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="variable language_">console</span>.<span class="title function_">log</span>(blue.<span class="title function_">getAttribute</span>(<span class="string">&quot;id&quot;</span>));  <span class="comment">//显示蓝色盒子的id属性值</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>示例2</p>
+<p>HTML DOM 也支持使用点语法读取属性值，使用比较简便，也获得了所有浏览器的支持。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> red = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;red&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(red.<span class="property">id</span>);</span><br><span class="line"><span class="keyword">var</span> blue = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;blue&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(blue.<span class="property">id</span>);</span><br></pre></td></tr></table></figure>
+
+<p>对于 class 属性，则必须使用 className 属性名，因为 class 是 JavaScript 的保留字；对于 for  属性，则必须使用 htmlFor 属性名，这与 CSS 脚本中 float 和 text 属性被改名为 cssFloat 和 cssText  是一个道理。</p>
+<p>示例3</p>
+<p>使用 className 读写样式类。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;label id=<span class="string">&quot;label1&quot;</span> <span class="keyword">class</span>=<span class="string">&quot;class1&quot;</span> <span class="keyword">for</span>=<span class="string">&quot;textfield&quot;</span>&gt;文本框：</span><br><span class="line">    &lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;textfield&quot;</span> id=<span class="string">&quot;textfield&quot;</span> /&gt;</span><br><span class="line">&lt;/label&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">var</span> label = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;label1&quot;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="variable language_">console</span>.<span class="title function_">log</span>(label.<span class="property">className</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="variable language_">console</span>.<span class="title function_">log</span>(label.<span class="property">htmlFor</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>示例4</p>
+<p>对于复合类样式，需要使用 split() 方法劈开返回的字符串，然后遍历读取类样式。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">&quot;red&quot;</span> <span class="keyword">class</span>=<span class="string">&quot;red blue&quot;</span>&gt;红盒子&lt;/div&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="comment">//所有类名生成的数组</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">var</span> classNameArray = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;red&quot;</span>).<span class="property">className</span>.<span class="title function_">split</span>(<span class="string">&quot; &quot;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> classNameArray) &#123;  <span class="comment">//遍历数组</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="variable language_">console</span>.<span class="title function_">log</span>(classNameArray[i]);  <span class="comment">//当前class名</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="设置属性值"><a href="#设置属性值" class="headerlink" title="设置属性值"></a>设置属性值</h3><p>使用元素的 setAttribute() 方法可以设置元素的属性值。用法如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">setAttribute</span>(name) </span><br></pre></td></tr></table></figure>
+
+<p>参数 name 和 value 分别表示属性名称和属性值。属性名和属性值必须以字符串的形式进行传递。如果元素中存在指定的属性，它的值将被刷新；如果不存在，则 setAttribute() 方法将为元素创建该属性并赋值。</p>
+<p>示例1</p>
+<p>下面示例分别为页面中 div 元素设置 title 属性。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">&quot;red&quot;</span>&gt;红盒子&lt;/div&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;blue&quot;</span>&gt;</span>蓝盒子<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">var</span> red = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;red&quot;</span>);  <span class="comment">//获取红盒子的引用</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">var</span> blue= <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;blue&quot;</span>);  <span class="comment">//获取蓝盒子的引用</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    red.<span class="title function_">setAttribute</span>(<span class="string">&quot;title&quot;</span>, <span class="string">&quot;这是红盒子&quot;</span>);  <span class="comment">//为红盒子对象设置title属性和值</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    blue.<span class="title function_">setAttribute</span>(<span class="string">&quot;title&quot;</span>, <span class="string">&quot;这是蓝盒子&quot;</span>);  <span class="comment">//为蓝盒子对象设置title属性和值</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>示例2</p>
+<p>下面示例定义了一个文本节点和元素节点，并为一级标题元素设置 title 属性，最后把它们添加到文档结构中。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> hello = <span class="variable language_">document</span>.<span class="title function_">createTextNode</span>(<span class="string">&quot;Hello World!&quot;</span>);  <span class="comment">//创建一个文本节点</span></span><br><span class="line"><span class="keyword">var</span> h1 = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;h1&quot;</span>);  <span class="comment">//创建一个一级标题</span></span><br><span class="line">h1.<span class="title function_">setAttribute</span>(<span class="string">&quot;title&quot;</span>, <span class="string">&quot;你好，欢迎光临！&quot;</span>);  <span class="comment">//为以及标题定义title 属性</span></span><br><span class="line">h1.<span class="title function_">appendChild</span>(hello);  <span class="comment">//把文本节点增加到一级标题中</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(h1);  <span class="comment">//把一级标题增加到文档</span></span><br></pre></td></tr></table></figure>
+
+<p>示例3</p>
+<p>也可以使用快捷方法设置 HTML DOM 文档中元素的属性值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;label id=<span class="string">&quot;label1&quot;</span>&gt;文本框：</span><br><span class="line">    &lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;textfield&quot;</span> id=<span class="string">&quot;textfield&quot;</span> /&gt;</span><br><span class="line">&lt;/label&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">var</span> label1 = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;label1&quot;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    label.<span class="property">className</span> = <span class="string">&quot;class1&quot;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    label.<span class="property">htmlFor</span> = <span class="string">&quot;textfield&quot;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>DOM 支持使用 getAttribute() 和 setAttribute() 方法读写自定义属性，不过 IE 6.0 及其以下版本浏览器对其的支持不是很完善。</p>
+<p>示例4</p>
+<p>直接使用 className 添加类样式，会覆盖掉元素原来的类样式。这时可以采用叠加的方式添加类。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">&quot;red&quot;</span>&gt;红盒子&lt;/div&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">var</span> red = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;red&quot;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    red.<span class="property">className</span> = <span class="string">&quot;red&quot;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    red.<span class="property">className</span> += <span class="string">&quot;blue&quot;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>示例5</p>
+<p>使用叠加的方式添加类也存在问题，这样容易添加大量重复的类。为此，定义一个检测函数，判断元素是否包含指定的类，然后再决定是否添加类。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">hasClass</span> (element, className) &#123;  <span class="comment">//检测类名函数</span></span><br><span class="line">        <span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="string">&#x27;(\\s|^)&#x27;</span> + className + <span class="string">&#x27;(\\s|$)&#x27;</span>);</span><br><span class="line">        <span class="keyword">return</span> reg.<span class="title function_">test</span>(element.<span class="property">className</span>);  <span class="comment">//使用正则检测是否有相同的样式</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">addClass</span> (element, className) &#123;  <span class="comment">//添加类名函数</span></span><br><span class="line">        <span class="keyword">if</span> (! hasClass (element, className))</span><br><span class="line">            element.<span class="property">className</span> += <span class="string">&#x27; &#x27;</span> + className;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;red&quot;</span>&gt;</span>红盒子<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">var</span> red = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;red&quot;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="title function_">addClass</span>(red, <span class="string">&#x27;red&#x27;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="title function_">addClass</span>(red, <span class="string">&#x27;blue&#x27;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="删除属性"><a href="#删除属性" class="headerlink" title="删除属性"></a>删除属性</h3><p>使用元素的 removeAttribute() 方法可以删除指定的属性。用法如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">removeAttribute</span>(name)</span><br></pre></td></tr></table></figure>
+
+<p>参数 name 表示元素的属性名。</p>
+<p>示例1</p>
+<p>下面示例演示了如何动态设置表格的边框</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">onload</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;  <span class="comment">//绑定页面加载完毕时的事件处理函数</span></span><br><span class="line">        <span class="keyword">var</span> table = <span class="variable language_">document</span>.<span class="title function_">getElementByTagName</span>(<span class="string">&quot;table&quot;</span>)[<span class="number">0</span>];  <span class="comment">//获取表格外框的引用</span></span><br><span class="line">        <span class="keyword">var</span> del = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;del&quot;</span>);</span><br><span class="line">        <span class="keyword">var</span> reset = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;reset&quot;</span>);</span><br><span class="line">        del.<span class="property">onclick</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">            table.<span class="title function_">removeAttribute</span>(<span class="string">&quot;border&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        reset.<span class="property">onclick</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">            table.<span class="title function_">setAttribute</span>(<span class="string">&quot;border&quot;</span>, <span class="string">&quot;2&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;table width=&quot;100%&quot; border=&quot;2&quot;&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td&gt;数据表格&lt;/td&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">&lt;/table&gt;</span><br><span class="line">&lt;button id=&quot;del&quot;&gt;删除&lt;/button&gt;&lt;button id=&quot;reset&quot;&gt;恢复&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在上面示例中设计了两个按钮，并分别绑定了不同的事件处理函数。单击“删除”按钮即可调用表格的 removeAttribute() 方法清除表格边框，单击“恢复”按钮即可调用表格的 setAttribute() 方法重新设置表哥便可的粗细。</p>
+<p>示例2</p>
+<p>下面示例演示了如何自定义删除类函数，并调用该函数删除指定类名。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">hasClass</span> (element, className) &#123;  <span class="comment">//类名检测函数</span></span><br><span class="line">        <span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="title class_">RegExp</span> (<span class="string">&#x27;(\\s|^)&#x27;</span> + className + <span class="string">&#x27;(\\s|$)&#x27;</span>);</span><br><span class="line">        <span class="keyword">return</span> reg.<span class="property">test</span> (element, className);  <span class="comment">//使用正则检测是否有相同的样式</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">deleteClass</span> (element, className) &#123;</span><br><span class="line">        <span class="keyword">if</span> (hasClass (element, className)) &#123;</span><br><span class="line">            element.<span class="property">className</span>.<span class="property">replace</span> (reg, <span class="string">&#x27; &#x27;</span>);  <span class="comment">//捕获要删除样式，然后替换为空白字符串</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;red&quot;</span> <span class="attr">class</span>=<span class="string">&quot;red blue bold&quot;</span>&gt;</span>盒子<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">var</span> red = <span class="variable language_">document</span>.<span class="property">getElementById</span> (<span class="string">&quot;red&quot;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    deleteClass (red, <span class="string">&#x27;blue&#x27;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码使用正则表达式检测 className 属性值字符串中是否包含指定的类名，如果存在，则使用空字符串替换掉匹配到的子字符串，从而实现删除类名的目的。</p>
+<h3 id="创建节点"><a href="#创建节点" class="headerlink" title="创建节点"></a>创建节点</h3><p>createElement() 方法创建新的元素节点。</p>
+<p>document.createElement()是在对象中创建一个对象，要与appendChild()或insertBefore()方法联合使用。其中，appendChild()方法在节点的子节点列表末添加新的子节点。insertBefore()方法在节点的子节点列表任意位置插入新的节点。</p>
+<h3 id="添加节点"><a href="#添加节点" class="headerlink" title="添加节点"></a>添加节点</h3><p>appendChild() 方法向已存在的节点添加子节点。</p>
+<p>示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">&quot;board&quot;</span>&gt;&lt;/div&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">var</span> board = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;board&quot;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">var</span> e = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;input&quot;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">e.<span class="property">type</span> = <span class="string">&quot;button&quot;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">e.<span class="property">value</span> = <span class="string">&quot;这是测试加载的小例子&quot;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">var</span> object = board.<span class="title function_">appendChild</span>(e);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>示例2：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><br><span class="line">    <span class="keyword">var</span> board = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;board&quot;</span>);</span><br><span class="line">    <span class="keyword">var</span> e2 = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;select&quot;</span>);</span><br><span class="line">    e2.<span class="property">options</span>[<span class="number">0</span>] = <span class="keyword">new</span> <span class="title class_">Option</span>(<span class="string">&quot;加载项1&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">    e2.<span class="property">options</span>[<span class="number">1</span>] = <span class="keyword">new</span> <span class="title class_">Option</span>(<span class="string">&quot;加载项2&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">    e2.<span class="property">size</span> = <span class="string">&quot;2&quot;</span>;</span><br><span class="line">    <span class="keyword">var</span> object = board.<span class="title function_">appendChild</span>(e2);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>示例3：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><br><span class="line">    <span class="keyword">var</span> board = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;board&quot;</span>);           </span><br><span class="line">    <span class="keyword">var</span> e3 = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;input&quot;</span>);</span><br><span class="line">    e4.<span class="title function_">setAttribute</span>(<span class="string">&quot;type&quot;</span>, <span class="string">&quot;text&quot;</span>);</span><br><span class="line">    e4.<span class="title function_">setAttribute</span>(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;q&quot;</span>);</span><br><span class="line">    e4.<span class="title function_">setAttribute</span>(<span class="string">&quot;value&quot;</span>, <span class="string">&quot;使用setAttribute&quot;</span>);</span><br><span class="line">    e4.<span class="title function_">setAttribute</span>(<span class="string">&quot;onclick&quot;</span>, <span class="string">&quot;javascript:alert(&#x27;This is a test!&#x27;);&quot;</span>);           </span><br><span class="line">    <span class="keyword">var</span> object = board.<span class="title function_">appendChild</span>(e3);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="替换节点"><a href="#替换节点" class="headerlink" title="替换节点"></a>替换节点</h3><p>replaceChild() 方法可以将某个子节点替换为另一个。</p>
+<p>语法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nodeObject.<span class="title function_">replaceChild</span>(new_node, old_node)</span><br></pre></td></tr></table></figure>
+
+<p>其中参数 new_node 为指定新的节点，old_node 为被替换的节点。如果替换成功，则返回被替换的节点；如果替换失败，则返回 null。</p>
+<p>示例1：</p>
+<p>以上示例为基础重写脚本，新建一个二级标题元素并替换掉红色盒子中的一级标题元素。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ok = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;ok&quot;</span>);  <span class="comment">//获取按钮元素的引用</span></span><br><span class="line">ok.<span class="property">onclick</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;  <span class="comment">//为按钮注册一个鼠标单击事件处理函数</span></span><br><span class="line">    <span class="keyword">var</span> red = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;red&quot;</span>);  <span class="comment">//获取红色盒子的引用</span></span><br><span class="line">    <span class="keyword">var</span> h1 = <span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(<span class="string">&quot;h1&quot;</span>)[<span class="number">0</span>];  <span class="comment">//获取一级标题的引用</span></span><br><span class="line">    <span class="keyword">var</span> h2 = documeng.<span class="title function_">createElement</span>(<span class="string">&quot;h2&quot;</span>);  <span class="comment">//创建二级标题元素并引用</span></span><br><span class="line">    red.<span class="title function_">replaceChild</span>(h2, h1);  <span class="comment">//把一级标题替换为二级标题</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>示例2：</p>
+<p>在下面示例中使用蓝盒子替换掉红盒子中包含的一级标题元素。此时可以看到，蓝盒子原来显示的位置已经被删除显示，同时被替换元素 h1 也被删除。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ok = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;ok&quot;</span>);  <span class="comment">//获取按钮元素的引用</span></span><br><span class="line">ok.<span class="property">onclick</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;  <span class="comment">//为按钮注册一个鼠标单击事件处理函数</span></span><br><span class="line">    <span class="keyword">var</span> red = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;red&quot;</span>);  <span class="comment">//获取红色盒子的引用</span></span><br><span class="line">    <span class="keyword">var</span> blue= <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;blue&quot;</span>);  <span class="comment">//获取蓝色盒子的引用</span></span><br><span class="line">    <span class="keyword">var</span> h1 = <span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(<span class="string">&quot;h1&quot;</span>)[<span class="number">0</span>];  <span class="comment">//获取一级标题的引用</span></span><br><span class="line">    red.<span class="title function_">replaceChild</span>(blue, h1);  <span class="comment">//把红盒子中包含的一级标题替换为蓝盒子</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>示例3：</p>
+<p>replaceChild() 方法能够返回被替换掉的节点引用，因此还可以把被替换掉的元素给找回来，并增加到文档中的指定节点中。</p>
+<p>针对上面示例，使用一个变量 del_h1 存储被替换掉的一级标题，然后再把它插入到红色盒子前面。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ok = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;ok&quot;</span>);  <span class="comment">//获取按钮元素的引用</span></span><br><span class="line">ok.<span class="property">onclick</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;  <span class="comment">//为按钮注册一个鼠标单击事件处理函数</span></span><br><span class="line">    <span class="keyword">var</span> red = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;red&quot;</span>);  <span class="comment">//获取红色盒子的引用</span></span><br><span class="line">    <span class="keyword">var</span> blue= <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;blue&quot;</span>);  <span class="comment">//获取蓝色盒子的引用</span></span><br><span class="line">    <span class="keyword">var</span> h1 = <span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(<span class="string">&quot;h1&quot;</span>)[<span class="number">0</span>];  <span class="comment">//获取一级标题的引用</span></span><br><span class="line">    <span class="keyword">var</span> del_h1 = red,<span class="title function_">replaceChild</span>(blue, h1);  <span class="comment">//把红盒子中包含的一级标题替换为蓝盒子</span></span><br><span class="line">    red.<span class="property">parentNode</span>.<span class="title function_">insertBefore</span>(del_h1, red);  <span class="comment">//把替换掉的一级标题插入到红盒子前面</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自定义属性"><a href="#自定义属性" class="headerlink" title="自定义属性"></a>自定义属性</h3><p>HTML 5 允许用户为元素自定义属性，但要求添加 data- 前缀，目的是为元素提供与渲染无关的附加信息，或者提供语义信息。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">&quot;box&quot;</span> data-myid=<span class="string">&quot;12345&quot;</span> data-myname=<span class="string">&quot;zhangsan&quot;</span> data-mypass=<span class="string">&quot;zhang123&quot;</span>&gt;自定义数据属性&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>添加自定义属性之后，可以通过元素的 dataset 属性访问自定义属性。dataset 属性的值是一个 DOMStringMap  实例，也就是一个名值对的映射。在这个映射中，每个 data-name 形式的属性都会有一个对应的属性，只不过属性名没有 data- 前缀。</p>
+<p>浏览器支持状态：Firefox 6+ 和 Chrome。</p>
+<p>示例</p>
+<p>下面代码演示了如何自定义属性，以及如何读取这些附加信息。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> div = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;box&quot;</span>);</span><br><span class="line"><span class="comment">//访问自定义属性值</span></span><br><span class="line"><span class="keyword">var</span> id = div.<span class="property">dataset</span>.<span class="property">myid</span>;</span><br><span class="line"><span class="keyword">var</span> name = div.<span class="property">dataset</span>.<span class="property">myname</span>;</span><br><span class="line"><span class="keyword">var</span> pass = div.<span class="property">dataset</span>.<span class="property">mypass</span>;</span><br><span class="line"><span class="comment">//重置自定义属性值</span></span><br><span class="line">div.<span class="property">dataset</span>.<span class="property">myid</span> = <span class="string">&quot;66666&quot;</span>;</span><br><span class="line">div.<span class="property">dataset</span>.<span class="property">myname</span> = <span class="string">&quot;zhangsan&quot;</span>;</span><br><span class="line">div.<span class="property">dataset</span>.<span class="property">mypass</span> = <span class="string">&quot;zhangsan666&quot;</span>;</span><br><span class="line"><span class="comment">//检测自定义属性</span></span><br><span class="line"><span class="keyword">if</span> (div.<span class="property">dataset</span>.<span class="property">myname</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(div.<span class="property">dataset</span>.<span class="property">myname</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>虽然上述用法未获得所有浏览器支持，但是我们仍然可以使用这种方式为元素添加自定义属性，然后使用 getAttribute() 方法读取元素附加的信息。</p>
+<h2 id="节点关系"><a href="#节点关系" class="headerlink" title="节点关系"></a>节点关系</h2><h3 id="识别空白文本"><a href="#识别空白文本" class="headerlink" title="识别空白文本"></a>识别空白文本</h3><p>元素.firstChild  第一个子节点</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C51.png" alt="51"></p>
+<p>元素.lastChild  最后一个子节点</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C52.png" alt="52"></p>
+<p>元素.childNodes  获取所有的子节点</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C53.png" alt="53"></p>
+<p>元素.attributes  获取某个元素的所有属性节点</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C54.png" alt="54"></p>
+<p>元素.nextSibling  获取下一个兄弟节点</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C55.png" alt="55"></p>
+<p>元素.previousSibling  获取上一个兄弟节点</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C56.png" alt="56"></p>
+<h3 id="不识别空白文本"><a href="#不识别空白文本" class="headerlink" title="不识别空白文本"></a>不识别空白文本</h3><p>元素.children 获取所有的元素子节点</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C57.png" alt="57"></p>
+<p>元素.firstElementChild   获取第一个元素子节点</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/07/15/DOM/DOM%5C58.png" alt="58"></p>
+<p>元素.lastElementChild   获取最后一个元素子节点</p>
+<p>元素.nextElementSibling  获取下一个元素兄弟节点</p>
+<p>元素.previousElementSibling  获取上一个元素兄弟节点</p>
+<p>元素.parentNode  父节点</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://jiaobingyang.gitee.io">三乘以十的八次幂</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://jiaobingyang.gitee.io/2017/07/15/DOM/">https://jiaobingyang.gitee.io/2017/07/15/DOM/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://jiaobingyang.gitee.io" target="_blank">三乘以十的八次幂</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/DOM/">DOM</a></div><div class="post_share"><div class="social-share" data-image="https://img2.baidu.com/it/u=203840827,1100704486&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=PNG?w=500&amp;h=313" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081333.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081333.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081350.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081350.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2017/07/21/DOM%E4%BA%8B%E4%BB%B6/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img0.baidu.com/it/u=2287769419,267238363&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=658&amp;h=411" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">DOM事件</div></div></a></div><div class="next-post pull-right"><a href="/2017/06/20/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.baidu.com/it/u=2952638880,3324182124&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=800&amp;h=500" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">面向对象编程</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2017/07/21/DOM%E4%BA%8B%E4%BB%B6/" title="DOM事件"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img0.baidu.com/it/u=2287769419,267238363&fm=253&fmt=auto&app=138&f=JPEG?w=658&h=411" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2017-07-21</div><div class="title">DOM事件</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13279652804370799.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="avatar"/></div><div class="author-info__name">三乘以十的八次幂</div><div class="author-info__description">死亡如风，常伴吾身</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">99</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/BINGYANGJIAO/bingyangjiao.github.io"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/BINGYANGJIAO/bingyangjiao.github.io" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:781250021@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">兴趣爱好才是最大的动力，何不与我共同攀知识高峰，品翘楚美人！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#DOM"><span class="toc-number">1.</span> <span class="toc-text">DOM</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A4%E8%AF%86dom%E6%A0%91%E5%92%8Cdom%E8%8A%82%E7%82%B9"><span class="toc-number">1.2.</span> <span class="toc-text">认识dom树和dom节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dom%E6%A0%91"><span class="toc-number">1.3.</span> <span class="toc-text">Dom树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM%E8%8A%82%E7%82%B9%E7%9A%84%E5%88%86%E7%B1%BB%EF%BC%9A"><span class="toc-number">1.4.</span> <span class="toc-text">DOM节点的分类：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8A%82%E7%82%B9%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%9A"><span class="toc-number">1.5.</span> <span class="toc-text">节点之间的关系：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E8%8A%82%E7%82%B9"><span class="toc-number">1.6.</span> <span class="toc-text">访问节点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87ID%E5%90%8D%E6%9F%A5%E6%89%BEdom%E5%85%83%E7%B4%A0"><span class="toc-number">1.6.1.</span> <span class="toc-text">通过ID名查找dom元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E6%A0%87%E7%AD%BE%E5%90%8D%E6%89%BE%E5%85%83%E7%B4%A0"><span class="toc-number">1.6.2.</span> <span class="toc-text">通过标签名找元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87name%E5%B1%9E%E6%80%A7%E6%89%BE%E5%85%83%E7%B4%A0"><span class="toc-number">1.6.3.</span> <span class="toc-text">通过name属性找元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E6%8C%87%E5%AE%9A%E7%9A%84%E7%B1%BB%E5%90%8D%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0"><span class="toc-number">1.6.4.</span> <span class="toc-text">通过指定的类名获取元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E6%A0%B7%E5%BC%8F%E6%9F%A5%E6%89%BE%E5%8D%95%E4%B8%AA%E5%85%83%E7%B4%A0"><span class="toc-number">1.6.5.</span> <span class="toc-text">通过样式查找单个元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E6%A0%B7%E5%BC%8F%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E5%85%83%E7%B4%A0"><span class="toc-number">1.6.6.</span> <span class="toc-text">通过样式获取所有元素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Document%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.7.</span> <span class="toc-text">Document类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%A1%A3%E7%9A%84%E5%AD%90%E8%8A%82%E7%82%B9"><span class="toc-number">1.7.1.</span> <span class="toc-text">文档的子节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%A1%A3%E4%BF%A1%E6%81%AF"><span class="toc-number">1.7.2.</span> <span class="toc-text">文档信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%94%B9%E8%8A%82%E7%82%B9%E5%86%85%E5%AE%B9"><span class="toc-number">1.7.3.</span> <span class="toc-text">更改节点内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%B4%A0%E7%9A%84%E8%A1%8C%E5%86%85%E6%A0%B7%E5%BC%8F"><span class="toc-number">1.7.4.</span> <span class="toc-text">元素的行内样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E5%85%83%E7%B4%A0%E7%9A%84%E8%A1%8C%E5%86%85%E6%A0%B7%E5%BC%8F"><span class="toc-number">1.7.5.</span> <span class="toc-text">设置元素的行内样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0%E7%9A%84html%E5%B1%9E%E6%80%A7"><span class="toc-number">1.7.6.</span> <span class="toc-text">获取元素的html属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E4%BF%AE%E6%94%B9%E5%85%83%E7%B4%A0%E7%9A%84html%E5%B1%9E%E6%80%A7"><span class="toc-number">1.7.7.</span> <span class="toc-text">设置修改元素的html属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Node-%E5%B1%9E%E6%80%A7%E6%A6%82%E8%BF%B0"><span class="toc-number">1.8.</span> <span class="toc-text">Node 属性概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nodeName-%E5%92%8C-nodeValue-%E5%B1%9E%E6%80%A7"><span class="toc-number">1.8.1.</span> <span class="toc-text">nodeName 和 nodeValue 属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%B1%9E%E6%80%A7%E8%8A%82%E7%82%B9"><span class="toc-number">1.8.2.</span> <span class="toc-text">创建属性节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%BB%E5%8F%96%E5%B1%9E%E6%80%A7%E5%80%BC"><span class="toc-number">1.8.3.</span> <span class="toc-text">读取属性值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E5%B1%9E%E6%80%A7%E5%80%BC"><span class="toc-number">1.8.4.</span> <span class="toc-text">设置属性值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%B1%9E%E6%80%A7"><span class="toc-number">1.8.5.</span> <span class="toc-text">删除属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E8%8A%82%E7%82%B9"><span class="toc-number">1.8.6.</span> <span class="toc-text">创建节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E8%8A%82%E7%82%B9"><span class="toc-number">1.8.7.</span> <span class="toc-text">添加节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%BF%E6%8D%A2%E8%8A%82%E7%82%B9"><span class="toc-number">1.8.8.</span> <span class="toc-text">替换节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7"><span class="toc-number">1.8.9.</span> <span class="toc-text">自定义属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8A%82%E7%82%B9%E5%85%B3%E7%B3%BB"><span class="toc-number">1.9.</span> <span class="toc-text">节点关系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%86%E5%88%AB%E7%A9%BA%E7%99%BD%E6%96%87%E6%9C%AC"><span class="toc-number">1.9.1.</span> <span class="toc-text">识别空白文本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E8%AF%86%E5%88%AB%E7%A9%BA%E7%99%BD%E6%96%87%E6%9C%AC"><span class="toc-number">1.9.2.</span> <span class="toc-text">不识别空白文本</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/09/27/%E6%97%A5%E5%B8%B8%E9%9D%A2%E8%AF%95%E9%A2%98/" title="日积月累"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="日积月累"/></a><div class="content"><a class="title" href="/2022/09/27/%E6%97%A5%E5%B8%B8%E9%9D%A2%E8%AF%95%E9%A2%98/" title="日积月累">日积月累</a><time datetime="2022-09-27T12:26:26.000Z" title="发表于 2022-09-27 20:26:26">2022-09-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/06/%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端基础"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="前端基础"/></a><div class="content"><a class="title" href="/2022/07/06/%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端基础">前端基础</a><time datetime="2022-07-06T06:40:34.000Z" title="发表于 2022-07-06 14:40:34">2022-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/28/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端进阶"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="前端进阶"/></a><div class="content"><a class="title" href="/2022/06/28/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端进阶">前端进阶</a><time datetime="2022-06-27T23:33:45.000Z" title="发表于 2022-06-28 07:33:45">2022-06-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/23/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" title="事件循环"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="事件循环"/></a><div class="content"><a class="title" href="/2022/05/23/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" title="事件循环">事件循环</a><time datetime="2022-05-23T09:10:37.000Z" title="发表于 2022-05-23 17:10:37">2022-05-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/23/%E6%A8%A1%E5%9D%97%E5%8C%96/" title="模块化"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="模块化"/></a><div class="content"><a class="title" href="/2022/03/23/%E6%A8%A1%E5%9D%97%E5%8C%96/" title="模块化">模块化</a><time datetime="2022-03-23T08:50:18.000Z" title="发表于 2022-03-23 16:50:18">2022-03-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 三乘以十的八次幂</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="2963148865" data-server="netease" data-type="playlist" data-mini="true" data-fixed="true" data-preload="auto" data-autoplay="true"> </div><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "e0515f76-f737-4f77-ad57-761c3dc58f50";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (false) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (false) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

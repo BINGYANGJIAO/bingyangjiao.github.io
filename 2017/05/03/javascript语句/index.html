@@ -1,0 +1,455 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>javascript语句 | 三乘以十的八次幂</title><meta name="keywords" content="javascript"><meta name="author" content="三乘以十的八次幂"><meta name="copyright" content="三乘以十的八次幂"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="语句表达式在 JavaScript 中是短语，那么语句就是整句命令。表达式用来计算出一个值，语句用来执行以使某件事发生。从本质上看，语句定义了 JavaScript 中的主要语法，语句通常使用一或多个关键字来完成给定任务。语句可以很简单，例如通知函数退出；也可以比较复杂，例如指定重复执行某个命令的次数。下表列出了 JavaScript 大部分语句的语法和用途：    语句 语法 用途    bre">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript语句">
+<meta property="og:url" content="https://jiaobingyang.gitee.io/2017/05/03/javascript%E8%AF%AD%E5%8F%A5/index.html">
+<meta property="og:site_name" content="三乘以十的八次幂">
+<meta property="og:description" content="语句表达式在 JavaScript 中是短语，那么语句就是整句命令。表达式用来计算出一个值，语句用来执行以使某件事发生。从本质上看，语句定义了 JavaScript 中的主要语法，语句通常使用一或多个关键字来完成给定任务。语句可以很简单，例如通知函数退出；也可以比较复杂，例如指定重复执行某个命令的次数。下表列出了 JavaScript 大部分语句的语法和用途：    语句 语法 用途    bre">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img2.baidu.com/it/u=203840827,1100704486&fm=253&fmt=auto&app=138&f=PNG?w=500&h=313">
+<meta property="article:published_time" content="2017-05-03T01:34:16.000Z">
+<meta property="article:modified_time" content="2022-05-26T11:37:15.367Z">
+<meta property="article:author" content="三乘以十的八次幂">
+<meta property="article:tag" content="javascript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img2.baidu.com/it/u=203840827,1100704486&fm=253&fmt=auto&app=138&f=PNG?w=500&h=313"><link rel="shortcut icon" href="/img/13279652804370799.jpg"><link rel="canonical" href="https://jiaobingyang.gitee.io/2017/05/03/javascript%E8%AF%AD%E5%8F%A5/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'javascript语句',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-05-26 19:37:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/mycss.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13279652804370799.jpg" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">99</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/List/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/List/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page child" href="/List/gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/_data/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于本站</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img2.baidu.com/it/u=203840827,1100704486&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=PNG?w=500&amp;h=313')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">三乘以十的八次幂</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/List/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/List/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page child" href="/List/gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/_data/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于本站</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">javascript语句</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2017-05-03T01:34:16.000Z" title="发表于 2017-05-03 09:34:16">2017-05-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-26T11:37:15.367Z" title="更新于 2022-05-26 19:37:15">2022-05-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/javascript/">javascript</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="javascript语句"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h1><p>表达式在 JavaScript 中是短语，那么语句就是整句命令。表达式用来计算出一个值，语句用来执行以使某件事发生。从本质上看，语句定义了 JavaScript 中的主要语法，语句通常使用一或多个关键字来完成给定任务。语句可以很简单，例如通知函数退出；也可以比较复杂，例如指定重复执行某个命令的次数。下表列出了 JavaScript 大部分语句的语法和用途：</p>
+<table>
+<thead>
+<tr>
+<th>语句</th>
+<th>语法</th>
+<th align="left">用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>break</code></td>
+<td><code>break [label];</code></td>
+<td align="left">退出最内层循环或者退出 <code>switch</code> 语句，又或者退出 <code>label</code> 指定的语句</td>
+</tr>
+<tr>
+<td><code>case</code></td>
+<td><code>case expression:</code></td>
+<td align="left">在 <code>switch</code> 语句中标记一条语句</td>
+</tr>
+<tr>
+<td><code>continue</code></td>
+<td><code>continue [label];</code></td>
+<td align="left">重新开始最内层的循环或重新开始 <code>label</code> 指定的循环</td>
+</tr>
+<tr>
+<td><code>debugger</code></td>
+<td><code>debugger;</code></td>
+<td align="left">断点器调试</td>
+</tr>
+<tr>
+<td><code>default</code></td>
+<td><code>default;</code></td>
+<td align="left">在 <code>switch</code> 中标记默认的语句</td>
+</tr>
+<tr>
+<td><code>do-while</code></td>
+<td><code>do statement while(expression);</code></td>
+<td align="left"><code>while</code> 循环的一种替代形式</td>
+</tr>
+<tr>
+<td><code>empty</code></td>
+<td><code>;</code></td>
+<td align="left">什么都不做</td>
+</tr>
+<tr>
+<td><code>for</code></td>
+<td><code>for(init;expr;incr) statement</code></td>
+<td align="left">简写的循环结构</td>
+</tr>
+<tr>
+<td><code>for-in</code></td>
+<td><code>for(var in object) statement</code></td>
+<td align="left">遍历一个对象的属性</td>
+</tr>
+<tr>
+<td><code>function</code></td>
+<td><code>function name([param[],...])</code><br><code>&#123;statement&#125;</code></td>
+<td align="left">声明一个函数</td>
+</tr>
+<tr>
+<td><code>if-else</code></td>
+<td><code>if (expression) statement1</code><br><code>[else statement2]</code></td>
+<td align="left">执行 <code>statement1</code> 或者 <code>statement2</code></td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td><code>label:statement</code></td>
+<td align="left">给 <code>statement</code> 指定一个名字 <code>label</code></td>
+</tr>
+<tr>
+<td><code>return</code></td>
+<td><code>return [expression];</code></td>
+<td align="left">从函数返回一个值</td>
+</tr>
+<tr>
+<td><code>switch</code></td>
+<td><code>switch(expression)&#123;statement&#125;</code></td>
+<td align="left">用 <code>case</code> 或者 <code>default</code> 语句标记的多分支语句</td>
+</tr>
+<tr>
+<td><code>throw</code></td>
+<td><code>throw expression;</code></td>
+<td align="left">抛出异常</td>
+</tr>
+<tr>
+<td><code>try</code></td>
+<td><code>try &#123;statement&#125;</code><br><code>[catch &#123;handler statement&#125;]</code><br><code>[finally &#123;cleaup statement&#125;]</code></td>
+<td align="left">捕获异常</td>
+</tr>
+<tr>
+<td><code>use strict</code></td>
+<td><code>&quot;use strict&quot;</code></td>
+<td align="left">对脚本和函数应用严格模式</td>
+</tr>
+<tr>
+<td><code>var</code></td>
+<td><code>var name=[=expr][,...];</code></td>
+<td align="left">声明并初始化一个或多个变量</td>
+</tr>
+<tr>
+<td><code>while</code></td>
+<td><code>while(expression) statement</code></td>
+<td align="left">基本的循环结构</td>
+</tr>
+<tr>
+<td><code>with</code></td>
+<td><code>with(object) statement</code></td>
+<td align="left">扩展作用域链</td>
+</tr>
+</tbody></table>
+<h2 id="1-条件语句"><a href="#1-条件语句" class="headerlink" title="1)条件语句"></a>1)条件语句</h2><h3 id="if-else-语句"><a href="#if-else-语句" class="headerlink" title="if-else 语句"></a><code>if-else</code> 语句</h3><p>大多数编程语言中最为常用的一个语句就是 <code>if-else</code> 语句。以下是 <code>if-else</code> 语句的语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (condition) statement1 [<span class="keyword">else</span> statement2]</span><br></pre></td></tr></table></figure>
+
+<p>其中的 <code>condition</code> 可以是任意表达式；而且对这个表达式求值的结果不一定是布尔值。JavaScript 会自动调用 <code>Boolean()</code> 转换函数将这个表达式的结果转换为一个布尔值。如果对 <code>condition</code> 求值的结果是 <code>true</code>，则执行 <code>statement1</code>，如果对 <code>condition</code> 求值的结果是 <code>false</code>，则执行 <code>statement2</code>。而且这两个语句既可以是一行代码，也可以是一个代码块（以一对花括号括起来的多行代码）。请看下面的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (i &gt; <span class="number">25</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Greater than 25.&quot;</span>);              <span class="comment">// 单行语句</span></span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Less than or equal to 25.&quot;</span>);     <span class="comment">// 代码块中的语句</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>业界普遍推崇的最佳实践是始终使用代码块，即使要执行的只有一行代码。因为这样可以消除人们的误解，否则可能让人分不清在不同条件下要执行哪些语句。</p>
+<h3 id="switch-语句"><a href="#switch-语句" class="headerlink" title="switch 语句"></a><code>switch</code> 语句</h3><p><code>switch</code> 语句与 <code>if</code> 语句的关系最为密切，而且也是在其他语言中普遍使用的一种流控制语句。JavaScript 中 <code>switch</code> 语句的语法与其他基于 C 的语言非常接近，如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (expression) &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="attr">value</span>: statement</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">case</span> <span class="attr">value</span>: statement</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">case</span> <span class="attr">value</span>: statement</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">case</span> <span class="attr">value</span>: statement</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="attr">default</span>: statement</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>switch</code> 语句中的每一种情形的含义是：“如果表达式等于这个值（value），则执行后面的语句（statement）”。而 <code>break</code> 关键字会导致代码执行流跳出 <code>switch</code> 语句。如果省略 <code>break</code> 关键字，就会导致执行完当前 <code>case</code> 后，继续执行下一个 <code>case</code>。最后的 <code>default</code> 关键字则用于在表达式不匹配前面任何一种情形的时候，也相当于一个 <code>else</code> 语句。从根本上讲，<code>switch</code> 语句就是为了让开发人员免于编写像下面这样的代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (i === <span class="number">25</span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;25&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (i === <span class="number">35</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;35&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (i === <span class="number">45</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;45&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Other&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>而与此等价的switch语句如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (i) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">25</span>: </span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;25&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">35</span>: </span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;35&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">45</span>: </span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;45&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="attr">default</span>: </span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Other&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过为每个case后面都添加一个break语句，就可以避免同时执行多个case代码的情况。假如确实需要混合几种情形，不要忘了在代码中添加注释，说明你是有意省略了break关键字。</p>
+<p>虽然 JavaScript 中的 <code>switch</code> 语句借鉴自其他语言，但这个语句也有自己的特色。首先，可以在 <code>switch</code> 语句中使用任何数据类型（在很多其他语言中只能使用数值），无论是字符串，还是对象都没有问题。其次，每个 <code>case</code> 的值不一定是常量，可以是变量，甚至是表达式。请看下面这两个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (<span class="string">&quot;hello world&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;hello&quot;</span> + <span class="string">&quot; world&quot;</span>: </span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Greeting was found.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;goodbye&quot;</span>: </span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Closing was found.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="attr">default</span>: </span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Unexpected message was found.&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> num = <span class="number">25</span>;</span><br><span class="line"><span class="keyword">switch</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">case</span> num &lt; <span class="number">0</span>: </span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Less than 0.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> num &gt;= <span class="number">0</span> &amp;&amp; num &lt;= <span class="number">10</span>: </span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Between 0 and 10.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> num &gt; <span class="number">10</span> &amp;&amp; num &lt;= <span class="number">20</span>: </span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Between 10 and 20.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="attr">default</span>: </span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;More than 20.&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>switch</code> 语句首先计算 <code>switch</code> 关键字后的表达式，然后按照从上到下的顺序计算每个 <code>case</code> 后的表达式，直到执行到 <code>case</code> 的表达式的值与 <code>switch</code> 的表达式的值相等时为止。由于对每个 <code>case</code> 的匹配操作实际上是 <code>===</code> 恒等运算符比较，而不是 <code>==</code> 相等运算符比较，因此，表达式和 <code>case</code> 的匹配并不会做任何类型转换。</p>
+<h2 id="2）循环"><a href="#2）循环" class="headerlink" title="2）循环"></a>2）循环</h2><h3 id="while-语句"><a href="#while-语句" class="headerlink" title="while 语句"></a><code>while</code> 语句</h3><p><code>while</code> 语句属于前测试循环语句，也就是说，在循环体内的代码被执行之前，就会对出口条件求值。因引，循环体内的代码有可能永远不会被执行。以下是 <code>while</code> 语句的语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(expression) statement</span><br></pre></td></tr></table></figure>
+
+<p>下面是一个示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (i &lt; <span class="number">10</span>) &#123;</span><br><span class="line">    i += <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="do-while-语句"><a href="#do-while-语句" class="headerlink" title="do-while 语句"></a><code>do-while</code> 语句</h3><p><code>do-while</code> 语句是一种后测试循环语句，即只有在循环体中的代码执行之后，才会测试出口条件。换句话说，在对条件表达式求值之前，循环体内的代码至少会被执行一次。以下是 <code>do-while</code> 语句的语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    statement</span><br><span class="line">&#125; <span class="keyword">while</span> (expression);</span><br></pre></td></tr></table></figure>
+
+<p>下面是一个示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">   i += <span class="number">2</span>;</span><br><span class="line">&#125; <span class="keyword">while</span> (i &lt; <span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="for-语句"><a href="#for-语句" class="headerlink" title="for 语句"></a><code>for</code> 语句</h3><p><code>for</code> 语句也是一种前测试循环语句，但它具有在执行循环之前初始化变量和定义循环后要执行的代码的能力。以下是 <code>for</code> 语句的语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (初始化变量; 条件表达式; 操作表达式) 循环体</span><br></pre></td></tr></table></figure>
+
+<p>下面是一个示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; count; i++)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个 <code>for</code> 循环语句与下面的 <code>while</code> 语句的功能相同：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (i &lt; count)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">    i++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于 JavaScript 中不存在块级作用域，因此在循环内部定义的变量也可以在外部访问到。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; count; i++)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(i); <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
+
+<p>此外，<code>for</code> 语句中的初始化表达式、控制表达式和循环后表达式都是可选的。将这两个表达式全部省略，就会创建一个无限循环，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 无限循环</span></span><br><span class="line"><span class="keyword">for</span> (;;) &#123;</span><br><span class="line">    <span class="title function_">doSomething</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="for-in-语句"><a href="#for-in-语句" class="headerlink" title="for-in 语句"></a><code>for-in</code> 语句</h3><p><code>for-in</code> 语句是一种精准的迭代语句，可以用来枚举对象的属性。以下是 <code>for-in</code> 语句的语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (property <span class="keyword">in</span> object) statement</span><br></pre></td></tr></table></figure>
+
+<p>下面是一个示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> propName <span class="keyword">in</span> <span class="variable language_">window</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(propName);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，我们使用 <code>for-in</code> 循环来显示了 BOM 中 <code>window</code> 对象的所有属性。每次执行循环时，都会将 <code>window</code> 对象中存在的一个属性名赋值给变量 <code>propName</code>。这个过程会一直持续到对象中的所有属性都被枚举一遍为止。与 <code>for</code> 语句类似，这里控制语句中的 <code>var</code> 操作符也不是必需的。但是，为了保证使用局部变量，我们推荐上面例子中的这种做法。</p>
+<p>JavaScript 对象的属性没有顺序。因此，通过 <code>for-in</code> 循环输出的属性名的顺序是不可预测的。具体来讲，所有属性都会被返回一次，但返回的先后次序可能会因浏览器而异。</p>
+<p>如果表示要迭代的对象的变量值为 <code>null</code> 或 <code>undefined</code>，<code>for-in</code> 语句会抛出错误。虽然 ECMAScript 5 更正了这一行为；对这种情况不再抛出错误，而只是不执行循环体。为了保证最大限度的兼容性，建议在使用 <code>for-in</code> 循环之前，先检测确认该对象的值不是 <code>null</code> 或 <code>undefined</code>。</p>
+<h2 id="3）跳转"><a href="#3）跳转" class="headerlink" title="3）跳转"></a>3）跳转</h2><h3 id="break-和-continue-语句"><a href="#break-和-continue-语句" class="headerlink" title="break 和 continue 语句"></a><code>break</code> 和 <code>continue</code> 语句</h3><p><code>break</code> 和 <code>continue</code> 语句用于在循环中精确地控制代码的执行。其中，<code>break</code> 语句会立即退出循环，强制继续执行循环后面的语句。而 <code>continue</code> 语句虽然也是立即退出循环，但退出循环后会从循环的顶部继续执行。请看下面的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">1</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (i % <span class="number">5</span> == <span class="number">0</span>) &#123;</span><br><span class="line">       <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    num++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(num);   <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
+
+<p>这个例子中的 <code>for</code> 循环会将变量 <code>i</code> 由1递增至 <code>10</code>。在循环体内，有一个 <code>if</code> 语句检查 <code>i</code> 的值是否可以被 <code>5</code> 整除（使用求模运算符）。如果是，则执行 <code>break</code> 语句退出循环。另一方面，变量 <code>num</code> 从 <code>0</code> 开始，用于记录循环执行的次数。在执行 <code>break</code> 语句之后，结果显示 <code>4</code>。也就是说，在变量 <code>i</code> 等于 <code>5</code> 时，循环总共执行了 <code>4</code> 次；而 <code>break</code> 语句的执行，导致了循环在 <code>num</code> 再次递增之前就退出了。如果在这里把 <code>break</code> 替换为 <code>continue</code> 的话，则可以看到另一种结果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">1</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line"><span class="keyword">if</span> (i % <span class="number">5</span> == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    num++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(num);   <span class="comment">// 8</span></span><br></pre></td></tr></table></figure>
+
+<p>例子的结果显示 <code>8</code>，也就是循环总共执行了 <code>8</code> 次。当变量 <code>i</code> 等于 <code>5</code> 时，循环会在 <code>num</code> 再次递增之前退出，但接下来执行的是下一次循环，即i的值等于 <code>6</code> 的循环。于是，循环又继续执行，直到 <code>i</code> 等于 <code>10</code> 时自然结束。而 <code>num</code> 的最终值之所以是 <code>8</code>，是因为 <code>continue</code> 语句导致它少递增了一次。</p>
+<p><code>break</code> 和 <code>continue</code> 语句都可以与 <code>label</code> 语句联合使用，从而返回代码中特定的位置。这种联合使用的情况多发生在循环嵌套的情况下，如下面的例子所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="attr">outermost</span>:</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i == <span class="number">5</span> &amp;&amp; j == <span class="number">5</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span> outermost;</span><br><span class="line">        &#125;</span><br><span class="line">        num++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(num);   <span class="comment">// 55</span></span><br></pre></td></tr></table></figure>
+
+
+<p>在这个例子中，<code>outermost</code> 标签表示外部的 <code>for</code> 语句。如果每个循环正常执行 <code>10</code> 次，则 <code>num++</code> 语句就会正常执行 <code>100</code> 次。换句话说，如果两个循环都自然结束，<code>num</code> 的值应该是 <code>100</code>。但内部循环中的 <code>break</code> 语句带了一个参数：要返回到的标签。添加这个标签的结果将导致 <code>break</code> 语句不仅会退出内部的 <code>for</code> 语句（即使用变量 <code>j</code> 的循环），而且也会退出外部的 <code>for</code> 语句（即使用变量 <code>i</code> 的循环）。为此，当变量 <code>i</code> 和 <code>j</code> 都等于 <code>5</code> 时， <code>num</code>的值正好是 <code>55</code>。同样，<code>continue</code> 语句也可以像这样与 <code>label</code> 语句联用，如下面的例子所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="attr">outermost</span>:</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i == <span class="number">5</span> &amp;&amp; j == <span class="number">5</span>) &#123;</span><br><span class="line">            <span class="keyword">continue</span> outermost;</span><br><span class="line">        &#125;</span><br><span class="line">        num++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(num);   <span class="comment">// 95</span></span><br></pre></td></tr></table></figure>
+
+<p>在这种情况下，<code>continue</code> 语句会强制继续执行循环，退出内部循环，执行外部循环。当 <code>j</code> 是 <code>5</code> 时，<code>continue</code> 语句执行，而这也就意味着内部循环少执行了 <code>5</code> 次，因此 <code>num</code> 的结果是 <code>95</code>。</p>
+<p>虽然联用 <code>break</code>、<code>continue</code> 和 <code>label</code> 语句能够执行复杂的操作，但如果使用过度，也会给调试带来麻烦。在此，我们建议如果使用 <code>label</code> 语句，一定要使用描述性的标签，同时不要嵌套过多的循环。</p>
+<h3 id="return-语句"><a href="#return-语句" class="headerlink" title="return 语句"></a><code>return</code> 语句</h3><p><code>return</code> 语句的作用是指定函数调用后的返回值。<code>return</code> 语句的语法如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> [expression];</span><br></pre></td></tr></table></figure>
+
+<p>下面是一个示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">square</span>(<span class="params">x</span>) &#123; <span class="keyword">return</span> x*x; &#125;  <span class="comment">// 一个包含 return 语句的函数</span></span><br><span class="line"><span class="title function_">square</span>(<span class="number">2</span>);                          <span class="comment">// 调用结果为 4</span></span><br></pre></td></tr></table></figure>
+
+<p><code>return</code> 语句只能在函数体内出现，如果不是的话会报语法错误。当执行到 <code>return</code> 语句的时候，函数终止执行，并返回 <code>expression</code> 的值给调用程序。如果没有 <code>return</code> 语句，则函数调用仅依次执行函数体内的每一条语句直到函数结束，最后返回调用程序。这种情况下，调用表达式的结果是 <code>undefined</code>。<code>return</code> 语句经常作为函数内的最后一条语句出现，但并不是说要一定放在函数最后。<code>return</code> 语句可以单独使用而不必带有 <code>expression</code>，这样的话函数也会向调用程序返回 <code>undefined</code>。</p>
+<p>由于 JavaScript 可以自动插入分号，因此在 <code>return</code> 关键字和它后面的表达式之间不能有换行。</p>
+<h2 id="4）其他"><a href="#4）其他" class="headerlink" title="4）其他"></a>4）其他</h2><h3 id="with-语句"><a href="#with-语句" class="headerlink" title="with 语句"></a><code>with</code> 语句</h3><p><code>with</code> 语句的作用是将代码的作用域设置到一个特定的对象中。<code>with</code> 语句的语法如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> (expression) statement;</span><br></pre></td></tr></table></figure>
+
+<p>定义 <code>with</code> 语句的目的主要是为了简化多次编写同一个对象的工作，如下面的例子所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> qs = location.<span class="property">search</span>.<span class="title function_">substring</span>(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">var</span> hostName = location.<span class="property">hostname</span>;</span><br><span class="line"><span class="keyword">var</span> url = location.<span class="property">href</span>;</span><br></pre></td></tr></table></figure>
+
+<p>上面几行代码都包含 <code>location</code> 对象。如果使用 <code>with</code> 语句，可以把上面的代码改写成如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">with</span>(<span class="params">location</span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> qs = search.<span class="title function_">substring</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">var</span> hostName = hostname;</span><br><span class="line">    <span class="keyword">var</span> url = href;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个重写后的例子中，使用 <code>with</code> 语句关联了 <code>location</code> 对象。这意味着在 <code>with</code> 语句的代码块内部，每个变量首先被认为是一个局部变量，而如果在局部环境中找不到该变量的定义，就会查询 <code>location</code> 对象中是否有同名的属性。如果发现了同名属性，则以 <code>location</code> 对象属性的值作为变量的值。</p>
+<p>由于大量使用 <code>with</code> 语句会导致性能下降，同时也会给调试代码造成困难，因此在开发大型应用程序时，不建议使用 <code>with</code> 语句。严格模式下不允许使用 <code>with</code> 语句，否则将视为语法错误。</p>
+<h3 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h3><p>代码块将多个语句组合为一个复合语句。代码块其实就是一系列语句，可以放在任何期待一个语句的地方：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	x  = Math.PI</span><br><span class="line">	cx = Math.cos(x)</span><br><span class="line">	console.log(&quot;cos(n)= &quot; + cx)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：1)它没有以分号结尾。块中的单条语句都以分号结尾，但块本身没有。2）块中的代码相对于包含它们的花括号缩进</strong></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://jiaobingyang.gitee.io">三乘以十的八次幂</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://jiaobingyang.gitee.io/2017/05/03/javascript%E8%AF%AD%E5%8F%A5/">https://jiaobingyang.gitee.io/2017/05/03/javascript%E8%AF%AD%E5%8F%A5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://jiaobingyang.gitee.io" target="_blank">三乘以十的八次幂</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/javascript/">javascript</a></div><div class="post_share"><div class="social-share" data-image="https://img2.baidu.com/it/u=203840827,1100704486&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=PNG?w=500&amp;h=313" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081333.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081333.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081350.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081350.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2017/05/05/javascript%E5%AD%97%E7%AC%A6%E4%B8%B2/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.baidu.com/it/u=203840827,1100704486&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=PNG?w=500&amp;h=313" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">javascript字符串</div></div></a></div><div class="next-post pull-right"><a href="/2017/04/23/javascript%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8C%E6%93%8D%E4%BD%9C%E7%AC%A6/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img0.baidu.com/it/u=2287769419,267238363&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=658&amp;h=411" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">javascript表达式和操作符</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2017/05/26/javascript%E5%87%BD%E6%95%B0/" title="javascript函数"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img1.baidu.com/it/u=3573567130,3115501667&fm=253&fmt=auto&app=120&f=JPEG?w=1280&h=800" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2017-05-26</div><div class="title">javascript函数</div></div></a></div><div><a href="/2017/05/05/javascript%E5%AD%97%E7%AC%A6%E4%B8%B2/" title="javascript字符串"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.baidu.com/it/u=203840827,1100704486&fm=253&fmt=auto&app=138&f=PNG?w=500&h=313" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2017-05-05</div><div class="title">javascript字符串</div></div></a></div><div><a href="/2017/05/26/javascript%E5%AF%B9%E8%B1%A1/" title="javascript对象"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img1.baidu.com/it/u=2034218277,3798913723&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2017-05-26</div><div class="title">javascript对象</div></div></a></div><div><a href="/2017/05/14/javascript%E6%95%B0%E7%BB%84/" title="javascript数组"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img0.baidu.com/it/u=1795835256,1026023622&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2017-05-14</div><div class="title">javascript数组</div></div></a></div><div><a href="/2017/04/23/javascript%E7%B1%BB%E5%9E%8B%E3%80%81%E5%80%BC%E5%92%8C%E5%8F%98%E9%87%8F/" title="javascript类型、值和变量"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img1.baidu.com/it/u=611738635,3583713525&fm=253&fmt=auto&app=120&f=JPEG?w=800&h=500" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2017-04-23</div><div class="title">javascript类型、值和变量</div></div></a></div><div><a href="/2017/04/23/javascript%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8C%E6%93%8D%E4%BD%9C%E7%AC%A6/" title="javascript表达式和操作符"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img0.baidu.com/it/u=2287769419,267238363&fm=253&fmt=auto&app=138&f=JPEG?w=658&h=411" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2017-04-23</div><div class="title">javascript表达式和操作符</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13279652804370799.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="avatar"/></div><div class="author-info__name">三乘以十的八次幂</div><div class="author-info__description">死亡如风，常伴吾身</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">99</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/BINGYANGJIAO/bingyangjiao.github.io"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/BINGYANGJIAO/bingyangjiao.github.io" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:781250021@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">兴趣爱好才是最大的动力，何不与我共同攀知识高峰，品翘楚美人！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.</span> <span class="toc-text">语句</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.1.</span> <span class="toc-text">1)条件语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#if-else-%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.1.1.</span> <span class="toc-text">if-else 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#switch-%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.1.2.</span> <span class="toc-text">switch 语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%EF%BC%89%E5%BE%AA%E7%8E%AF"><span class="toc-number">1.2.</span> <span class="toc-text">2）循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#while-%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.2.1.</span> <span class="toc-text">while 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#do-while-%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.2.2.</span> <span class="toc-text">do-while 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for-%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.2.3.</span> <span class="toc-text">for 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for-in-%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.2.4.</span> <span class="toc-text">for-in 语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%EF%BC%89%E8%B7%B3%E8%BD%AC"><span class="toc-number">1.3.</span> <span class="toc-text">3）跳转</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#break-%E5%92%8C-continue-%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.3.1.</span> <span class="toc-text">break 和 continue 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#return-%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.3.2.</span> <span class="toc-text">return 语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%EF%BC%89%E5%85%B6%E4%BB%96"><span class="toc-number">1.4.</span> <span class="toc-text">4）其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#with-%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.4.1.</span> <span class="toc-text">with 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%9D%97"><span class="toc-number">1.4.2.</span> <span class="toc-text">代码块</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/09/27/%E6%97%A5%E5%B8%B8%E9%9D%A2%E8%AF%95%E9%A2%98/" title="日积月累"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="日积月累"/></a><div class="content"><a class="title" href="/2022/09/27/%E6%97%A5%E5%B8%B8%E9%9D%A2%E8%AF%95%E9%A2%98/" title="日积月累">日积月累</a><time datetime="2022-09-27T12:26:26.000Z" title="发表于 2022-09-27 20:26:26">2022-09-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/06/%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端基础"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="前端基础"/></a><div class="content"><a class="title" href="/2022/07/06/%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端基础">前端基础</a><time datetime="2022-07-06T06:40:34.000Z" title="发表于 2022-07-06 14:40:34">2022-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/28/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端进阶"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="前端进阶"/></a><div class="content"><a class="title" href="/2022/06/28/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端进阶">前端进阶</a><time datetime="2022-06-27T23:33:45.000Z" title="发表于 2022-06-28 07:33:45">2022-06-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/23/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" title="事件循环"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="事件循环"/></a><div class="content"><a class="title" href="/2022/05/23/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" title="事件循环">事件循环</a><time datetime="2022-05-23T09:10:37.000Z" title="发表于 2022-05-23 17:10:37">2022-05-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/23/%E6%A8%A1%E5%9D%97%E5%8C%96/" title="模块化"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="模块化"/></a><div class="content"><a class="title" href="/2022/03/23/%E6%A8%A1%E5%9D%97%E5%8C%96/" title="模块化">模块化</a><time datetime="2022-03-23T08:50:18.000Z" title="发表于 2022-03-23 16:50:18">2022-03-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 三乘以十的八次幂</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="2963148865" data-server="netease" data-type="playlist" data-mini="true" data-fixed="true" data-preload="auto" data-autoplay="true"> </div><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "e0515f76-f737-4f77-ad57-761c3dc58f50";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (false) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (false) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

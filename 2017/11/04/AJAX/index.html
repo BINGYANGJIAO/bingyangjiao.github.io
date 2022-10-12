@@ -1,0 +1,389 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>AJAX | 三乘以十的八次幂</title><meta name="keywords" content="AJAX"><meta name="author" content="三乘以十的八次幂"><meta name="copyright" content="三乘以十的八次幂"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="AJAX定义ajax全称“Asynchronous Javascript And XML”，是由javascript、xml、XMLHttpRequest组合在一起、能实现异步提交的功能，是一种创建交互式网页应用的网页开发技术。 前后台分离的项目架构 ajax包含哪些技术AJAX:(Asynchronous JavaScript and XML)并不是一项新技术,其实是多种技术的综合，包括Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AJAX">
+<meta property="og:url" content="https://jiaobingyang.gitee.io/2017/11/04/AJAX/index.html">
+<meta property="og:site_name" content="三乘以十的八次幂">
+<meta property="og:description" content="AJAX定义ajax全称“Asynchronous Javascript And XML”，是由javascript、xml、XMLHttpRequest组合在一起、能实现异步提交的功能，是一种创建交互式网页应用的网页开发技术。 前后台分离的项目架构 ajax包含哪些技术AJAX:(Asynchronous JavaScript and XML)并不是一项新技术,其实是多种技术的综合，包括Java">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img0.baidu.com/it/u=1327340844,2913194758&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800">
+<meta property="article:published_time" content="2017-11-04T02:35:00.000Z">
+<meta property="article:modified_time" content="2022-05-28T03:10:26.718Z">
+<meta property="article:author" content="三乘以十的八次幂">
+<meta property="article:tag" content="AJAX">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img0.baidu.com/it/u=1327340844,2913194758&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800"><link rel="shortcut icon" href="/img/13279652804370799.jpg"><link rel="canonical" href="https://jiaobingyang.gitee.io/2017/11/04/AJAX/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'AJAX',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-05-28 11:10:26'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/mycss.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13279652804370799.jpg" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">99</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/List/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/List/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page child" href="/List/gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/_data/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于本站</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img0.baidu.com/it/u=1327340844,2913194758&amp;fm=253&amp;fmt=auto&amp;app=120&amp;f=JPEG?w=1422&amp;h=800')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">三乘以十的八次幂</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/List/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/List/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page child" href="/List/gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/_data/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于本站</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">AJAX</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2017-11-04T02:35:00.000Z" title="发表于 2017-11-04 10:35:00">2017-11-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-28T03:10:26.718Z" title="更新于 2022-05-28 11:10:26">2022-05-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/AJAX/">AJAX</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="AJAX"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>ajax全称“Asynchronous Javascript And XML”，是由javascript、xml、XMLHttpRequest组合在一起、能实现异步提交的功能，是一种创建交互式网页应用的网页开发技术。</p>
+<h2 id="前后台分离的项目架构"><a href="#前后台分离的项目架构" class="headerlink" title="前后台分离的项目架构"></a>前后台分离的项目架构</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/11/04/AJAX/AJAX%5C42.png" alt="42"></p>
+<h2 id="ajax包含哪些技术"><a href="#ajax包含哪些技术" class="headerlink" title="ajax包含哪些技术"></a>ajax包含哪些技术</h2><p>AJAX:(Asynchronous JavaScript and XML)并不是一项新技术,其实是多种技术的综合，包括Javascript、XHTML和CSS、DOM、XML和XMLHttpRequest。</p>
+<p>服务器端语言：服务器需要具备向浏览器发送特定信息的能力。Ajax与服务器端语言无关。</p>
+<p>XML (eXtensible Markup Language，可扩展标记语言) 是一种描述数据的格式。AJAX程序需要某种格式化的格式来在服务器和客户端之间传递信息，XML 是其中的一种选择。</p>
+<h3 id="XHTML"><a href="#XHTML" class="headerlink" title="XHTML"></a>XHTML</h3><p>XHTML（eXtended Hypertext Markup Language,使用扩展超媒体标记语言）和 CSS（Cascading Style Sheet,级联样式单）标准化呈现；</p>
+<ul>
+<li><p>DOM（Document Object Model,文档对象模型）实现动态显示和交互；</p>
+</li>
+<li><p>使用XMLHTTP组件XMLHttpRequest对象进行异步数据读取</p>
+</li>
+<li><p>使用JavaScript绑定和处理所有数据。</p>
+</li>
+</ul>
+<h3 id="同步和异步"><a href="#同步和异步" class="headerlink" title="同步和异步"></a>同步和异步</h3><p>同步处理：我们通过实践触发ajax，请求服务器，在这个期间等待服务器处理请求，在这个期间客户端不能做任何处理。当 ajax 执行完毕才会继续执行其他代码。</p>
+<p>异步处理：就是我们通过事件触发到ajax，请求服务器，在这个期间无论服务器有没有响应，客户端的其他代码一样可以运行。</p>
+<h3 id="同步机制流程图"><a href="#同步机制流程图" class="headerlink" title="同步机制流程图"></a>同步机制流程图</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/11/04/AJAX/AJAX%5C43.png" alt="43"></p>
+<h3 id="Ajax异步交互原理"><a href="#Ajax异步交互原理" class="headerlink" title="Ajax异步交互原理"></a>Ajax异步交互原理</h3><p>AJAX采用异步交互过程。AJAX在用户与服务器之间引入一个中间媒介，从而消除了网络交互过程中的处理—等待—处理—等待缺点。</p>
+<p>用户的浏览器在执行任务时即装载了AJAX引擎。AJAX引擎用JavaScript语言编写，通常藏在一个隐藏的框架中。它负责编译用户界面及与服务器之间的交互。</p>
+<p>AJAX引擎允许用户与应用软件之间的交互过程异步进行，独立于用户与网络服务器间的交流。现在，可以用Javascript调用AJAX引擎来代替产生一个HTTP的用户动作，内存中的数据编辑、页面导航、数据校验这些不需要重新载入整个页面的需求可以交给AJAX来执行。 </p>
+<p>使用AJAX，可以为开发人员、终端用户带来可见的便捷： </p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/11/04/AJAX/AJAX%5C44.png" alt="44"></p>
+<h2 id="XMLHttpRequst对象"><a href="#XMLHttpRequst对象" class="headerlink" title="XMLHttpRequst对象"></a>XMLHttpRequst对象</h2><p>XMLHttpRequest是XMLHTTP组件的对象，通过这个对象，AJAX可以像桌面应用程序一样只同服务器进行数据层面的交换，而不用每次都刷新界面，也不用每次将数据处理的工作都交给服务器来做；这样既减轻了服务器负担又加快了响应速度、缩短了用户等待的时间。 </p>
+<p>XMLHttpRequest最早是在IE5中以ActiveX组件的形式实现的。非W3C标准。</p>
+<p>创建XMLHttpRequest对象（由于非标准所以实现方法不统一）</p>
+<ul>
+<li><p>Internet Explorer把XMLHttpRequest实现为一个ActiveX对象</p>
+</li>
+<li><p>其他浏览器（Firefox、Safari、Opera…）把它实现为一个本地的JavaScript对象。</p>
+</li>
+</ul>
+<p>XMLHttpRequest在不同浏览器上的实现是兼容的，所以可以用同样的方式访问XMLHttpRequest实例的属性和方法，而不论这个实例创建的方法是什么。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//兼容性写法</span></span><br><span class="line"><span class="keyword">function</span>   <span class="title function_">createXmlHttpRequest</span>(<span class="params"></span>)&#123;</span><br><span class="line">   <span class="keyword">var</span> xmlHttp;</span><br><span class="line">   <span class="keyword">try</span>&#123;    <span class="comment">//Firefox, Opera 8.0+, Safari</span></span><br><span class="line">           xmlHttp=<span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">    &#125;<span class="keyword">catch</span> (e)&#123;</span><br><span class="line">           <span class="keyword">try</span>&#123;    <span class="comment">//Internet Explorer</span></span><br><span class="line">                  xmlHttp=<span class="keyword">new</span> <span class="title class_">ActiveXObject</span>(<span class="string">&quot;Msxml2.XMLHTTP&quot;</span>);</span><br><span class="line">            &#125;<span class="keyword">catch</span> (e)&#123;</span><br><span class="line">                  <span class="keyword">try</span>&#123;</span><br><span class="line">                          xmlHttp=<span class="keyword">new</span> <span class="title class_">ActiveXObject</span>(<span class="string">&quot;Microsoft.XMLHTTP&quot;</span>);</span><br><span class="line">                  &#125;<span class="keyword">catch</span> (e)&#123;&#125;  </span><br><span class="line">           &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="keyword">return</span> xmlHttp;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="XMLHttpRequest方法"><a href="#XMLHttpRequest方法" class="headerlink" title="XMLHttpRequest方法"></a>XMLHttpRequest方法</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/11/04/AJAX/AJAX%5C45.png" alt="45"></p>
+<h2 id="XMLHttpRequst对象属性"><a href="#XMLHttpRequst对象属性" class="headerlink" title="XMLHttpRequst对象属性"></a>XMLHttpRequst对象属性</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/11/04/AJAX/AJAX%5C46.png" alt="46"></p>
+<h2 id="发送请求"><a href="#发送请求" class="headerlink" title="发送请求"></a>发送请求</h2><p>利用XMLHttpRequest 实例与服务器进行异步通信包含以下3个关键部分：</p>
+<ul>
+<li><p>onreadystatechange 事件处理函数</p>
+</li>
+<li><p>open 方法</p>
+</li>
+<li><p>send 方法</p>
+</li>
+</ul>
+<h3 id="open-method-url-asynch"><a href="#open-method-url-asynch" class="headerlink" title="open(method, url, asynch)"></a>open(method, url, asynch)</h3><ul>
+<li><p>XMLHttpRequest 对象的 open 方法允许程序员用一个Ajax调用向服务器发送请求。</p>
+</li>
+<li><p>method：请求类型，类似 “GET”或”POST”的字符串。若只想从服务器检索一个文件，而不需要发送任何数据，使用GET(可以在GET请求里通过附加在URL上的查询字符串来发送数据，不过数据大小限制为2000个字符)。若需要向服务器发送数据，用POST。</p>
+</li>
+<li><p>在某些情况下，有些浏览器会把多个XMLHttpRequest请求的结果缓存在同一个URL。如果对每个请求的响应不同，这就会来不好的结果。把当前时间戳追加到URL的最后，就能确保URL的惟一性，从而避免浏览器缓存结果。</p>
+</li>
+</ul>
+<h3 id="onreadystatechange"><a href="#onreadystatechange" class="headerlink" title="onreadystatechange:"></a>onreadystatechange:</h3><ul>
+<li><p>该事件处理函数由服务器触发，而不是用户</p>
+</li>
+<li><p>在 Ajax 执行过程中，服务器会通知客户端当前的通信状态。这依靠更新 XMLHttpRequest 对象的 readyState 来实现。改变 readyState 属性是服务器对客户端连接操作的一种方式。</p>
+</li>
+<li><p>每次 readyState 属性的改变都会触发 readystatechange事件</p>
+</li>
+</ul>
+<h3 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h3><ul>
+<li><p>url：路径字符串，指向你所请求的服务器上的那个文件。可以是绝对路径或相对路径。</p>
+</li>
+<li><p>async：表示请求是否要异步传输，默认值为true(异步)。指定true，在读取后面的脚本之前，不需要等待服务器的相应。指定false，当脚本处理过程经过这点时，会停下来，一直等到Ajax请求执行完毕再继续执行。</p>
+</li>
+</ul>
+<h2 id="send方法"><a href="#send方法" class="headerlink" title="send方法"></a>send方法</h2><p>send(data)：</p>
+<ul>
+<li><p>open 方法定义了 Ajax 请求的一些细节。send 方法可为已经待命的请求发送指令</p>
+</li>
+<li><p>data：将要传递给服务器的字符串。</p>
+</li>
+<li><p>若选用的是 GET 请求，则不会发送任何数据， 给 send 方法传递 null 即可：request.send(null);</p>
+</li>
+<li><p>当向send()方法提供参数时，要确保open()中指定的方法是POST，如果没有数据作为请求体的一部分发送，则使用null.</p>
+</li>
+</ul>
+<p>完整的 Ajax 的 GET 请求示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>()</span><br><span class="line">xhr.<span class="title function_">open</span>(<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;/data/test.json&#x27;</span>, <span class="literal">true</span>)</span><br><span class="line">xhr.<span class="property">onreadystatechange</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (xhr.<span class="property">readyState</span> === <span class="number">4</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (xhr.<span class="property">status</span> === <span class="number">200</span>) &#123;</span><br><span class="line">            <span class="comment">// console.log(</span></span><br><span class="line">            <span class="comment">//     JSON.parse(xhr.responseText)</span></span><br><span class="line">            <span class="comment">// )</span></span><br><span class="line">            <span class="title function_">alert</span>(xhr.<span class="property">responseText</span>)</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (xhr.<span class="property">status</span> === <span class="number">404</span>) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;404 not found&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">xhr.<span class="title function_">send</span>(<span class="literal">null</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：使用get请求时send方法参数时null,如果传值的话，服务器也接收不到</strong></p>
+<h2 id="发送Post请求"><a href="#发送Post请求" class="headerlink" title="发送Post请求"></a>发送Post请求</h2><p>setRequestHeader(header,value)当浏览器向服务器请求页面时，它会伴随这个请求发送一组首部信息。这些首部信息是一系列描述请求的元数据(metadata)。</p>
+<p>首部信息用来声明一个请求是 GET 还是 POST。</p>
+<p>Ajax 请求中，发送首部信息的工作可以由 setRequestHeader完成参数header： 首部的名字;  参数value：首部的值。</p>
+<p>如果用 POST 请求向服务器发送数据，需要将 “Content-type” 的首部设置为 “application&#x2F;x-www-form-urlencoded”.它会告知服务器正在发送数据，并且数据已经符合URL编码了。</p>
+<p>该方法必须在open()之后才能调用完整的 Ajax 的 POST 请求示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">ajax</span>(<span class="params">url</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>()</span><br><span class="line">        xhr.<span class="title function_">open</span>(<span class="string">&#x27;POST&#x27;</span>, url, <span class="literal">true</span>)</span><br><span class="line">        xhr.<span class="property">onreadystatechange</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (xhr.<span class="property">readyState</span> === <span class="number">4</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (xhr.<span class="property">status</span> === <span class="number">200</span>) &#123;</span><br><span class="line">                    <span class="title function_">resolve</span>(</span><br><span class="line">                        <span class="title class_">JSON</span>.<span class="title function_">parse</span>(xhr.<span class="property">responseText</span>)</span><br><span class="line">                    )</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (xhr.<span class="property">status</span> === <span class="number">404</span> || xhr.<span class="property">status</span> === <span class="number">500</span>) &#123;</span><br><span class="line">                    <span class="title function_">reject</span>(<span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;404 not found&#x27;</span>))</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        xhr.<span class="title function_">send</span>(<span class="literal">null</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> p</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="接收数据的方法和属性"><a href="#接收数据的方法和属性" class="headerlink" title="接收数据的方法和属性"></a>接收数据的方法和属性</h2><p>用XMLHttpRequest的方法可向服务器发送请求。在Ajax处理过程中，XMLHttpRequest的如下属性可被服务器更改：</p>
+<ul>
+<li><p>readyState</p>
+</li>
+<li><p>status</p>
+</li>
+<li><p>responseText</p>
+</li>
+<li><p>responseXML</p>
+</li>
+</ul>
+<h3 id="readyState（请求状态）"><a href="#readyState（请求状态）" class="headerlink" title="readyState（请求状态）"></a>readyState（请求状态）</h3><p>readyState 属性表示Ajax请求的当前状态。它的值用数字代表。</p>
+<ul>
+<li><p>0 代表未初始化。 还没有调用 open 方法</p>
+</li>
+<li><p>1 代表正在加载。 open 方法已被调用，但 send 方法还没有被调用</p>
+</li>
+<li><p>2 代表已加载完毕。send 已被调用。请求已经开始</p>
+</li>
+<li><p>3 代表交互中。服务器正在发送响应</p>
+</li>
+<li><p>4 代表完成。响应发送完毕</p>
+</li>
+</ul>
+<p>每次 readyState 值的改变，都会触发 readystatechange 事件。如果把 onreadystatechange 事件处理函数赋给一个函数，那么每次 readyState 值的改变都会引发该函数的执行。</p>
+<p>readyState 值的变化会因浏览器的不同而有所差异。但是，当请求结束的时候，每个浏览器都会把 readyState 的值统一设为 4。</p>
+<h3 id="status（服务器状态码）"><a href="#status（服务器状态码）" class="headerlink" title="status（服务器状态码）"></a>status（服务器状态码）</h3><p>服务器发送的每一个响应也都带有首部信息。三位数的状态码是服务器发送的响应中最重要的首部信息，并且属于超文本传输协议中的一部分。</p>
+<p>在 XMLHttpRequest 对象中，服务器发送的状态码都保存在 status 属性里。通过把这个值和 200 或 304 比较，可以确保服务器是否已发送了一个成功的响应。</p>
+<p>常用状态码及其含义：</p>
+<ul>
+<li>404 没找到页面(not found)</li>
+<li>403 禁止访问(forbidden)</li>
+<li>500 内部服务器出错(internal service error)</li>
+<li>200 一切正常(ok)</li>
+<li>304 没有被修改(not modified)(服务器返回304状态，表示源文件没有被修改 )</li>
+</ul>
+<h3 id="responseText"><a href="#responseText" class="headerlink" title="responseText"></a>responseText</h3><p>XMLHttpRequest 的 responseText 属性包含了从服务器发送的数据。它是一个HTML,XML或普通文本，这取决于服务器发送的内容。</p>
+<p>当 readyState 属性值变成 4 时, responseText 属性才可用，表明 Ajax 请求已经结束。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//指定响应处理函数</span></span><br><span class="line"><span class="title class_">XMLHttpReq</span>.<span class="property">onreadystatechange</span>=<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="comment">//判断对象状态 4代表完成</span></span><br><span class="line">   <span class="keyword">if</span>(<span class="title class_">XMLHttpReq</span>.<span class="property">readyState</span>==<span class="number">4</span>)&#123; </span><br><span class="line">        <span class="comment">//信息已经成功返回，开始处理信息</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="title class_">XMLHttpReq</span>.<span class="property">status</span>==<span class="number">200</span> || <span class="title class_">XMLHttpReq</span>.<span class="property">status</span>==<span class="number">304</span>)&#123; </span><br><span class="line">            <span class="comment">// 开始处理信息</span></span><br><span class="line">            <span class="title function_">alert</span>(<span class="title class_">XMLHttpReq</span>.<span class="property">responseText</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="两种数据格式"><a href="#两种数据格式" class="headerlink" title="两种数据格式"></a>两种数据格式</h3><p>XMLHttpRequest对成功返回的信息有两种处理方式：</p>
+<ul>
+<li><p>responseText：将传回的信息当字符串使用；</p>
+</li>
+<li><p>responseXML：将传回的信息当XML文档使用，可以用DOM处理。</p>
+</li>
+</ul>
+<p>如果服务器返回的是 XML， 那么数据将储存在 responseXML 属性中只用服务器发送了带有正确首部信息的数据时， responseXML 属性才是可用的。 MIME 类型必须为 text&#x2F;xml </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//处理返回信息的函数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">processResponse</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="title class_">XMLHttpReq</span>.<span class="property">readyState</span>==<span class="number">4</span>)&#123; <span class="comment">//判断对象状态 4代表完成</span></span><br><span class="line">         <span class="keyword">if</span>(<span class="title class_">XMLHttpReq</span>.<span class="property">status</span>==<span class="number">200</span>)&#123; <span class="comment">//信息已经成功返回，开始处理信息</span></span><br><span class="line">              <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;chatArea&quot;</span>).<span class="property">value</span>=<span class="title class_">XMLHttpReq</span>.<span class="property">responseText</span>;</span><br><span class="line">         &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="get和post区别"><a href="#get和post区别" class="headerlink" title="get和post区别"></a>get和post区别</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2017/11/04/AJAX/AJAX%5C50.png" alt="50"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://jiaobingyang.gitee.io">三乘以十的八次幂</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://jiaobingyang.gitee.io/2017/11/04/AJAX/">https://jiaobingyang.gitee.io/2017/11/04/AJAX/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://jiaobingyang.gitee.io" target="_blank">三乘以十的八次幂</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/AJAX/">AJAX</a></div><div class="post_share"><div class="social-share" data-image="https://img0.baidu.com/it/u=1327340844,2913194758&amp;fm=253&amp;fmt=auto&amp;app=120&amp;f=JPEG?w=1422&amp;h=800" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081333.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081333.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081350.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081350.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2018/02/27/%E9%98%B2%E6%8A%96%E4%B8%8E%E8%8A%82%E6%B5%81/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img0.baidu.com/it/u=3895890390,3140605354&amp;fm=253&amp;fmt=auto&amp;app=120&amp;f=JPEG?w=700&amp;h=436" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">防抖与节流</div></div></a></div><div class="next-post pull-right"><a href="/2017/10/15/flex%E5%B8%83%E5%B1%80/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.baidu.com/it/u=2952638880,3324182124&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=800&amp;h=500" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">flex布局</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13279652804370799.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="avatar"/></div><div class="author-info__name">三乘以十的八次幂</div><div class="author-info__description">死亡如风，常伴吾身</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">99</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/BINGYANGJIAO/bingyangjiao.github.io"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/BINGYANGJIAO/bingyangjiao.github.io" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:781250021@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">兴趣爱好才是最大的动力，何不与我共同攀知识高峰，品翘楚美人！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#AJAX"><span class="toc-number">1.</span> <span class="toc-text">AJAX</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E5%90%8E%E5%8F%B0%E5%88%86%E7%A6%BB%E7%9A%84%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84"><span class="toc-number">1.2.</span> <span class="toc-text">前后台分离的项目架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ajax%E5%8C%85%E5%90%AB%E5%93%AA%E4%BA%9B%E6%8A%80%E6%9C%AF"><span class="toc-number">1.3.</span> <span class="toc-text">ajax包含哪些技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#XHTML"><span class="toc-number">1.3.1.</span> <span class="toc-text">XHTML</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5"><span class="toc-number">1.3.2.</span> <span class="toc-text">同步和异步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E6%9C%BA%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="toc-number">1.3.3.</span> <span class="toc-text">同步机制流程图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ajax%E5%BC%82%E6%AD%A5%E4%BA%A4%E4%BA%92%E5%8E%9F%E7%90%86"><span class="toc-number">1.3.4.</span> <span class="toc-text">Ajax异步交互原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XMLHttpRequst%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.4.</span> <span class="toc-text">XMLHttpRequst对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XMLHttpRequest%E6%96%B9%E6%B3%95"><span class="toc-number">1.5.</span> <span class="toc-text">XMLHttpRequest方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XMLHttpRequst%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7"><span class="toc-number">1.6.</span> <span class="toc-text">XMLHttpRequst对象属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%91%E9%80%81%E8%AF%B7%E6%B1%82"><span class="toc-number">1.7.</span> <span class="toc-text">发送请求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#open-method-url-asynch"><span class="toc-number">1.7.1.</span> <span class="toc-text">open(method, url, asynch)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#onreadystatechange"><span class="toc-number">1.7.2.</span> <span class="toc-text">onreadystatechange:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.7.3.</span> <span class="toc-text">参数设置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#send%E6%96%B9%E6%B3%95"><span class="toc-number">1.8.</span> <span class="toc-text">send方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%91%E9%80%81Post%E8%AF%B7%E6%B1%82"><span class="toc-number">1.9.</span> <span class="toc-text">发送Post请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E6%94%B6%E6%95%B0%E6%8D%AE%E7%9A%84%E6%96%B9%E6%B3%95%E5%92%8C%E5%B1%9E%E6%80%A7"><span class="toc-number">1.10.</span> <span class="toc-text">接收数据的方法和属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#readyState%EF%BC%88%E8%AF%B7%E6%B1%82%E7%8A%B6%E6%80%81%EF%BC%89"><span class="toc-number">1.10.1.</span> <span class="toc-text">readyState（请求状态）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#status%EF%BC%88%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%8A%B6%E6%80%81%E7%A0%81%EF%BC%89"><span class="toc-number">1.10.2.</span> <span class="toc-text">status（服务器状态码）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#responseText"><span class="toc-number">1.10.3.</span> <span class="toc-text">responseText</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E7%A7%8D%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.10.4.</span> <span class="toc-text">两种数据格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#get%E5%92%8Cpost%E5%8C%BA%E5%88%AB"><span class="toc-number">1.11.</span> <span class="toc-text">get和post区别</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/09/27/%E6%97%A5%E5%B8%B8%E9%9D%A2%E8%AF%95%E9%A2%98/" title="日积月累"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="日积月累"/></a><div class="content"><a class="title" href="/2022/09/27/%E6%97%A5%E5%B8%B8%E9%9D%A2%E8%AF%95%E9%A2%98/" title="日积月累">日积月累</a><time datetime="2022-09-27T12:26:26.000Z" title="发表于 2022-09-27 20:26:26">2022-09-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/06/%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端基础"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="前端基础"/></a><div class="content"><a class="title" href="/2022/07/06/%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端基础">前端基础</a><time datetime="2022-07-06T06:40:34.000Z" title="发表于 2022-07-06 14:40:34">2022-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/28/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端进阶"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="前端进阶"/></a><div class="content"><a class="title" href="/2022/06/28/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端进阶">前端进阶</a><time datetime="2022-06-27T23:33:45.000Z" title="发表于 2022-06-28 07:33:45">2022-06-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/23/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" title="事件循环"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="事件循环"/></a><div class="content"><a class="title" href="/2022/05/23/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" title="事件循环">事件循环</a><time datetime="2022-05-23T09:10:37.000Z" title="发表于 2022-05-23 17:10:37">2022-05-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/23/%E6%A8%A1%E5%9D%97%E5%8C%96/" title="模块化"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="模块化"/></a><div class="content"><a class="title" href="/2022/03/23/%E6%A8%A1%E5%9D%97%E5%8C%96/" title="模块化">模块化</a><time datetime="2022-03-23T08:50:18.000Z" title="发表于 2022-03-23 16:50:18">2022-03-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 三乘以十的八次幂</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="2963148865" data-server="netease" data-type="playlist" data-mini="true" data-fixed="true" data-preload="auto" data-autoplay="true"> </div><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "e0515f76-f737-4f77-ad57-761c3dc58f50";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (false) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (false) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

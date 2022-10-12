@@ -1,0 +1,878 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>数据分析（4） | 三乘以十的八次幂</title><meta name="keywords" content="python"><meta name="author" content="三乘以十的八次幂"><meta name="copyright" content="三乘以十的八次幂"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="第四章 Pandas统计分析4.1 数据计算Pandas提供了大量的数据计算函数，可以实现求和、求均值、求最大值、求最小值、求中位数、求众数、求方差、标准差等，从而使得数据统计变得简单高效。 4.1.1求和函数（sum())DataFrame.sum(axis&#x3D;None, skipna&#x3D;None, level&#x3D;None, numeric_only&#x3D;None,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据分析（4）">
+<meta property="og:url" content="https://jiaobingyang.gitee.io/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/index.html">
+<meta property="og:site_name" content="三乘以十的八次幂">
+<meta property="og:description" content="第四章 Pandas统计分析4.1 数据计算Pandas提供了大量的数据计算函数，可以实现求和、求均值、求最大值、求最小值、求中位数、求众数、求方差、标准差等，从而使得数据统计变得简单高效。 4.1.1求和函数（sum())DataFrame.sum(axis&#x3D;None, skipna&#x3D;None, level&#x3D;None, numeric_only&#x3D;None,">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img0.baidu.com/it/u=3046384215,884063302&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=233">
+<meta property="article:published_time" content="2021-05-30T03:53:51.000Z">
+<meta property="article:modified_time" content="2022-10-12T01:34:17.019Z">
+<meta property="article:author" content="三乘以十的八次幂">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img0.baidu.com/it/u=3046384215,884063302&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=233"><link rel="shortcut icon" href="/img/13279652804370799.jpg"><link rel="canonical" href="https://jiaobingyang.gitee.io/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '数据分析（4）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-10-12 09:34:17'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/mycss.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13279652804370799.jpg" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">99</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/List/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/List/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page child" href="/List/gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/_data/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于本站</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img0.baidu.com/it/u=3046384215,884063302&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=500&amp;h=233')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">三乘以十的八次幂</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/List/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/List/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page child" href="/List/gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/_data/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于本站</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">数据分析（4）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-05-30T03:53:51.000Z" title="发表于 2021-05-30 11:53:51">2021-05-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-12T01:34:17.019Z" title="更新于 2022-10-12 09:34:17">2022-10-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/python/">python</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="数据分析（4）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="第四章-Pandas统计分析"><a href="#第四章-Pandas统计分析" class="headerlink" title="第四章 Pandas统计分析"></a>第四章 Pandas统计分析</h1><h2 id="4-1-数据计算"><a href="#4-1-数据计算" class="headerlink" title="4.1 数据计算"></a>4.1 数据计算</h2><p>Pandas提供了大量的数据计算函数，可以实现求和、求均值、求最大值、求最小值、求中位数、求众数、求方差、标准差等，从而使得数据统计变得简单高效。</p>
+<h3 id="4-1-1求和函数（sum"><a href="#4-1-1求和函数（sum" class="headerlink" title="4.1.1求和函数（sum())"></a>4.1.1求和函数（sum())</h3><p>DataFrame.sum(axis&#x3D;None, skipna&#x3D;None, level&#x3D;None, numeric_only&#x3D;None, min_count&#x3D;0, **kwargs)<br>参数说明：　</p>
+<p>axis：axis&#x3D;1表示行，axis&#x3D;0表示列，默认值为None（无）。　skipna：布尔型，表示计算结果是否排除NaN&#x2F;Null值，默认值为None。</p>
+<p>level：表示索引层级，默认值为None。　</p>
+<p>numeric_only：仅数字，布尔型，默认值为None。　</p>
+<p>min_count：表示执行操作所需的数目，整型，默认值为0。　**kwargs：要传递给函数的附加关键字参数。　</p>
+<p>返回值：返回Series对象或DataFrame对象。行或列求和数据。</p>
+<p>【示例01】　计算语文、数学和英语三科的总成绩。（示例位置：资源包\MR\Code\04\01）<br>首先，创建一组DataFrame类型的数据，包括语文、数学和英语三科的成绩，如图4.1所示。<br>程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020032035450.png" alt="image-20211020032035450">下面使用sum()函数计算三科的总成绩，代码如下：</p>
+<p>df[‘总成绩’]&#x3D;df.sum(axis&#x3D;1)</p>
+<p>运行程序，输出结果如图4.2所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89" alt="image-20211020032210845"></p>
+<p>​                                        图4.1　DataFrame数据</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020032230748.png" alt="image-20211020032230748"></p>
+<p>​                                  图4.2　sum()函数计算三科的总成绩</p>
+<h3 id="4-1-2-求均值（mean-函数）"><a href="#4-1-2-求均值（mean-函数）" class="headerlink" title="4.1.2　求均值（mean()函数）"></a>4.1.2　求均值（mean()函数）</h3><p>DataFrame.mean(axis&#x3D;None, skipna&#x3D;None, level&#x3D;None, numeric_only&#x3D;None, kwargs)<br>参数说明：　</p>
+<p>axis：axis&#x3D;1表示行，axis&#x3D;0表示列，默认值为None（无）。　</p>
+<p>skipna：布尔型，表示计算结果是否排除NaN&#x2F;Null值，默认值为None。　</p>
+<p>level：表示索引层级，默认值为None。　</p>
+<p>numeric_only：仅数字，布尔型，默认值为None。　</p>
+<p>kwargs：要传递给函数的附加关键字参数。　</p>
+<p>返回值：返回Series对象或DataFrame对象。行或列平均值数据。</p>
+<p>【示例02】　计算语文、数学和英语各科的平均分。（示例位置：资源包\MR\Code\04\02）<br>计算语文、数学和英语各科成绩的平均值，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020032641368.png" alt="image-20211020032641368"></p>
+<p>运行程序，输出结果如图4.3所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020032714762.png" alt="image-20211020032714762"></p>
+<p>​                             图4.3　mean()函数计算三科成绩的平均值<br>从运行结果得知：语文平均分109，数学平均分107，英语平均分114.667。</p>
+<h3 id="4-1-3-求最大值（max-函数）"><a href="#4-1-3-求最大值（max-函数）" class="headerlink" title="4.1.3　求最大值（max()函数）"></a>4.1.3　求最大值（max()函数）</h3><p>在Python中通过调用DataFrame对象的max()函数实现行／列数据最大值运算，语法如下：</p>
+<p>DataFrame.max(axis&#x3D;None, skipna&#x3D;None, level&#x3D;None, numeric_only&#x3D;None, **kwargs)<br>参数说明：　**</p>
+<p>**axis：axis&#x3D;1表示行，axis&#x3D;0表示列，默认值为None（无）。　skipna：布尔型，表示计算结果是否排除NaN&#x2F;Null值，默认值为None。　</p>
+<p>**level：表示索引层级，默认值为None。　</p>
+<p>**numeric_only：仅数字，布尔型，默认值为None。　</p>
+<p>kwargs：要传递给函数的附加关键字参数。　</p>
+<p>返回值：返回Series对象或DataFrame对象。行或列最大值数据。</p>
+<p>【示例03】　计算语文、数学和英语各科的最高分。（示例位置：资源包\MR\Code\04\03）<br>计算语文、数学和英语各科成绩的最大值，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020032850843.png" alt="image-20211020032850843"></p>
+<p>运行程序，输出结果如图4.4所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020033031795.png" alt="image-20211020033031795"></p>
+<p>​                       图4.4　max()函数计算三科成绩的最大值</p>
+<p>4.1.4　求最小值（min()函数）<br>在Python中通过调用DataFrame对象的min()函数实现行／列数据最小值运算，语法如下：</p>
+<p>DataFrame.min(axis&#x3D;None, skipna&#x3D;None, level&#x3D;None, numeric_only&#x3D;None, **kwargs)<br>参数说明：　**</p>
+<p>**axis：axis&#x3D;1表示行，axis&#x3D;0表示列，默认值为None（无）。　skipna：布尔型，表示计算结果是否排除NaN&#x2F;Null值，默认值为None。　</p>
+<p>**level：表示索引层级，默认值为None。　</p>
+<p>**numeric_only：仅数字，布尔型，默认值为None。　</p>
+<p>kwargs：要传递给函数的附加关键字参数。　</p>
+<p>返回值：返回Series对象或DataFrame对象。行或列最小值数据。</p>
+<p>【示例04】　计算语文、数学和英语各科的最低分。（示例位置：资源包\MR\Code\04\04）<br>计算语文、数学和英语各科成绩的最小值，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020033254349.png" alt="image-20211020033254349"></p>
+<p>运行程序，输出结果如图4.5所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020033314763.png" alt="image-20211020033314763"></p>
+<h3 id="4-1-5-求中位数（median-函数）"><a href="#4-1-5-求中位数（median-函数）" class="headerlink" title="4.1.5　求中位数（median()函数）"></a>4.1.5　求中位数（median()函数）</h3><p>中位数又称中值，是统计学专有名词，是指按顺序排列的一组数据中位于中间位置的数，其不受异常值的影响。例如，年龄23、45、35、25、22、34、28这7个数，中位数就是排序后位于中间的数字，即28；而年龄23、45、35、25、22、34、28、27这8个数，中位数则是排序后位于中间两个数的平均值，即27.5。在Python中直接调用DataFrame对象的median()函数就可以轻松实现中位数的运算，语法如下：</p>
+<p>DataFrame.median(axis&#x3D;None,skipna&#x3D;None,level&#x3D;None,numeric_only&#x3D;None,**kwargs)<br>参数说明：　**</p>
+<p>**axis：axis&#x3D;1表示行，axis&#x3D;0表示列，默认值为None（无）。　skipna：布尔型，表示计算结果是否排除NaN&#x2F;Null值，默认值为None。　</p>
+<p>**level：表示索引层级，默认值为None。　</p>
+<p>**numeric_only：仅数字，布尔型，默认值为None。　</p>
+<p>kwargs：要传递给函数的附加关键字参数。　</p>
+<p>返回值：返回Series对象或DataFrame对象。</p>
+<p>【示例05】　计算学生各科成绩的中位数1。（示例位置：资源包\MR\Code\04\05）<br>下面给出一组数据（3条记录），然后使用median()函数计算语文、数学和英语各科成绩的中位数，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020033458773.png" alt="image-20211020033458773"></p>
+<p>运行程序，控制台输出结果如下：</p>
+<p>语文    130.0数学    120.0英语    130.0</p>
+<p>【示例06】　计算学生各科成绩的中位数2。（示例位置：资源包\MR\Code\04\06）<br>下面再给出一组数据（4条记录），同样使用median()函数计算语文、数学和英语各科成绩的中位数，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020033625031.png" alt="image-20211020033625031"></p>
+<p>运行程序，控制台输出结果如下：</p>
+<p>语文    121.5数学    121.5英语    120.0</p>
+<h3 id="4-1-6-求众数（mode-函数）"><a href="#4-1-6-求众数（mode-函数）" class="headerlink" title="4.1.6　求众数（mode()函数）"></a>4.1.6　求众数（mode()函数）</h3><p>什么是众数？众数的众字有多的意思，顾名思义，众数就是一组数据中出现最多的数称为众数，它代表了数据的一般水平。<br>在Python中通过调用DataFrame对象的mode()函数可以实现众数运算，语法如下：</p>
+<p>DataFrame.mode(axis&#x3D;0,numeric_only&#x3D;False,dropna&#x3D;True)<br>参数说明：　</p>
+<p>axis：axis&#x3D;1表示行，axis&#x3D;0表示列，默认值为0。　</p>
+<p>numeric_only：仅数字，布尔型，默认值为False。如果值为True，则仅适用于数字列。　</p>
+<p>dropna：是否删除缺失值，布尔型，默认值为True。　</p>
+<p>返回值：返回Series对象或DataFrame对象。<br>首先看一组原始数据，如图4.6所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020033849240.png" alt="image-20211020033849240"></p>
+<p>【示例07】　计算学生各科成绩的众数。（示例位置：资源包\MR\Code\04\07）<br>计算语文、数学和英语三科成绩的众数、每一行的众数和“数学”成绩的众数，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020034005721.png" alt="image-20211020034005721"></p>
+<p>三科成绩的众数：<br>每一行的众数：</p>
+<p>0  110<br>1  130<br>2  130<br>数学成绩的众数：</p>
+<p>0  120</p>
+<h3 id="4-1-7-求方差（var-函数）"><a href="#4-1-7-求方差（var-函数）" class="headerlink" title="4.1.7　求方差（var()函数）"></a>4.1.7　求方差（var()函数）</h3><p>方差用于衡量一组数据的离散程度，即各组数据与它们的平均数的差的平方，那么我们用这个结果来衡量这组数据的波动大小，并把它叫作这组数据的方差，方差越小越稳定。通过方差可以了解一个问题的波动性。下面简单介绍下方差的意义，相信通过一个简单的举例您就会了解。<br>例如，某校两名同学的物理成绩都很优秀，而参加物理竞赛的名额只有一个，那么选谁去获得名次的机率更大呢？于是根据历史数据计算出了两名同学的平均成绩，但结果是实力相当，平均成绩都是107.6，怎么办呢？这时让方差帮决定，看看谁的成绩更稳定。首先汇总物理成绩，如图4.7所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020034219502.png" alt="image-20211020034219502"></p>
+<p>​                                            图4.7　物理成绩<br>通过方差对比两名同学物理成绩的波动，如图4.8所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020034235082.png" alt="image-20211020034235082"></p>
+<p>​                                                   图4.8　方差<br>接着来看一下总体波动（方差和），“小黑”的数据是73.2，“小白”的数据是949.2，很明显“小黑”的物理成绩波动较小，发挥更稳定，所以应该选“小黑”参加物理竞赛。<br>以上举例就是方差的意义。大数据时代，它能够帮助我们解决很多身边的问题、协助我们做出合理的决策。<br>在Python中通过调用DataFrame对象的var()函数可以实现方差运算，语法如下：</p>
+<p><strong>DataFrame.var(axis&#x3D;None,skipna&#x3D;None,level&#x3D;None,ddof&#x3D;1,numeric_only&#x3D;None,kwargs)</strong><br>参数说明：　</p>
+<p>axis：axis&#x3D;1表示行，axis&#x3D;0表示列，默认值为None（无）。　skipna：布尔型，表示计算结果是否排除NaN&#x2F;Null值，默认值为None。　</p>
+<p>level：表示索引层级，默认值为None。　</p>
+<p>ddof：整型，默认值为1。自由度，计算中使用的除数是N-ddof，其中N表示元素的数量。　</p>
+<p>numeric_only：仅数字，布尔型，默认值为None。　</p>
+<p>kwargs：要传递给函数的附加关键字参数。　</p>
+<p>返回值：返回Series对象或DataFrame对象。</p>
+<p>【示例08】　通过方差判断谁的物理成绩更稳定。（示例位置：资源包\MR\Code\04\08）<br>计算“小黑”和“小白”物理成绩的方差，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020034435272.png" alt="image-20211020034435272"></p>
+<p>运行程序，控制台输出结果如下：</p>
+<p>小黑     18.3小白    237.3<br>从运行结果得知：“小黑”的物理成绩波动较小，发挥更稳定。这里需要注意的是，Pandas中计算的方差为无偏样本方差（即方差和／样本数-1），NumPy中计算的方差就是样本方差本身（即方差和／样本数）。</p>
+<h3 id="4-1-8-标准差（数据标准化std-函数）"><a href="#4-1-8-标准差（数据标准化std-函数）" class="headerlink" title="4.1.8　标准差（数据标准化std()函数）"></a>4.1.8　标准差（数据标准化std()函数）</h3><p>标准差又称均方差，是方差的平方根，用来表示数据的离散程度。<br>在Python中通过调用DataFrame对象的std()函数求标准差，语法如下：</p>
+<p>DataFrame.std(axis&#x3D;None,skipna&#x3D;None,level&#x3D;None,ddof&#x3D;1,numeric_only&#x3D;None,**kwargs)<br>std()函数的参数与var()函数一样，这里不再赘述。</p>
+<p>【示例09】　计算各科成绩的标准差。（示例位置：资源包\MR\Code\04\09）<br>使用std()函数计算标准差，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020034453875.png" alt="image-20211020034453875"></p>
+<p>运行程序，控制台输出结果如下：</p>
+<p>语文    11.547005数学     5.773503英语    11.5547005</p>
+<h3 id="4-1-9-求分位数（quantile-函数）"><a href="#4-1-9-求分位数（quantile-函数）" class="headerlink" title="4.1.9　求分位数（quantile()函数）"></a>4.1.9　求分位数（quantile()函数）</h3><p>分位数也称分位点，它以概率依据将数据分割为几个等份，常用的有中位数（即二分位数）、四分位数、百分位数等。分位数是数据分析中常用的一个统计量，经过抽样得到一个样本值。例如，经常会听老师说：“这次考试竟然有20%的同学不及格！”，那么这句话就体现了分位数的应用。在Python中通过调用DataFrame对象的quantile()函数求分位数，语法如下：</p>
+<p><strong>DataFrame.quantile(q&#x3D;0.5,axis&#x3D;0,numeric_only&#x3D;True, interpolation&#x3D;’linear’)</strong><br>参数说明：　</p>
+<p>q：浮点型或数组，默认为0.5（50%分位数），其值为0～1。　</p>
+<p>axis：axis&#x3D;1表示行，axis&#x3D;0表示列。默认值为0。　</p>
+<p>numeric_only：仅数字，布尔型，默认值为True。　</p>
+<p>interpolation：内插值，可选参数[{‘linear’,‘lower’,‘higher’,‘midpoint’,‘nearest’}]用于指定要使用的插值方法，当期望的分位数为数据点i～j时。　</p>
+<p>​	linear’：i+(j-i)×分数，其中分数是指数被i和j包围的小数部分。　</p>
+<p>​	lower：i。　</p>
+<p>​	higher：j。　</p>
+<p>​	nearest：i或j二者以最近者为准。　</p>
+<p>​	midpoint：(i+j)&#x2F;2。　</p>
+<p>返回值：返回Series或DataFrame对象。</p>
+<p>【示例10】　通过分位数确定被淘汰的35%的学生。（示例位置：资源包\MR\Code\04\10）<br>以学生成绩为例，数学成绩分别为120、89、98、78、65、102、112、56、79、45的10名同学，现根据分数淘汰35%的学生，该如何处理？首先使用quantile()函数计算35%的分位数，然后将学生成绩与分位数比较，筛选小于等于分位数的学生，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020035437337.png" alt="image-20211020035437337"></p>
+<p>运行程序，控制台输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020035513992.png" alt="image-20211020035513992"></p>
+<p>从运行结果得知：即将被淘汰的学生有4名，分数分别为78、65、56和45。</p>
+<p>【示例11】　计算日期、时间和时间增量数据的分位数。（示例位置：资源包\MR\Code\04\11）<br>如果参数numeric_only&#x3D;False，将计算日期、时间和时间增量数据的分位数，程序代码如下：<br>运行程序，控制台输出结果如下：</p>
+<p>A                  1.5<br>B 2019-07-02 12:00:00<br>C          1 days 12:00:00<br>Name: 0.5, dtype: object</p>
+<h2 id="4-2-数据格式化"><a href="#4-2-数据格式化" class="headerlink" title="4.2　数据格式化"></a>4.2　数据格式化</h2><p>在进行数据处理时，尤其是在数据计算中应用求均值（mean()函数）后，发现结果中的小数位数增加了许多。此时就需要对数据进行格式化，以增加数据的可读性。例如，保留小数点位数、百分号、千位分隔符等。首先来看一组数据，如图4.9所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020035851798.png" alt="image-20211020035851798"></p>
+<p>​                                         图4.9　原始数据</p>
+<h3 id="4-2-1-设置小数位数"><a href="#4-2-1-设置小数位数" class="headerlink" title="4.2.1　设置小数位数"></a>4.2.1　设置小数位数</h3><p>设置小数位数主要使用DataFrame对象的round()函数，该函数可以实现四舍五入，而它的decimals参数则用于设置保留小数的位数，设置后数据类型不会发生变化，依然是浮点型。语法如下：</p>
+<p>DataFrame.round(decimals&#x3D;0, *args, **kwargs)　**</p>
+<p>decimals：每一列四舍五入的小数位数，整型、字典或Series对象。如果是整数，则将每一列四舍五入到相同的位置。否则，将字典和Series舍入到可变数目的位置；如果小数是类似于字典的，那么列名应该在键中；如果小数是级数，列名应该在索引中。没有包含在小数中的任何列都将保持原样。非输入列的小数元素将被忽略。　</p>
+<p>args：附加的关键字参数。　</p>
+<p>kwargs：附加的关键字参数。　</p>
+<p>返回值：返回DataFrame对象。</p>
+<p>【示例12】　四舍五入保留指定的小数位数。（示例位置：资源包\MR\Code\04\12）<br>使用round()函数四舍五入保留小数位数，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020040002742.png" alt="image-20211020040002742"></p>
+<p>运行程序，控制台输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020040023289.png" alt="image-20211020040023289"></p>
+<p>当然，保留小数位数也可以用自定义函数，例如，为DataFrame对象中的各个浮点值保留两位小数，主要代码如下：</p>
+<p>df.applymap(lambda x: ‘%.2f’%x)</p>
+<p>注意<br>经过自定义函数处理过的数据将不再是浮点型而是对象型，如果后续计算需要数据，则应先进行数据类型转换。</p>
+<h3 id="4-2-2-设置百分比"><a href="#4-2-2-设置百分比" class="headerlink" title="4.2.2　设置百分比"></a>4.2.2　设置百分比</h3><p>在数据分析过程中，有时需要百分比数据。那么，利用自定义函数将数据进行格式化处理，处理后的数据就可以从浮点型转换成带指定小数位数的百分比数据，主要使用apply()函数与format()函数。</p>
+<p>【示例13】　将指定数据格式化为百分比数据。（示例位置：资源包\MR\Code\04\13）<br>将A1列的数据格式化为百分比数据，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020040234891.png" alt="image-20211020040234891"></p>
+<p>运行程序，控制台输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020040335780.png" alt="image-20211020040335780"></p>
+<h3 id="4-2-3-设置千位分隔符"><a href="#4-2-3-设置千位分隔符" class="headerlink" title="4.2.3　设置千位分隔符"></a>4.2.3　设置千位分隔符</h3><p>由于业务需要，有时需要将数据格式化为带千位分隔符的数据。那么，处理后的数据将不再是浮点型而是对象型。</p>
+<p>【示例14】　将金额格式化为带千位分隔符的数据。（示例位置：资源包\MR\Code\04\14）<br>将图书销售码洋格式化为带千位分隔符的数据，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020040604750.png" alt="image-20211020040604750"></p>
+<p>运行程序，控制台输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020040623599.png" alt="image-20211020040623599"></p>
+<p>注意<br>设置千位分隔符后，对于程序来说，这些数据将不再是数值型，而是数字和逗号组成的字符串，如果由于程序需要再变成数值型就会很麻烦，因此设置千位分隔符要慎重。</p>
+<h2 id="4-3-数据分组统计"><a href="#4-3-数据分组统计" class="headerlink" title="4.3　数据分组统计"></a>4.3　数据分组统计</h2><p>本节主要介绍分组统计函数groupby()的各种应用。</p>
+<h3 id="4-3-1-分组统计groupby-函数"><a href="#4-3-1-分组统计groupby-函数" class="headerlink" title="4.3.1　分组统计groupby()函数"></a>4.3.1　分组统计groupby()函数</h3><p>对数据进行分组统计，主要使用DataFrame对象的groupby()函数，其功能如下。<br>（1）根据给定的条件将数据拆分成组。</p>
+<p>（2）每个组都可以独立应用函数（如求和函数sum()、求平均值函数mean()等）。<br>（3）将结果合并到一个数据结构中。<br>groupby()函数用于将数据按照一列或多列进行分组，一般与计算函数结合使用，实现数据的分组统计，语法如下：</p>
+<p><strong>DataFrame.groupby(by&#x3D;None,axis&#x3D;0,level&#x3D;None,as_index&#x3D;True,sort&#x3D;True,group_keys&#x3D;True,squeeze&#x3D;False,observed&#x3D;False)</strong></p>
+<p>参数说明：　</p>
+<p>by：映射、字典或Series对象、数组、标签或标签列表。如果by是一个函数，则对象索引的每个值都调用它；如果传递了一个字典或Series对象，则使用该字典或Series对象值来确定组；如果传递了数组ndarray，则按原样使用这些值来确定组。　</p>
+<p>axis：axis&#x3D;1表示行，axis&#x3D;0表示列。默认值为0。　</p>
+<p>level：表示索引层级，默认值为None（无）。　</p>
+<p>as_index：布尔型，默认值为True，返回以组标签为索引的对象。　sort：对组进行排序，布尔型，默认值为True。　</p>
+<p>group_keys：布尔型，默认值为True，调用apply()函数时，将分组的键添加到索引以标识片段。　</p>
+<p>squeeze：布尔型，默认值为False。如果可能，减少返回类型的维度；否则返回一致类型。　</p>
+<p>observed： <em>bool, default False</em> 布尔型, 观察者, 默认为False。当以石斑鱼为分类时，才会使用该参数。如果参数值为True，则仅显示分类石斑鱼的观测值；如果参数值为False，则显示分类石斑鱼的所有值。</p>
+<p>返回值：返回DataFrameGroupBy，返回包含有关组的信息的groupby对象。</p>
+<h4 id="1．按照一列分组统计"><a href="#1．按照一列分组统计" class="headerlink" title="1．按照一列分组统计"></a>1．按照一列分组统计</h4><p>【示例15】　根据“一级分类”统计订单数据。（示例位置：资源包\MR\Code\04\15）<br>按照图书“一级分类”对订单数据进行分组统计求和，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020042705196.png" alt="image-20211020042705196"></p>
+<p>运行程序，输出结果如图4.10所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020042744863.png" alt="image-20211020042744863"></p>
+<p>​                                 图4.10　按照一列分组统计</p>
+<h4 id="2．按照多列分组统计"><a href="#2．按照多列分组统计" class="headerlink" title="2．按照多列分组统计"></a>2．按照多列分组统计</h4><p>多列分组统计，以列表形式指定列。</p>
+<p>【示例16】　根据两级分类统计订单数据。（示例位置：资源包\MR\Code\04\16）<br>按照图书“一级分类”和“二级分类”对订单数据进行分组统计求和，主要代码如下：</p>
+<p>01 #抽取数据<br>02 df1&#x3D;df[[‘一级分类’,’二级分类’,’7天点击量’,’订单预定’]]<br>03 df1&#x3D;df1.groupby([‘一级分类’,’二级分类’]).sum()    #分组统计求和</p>
+<p>运行程序，输出结果如图4.11所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020042906442.png" alt="image-20211020042906442"></p>
+<p>​                                    图4.11　按照多列分组统计</p>
+<h4 id="3．分组并按指定列进行数据计算"><a href="#3．分组并按指定列进行数据计算" class="headerlink" title="3．分组并按指定列进行数据计算"></a>3．分组并按指定列进行数据计算</h4><p>前面介绍的分组统计是按照所有列进行汇总计算的，那么如何按照指定列汇总计算呢？</p>
+<p>【示例17】　统计各编程语言的7天点击量。（示例位置：资源包\MR\Code\04\17）<br>统计各编程语言的7天点击量，首先按“二级分类”分组，然后抽取“7天点击量”列并对该列进行求和运算，主要代码如下：</p>
+<p>df1&#x3D;df1.groupby(‘二级分类’)[‘7天点击量’].sum()<br>运行程序，输出结果如图4.12所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020043023795.png" alt="image-20211020043023795"></p>
+<p>图4.12　分组并按指定列进行数据计算</p>
+<h3 id="4-3-2-对分组数据进行迭代"><a href="#4-3-2-对分组数据进行迭代" class="headerlink" title="4.3.2　对分组数据进行迭代"></a>4.3.2　对分组数据进行迭代</h3><p>通过for循环对分组统计数据进行迭代（遍历分组数据）。</p>
+<p>【示例18】　迭代一级分类的订单数据。（示例位置：资源包\MR\Code\04\18）<br>按照“一级分类”分组，并输出每一分类中的订单数据，主要代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020043149194.png" alt="image-20211020043149194"></p>
+<p>运行程序，控制台输出结果如图4.13所示。<br>上述代码中，name是groupby()函数中“一级分类”的值，group是分组后的数据。如果groupby()函数对多列进行分组，那么需要在for循环中指定多列。</p>
+<p>【示例19】　迭代两级分类的订单数据。（示例位置：资源包\MR\Code\04\19）<br>迭代“一级分类”和“二级分类”的订单数据，主要代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020043219251.png" alt="image-20211020043219251"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020043328145.png" alt="image-20211020043328145"></p>
+<p>​                          图4.13　对分组数据进行迭代</p>
+<h3 id="4-3-3-对分组的某列或多列使用聚合函数（agg-函数）"><a href="#4-3-3-对分组的某列或多列使用聚合函数（agg-函数）" class="headerlink" title="4.3.3　对分组的某列或多列使用聚合函数（agg()函数）"></a>4.3.3　对分组的某列或多列使用聚合函数（agg()函数）</h3><p>Python也可以实现像SQL中的分组聚合运算操作，主要通过groupby()函数与agg()函数实现。【示例20】　对分组统计结果使用聚合函数。（示例位置：资源包\MR\Code\04\20）<br>按“一级分类”分组统计“7天点击量”“订单预定”的平均值和总和，主要代码如下：</p>
+<p>print(df1.groupby(‘一级分类’).agg([‘mean’,’sum’]))<br>运行程序，控制台输出结果如图4.14所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020043531227.png" alt="image-20211020043531227"></p>
+<p>​                 图4.14　分组统计“7天点击量”“订单预定”的平均值和总和</p>
+<p>【示例21】　针对不同的列使用不同的聚合函数。（示例位置：资源包\MR\Code\04\21）<br>在上述示例中，还可以针对不同的列使用不同的聚合函数。例如，按“一级分类”分组统计“7天点击量”的平均值和总和、“订单预定”的总和，主要代码如下：</p>
+<p>print(df1.groupby(‘一级分类’).agg({‘7天点击量’:[‘mean’,’sum’], ‘订单预定’:[‘sum’]}))<br>运行程序，控制台输出结果如图4.15所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020043554534.png" alt="image-20211020043554534"></p>
+<p>​           图4.15　分组统计“7天点击量”的平均值和总和、“订单预定”的总和</p>
+<p>【示例22】　通过自定义函数实现分组统计。（示例位置：资源包\MR\Code\04\22）<br>通过自定义函数也可以实现数据分组统计。例如，统计1月份销售数据中，购买次数最多的产品，主要代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020043631773.png" alt="image-20211020043631773"></p>
+<p>运行程序，控制台输出结果如图4.16所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020043647886.png" alt="image-20211020043647886"></p>
+<p>​                             图4.16　统计购买次数最多的产品</p>
+<p>从运行结果得知：“零基础学Python”是用户购买次数最多的产品。实用技巧<br>在图4.16显示的输出结果中可以看到，lambda()函数名称<lambda>被输出出来，看上去不是很美观，那么如何去掉它？方法是使用__name__方法修改函数名称，主要代码如下：</lambda></p>
+<p>max.<strong>name</strong> &#x3D; “购买次数最多”<br>运行程序，控制台输出结果如图4.17所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020043747160.png" alt="image-20211020043747160"></p>
+<p>​                         图4.17　使用__name__方法修改函数名称</p>
+<h3 id="4-3-4-通过字典和Series对象进行分组统计"><a href="#4-3-4-通过字典和Series对象进行分组统计" class="headerlink" title="4.3.4　通过字典和Series对象进行分组统计"></a>4.3.4　通过字典和Series对象进行分组统计</h3><h4 id="1．通过字典进行分组统计"><a href="#1．通过字典进行分组统计" class="headerlink" title="1．通过字典进行分组统计"></a>1．通过字典进行分组统计</h4><p>首先创建字典建立对应关系，然后将字典传递给groupby()函数从而实现数据分组统计。</p>
+<p>【示例23】　通过字典分组统计“北上广”销量。（示例位置：资源包\MR\Code\04\23）<br>统计各地区销量，业务要求将“北京”“上海”“广州”3个一线城市放在一起统计。那么首先创建一个字典将“北京出库销量”“上海出库销量”“广州出库销量”都对应“北上广”；然后使用groupby()函数进行分组统计。主要代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020043824543.png" alt="image-20211020043824543"></p>
+<p>运行程序，控制台输出结果如图4.18所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020043847244.png" alt="image-20211020043847244"></p>
+<p>​                                 图4.18　通过字典进行分组统计</p>
+<h4 id="2．通过Series对象进行分组统计"><a href="#2．通过Series对象进行分组统计" class="headerlink" title="2．通过Series对象进行分组统计"></a>2．通过Series对象进行分组统计</h4><p>通过Series对象进行分组统计与字典的方法类似。</p>
+<p>【示例24】　通过Series对象分组统计“北上广”销量。（示例位置：资源包\MR\Code\04\24）<br>首先，创建一个Series对象，主要代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020043933019.png" alt="image-20211020043933019"></p>
+<p>运行程序，输出结果如图4.19所示。<br>然后，将Series对象传递给groupby()函数实现数据分组统计，主要代码如下：</p>
+<p>01  df1&#x3D;df.groupby(s1,axis&#x3D;1).sum()<br>02  print(df1)<br>运行程序，控制台输出结果如图4.20所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020043959963.png" alt="image-20211020043959963"></p>
+<p>​                             图4.19　通过Series对象进行分组统计</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020044040014.png" alt="image-20211020044040014"></p>
+<p>​                             图4.20　分组统计结果</p>
+<h2 id="4-4-数据移位"><a href="#4-4-数据移位" class="headerlink" title="4.4　数据移位"></a>4.4　数据移位</h2><p>什么是数据移位？例如，分析数据时需要上一条数据怎么办？当然是移动至上一条，从而得到该条数据，这就是数据移位。在Pandas中，使用shift()方法可以获得上一条数据，该方法返回向下移位后的结果，从而得到上一条数据。例如，获取某学生上一次英语成绩，如图4.21所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020044117875.png" alt="image-20211020044117875"></p>
+<p>​                              图4.21　获取学生上一次英语成绩<br>shift()方法是一个非常有用的方法，用于数据位移与其他方法结合，能实现很多难以想象的功能，语法格式如下：</p>
+<p>DataFrame.shift(periods&#x3D;1, freq&#x3D;None, axis&#x3D;0)<br>参数说明：　</p>
+<p>periods：表示移动的幅度，可以是正数，也可以是负数，默认值是1，1表示移动一次。注意这里移动的都是数据，而索引是不移动的，移动之后是没有对应值的，赋值为NaN。　</p>
+<p>freq：可选参数，默认值为None，只适用于时间序列，如果这个参数存在，那么会按照参数值移动时间索引，而数据值没有发生变化。　</p>
+<p>axis：axis&#x3D;1表示行，axis&#x3D;0表示列。默认值为0。</p>
+<p>【示例25】　统计学生英语周测成绩的升降情况。（示例位置：资源包\MR\Code\04\25）<br>使用shift()方法统计学生每周英语测试成绩的升降情况，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020044313140.png" alt="image-20211020044313140"></p>
+<p>运行程序，控制台输出结果如图4.22所示。<br>从运行结果得知：第2次比第1次下降5分，第3次比第2次下降6分，第4次比第3次提升21分，第5次比第4次下降5分。<br>这里再扩展下，通过10次周测来一看下学生整体英语成绩的升降情况，如图4.23和图4.24所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020044330897.png" alt="image-20211020044330897"></p>
+<p>​                                     图4.22　英语升降情况</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020044547566.png" alt="image-20211020044547566"></p>
+<p>​                               图4.23　10次周测英语成绩升降情况</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020044603814.png" alt="image-20211020044603814"></p>
+<p>​                     图4.24　图表展示英语成绩升降情况</p>
+<p>说明</p>
+<p>有关图表的知识将在第6章介绍，这里先简单了解。</p>
+<p>shift()方法还有很多方面的应用。例如这样一个场景：分析股票数据，获取的股票数据中有股票的实时价格，也有每日的收盘价“close”，此时需要将实时价格和上一个工作日的收盘价进行对比，那么通过shift()方法就可以轻松解决。shift()方法还可以应用于时间序列，感兴趣的读者可以在学习完成后续章节进行尝试和探索。</p>
+<h2 id="4-5-数据转换"><a href="#4-5-数据转换" class="headerlink" title="4.5　数据转换"></a>4.5　数据转换</h2><p>数据转换一般包括一列数据转换为多列数据、行列转换、DataFrame转换为字典、DataFrame转换为列表和DataFrame转换为元组等。</p>
+<h3 id="4-5-1-一列数据转换为多列数据"><a href="#4-5-1-一列数据转换为多列数据" class="headerlink" title="4.5.1　一列数据转换为多列数据"></a>4.5.1　一列数据转换为多列数据</h3><p>一列数据转换为多列数据的情况在日常工作中经常会用到，从各种系统中导出的订单号、名称、地址很多都是复合组成的（即由多项内容组成），那么，这些列在查找、统计、合并时就没办法使用，需要将它们拆分开。例如，地址信息由省市区街道门牌号等信息组成，如果按省、市或区统计数据，就需要将地址信息中的“省”“市”“区”拆分开，此时就应用到了一列数据转多列数据，通常使用以下方法。</p>
+<h4 id="1．split-方法"><a href="#1．split-方法" class="headerlink" title="1．split()方法"></a>1．split()方法</h4><p>Pandas的DataFrame对象中的str.split()内置方法可以实现分割字符串，语法如下：</p>
+<p>Series.str.split(pat&#x3D;None, n&#x3D;-1, expand&#x3D;False)<br>参数说明：　</p>
+<p>pat：字符串、符号或正则表达式，字符串分割的依据，默认以空格分割字符串。　</p>
+<p>n：整型，分割次数，默认值是-1，0或-1都将返回所有拆分。　expand：布尔型，分割后的结果是否转换为DataFrame，默认值是False。　</p>
+<p>返回值：系列、索引、DataFrame或多重索引。<br>首先，我们来看一组淘宝销售订单数据（部分数据），如图4.25所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020044753477.png" alt="image-20211020044753477"></p>
+<p>图4.25　淘宝销售订单数据（部分数据）<br>从图4-25中数据得知：不仅“收货地址”是复合的，“宝贝标题”也是复合的，即由多种产品组成。</p>
+<p>【示例26】　分割“收货地址”数据中的“省、市、区”。（示例位置：资源包\MR\Code\04\26）<br>使用split()方法先对“收货地址”进行分割，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020044817707.png" alt="image-20211020044817707"></p>
+<p>运行程序，输出结果如图4.26所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020044931041.png" alt="image-20211020044931041"></p>
+<p>​                                  图4.26　分割后的收货地址</p>
+<h4 id="2．join-方法与split-方法结合"><a href="#2．join-方法与split-方法结合" class="headerlink" title="2．join()方法与split()方法结合"></a>2．join()方法与split()方法结合</h4><p>【示例27】　以逗号分隔多种产品数据。（示例位置：资源包\MR\Code\04\27）<br>通过join()方法与split()方法结合，以逗号“,”分隔“宝贝标题”，主要代码如下：</p>
+<p>df &#x3D; df.join(df[‘宝贝标题’].str.split(‘, ‘, expand&#x3D;True))</p>
+<p>运行程序，输出结果如图4.27所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020044959881.png" alt="image-20211020044959881"></p>
+<p>​                                   图4.27　分隔后的“宝贝标题”<br>从运行结果得知：“宝贝标题”中含有多种产品的数据被拆分开，这样操作便于日后对每种产品的销量进行统计。<br>将DataFrame中的tuple（元组）类型数据分隔成多列</p>
+<p>【示例28】　对元组数据进行分隔。（示例位置：资源包\MR\Code\04\28）<br>首先，创建一组包含元组的数据，程序代码如下：</p>
+<p>01  import pandas as pd<br>02  df &#x3D; pd.DataFrame({‘a’:[1,2,3,4,5], ‘b’:[(1,2), (3,4),(5,6),(7,8),(9,10)]})<br>03  print(df)</p>
+<p>然后，使用apply()函数对元组进行分隔，主要代码如下：</p>
+<p>df[[‘b1’, ‘b2’]] &#x3D; df[‘b’].apply(pd.Series)<br>或者使用join()方法结合apply()函数，主要代码如下：</p>
+<p>df&#x3D; df.join(df[‘b’].apply(pd.Series))<br>运行程序，控制台输出原始数据如图4.28所示，结果如图4.29和图4.30所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020045110497.png" alt="image-20211020045110497"></p>
+<p>​                                            图4.28　原始数据</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020045122797.png" alt="image-20211020045122797"></p>
+<p>​                             图4.29　apply()函数分隔元组</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020045146968.png" alt="image-20211020045146968"></p>
+<p>​                       图4.30　join()方法结合apply()函数分隔元组</p>
+<h3 id="4-5-2-行列转换"><a href="#4-5-2-行列转换" class="headerlink" title="4.5.2　行列转换"></a>4.5.2　行列转换</h3><p>在Pandas处理数据过程中，有时需要对数据进行行列转换或重排，主要使用stack()方法、unstack()方法和pivot()方法，下面介绍这3种方法的应用。</p>
+<h4 id="1．stack-方法"><a href="#1．stack-方法" class="headerlink" title="1．stack()方法"></a>1．stack()方法</h4><p>stack()方法用于将原来的列索引转换成最内层的行索引，转换效果对比示意图如图4.31所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020045215351.png" alt="image-20211020045215351"></p>
+<p>​                               图4.31　转换效果对比示意图<br>stack()方法的语法如下：</p>
+<p>DataFrame.stack(level&#x3D;-1, dropna&#x3D;True)<br>参数说明：　</p>
+<p>level：索引层级，定义为一个索引或标签，或索引或标签列表，默认值是-1。　</p>
+<p>dropna：布尔型，默认值是True，　</p>
+<p>返回值：DataFrame对象或Series对象。</p>
+<p>【示例29】　对英语成绩表进行行列转换。（示例位置：资源包\MR\Code\04\29）<br>将学生英语成绩表进行行列转换，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020045321517.png" alt="image-20211020045321517"></p>
+<h4 id="2．unstack-方法"><a href="#2．unstack-方法" class="headerlink" title="2．unstack()方法"></a>2．unstack()方法</h4><p>unstack()方法与stack()方法相反，它是stack()方法的逆操作，即将最内层的行索引转换成列索引，转换效果对比如图4.32所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020045341690.png" alt="image-20211020045341690"></p>
+<p>​                   图4.32　unstack()方法转换数据示意图<br>unstack()方法的语法如下：</p>
+<p>DataFrame.unstack(level&#x3D;-1, fill_value&#x3D;None)<br>参数说明：　</p>
+<p>level：索引层级，定义为一个索引或标签，或索引或标签列表，默认值是-1。　</p>
+<p>fill_value：整型、字符串或字典，如果unstack()方法产生丢失值，则用这个值替换NaN。　返回值：DataFrame对象或Series对象。</p>
+<p>【示例30】　使用unstack()方法转换学生成绩表。（示例位置：资源包\MR\Code\04\30）<br>同样转换学生成绩表，主要代码如下：</p>
+<p>01 df&#x3D;pd.read_excel(‘grade.xls’,sheet_name&#x3D;’英语2’)      #导入Excel文件<br>02 df &#x3D; df.set_index([‘班级’,’序号’,’Unnamed: 2’])       #设置多级索引<br>03 print(df.unstack())<br>unstack()方法中有一个参数可以指定转换第几层索引，例如，unstack(0)就是把第一层行索引转换为列索引，默认是将最内层索引转换为列索引。</p>
+<h4 id="3．pivot-方法"><a href="#3．pivot-方法" class="headerlink" title="3．pivot()方法"></a>3．pivot()方法</h4><p>pivot()方法针对列的值，即指定某列的值作为行索引，指定某列的值作为列索引，然后再指定哪些列作为索引对应的值。unstack()方法针对索引进行操作，pivot()方法针对值进行操作。但实际上，二者的功能往往可以互相实现。<br>pivot()方法的语法如下：</p>
+<p>DataFrame.pivot(index&#x3D;None, columns&#x3D;None, values&#x3D;None)<br>参数说明：　</p>
+<p>index：字符串或对象，可选参数。列用于创建新DataFrame数据的索引。如果没有，则使用现有索引。　</p>
+<p>columns：字符串或对象，列用于创建新DataFrame的列。　</p>
+<p>values：列用于填充新DataFrame的值，如果未指定，则将使用所有剩余的列，结果将具有分层索引列。　</p>
+<p>返回值：DataFrame对象或Series对象。</p>
+<p>【示例31】　使用pivot()方法转换学生成绩表。（示例位置：资源包\MR\Code\04\31）<br>使用pivot()方法转换学生成绩表，主要代码如下：</p>
+<p>01 df&#x3D;pd.read_excel(‘grade.xls’,sheet_name&#x3D;’英语3’)         #导入Excel文件<br>02 df1&#x3D;df.pivot(index&#x3D;’序号’,columns&#x3D;’班级’,values&#x3D;’得分’)<br>运行程序，输出结果如图4.33所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020045550818.png" alt="image-20211020045550818"></p>
+<p>图4.33　使用pivot()方法转换学生成绩表</p>
+<h3 id="4-5-3-DataFrame转换为字典"><a href="#4-5-3-DataFrame转换为字典" class="headerlink" title="4.5.3　DataFrame转换为字典"></a>4.5.3　DataFrame转换为字典</h3><p>DataFrame转换为字典主要使用DataFrame对象的to_dict()方法，以索引作为字典的键（key），以列作为字典的值（value）。例如，有一个DataFrame对象（索引为“类别”、列为“数量”），通过to_dict()方法就会生成一个字典，示意图如图4.34所示。如果DataFrame对象包含两列，那么to_dict()方法就会生成一个两层的字典（dict），第一层是列名作为字典的键（key），第二层以索引列的值作为字典的键（key），以列值作为字典的值（value）。</p>
+<p>【示例32】　将Excel销售数据转换为字典。（示例位置：资源包\MR\Code\04\32）<br>使用to_dict()方法将按“宝贝标题”分组统计后的部分数据转换为字典，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020045613721.png" alt="image-20211020045613721"></p>
+<p>运行程序，控制台输出结果如图4.35所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020045643137.png" alt="image-20211020045643137"></p>
+<p>​                       图4.34　DataFrame转换为字典示意图</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020045702961.png" alt="image-20211020045702961"></p>
+<p>​                           图4.35　DataFrame转换为字典</p>
+<h3 id="4-5-4-DataFrame转换为列表"><a href="#4-5-4-DataFrame转换为列表" class="headerlink" title="4.5.4　DataFrame转换为列表"></a>4.5.4　DataFrame转换为列表</h3><p>DataFrame转换为列表主要使用DataFrame对象的tolist()方法。</p>
+<p>【示例33】　将电商数据转换为列表。（示例位置：资源包\MR\Code\04\33）<br>将淘宝销售数据中的“买家会员名”转换为列表，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020045737401.png" alt="image-20211020045737401"></p>
+<p>运行程序，控制台输出结果如图4.36所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020045806297.png" alt="image-20211020045806297"></p>
+<p>图4.36　DataFrame转换为列表</p>
+<h3 id="4-5-5-DataFrame转换为元组"><a href="#4-5-5-DataFrame转换为元组" class="headerlink" title="4.5.5　DataFrame转换为元组"></a>4.5.5　DataFrame转换为元组</h3><p>DataFrame转换为元组，首先通过循环语句按行读取DataFrame数据，然后使用元组函数tuple()将其转换为元组。</p>
+<p>【示例34】　将Excel数据转换为元组。（示例位置：资源包\MR\Code\04\34）<br>将Excel表中的人物关系部分数据转换成元组，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020045832962.png" alt="image-20211020045832962"></p>
+<p>运行程序，控制台输出结果如图4.37所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020045913740.png" alt="image-20211020045913740"></p>
+<p>​                            图4.37　DataFrame转换为元组</p>
+<h3 id="4-5-6-Excel转换为HTML网页格式"><a href="#4-5-6-Excel转换为HTML网页格式" class="headerlink" title="4.5.6　Excel转换为HTML网页格式"></a>4.5.6　Excel转换为HTML网页格式</h3><p>日常工作中，有时会涉及财务数据的处理，而Excel应用最为广泛，但是对于展示数据来说，Excel并不友好，如果你想用其他格式的文件来向用户展示，那么，HTML网页格式是不错的选择。首先使用read_excel()方法导入Excel文件，然后使用to_html()方法将DataFrame数据导出为HTML格式，这样便实现了Excel转换为HTML格式。</p>
+<p>【示例35】　将Excel订单数据转换为HTML网页格式。（示例位置：资源包\MR\Code\04\35）<br>将淘宝部分订单数据转换为HTML网页格式，效果如图4.38所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020045939834.png" alt="image-20211020045939834"></p>
+<p>​                              图4.38　Excel转换为HTML网页格式<br>程序代码如下：</p>
+<p>01 import pandas as pd<br>02 df&#x3D;pd.read_excel(‘mrbooks.xls’)<br>03 df.to_html(‘mrbook.html’,header &#x3D; True,index &#x3D; False)</p>
+<h2 id="4-6-数据合并"><a href="#4-6-数据合并" class="headerlink" title="4.6　数据合并"></a>4.6　数据合并</h2><p>DataFrame数据合并主要使用merge()方法和concat()方法。</p>
+<h3 id="4-6-1-数据合并（merge-方法）"><a href="#4-6-1-数据合并（merge-方法）" class="headerlink" title="4.6.1　数据合并（merge()方法）"></a>4.6.1　数据合并（merge()方法）</h3><p>Pandas模块的merge()方法是按照两个DataFrame对象列名相同的列进行连接合并，两个DataFrame对象必须具有同名的列。merge()方法的语法如下：</p>
+<p>pandas.merge(right,how&#x3D;’inner’,on&#x3D;None,left_on&#x3D;None,right_on&#x3D;None,left_index&#x3D;False,right_index&#x3D;False,sort&#x3D;<br>False,suffixes&#x3D;(‘_x’,’_y’),copy&#x3D;True,indicator&#x3D;False,validate&#x3D;None)<br>参数说明：　</p>
+<p>right：合并对象，DataFrame对象或Series对象。　</p>
+<p>how：合并类型，参数值可以是left（左合并）、right（右合并）、outer（外部合并）或inner（内部合并），默认值为inner。各个值的说明如下。　</p>
+<p>​		left：只使用来自左数据集的键，类似于SQL左外部联接，保留键的顺序。　</p>
+<p>​		right：只使用来自右数据集的键，类似于SQL右外部联接，保留键的顺序。　</p>
+<p>​		outer：使用来自两个数据集的键，类似于SQL外部联接，按字典顺序对键进行排序。　</p>
+<p>​		inner：使用来自两个数据集的键的交集，类似于SQL内部连接，保持左键的顺序。</p>
+<p>on：标签、列表或数组，默认值为None。</p>
+<p>DataFrame对象连接的列或索引级别名称。也可以是DataFrame对象长度的数组或数组列表。</p>
+<p>left_on：标签、列表或数组，默认值为None。要连接的左数据集的列或索引级名称，也可以是左数据集长度的数组或数组列表。　</p>
+<p>right_on：标签、列表或数组，默认值为None。要连接的右数据集的列或索引级名称，也可以是右数据集长度的数组或数组列表。　left_index：布尔型，默认值为False。使用左数据集的索引作为连接键。如果是多重索引，则其他数据中的键数（索引或列数）必须匹配索引级别数。</p>
+<p>right_index：布尔型，默认值为False，使用右数据集的索引作为连接键。　</p>
+<p>sort：布尔型，默认值为False，在合并结果中按字典顺序对连接键进行排序。如果值为False，则连接键的顺序取决于连接类型how参数。　suffixes：元组类型，默认值为(‘_x’,’_y’)。当左侧数据集和右侧数据集的列名相同时，数据合并后列名将带上“_x”和“_y”后缀。　</p>
+<p>copy：是否复制数据，默认值为True。如果值为False，则不复制数据。　</p>
+<p>indicator：布尔型或字符串，默认值为False。如果值为True，则添加一个列以输出名为_Merge的DataFrame对象，其中包含每一行的信息。如果是字符串，将向输出的DataFrame对象中添加包含每一行信息的列，并将列命名为字符型的值。　</p>
+<p>validate：字符串，检查合并数据是否为指定类型。可选参数，其值说明如下。　one_to_one或“1:1”：检查合并键在左、右数据集中是否都是唯一的。　one_to_many或“1:m”：检查合并键在左数据集中是否唯一。　many_to_one或“m:1”：检查合并键在右数据集中是否唯一。　many_to_many或“m:m”：允许，但不检查。　</p>
+<p>返回值：DataFrame对象，两个合并对象的数据集。</p>
+<h4 id="1．常规合并"><a href="#1．常规合并" class="headerlink" title="1．常规合并"></a>1．常规合并</h4><p>【示例36】　合并学生成绩表。（示例位置：资源包\MR\Code\04\36）<br>假设一个DataFrame对象包含了学生的“语文”“数学”“英语”成绩，而另一个DataFrame对象则包含了学生的“体育”成绩，现在将它们合并，示意图如图4.39所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020050304612.png" alt="image-20211020050304612"></p>
+<p>​                 图4.39　数据合并效果对比示意图<br>程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020050326358.png" alt="image-20211020050326358"></p>
+<p>运行程序，控制台输出结果如图4.40所示。</p>
+<p>【示例37】　通过索引合并数据。（示例位置：资源包\MR\Code\04\37）<br>如果通过索引列合并，则需要设置right_index参数和left_index参数值为True。例如，上述举例，通过列索引合并，主要代码如下：</p>
+<p>01 df_merge&#x3D;pd.merge(df1,df2,right_index&#x3D;True,left_index&#x3D;True)<br>02 print(df_merge)<br>运行程序，控制台输出结果如图4.41所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020050352118.png" alt="image-20211020050352118"></p>
+<p>​                           图4.40　合并结果</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020050412167.png" alt="image-20211020050412167"></p>
+<p>​                            图4.41　通过索引列合并</p>
+<p>【示例38】　对合并数据去重。（示例位置：资源包\MR\Code\04\38）<br>从图4.41中的运行结果得知：数据中存在重复列（如编号），如果不想要重复列，可以设置按指定列和列索引合并数据，主要代码如下：</p>
+<p>df_merge&#x3D;pd.merge(df1,df2,on&#x3D;’编号’,left_index&#x3D;True,right_index&#x3D;True)</p>
+<p>还可以通过how参数解决这一问题。例如，设置该参数值为left，就是让df1保留所有的行列数据，df2则根据df1的行列进行补全，主要代码如下：</p>
+<p>df_merge&#x3D;pd.merge(df1,df2,on&#x3D;’编号’,how&#x3D;’left’)<br>运行程序，控制台输出结果如图4.42所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020050506047.png" alt="image-20211020050506047"></p>
+<p>图4.42　合并结果</p>
+<h4 id="2．多对一的数据合并"><a href="#2．多对一的数据合并" class="headerlink" title="2．多对一的数据合并"></a>2．多对一的数据合并</h4><p>多对一是指两个数据集（df1、df2）的共有列中的数据不是一对一的关系，例如，df1中的“编号”是唯一的，而df2中的“编号”有重复的编号，类似这种就是多对一的关系，示意图如图4.43所示。【示例39】　根据共有列进行合并数据。（示例位置：资源包\MR\Code\04\39）<br>根据共有列中的数据进行合并，df2根据df1的行列进行补全，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020050528714.png" alt="image-20211020050528714"></p>
+<p>运行程序，控制台输出结果如图4.44所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020050545631.png" alt="image-20211020050545631"></p>
+<p>​                                     图4.43　多对一合并示意图</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020050604101.png" alt="image-20211020050604101"></p>
+<p>​                                  图4.44　合并结果</p>
+<h4 id="3．多对多的数据合并"><a href="#3．多对多的数据合并" class="headerlink" title="3．多对多的数据合并"></a>3．多对多的数据合并</h4><p>多对多是指两个数据集（df1、df2）的共有列中的数据不全是一对一的关系，都有重复数据，例如“编号”，示图如图4.45所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020050702131.png" alt="image-20211020050702131"></p>
+<p>​                                    图4.45　多对多示意图</p>
+<p>【示例40】　合并数据并相互补全。（示例位置：资源包\MR\Code\04\40）<br>根据共有列中的数据进行合并，df2、df1相互补全，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020050733884.png" alt="image-20211020050733884"></p>
+<p>运行程序，控制台输出结果如图4.46所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020050749641.png" alt="image-20211020050749641"></p>
+<p>​                                               图4.46　合并结果</p>
+<h3 id="4-6-2-数据合并（concat-方法）"><a href="#4-6-2-数据合并（concat-方法）" class="headerlink" title="4.6.2　数据合并（concat()方法）"></a>4.6.2　数据合并（concat()方法）</h3><p>concat()方法可以根据不同的方式将数据合并，语法如下：</p>
+<p>pandas.concat(objs,axis&#x3D;0,join&#x3D;’outer’,ignore_index: bool &#x3D; False, keys&#x3D;None, levels&#x3D;None, names&#x3D;None,<br>verify_integrity: bool &#x3D; False, sort: bool &#x3D; False, copy: bool &#x3D; True)<br>参数说明：　</p>
+<p>objs：Series、DataFrame或Panel对象的序列或映射。如果传递一个字典，则排序的键将用作键参数。　</p>
+<p>axis：axis&#x3D;1表示行，axis&#x3D;0表示列。默认值为0。　</p>
+<p>join：值为inner（内连接）或outer（外连连接），处理其他轴上的索引方式。默认值为outer。　</p>
+<p>ignore_index：布尔值，默认值为False，保留索引，索引值为0，…，n-1。如果值为True，则忽略索引。　</p>
+<p>keys：序列，默认值为None。使用传递的键作为最外层构建层次索引。如果为多索引，应该使用元组。　</p>
+<p>levels：序列列表，默认值为None。用于构建MultiIndex的特定级别（唯一值）；否则，它们将从键推断。　</p>
+<p>names：list列表，默认值为None。结果层次索引中的级别的名称。　verify_integrity：布尔值，默认值为False。检查新连接的轴是否包含重复项。　</p>
+<p>sort：布尔值，默认值为True（1.0.0以后版本默认值为False，即不排序）。如果连接为外连接（join&#x3D;’outer’），则对未对齐的非连接轴进行排序；如果连接为内连接（join&#x3D;’inner’），则该参数不起作用。</p>
+<p>copy：是否复制数据，默认值为True，如果值为False，则不复制数据。</p>
+<p>下面介绍concat()方法不同的合并方式，其中dfs代表合并后的DataFrame对象，df1、df2等代表单个DataFrame对象，result代表合并后的结果（DataFrame对象）。</p>
+<h4 id="1．相同字段的表首尾相接"><a href="#1．相同字段的表首尾相接" class="headerlink" title="1．相同字段的表首尾相接"></a>1．相同字段的表首尾相接</h4><p>表结构相同的数据将直接合并，表首尾相接，主要代码如下：</p>
+<p>01  dfs&#x3D; [df1, df2, df3]<br>02  result &#x3D; pd.concat(dfs)<br>例如，表df1、df2和df3结构相同，如图4.47所示。合并后的效果如图4.48所示。如果想要在合并数据时标记源数据来自哪张表，则需要在代码中加入参数keys，例如表名分别为“1月”“2月”“3月”，合并后的效果如图4.49所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020051001176.png" alt="image-20211020051001176"></p>
+<p>​                          图4.47　3张相同字段的表</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020051019220.png" alt="image-20211020051019220"></p>
+<p>​                                     图4.48　首尾相接合并后的效果</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020051035379.png" alt="image-20211020051035379"></p>
+<p>​                        图4.49　合并后带标记（月份）的效果<br>主要代码如下：</p>
+<p>result &#x3D; pd.concat(dfs, keys&#x3D;[‘1月’, ‘2月’, ‘3月’])</p>
+<h4 id="2．横向表合并（行对齐）"><a href="#2．横向表合并（行对齐）" class="headerlink" title="2．横向表合并（行对齐）"></a>2．横向表合并（行对齐）</h4><p>当合并的数据列名称不一致时，可以设置参数axis&#x3D;1，concat()方法将按行对齐，然后将不同列名的两组数据进行合并，缺失的数据用NaN填充，df1和df4合并前后效果如图4.50和图4.51所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020051057217.png" alt="image-20211020051057217"></p>
+<p>​                        图4.50　横向表合并前</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020051113896.png" alt="image-20211020051113896"></p>
+<p>​                            图4.51　横向表合并后<br>主要代码如下：</p>
+<p>result &#x3D; pd.concat([df1, df4], axis&#x3D;1)</p>
+<h4 id="3．交叉合并"><a href="#3．交叉合并" class="headerlink" title="3．交叉合并"></a>3．交叉合并</h4><p>交叉合并，需要在代码中加上join参数，如果值为inner，结果是两张表的交集；如果值为outer，结果是两张表的并集。例如两张表交集，表df1和df4合并前后的效果如图4.52和图4.53所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020051227829.png" alt="image-20211020051227829"></p>
+<p>​                                   图4.52　交叉合并前</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020051243654.png" alt="image-20211020051243654"></p>
+<p>​                                       图4.53　交叉合并后<br>主要代码如下：</p>
+<p>result &#x3D; pd.concat([df1, df4], axis&#x3D;1, join&#x3D;’inner’)</p>
+<h4 id="4．指定表对齐数据（行对齐）"><a href="#4．指定表对齐数据（行对齐）" class="headerlink" title="4．指定表对齐数据（行对齐）"></a>4．指定表对齐数据（行对齐）</h4><p>如果指定参数join_axes，就可以指定根据哪张表来对齐数据。例如，根据df4对齐数据，就会保留表df4的数据，然后将表df1的数据与之合并，行数不变，合并前后的效果与如图4.54和图4.55所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020051305083.png" alt="image-20211020051305083"></p>
+<p>​                          图4.54　指定表对齐数据合并前</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020051320918.png" alt="image-20211020051320918"></p>
+<p>​                           图4.55　指定表对齐数据合并后<br>主要代码如下：</p>
+<p>result &#x3D; pd.concat([df1, df4], axis&#x3D;1, join_axes&#x3D;[df4.index])</p>
+<h2 id="4-7-数据导出"><a href="#4-7-数据导出" class="headerlink" title="4.7　数据导出"></a>4.7　数据导出</h2><h3 id="4-7-1-导出为-xlsx文件"><a href="#4-7-1-导出为-xlsx文件" class="headerlink" title="4.7.1　导出为.xlsx文件"></a>4.7.1　导出为.xlsx文件</h3><p>导出数据为Excel，主要使用DataFrame对象的to_excel()方法，语法如下：</p>
+<p>DataFrame.to_excel(excel_writer,sheet_name&#x3D;’Sheet1’,na_rep&#x3D;’’,float_format&#x3D;None,columns&#x3D;None,header&#x3D;True,<br>index&#x3D;True,index_label&#x3D;None,startrow&#x3D;0,startcol&#x3D;0,engine&#x3D;None,merge_cells&#x3D;True, encoding&#x3D;None, inf_rep&#x3D;’inf’,<br>verbose&#x3D;True, freeze_panes&#x3D;None)<br>参数说明：　</p>
+<p>excel_writer：字符串或ExcelWriter对象。　</p>
+<p>sheet_name：字符串，默认值为Sheet1，包含DataFrame的表的名称。　</p>
+<p>na_rep：字符串，默认值为’ ‘。缺失数据的表示方式。　</p>
+<p>float_format：字符串，默认值为None，格式化浮点数的字符串。　columns：序列，可选参数，要编辑的列。　</p>
+<p>header：布尔型或字符串列表，默认值为True。列名称，如果给定字符串列表，则表示它是列名称的别名。　</p>
+<p>index：布尔型，默认值为True，行名（索引）。　</p>
+<p>index_label：字符串或序列，默认值为None。如果需要，可以使用索引列的列标签；如果没有给出，标题和索引为True，则使用索引名称；如果数据文件使用多索引，则需使用序列。</p>
+<p>startrow：指定从哪一行开始写入数据。　</p>
+<p>startcol：指定从哪一列开始写入数据。　</p>
+<p>engine：字符串，默认值为None，指定要使用的写引擎，如openpyxl或xlsxwriter。也可以通过io.excel.xlsx.writer、io.excel.xls.writer和io.excel.xlsm.writer进行设置。　</p>
+<p>merge_cells：布尔型，默认值为True。　</p>
+<p>encoding：指定Excel文件的编码方式，默认值为None。　</p>
+<p>inf_rep：字符串，默认值为“正”，表示无穷大。　</p>
+<p>verbose：布尔型，默认值为True。在错误日志中显示更多信息。　freeze_panes：整数的元组，长度2，默认值为None。指定要冻结的行列。</p>
+<p>【示例41】　将处理后的数据导出为Excel文件。（示例位置：资源包\MR\Code\04\41）<br>将数据合并后的结果导出为Excel文件，主要代码如下：</p>
+<p>df_merge.to_excel(‘merge.xlsx’)<br>运行程序，数据将导出为Excel文件，如图4.56所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020051510137.png" alt="image-20211020051510137"></p>
+<p>​                         图4.56　导出为Excel文件</p>
+<p>上述举例，如果需要指定Sheet页名称，可以通过sheet_name参数指定，主要代码如下：</p>
+<p>df1.to_excel(‘df1.xlsx’,sheet_name&#x3D;’df1’)</p>
+<h3 id="4-7-2-导出为-csv文件"><a href="#4-7-2-导出为-csv文件" class="headerlink" title="4.7.2　导出为.csv文件"></a>4.7.2　导出为.csv文件</h3><p>导出数据为.csv文件，主要使用DataFrame对象的to_csv()方法，语法如下：</p>
+<p>DataFrame.to_csv(path_or_buf&#x3D;None,sep&#x3D;’,’,na_rep&#x3D;’’,float_format&#x3D;None,columns&#x3D;None,header&#x3D;True,index&#x3D;<br>True,index_label&#x3D;None,mode&#x3D;’w’,encoding&#x3D;None,compression&#x3D;’infer’,quoting&#x3D;None,quotechar&#x3D;’”‘,line_terminator&#x3D;<br>None,chunksize&#x3D;None,date_format&#x3D;None,doublequote&#x3D;True, escapechar&#x3D;None, decimal&#x3D;’.’,errors&#x3D;’strict’)<br>参数说明：　</p>
+<p>path_or_buf：要保存的路径及文件名。　</p>
+<p>sep：分隔符，默认值为”,”。　</p>
+<p>na_rep：指定空值的输出方式，默认值为空字符串。　</p>
+<p>float_format：浮点数的输出格式，要用双引号括起来。　</p>
+<p>columns：指定要导出的列，用列名列表表示，默认值为None。　header：是否输出列名，默认值为True。　</p>
+<p>index：是否输出索引，默认值为True。　</p>
+<p>index_label：索引列的列名，默认值为None。　</p>
+<p>mode：Python写入模式，默认值为w。　</p>
+<p>encoding：编码方式，默认值为utf-8。　</p>
+<p>compression：压缩模式，默认值为infer。　</p>
+<p>quoting：导出.csv文件是否用引号，默认值为0，表示不加双引号；如果值为1，则每个字段都会加上引号，数值也会被当作字符串看待。</p>
+<p>quotechar：引用字符，当quoting&#x3D;1时可以指定引号字符为双引号（” “）或单引号（’ ‘）。　</p>
+<p>line_terminator：换行符，默认值为\n。</p>
+<p>chunksize：一次写入.csv文件的行数，当DataFrame对象数据特别大时需要分批写入。　</p>
+<p>date_format：日期输出格式。　</p>
+<p>doublequote：是否添加双引用符，默认值为True。　</p>
+<p>escapechar：设置转义字符。　</p>
+<p>decimal：可识别十进制分隔符的字符。　</p>
+<p>errors：指定如何处理编码和解码错误，默认值为strict（严格的）。</p>
+<p>【示例42】　将处理后的数据导出为.csv文件。（示例位置：资源包\MR\Code\04\42）<br>下面介绍to_csv()方法常用功能，举例如下，df为DataFrame对象。<br>（1）相对位置，保存在程序所在路径下，代码如下：</p>
+<p>df.to_csv(‘Result.csv’)<br>（2）绝对位置，代码如下：</p>
+<p>df.to_csv(‘d:\Result.csv’)<br>（3）分隔符。使用问号（？）分隔符分隔需要保存的数据，代码如下：</p>
+<p>df.to_csv(‘Result.csv’,sep&#x3D;’?’)<br>（4）替换空值，缺失值保存为NA，代码如下：</p>
+<p>df.to_csv(‘Result1.csv’,na_rep&#x3D;’NA’)<br>（5）格式化数据，保留两位小数，代码如下：</p>
+<p>df.to_csv(‘Result1.csv’,float_format&#x3D;’%.2f’)<br>（6）保留某列数据，保存索引列和name列，代码如下：</p>
+<p>df.to_csv(‘Result.csv’,columns&#x3D;[‘name’])<br>（7）是否保留列名，不保留列名，代码如下：</p>
+<p>df.to_csv(‘Result.csv’,header&#x3D;False)<br>（8）是否保留行索引，不保留行索引，代码如下：</p>
+<p>df.to_csv(‘Result.csv’,index&#x3D;False)</p>
+<h3 id="4-7-3-导出多个Sheet"><a href="#4-7-3-导出多个Sheet" class="headerlink" title="4.7.3　导出多个Sheet"></a>4.7.3　导出多个Sheet</h3><p>导出多个Sheet，应首先使用pd.ExcelWriter()方法打开一个Excel文件，然后再使用to_excel()方法导出指定的Sheet。</p>
+<p>【示例43】　导出Excel中多个Sheet页的数据。（示例位置：资源包\MR\Code\04\43）<br>导出指定Sheet页中的数据，主要代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020051720411.png" alt="image-20211020051720411"></p>
+<h2 id="4-8-日期数据处理"><a href="#4-8-日期数据处理" class="headerlink" title="4.8　日期数据处理"></a>4.8　日期数据处理</h2><h3 id="4-8-1-DataFrame的日期数据转换"><a href="#4-8-1-DataFrame的日期数据转换" class="headerlink" title="4.8.1　DataFrame的日期数据转换"></a>4.8.1　DataFrame的日期数据转换</h3><p>日常工作中，有一个非常麻烦的事情就是日期的格式可以有很多种表达，我们看到同样是2020年2月14日，可以有很多种格式，如图4.57所示。那么，我们需要先将这些格式统一后才能进行后续的工作。Pandas提供了to_datetime()方法可以帮助我们解决这一问题。<br>to_datetime()方法可以用来批量处理日期数据转换，对于处理大数据非常实用和方便，它可以将日期数据转换成你需要的各种格式。例如，将2&#x2F;14&#x2F;20和14-2-2020转换为日期格式2020-02-14。to_datetime()方法的语法如下：</p>
+<p>pandas.to_datetime(arg,errors&#x3D;’ignore’,dayfirst&#x3D;False,yearfirst&#x3D;False,utc&#x3D;None,box&#x3D;True,format&#x3D;None,exact&#x3D;<br>True,unit&#x3D;None,infer_datetime_format&#x3D;False,origin&#x3D;’unix’,cache&#x3D;False)<br>参数说明：　</p>
+<p>arg：字符串、日期时间、字符串数组。　</p>
+<p>errors：值为ignore、raise或coerce，具体说明如下，默认值为ignore，即忽略错误。　</p>
+<p>ignore：无效的解析将返回原值。　</p>
+<p>raise：无效的解析将引发异常。　</p>
+<p>coerce：无效的解析将被设置为NaT，即无法转换为日期的数据将被转换为NaT。　</p>
+<p>dayfirst：第一个为天，布尔型，默认值为False。例如02&#x2F;09&#x2F;2020，如果值为True，则解析日期的第一个为天，即2020-09-02；如果值为False，则解析日期与原日期一致，即2020-02-09。　</p>
+<p>yearfirst：第一个为年，布尔型，默认值为False。例如14-Feb-20，如果值为True，则解析日期的第一个为年，即2014-02-20；如果值为False，则解析日期与原日期一致，即2020-02-14。　</p>
+<p>utc：默认值为None。返回utc即协调世界时间。　</p>
+<p>box：布尔值，默认值为True，如果值为True，则返回DatetimeIndex；如果值为False，则返回ndarray。　</p>
+<p>format：格式化显示时间的格式。字符串，默认值为None。　</p>
+<p>exact：布尔值，默认值为True。如果为True，则要求格式完全匹配；如果为False，则允许格式与目标字符串中的任何位置匹配。　</p>
+<p>unit：默认值为None，参数的单位（D、s、、ms、μs、ns）表示时间的单位。　</p>
+<p>infer_datetime_format：默认值为False。如果没有格式，则尝试根据第一个日期时间字符串推断格式。　</p>
+<p>origin：默认值为unix。定义参考日期。数值将被解析为单位数。　</p>
+<p>cache：默认值为False。如果值为True，则使用唯一、转换日期的缓存应用日期时间转换。在解析重复日期字符串，特别是带有时区偏移的字符串时，可能会产生明显的加速。只有在至少有50个值时才使用缓存。越界值的存在将使缓存不可用，并可能减慢解析速度。　</p>
+<p>返回值：日期时间。</p>
+<p>【示例44】　将各种日期字符串转换为指定的日期格式。（示例位置：资源包\MR\Code\04\44）<br>将2020年2月14日的各种格式转换为日期格式，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020051913944.png" alt="image-20211020051913944"></p>
+<p>运行程序，控制台输出结果如图4.58所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020051928130.png" alt="image-20211020051928130"></p>
+<p>​                   图4.57　日期的多种格式转换</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020051944812.png" alt="image-20211020051944812"></p>
+<p>​                 图4.58　2020年2月14日的各种格式转换为日期格式<br>还可以实现从DataFrame对象中的多列，如年、月、日各列组合成一列日期。键值是常用的日期缩略语。</p>
+<p>组合要求：　</p>
+<p>必选：year、month、day。　</p>
+<p>可选：hour、minute、second、millisecond（毫秒）、microsecond（微秒）、nanosecond（纳秒）。</p>
+<p>【示例45】　将一组数据组合为日期数据。（示例位置：资源包\MR\Code\04\45）<br>将一组数据组合为日期数据，主要代码如下：<br>运行程序，控制台输出结果如图4.59所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020052022697.png" alt="image-20211020052022697"></p>
+<p>​                                        图4.59　日期组合</p>
+<h3 id="4-8-2-dt对象的使用"><a href="#4-8-2-dt对象的使用" class="headerlink" title="4.8.2　dt对象的使用"></a>4.8.2　dt对象的使用</h3><p>dt对象是Series对象中用于获取日期属性的一个访问器对象，通过它可以获取日期中的年、月、日、星期数、季节等，还可以判断日期是否处在年底。语法如下：</p>
+<p>  Series.dt()<br>参数说明：　</p>
+<p>返回值：返回与原始系列相同的索引系列。如果Series不包含类日期值，则引发错误。　</p>
+<p>dt对象提供了year、month、day、dayofweek、dayofyear、is_leap_year、quarter、weekday_name等属性和方法。</p>
+<p>例如，year可以获取“年”、month可以获取“月”、quarter可以直接得到每个日期分别是第几个季度，weekday_name可以直接得到每个日期对应的是周几。</p>
+<p>【示例46】　获取日期中的年、月、日、星期数等。（示例位置：资源包\MR\Code\04\46）<br>使用dt对象获取日期中的年、月、日、星期数、季节等。<br>（1）获取年、月、日，代码如下：</p>
+<p>df[‘年’],df[‘月’],df[‘日’]&#x3D;df[‘日期’].dt.year,df[‘日期’].dt.month,df[‘日期’].dt.day<br>（2）从日期判断出所处星期数，代码如下：</p>
+<p>df[‘星期几’]&#x3D;df[‘日期’].dt.day_name()<br>（3）从日期判断所处季度，代码如下：</p>
+<p>df[‘季度’]&#x3D;df[‘日期’].dt.quarter<br>（4）从日期判断是否为年底最后一天，代码如下：</p>
+<p>df[‘是否年底’]&#x3D;df[‘日期’].dt.is_year_end<br>运行程序，控制台输出结果如图4.60所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020052128703.png" alt="image-20211020052128703"></p>
+<p>​                               图4.60　dt对象日期转换</p>
+<h3 id="4-8-3-获取日期区间的数据"><a href="#4-8-3-获取日期区间的数据" class="headerlink" title="4.8.3　获取日期区间的数据"></a>4.8.3　获取日期区间的数据</h3><p>获取日期区间的数据的方法是直接在DataFrame对象中输入日期或日期区间，但前提必须设置日期为索引，举例如下。　</p>
+<p>获取2018年的数据。</p>
+<p>df1[‘2018’]　</p>
+<p>获取2017—2018年的数据。</p>
+<p>df1[‘2017’:’2018’]　</p>
+<p>获取某月（2018年7月）的数据。</p>
+<p>df1[‘2018-07’]　</p>
+<p>获取具体某天（2018年5月6日）的数据。</p>
+<p>df1[‘2018-05-06’:’2018-05-06’]</p>
+<p>【示例47】　获取指定日期区间的订单数据。（示例位置：资源包\MR\Code\04\47）<br>获取2018年5月11日至6月10日的订单，结果如图4.61所示。<br>程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020052236563.png" alt="image-20211020052236563"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020052256160.png" alt="image-20211020052256160"></p>
+<p>​            图4.61　2018年5月11日至6月10日的订单（省略部分数据）</p>
+<h3 id="4-8-4-按不同时期统计并显示数据"><a href="#4-8-4-按不同时期统计并显示数据" class="headerlink" title="4.8.4　按不同时期统计并显示数据"></a>4.8.4　按不同时期统计并显示数据</h3><h4 id="1．按时期统计数据"><a href="#1．按时期统计数据" class="headerlink" title="1．按时期统计数据"></a>1．按时期统计数据</h4><p>按时期统计数据主要通过DataFrame对象的resample()方法结合数据计算函数实现。resample()方法主要应用于时间序列频率转换和重采样，它可以从日期中获取年、月、日、星期、季节等，结合数据计算函数就可以实现按年、月、日、星期或季度等不同时期统计数据。举例如下所示。<br>（1）按年统计数据，代码如下：</p>
+<p>df1&#x3D;df1.resample(‘AS’).sum()<br>（2）按季度统计数据，代码如下：</p>
+<p>df2.resample(‘Q’).sum()<br>（3）按月度统计数据，代码如下：</p>
+<p>df1.resample(‘M’).sum()<br>（4）按星期统计数据，代码如下：</p>
+<p>df1.resample(‘W’).sum()<br>（5）按天统计数据，代码如下：</p>
+<p>df1.resample(‘D’).sum()</p>
+<p>实用技巧<br>按日期统计数据过程中，可能会出现如图4.62所示的错误提示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020052356675.png" alt="image-20211020052356675"></p>
+<p>图4.62　错误提示</p>
+<p>完整错误描述：<br>TypeError: Only valid with DatetimeIndex, TimedeltaIndex or PeriodIndex, but got an instance of’Index’<br>出现上述错误，是由于resample()函数要求索引必须为日期型。<br>解决方法：将数据的索引转换为datetime类型，主要代码如下：</p>
+<p>df1.index &#x3D; pd.to_datetime(df1.index)</p>
+<h4 id="2．按时期显示数据"><a href="#2．按时期显示数据" class="headerlink" title="2．按时期显示数据"></a>2．按时期显示数据</h4><p>DataFrame对象的to_period()方法可以将时间戳转换为时期，从而实现按时期显示数据，前提是日期必须设置为索引。语法如下：</p>
+<p>DataFrame.to_period(freq&#x3D;None, axis&#x3D;0, copy&#x3D;True)<br>参数说明：　</p>
+<p>freq：字符串，周期索引的频率，默认值为None。　</p>
+<p>axis：行列索引，axis&#x3D;0表示行索引，axis&#x3D;1表示列索引。默认值为0，即表示行索引。　</p>
+<p>copy：是否复制数据，默认值为True，如果值为False，则不复制数据。　返回值：带周期索引的时间序列。</p>
+<p>【示例48】　从日期中获取不同的时期。（示例位置：资源包\MR\Code\04\48）<br>从日期中获取不同的时期，主要代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020052452293.png" alt="image-20211020052452293"></p>
+<h4 id="3．按时期统计并显示数据"><a href="#3．按时期统计并显示数据" class="headerlink" title="3．按时期统计并显示数据"></a>3．按时期统计并显示数据</h4><p>（1）按年统计并显示数据，代码如下：</p>
+<p>df2.resample(‘AS’).sum().to_period(‘A’)<br>控制台输出结果如图4.63所示。<br>（2）按季度统计并显示数据，代码如下：</p>
+<p>Q_df&#x3D;df2.resample(‘Q’).sum().to_period(‘Q’)</p>
+<p>控制台输出结果如图4.64所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020052536700.png" alt="image-20211020052536700"></p>
+<p>​                            图4.63　按年统计并显示数据</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020052550813.png" alt="image-20211020052550813"></p>
+<p>​                      图4.64　按季度统计并显示数据<br>（3）按月统计并显示数据，代码如下：</p>
+<p>df2.resample(‘M’).sum().to_period(‘M’)<br>控制台输出结果如图4.65所示。<br>（4）按星期统计并显示数据（前5条数据），代码如下：</p>
+<p>df2.resample(‘W’).sum().to_period(‘W’).head()<br>控制台输出结果如图4.66所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020052622774.png" alt="image-20211020052622774"></p>
+<p>​                          图4.65　按月统计并显示数据</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020052640893.png" alt="image-20211020052640893"></p>
+<p>​                      图4.66　按星期统计并显示数据</p>
+<h2 id="4-9-时间序列"><a href="#4-9-时间序列" class="headerlink" title="4.9　时间序列"></a>4.9　时间序列</h2><h3 id="4-9-1-重采样（Resample-方法）"><a href="#4-9-1-重采样（Resample-方法）" class="headerlink" title="4.9.1　重采样（Resample()方法）"></a>4.9.1　重采样（Resample()方法）</h3><p>通过前面的学习，我们学会了如何生成不同频率的时间索引，按小时、按天、按周、按月等，如果想对数据做不同频率的转换，该怎么办？在Pandas中对时间序列的频率的调整称为重新采样，即将时间序列从一个频率转换到另一个频率的处理过程。例如，每天一个频率转换为每5天一个频率，如图4.67所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020052720517.png" alt="image-20211020052720517"></p>
+<p>​                                       图4.67　时间频率<br>重采样主要使用resample()方法，该方法用于对常规时间序列重新采样和频率转换，包括降采样和升采样两种。首先了解下resample()方法，语法如下：</p>
+<p>DataFrame.resample(rule,how&#x3D;None,axis&#x3D;0,fill_method&#x3D;None,closed&#x3D;None,label&#x3D;None,convention&#x3D;’start’,kind&#x3D;<br>None,loffset&#x3D;None,limit&#x3D;None,base&#x3D;0,on&#x3D;None,level&#x3D;None)<br>参数说明：　</p>
+<p>rule：字符串，偏移量表示目标字符串或对象转换。　</p>
+<p>how：用于产生聚合值的函数名或数组函数。例如mean、ohlc和np.max等，默认值为mean，其他常用的值为first、last、median、max和min。　</p>
+<p>axis：整型，表示行列，axis&#x3D;0表示列，axis&#x3D;1表示行。默认值为0，即表示列。　fill_method：升采样时所使用的填充方法，ffill()方法（用前值填充）或bfill()方法（用后值填充），默认值为None。　</p>
+<p>closed：降采样时，时间区间的开和闭，与数学里区间的概念一样，其值为right或left，right表示左开右闭（即左边值不包括在内），left表示左闭右开（即右边值不包括在内），默认值为right左开右闭。　</p>
+<p>label：降采样时，如何设置聚合值的标签。例如，10:30—10:35会被标记成10:30还是10:35，默认值为None。　</p>
+<p>convention：当重采样时，将低频率转换到高频率所采用的约定，其值为start或end，默认值为start。　</p>
+<p>kind：聚合到时期（period）或时间戳（timestamp），默认聚合到时间序列的索引类型，默认值为None。　</p>
+<p>loffset：聚合标签的时间校正值，默认值为None。例如，-1s或Second(-1)用于将聚合标签调早1秒。　</p>
+<p>limit：向前或向后填充时，允许填充的最大时期数，默认值为None。</p>
+<p>　base：整型，默认值为0。对于均匀细分1天的频率，聚合间隔的“原点”。例如，对于5min频率，base的范围可以是0～4。　on：字符串，可选参数，默认值为None。对DataFrame对象使用列代替索引进行重新采样。列必须与日期时间类似。　</p>
+<p>level：字符串或整型，可选参数，默认值为None。用于多索引，重新采样的级别名称或级别编号，级别必须与日期时间类似。　</p>
+<p>返回值：重新采样对象。</p>
+<p>【示例49】　一分钟的时间序列转换为3分钟的时间序列。（示例位置：资源包\MR\Code\04\49）<br>首先创建一个包含9个一分钟的时间序列，然后使用resample()方法转换为3分钟的时间序列，并对索引列进行求和计算，如图4.68所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020052840027.png" alt="image-20211020052840027"></p>
+<p>​                          图4.68　时间序列转换<br>程序代码如下：</p>
+<p>01  import pandas as pd<br>02  index &#x3D; pd.date_range(‘02&#x2F;02&#x2F;2020’, periods&#x3D;9, freq&#x3D;’T’)</p>
+<p>03  series &#x3D; pd.Series(range(9), index&#x3D;index)<br>04  print(series)<br>05  print(series.resample(‘3T’).sum())</p>
+<h3 id="4-9-2-降采样处理"><a href="#4-9-2-降采样处理" class="headerlink" title="4.9.2　降采样处理"></a>4.9.2　降采样处理</h3><p>降采样是周期由高频率转向低频率。例如，将5min股票交易数据转换为日交易，按天统计的销售数据转换为按周统计。<br>数据降采样会涉及数据的聚合。例如，天数据变成周数据，那么就要对1周7天的数据进行聚合，聚合的方式主要包括求和、求均值等。例如，淘宝店铺每天销售数据（部分数据），如图4.69所示。</p>
+<p>【示例50】　按周统计销售数据。（示例位置：资源包\MR\Code\04\50）<br>使用resample()方法来做降采样处理，频率为“周”，也就是将上述销售数据处理为每周（每7天）求和一次数据，程序代码如下：</p>
+<p>01 import pandas as pd<br>02 df&#x3D;pd.read_excel(‘time.xls’)<br>03 df1 &#x3D; df.set_index(‘订单付款时间’)  #设置“订单付款时间”为索引<br>04 print(df1.resample(‘W’).sum().head())<br>运行程序，控制台输出结果如图4.70所示。<br>在参数说明中，我们列出了closed参数的解释，如果把closed参数值设置为left，结果如图4.71所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020052938423.png" alt="image-20211020052938423"></p>
+<p>​              图4.69　淘宝店铺每天销售数据（部分数据）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020053019859.png" alt="image-20211020053019859"></p>
+<p>​                                       图4.70　周数据统计1</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020053036196.png" alt="image-20211020053036196"></p>
+<p>​                              图4.71　周数据统计2</p>
+<h3 id="4-9-3-升采样处理"><a href="#4-9-3-升采样处理" class="headerlink" title="4.9.3　升采样处理"></a>4.9.3　升采样处理</h3><p>升采样是周期由低频率转向高频率。将数据从低频率转换到高频率时，就不需要聚合了，将其重采样到日频率，默认会引入缺失值。<br>例如，原来是按周统计的数据，现在变成按天统计。升采样会涉及数据的填充，根据填充的方法不同，填充的数据也不同。下面介绍3种填充方法。　不填充。空值用NaN代替，使用asfreq()方法。　用前值填充。用前面的值填充空值，使用ffill()方法或者pad()方法。为了方便记忆，ffill()方法可以使用它的第一个字母“f”代替，代表forward，向前的意思。　用后值填充，使用bfill()方法，可以使用字母“b”代替，代表back，向后的意思。</p>
+<p>【示例51】　每6小时统计一次数据。（示例位置：资源包\MR\Code\04\51）<br>下面创建一个时间序列，起始日期是2020-02-02，一共两天，每天对应的数值分别是1和2，通过升采样处理为每6小时统计一次数据，空值以不同的方式填充，程序代码如下：</p>
+<p>01  import pandas as pd<br>02  import numpy as np<br>03  rng &#x3D; pd.date_range(‘20200202’, periods&#x3D;2)<br>04  s1 &#x3D; pd.Series(np.arange(1,3), index&#x3D;rng)<br>05  s1_6h_asfreq &#x3D; s1.resample(‘6H’).asfreq()</p>
+<p>06  print(s1_6h_asfreq)<br>07  s1_6h_pad &#x3D; s1.resample(‘6H’).pad()<br>08  print(s1_6h_pad)<br>09  s1_6h_ffill &#x3D; s1.resample(‘6H’).ffill()<br>10  print(s1_6h_ffill)<br>11  s1_6h_bfill &#x3D; s1.resample(‘6H’).bfill()<br>12  print(s1_6h_bfill)<br>运行程序，控制台输出结果如图4.72所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020053124798.png" alt="image-20211020053124798"></p>
+<p>​                          图4.72　6小时数据统计</p>
+<h3 id="4-9-4-时间序列数据汇总（ohlc-函数）"><a href="#4-9-4-时间序列数据汇总（ohlc-函数）" class="headerlink" title="4.9.4　时间序列数据汇总（ohlc()函数）"></a>4.9.4　时间序列数据汇总（ohlc()函数）</h3><p>在金融领域，经常会看到开盘（open）、收盘（close）、最高价（high）和最低价（low）数据，而在Pandas中经过重新采样的数据也可以实现这样的结果，通过调用ohlc()函数得到数据汇总结果，即开始值（open）、结束值（close）、最高值（high）和最低值（low）。ohlc()函数的语法如下：</p>
+<p>resample.ohlc()<br>ohlc()函数返回DataFrame对象，每组数据的open（开）、high（高）、low（低）和close（关）值。</p>
+<p>【示例52】　统计数据的open、high、low和close值。（示例位置：资源包\MR\Code\04\52）<br>下面是一组5分钟的时间序列，通过ohlc()函数获取该时间序列中每组时间的开始值、最高值、最低值和结束值，程序代码如下：</p>
+<p>01  import pandas as pd<br>02  import numpy as np<br>03  rng &#x3D; pd.date_range(‘2&#x2F;2&#x2F;2020’,periods&#x3D;12,freq&#x3D;’T’)<br>04  s1 &#x3D; pd.Series(np.arange(12),index&#x3D;rng)<br>05  print(s1.resample(‘5min’).ohlc())<br>运行程序，控制台输出结果如图4.73所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020053212045.png" alt="image-20211020053212045"></p>
+<p>​                          图4.73　时间序列数据汇总</p>
+<h3 id="4-9-5-移动窗口数据计算（rolling-函数）"><a href="#4-9-5-移动窗口数据计算（rolling-函数）" class="headerlink" title="4.9.5　移动窗口数据计算（rolling()函数）"></a>4.9.5　移动窗口数据计算（rolling()函数）</h3><p>通过重采样可以得到想要的任何频率的数据，但是这些数据也是一个时点的数据，那么就存在这样一个问题：时点的数据波动较大，某一点的数据就不能很好地表现它本身的特性，于是就有了“移动窗口”的概念，简单地说，为了提升数据的可靠性，将某个点的取值扩大到包含这个点的一段区间，用区间来进行判断，这个区间就是窗口。<br>下面举例说明，图4.74显示了移动窗口数据示意图，其中时间序列代表1号到15号每天的销量数据，接下来以3天为一个窗口，将该窗口从左至右依次移动，统计出3天的平均值作为这个点的值，如3号的销量是1号、2号和3号的平均值。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020053234231.png" alt="image-20211020053234231"></p>
+<p>​                      图4.74　移动窗口数据示意图<br>通过上述示意图相信您已经理解了移动窗口，在Pandas中可以通过rolling()函数实现移动窗口数据的计算，语法如下：</p>
+<p>DataFrame.rolling(window, min_periods&#x3D;None, center&#x3D;False, win_type&#x3D;None, on&#x3D;None, axis&#x3D;0, closed&#x3D;None)</p>
+<p>参数说明：　</p>
+<p>window：时间窗口的大小，有两种形式，即int或offset。如果使用int，则数值表示计算统计量的观测值的数量，即向前几个数据；如果使用offset，则表示时间窗口的大小。　</p>
+<p>min_periods：每个窗口最少包含的观测值数量，小于这个值的窗口结果为NA。值可以是int，默认值为None。offset情况下，默认值为1。</p>
+<p>center：把窗口的标签设置为居中。布尔型，默认值为False，居右。</p>
+<p>win_type：窗口的类型。截取窗的各种函数。字符串类型，默认值为None。　</p>
+<p>on：可选参数。对于DataFrame对象，是指定要计算移动窗口的列，值为列名。　</p>
+<p>axis：整型，axis&#x3D;0表示列，axis&#x3D;1表示行。默认值为0，即对列进行计算。　</p>
+<p>closed：定义区间的开闭，支持int类型的窗口。对于offset类型默认是左开右闭（默认值为right）。可以根据情况指定left。　</p>
+<p>返回值：为特定操作而生成的窗口或移动窗口子类。</p>
+<p>【示例53】　创建淘宝每日销量数据。（示例位置：资源包\MR\Code\04\53）<br>首先创建一组淘宝每日销量数据，程序代码如下：</p>
+<p>01  import pandas as pd<br>02  index&#x3D;pd.date_range(‘20200201’,’20200215’)<br>03  data&#x3D;[3,6,7,4,2,1,3,8,9,10,12,15,13,22,14]<br>04  s1_data&#x3D;pd.Series(data,index&#x3D;index)<br>05  print(s1_data)<br>运行程序，控制台输出结果如图4.75所示。</p>
+<p>【示例54】　使用rolling()函数计算3天的均值。（示例位置：资源包\MR\Code\04\54）</p>
+<p>下面使用rolling()函数计算2020-02-01至2020-02-15中每3天的均值，窗口个数为3，代码如下：</p>
+<p>s1_data.rolling(3).mean()<br>运行程序，看下rolling()函数是如何计算的？在图4.76中，当窗口开始移动时，第一个时间点2020-02-01和第二个时间点2020-02-02的数值为空，这是因为窗口个数为3，它们前面有空数据，所以均值为空；而到第三个时间点2020-02-03时，它前面的数据是2020-02-01至2020-02-03，所以3天的均值是5.333333；以此类推。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020053403924.png" alt="image-20211020053403924"></p>
+<p>​                                     图4.75　原始数据</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020053419587.png" alt="image-20211020053419587"></p>
+<p>​                       图4.76　2020-02-01至2020-02-15移动窗口均值1</p>
+<p>【示例55】　用当天的数据代表窗口数据。（示例位置：资源包\MR\Code\04\55）<br>在计算第一个时间点2020-02-01的窗口数据时，虽然数据不够窗口长度3，但是至少有当天的数据，那么能否用当天的数据代表窗口数据呢？答案是肯定的，通过设置min_periods参数即可，它表示窗口最少包含的观测值，小于这个值的窗口长度显示为空，等于或大于时都有值，主要代码如下：</p>
+<p>s1_data.rolling(3,min_periods&#x3D;1).mean()</p>
+<p>运行程序，对比效果如图4.77所示。<br>上述举例，我们再扩展下，通过图表观察原始数据与移动窗口数据的平稳性，如图4.78所示。其中实线代表移动窗口数据，其走向更平稳，这也是学习移动窗口rolling()函数的原因。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020053518298.png" alt="image-20211020053518298"></p>
+<p>​                 图4.77　2020-02-01至2020-02-15移动窗口均值2</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020053531782.png" alt="image-20211020053531782"></p>
+<p>​                     图4.78　移动窗口数据的平稳性说明<br>虚线代表原始数据，实线代表移动窗口数据。</p>
+<h2 id="4-10-综合应用"><a href="#4-10-综合应用" class="headerlink" title="4.10　综合应用"></a>4.10　综合应用</h2><h3 id="4-10-1-案例1：Excel多表合并"><a href="#4-10-1-案例1：Excel多表合并" class="headerlink" title="4.10.1　案例1：Excel多表合并"></a>4.10.1　案例1：Excel多表合并</h3><p>案例位置：资源包\MR\Code\04\example\01<br>在日常工作中，几乎我们每天都有大量的数据需要处理，桌面上总是布满密密麻麻的Excel表，这样看上去非常凌乱，其实我们完全可以将其中类别相同的Excel表合并到一起，这样不但不会丢失数据，而且还可以有效地分析数据。下面使用concat()方法将指定文件夹内的所有Excel表合并，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020053607260.png" alt="image-20211020053607260"></p>
+<h3 id="4-10-2-案例2：股票行情数据分析"><a href="#4-10-2-案例2：股票行情数据分析" class="headerlink" title="4.10.2　案例2：股票行情数据分析"></a>4.10.2　案例2：股票行情数据分析</h3><p>案例位置：资源包\MR\Code\04\example\02<br>股票数据包括开盘价、收盘价、最高价、最低价、成交量等多个指标。其中，收盘价是当日行情的标准，也是下一个交易日开盘价的依据，可以预测未来证券市场行情，因此当投资者对行情分析时，一般采用收盘价作为计算依据。<br>下面使用rolling()函数计算某股票20天、50天和200天的收盘价均值并生成走势图（也称K线图），如图4.79所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020053723586.png" alt="image-20211020053723586"></p>
+<p>​                                       图4.79　股票行情分析</p>
+<p>程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89%5Cimage-20211020053800663.png" alt="image-20211020053800663"></p>
+<p>实用技巧<br>默认情况下，图表嵌入控制台（IPython console）中并以静态方式显示，无法进行移动、放大、缩小等操作。此时需要在工具中的首选项窗口进行设置，方法为选择Tools→Preferences命令，打开Preferences（首选项）窗口，在左侧列表中选择IPython console（IPython控制台），在右侧窗口选择Graphics（图形）选项卡，然后在Backend（后端）下拉列表框中选择Automatic（自动）或者Qt5，单击Apply（应用）按钮。设置完成后重新启动Spyder才生效。</p>
+<h2 id="4-11-小结"><a href="#4-11-小结" class="headerlink" title="4.11　小结"></a>4.11　小结</h2><p>本章是Pandas的进阶学习，有一定难度，但同时也更能够体现Pandas的强大之处，不仅可以完成数据处理工作，而且还能够实现数据的统计分析。Pandas提供的大量函数使统计分析工作变得简单高效。别具特色的“数据位移”是一个非常有用的方法，与其他方法结合，能够实现很多难以想象的功能，数据转换将DataFrame与Python数据类型之间进行灵活转换。不仅如此，对于日期数据的处理、时间序列也都提供了专门的函数和方法，使得量化数据得心应手。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://jiaobingyang.gitee.io">三乘以十的八次幂</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://jiaobingyang.gitee.io/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/">https://jiaobingyang.gitee.io/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://jiaobingyang.gitee.io" target="_blank">三乘以十的八次幂</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/python/">python</a></div><div class="post_share"><div class="social-share" data-image="https://img0.baidu.com/it/u=3046384215,884063302&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=500&amp;h=233" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081333.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081333.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081350.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081350.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%885%EF%BC%89/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.baidu.com/it/u=3843742074,4293285046&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=822&amp;h=500" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">数据分析（5）</div></div></a></div><div class="next-post pull-right"><a href="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%881-3%EF%BC%89/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.baidu.com/it/u=2952638880,3324182124&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=800&amp;h=500" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">数据分析（1-3）</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%881-3%EF%BC%89/" title="数据分析（1-3）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.baidu.com/it/u=2952638880,3324182124&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-30</div><div class="title">数据分析（1-3）</div></div></a></div><div><a href="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%887%EF%BC%89/" title="数据分析（7）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.baidu.com/it/u=86028500,1800130667&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-30</div><div class="title">数据分析（7）</div></div></a></div><div><a href="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%885%EF%BC%89/" title="数据分析（5）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.baidu.com/it/u=3843742074,4293285046&fm=253&fmt=auto&app=138&f=JPEG?w=822&h=500" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-30</div><div class="title">数据分析（5）</div></div></a></div><div><a href="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%889%EF%BC%89/" title="数据分析（9）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img0.baidu.com/it/u=3159172942,2257139948&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=470" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-30</div><div class="title">数据分析（9）</div></div></a></div><div><a href="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/" title="数据分析（8）Numpy"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img1.baidu.com/it/u=3796649019,1786443255&fm=253&fmt=auto&app=138&f=JPEG?w=700&h=455" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-30</div><div class="title">数据分析（8）Numpy</div></div></a></div><div><a href="/2017/06/20/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" title="面向对象编程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.baidu.com/it/u=2952638880,3324182124&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2017-06-20</div><div class="title">面向对象编程</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13279652804370799.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="avatar"/></div><div class="author-info__name">三乘以十的八次幂</div><div class="author-info__description">死亡如风，常伴吾身</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">99</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/BINGYANGJIAO/bingyangjiao.github.io"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/BINGYANGJIAO/bingyangjiao.github.io" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:781250021@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">兴趣爱好才是最大的动力，何不与我共同攀知识高峰，品翘楚美人！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-Pandas%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90"><span class="toc-number">1.</span> <span class="toc-text">第四章 Pandas统计分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%97"><span class="toc-number">1.1.</span> <span class="toc-text">4.1 数据计算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-1%E6%B1%82%E5%92%8C%E5%87%BD%E6%95%B0%EF%BC%88sum"><span class="toc-number">1.1.1.</span> <span class="toc-text">4.1.1求和函数（sum())</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-2-%E6%B1%82%E5%9D%87%E5%80%BC%EF%BC%88mean-%E5%87%BD%E6%95%B0%EF%BC%89"><span class="toc-number">1.1.2.</span> <span class="toc-text">4.1.2　求均值（mean()函数）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-3-%E6%B1%82%E6%9C%80%E5%A4%A7%E5%80%BC%EF%BC%88max-%E5%87%BD%E6%95%B0%EF%BC%89"><span class="toc-number">1.1.3.</span> <span class="toc-text">4.1.3　求最大值（max()函数）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-5-%E6%B1%82%E4%B8%AD%E4%BD%8D%E6%95%B0%EF%BC%88median-%E5%87%BD%E6%95%B0%EF%BC%89"><span class="toc-number">1.1.4.</span> <span class="toc-text">4.1.5　求中位数（median()函数）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-6-%E6%B1%82%E4%BC%97%E6%95%B0%EF%BC%88mode-%E5%87%BD%E6%95%B0%EF%BC%89"><span class="toc-number">1.1.5.</span> <span class="toc-text">4.1.6　求众数（mode()函数）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-7-%E6%B1%82%E6%96%B9%E5%B7%AE%EF%BC%88var-%E5%87%BD%E6%95%B0%EF%BC%89"><span class="toc-number">1.1.6.</span> <span class="toc-text">4.1.7　求方差（var()函数）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-8-%E6%A0%87%E5%87%86%E5%B7%AE%EF%BC%88%E6%95%B0%E6%8D%AE%E6%A0%87%E5%87%86%E5%8C%96std-%E5%87%BD%E6%95%B0%EF%BC%89"><span class="toc-number">1.1.7.</span> <span class="toc-text">4.1.8　标准差（数据标准化std()函数）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-9-%E6%B1%82%E5%88%86%E4%BD%8D%E6%95%B0%EF%BC%88quantile-%E5%87%BD%E6%95%B0%EF%BC%89"><span class="toc-number">1.1.8.</span> <span class="toc-text">4.1.9　求分位数（quantile()函数）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="toc-number">1.2.</span> <span class="toc-text">4.2　数据格式化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-1-%E8%AE%BE%E7%BD%AE%E5%B0%8F%E6%95%B0%E4%BD%8D%E6%95%B0"><span class="toc-number">1.2.1.</span> <span class="toc-text">4.2.1　设置小数位数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-2-%E8%AE%BE%E7%BD%AE%E7%99%BE%E5%88%86%E6%AF%94"><span class="toc-number">1.2.2.</span> <span class="toc-text">4.2.2　设置百分比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-3-%E8%AE%BE%E7%BD%AE%E5%8D%83%E4%BD%8D%E5%88%86%E9%9A%94%E7%AC%A6"><span class="toc-number">1.2.3.</span> <span class="toc-text">4.2.3　设置千位分隔符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-%E6%95%B0%E6%8D%AE%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1"><span class="toc-number">1.3.</span> <span class="toc-text">4.3　数据分组统计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-1-%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1groupby-%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.1.</span> <span class="toc-text">4.3.1　分组统计groupby()函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%EF%BC%8E%E6%8C%89%E7%85%A7%E4%B8%80%E5%88%97%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">1．按照一列分组统计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%EF%BC%8E%E6%8C%89%E7%85%A7%E5%A4%9A%E5%88%97%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">2．按照多列分组统计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%EF%BC%8E%E5%88%86%E7%BB%84%E5%B9%B6%E6%8C%89%E6%8C%87%E5%AE%9A%E5%88%97%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%97"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">3．分组并按指定列进行数据计算</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-2-%E5%AF%B9%E5%88%86%E7%BB%84%E6%95%B0%E6%8D%AE%E8%BF%9B%E8%A1%8C%E8%BF%AD%E4%BB%A3"><span class="toc-number">1.3.2.</span> <span class="toc-text">4.3.2　对分组数据进行迭代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-3-%E5%AF%B9%E5%88%86%E7%BB%84%E7%9A%84%E6%9F%90%E5%88%97%E6%88%96%E5%A4%9A%E5%88%97%E4%BD%BF%E7%94%A8%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%EF%BC%88agg-%E5%87%BD%E6%95%B0%EF%BC%89"><span class="toc-number">1.3.3.</span> <span class="toc-text">4.3.3　对分组的某列或多列使用聚合函数（agg()函数）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-4-%E9%80%9A%E8%BF%87%E5%AD%97%E5%85%B8%E5%92%8CSeries%E5%AF%B9%E8%B1%A1%E8%BF%9B%E8%A1%8C%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1"><span class="toc-number">1.3.4.</span> <span class="toc-text">4.3.4　通过字典和Series对象进行分组统计</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%EF%BC%8E%E9%80%9A%E8%BF%87%E5%AD%97%E5%85%B8%E8%BF%9B%E8%A1%8C%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">1．通过字典进行分组统计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%EF%BC%8E%E9%80%9A%E8%BF%87Series%E5%AF%B9%E8%B1%A1%E8%BF%9B%E8%A1%8C%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1"><span class="toc-number">1.3.4.2.</span> <span class="toc-text">2．通过Series对象进行分组统计</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-%E6%95%B0%E6%8D%AE%E7%A7%BB%E4%BD%8D"><span class="toc-number">1.4.</span> <span class="toc-text">4.4　数据移位</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-5-%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.5.</span> <span class="toc-text">4.5　数据转换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-1-%E4%B8%80%E5%88%97%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%A4%9A%E5%88%97%E6%95%B0%E6%8D%AE"><span class="toc-number">1.5.1.</span> <span class="toc-text">4.5.1　一列数据转换为多列数据</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%EF%BC%8Esplit-%E6%96%B9%E6%B3%95"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">1．split()方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%EF%BC%8Ejoin-%E6%96%B9%E6%B3%95%E4%B8%8Esplit-%E6%96%B9%E6%B3%95%E7%BB%93%E5%90%88"><span class="toc-number">1.5.1.2.</span> <span class="toc-text">2．join()方法与split()方法结合</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-2-%E8%A1%8C%E5%88%97%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.5.2.</span> <span class="toc-text">4.5.2　行列转换</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%EF%BC%8Estack-%E6%96%B9%E6%B3%95"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">1．stack()方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%EF%BC%8Eunstack-%E6%96%B9%E6%B3%95"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">2．unstack()方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%EF%BC%8Epivot-%E6%96%B9%E6%B3%95"><span class="toc-number">1.5.2.3.</span> <span class="toc-text">3．pivot()方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-3-DataFrame%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%AD%97%E5%85%B8"><span class="toc-number">1.5.3.</span> <span class="toc-text">4.5.3　DataFrame转换为字典</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-4-DataFrame%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%88%97%E8%A1%A8"><span class="toc-number">1.5.4.</span> <span class="toc-text">4.5.4　DataFrame转换为列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-5-DataFrame%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%85%83%E7%BB%84"><span class="toc-number">1.5.5.</span> <span class="toc-text">4.5.5　DataFrame转换为元组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-6-Excel%E8%BD%AC%E6%8D%A2%E4%B8%BAHTML%E7%BD%91%E9%A1%B5%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.5.6.</span> <span class="toc-text">4.5.6　Excel转换为HTML网页格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-6-%E6%95%B0%E6%8D%AE%E5%90%88%E5%B9%B6"><span class="toc-number">1.6.</span> <span class="toc-text">4.6　数据合并</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-1-%E6%95%B0%E6%8D%AE%E5%90%88%E5%B9%B6%EF%BC%88merge-%E6%96%B9%E6%B3%95%EF%BC%89"><span class="toc-number">1.6.1.</span> <span class="toc-text">4.6.1　数据合并（merge()方法）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%EF%BC%8E%E5%B8%B8%E8%A7%84%E5%90%88%E5%B9%B6"><span class="toc-number">1.6.1.1.</span> <span class="toc-text">1．常规合并</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%EF%BC%8E%E5%A4%9A%E5%AF%B9%E4%B8%80%E7%9A%84%E6%95%B0%E6%8D%AE%E5%90%88%E5%B9%B6"><span class="toc-number">1.6.1.2.</span> <span class="toc-text">2．多对一的数据合并</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%EF%BC%8E%E5%A4%9A%E5%AF%B9%E5%A4%9A%E7%9A%84%E6%95%B0%E6%8D%AE%E5%90%88%E5%B9%B6"><span class="toc-number">1.6.1.3.</span> <span class="toc-text">3．多对多的数据合并</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-2-%E6%95%B0%E6%8D%AE%E5%90%88%E5%B9%B6%EF%BC%88concat-%E6%96%B9%E6%B3%95%EF%BC%89"><span class="toc-number">1.6.2.</span> <span class="toc-text">4.6.2　数据合并（concat()方法）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%EF%BC%8E%E7%9B%B8%E5%90%8C%E5%AD%97%E6%AE%B5%E7%9A%84%E8%A1%A8%E9%A6%96%E5%B0%BE%E7%9B%B8%E6%8E%A5"><span class="toc-number">1.6.2.1.</span> <span class="toc-text">1．相同字段的表首尾相接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%EF%BC%8E%E6%A8%AA%E5%90%91%E8%A1%A8%E5%90%88%E5%B9%B6%EF%BC%88%E8%A1%8C%E5%AF%B9%E9%BD%90%EF%BC%89"><span class="toc-number">1.6.2.2.</span> <span class="toc-text">2．横向表合并（行对齐）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%EF%BC%8E%E4%BA%A4%E5%8F%89%E5%90%88%E5%B9%B6"><span class="toc-number">1.6.2.3.</span> <span class="toc-text">3．交叉合并</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%EF%BC%8E%E6%8C%87%E5%AE%9A%E8%A1%A8%E5%AF%B9%E9%BD%90%E6%95%B0%E6%8D%AE%EF%BC%88%E8%A1%8C%E5%AF%B9%E9%BD%90%EF%BC%89"><span class="toc-number">1.6.2.4.</span> <span class="toc-text">4．指定表对齐数据（行对齐）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-7-%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%87%BA"><span class="toc-number">1.7.</span> <span class="toc-text">4.7　数据导出</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-1-%E5%AF%BC%E5%87%BA%E4%B8%BA-xlsx%E6%96%87%E4%BB%B6"><span class="toc-number">1.7.1.</span> <span class="toc-text">4.7.1　导出为.xlsx文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-2-%E5%AF%BC%E5%87%BA%E4%B8%BA-csv%E6%96%87%E4%BB%B6"><span class="toc-number">1.7.2.</span> <span class="toc-text">4.7.2　导出为.csv文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-3-%E5%AF%BC%E5%87%BA%E5%A4%9A%E4%B8%AASheet"><span class="toc-number">1.7.3.</span> <span class="toc-text">4.7.3　导出多个Sheet</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-8-%E6%97%A5%E6%9C%9F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="toc-number">1.8.</span> <span class="toc-text">4.8　日期数据处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-8-1-DataFrame%E7%9A%84%E6%97%A5%E6%9C%9F%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.8.1.</span> <span class="toc-text">4.8.1　DataFrame的日期数据转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-8-2-dt%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">1.8.2.</span> <span class="toc-text">4.8.2　dt对象的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-8-3-%E8%8E%B7%E5%8F%96%E6%97%A5%E6%9C%9F%E5%8C%BA%E9%97%B4%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="toc-number">1.8.3.</span> <span class="toc-text">4.8.3　获取日期区间的数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-8-4-%E6%8C%89%E4%B8%8D%E5%90%8C%E6%97%B6%E6%9C%9F%E7%BB%9F%E8%AE%A1%E5%B9%B6%E6%98%BE%E7%A4%BA%E6%95%B0%E6%8D%AE"><span class="toc-number">1.8.4.</span> <span class="toc-text">4.8.4　按不同时期统计并显示数据</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%EF%BC%8E%E6%8C%89%E6%97%B6%E6%9C%9F%E7%BB%9F%E8%AE%A1%E6%95%B0%E6%8D%AE"><span class="toc-number">1.8.4.1.</span> <span class="toc-text">1．按时期统计数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%EF%BC%8E%E6%8C%89%E6%97%B6%E6%9C%9F%E6%98%BE%E7%A4%BA%E6%95%B0%E6%8D%AE"><span class="toc-number">1.8.4.2.</span> <span class="toc-text">2．按时期显示数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%EF%BC%8E%E6%8C%89%E6%97%B6%E6%9C%9F%E7%BB%9F%E8%AE%A1%E5%B9%B6%E6%98%BE%E7%A4%BA%E6%95%B0%E6%8D%AE"><span class="toc-number">1.8.4.3.</span> <span class="toc-text">3．按时期统计并显示数据</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-9-%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97"><span class="toc-number">1.9.</span> <span class="toc-text">4.9　时间序列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-9-1-%E9%87%8D%E9%87%87%E6%A0%B7%EF%BC%88Resample-%E6%96%B9%E6%B3%95%EF%BC%89"><span class="toc-number">1.9.1.</span> <span class="toc-text">4.9.1　重采样（Resample()方法）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-9-2-%E9%99%8D%E9%87%87%E6%A0%B7%E5%A4%84%E7%90%86"><span class="toc-number">1.9.2.</span> <span class="toc-text">4.9.2　降采样处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-9-3-%E5%8D%87%E9%87%87%E6%A0%B7%E5%A4%84%E7%90%86"><span class="toc-number">1.9.3.</span> <span class="toc-text">4.9.3　升采样处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-9-4-%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E6%95%B0%E6%8D%AE%E6%B1%87%E6%80%BB%EF%BC%88ohlc-%E5%87%BD%E6%95%B0%EF%BC%89"><span class="toc-number">1.9.4.</span> <span class="toc-text">4.9.4　时间序列数据汇总（ohlc()函数）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-9-5-%E7%A7%BB%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%97%EF%BC%88rolling-%E5%87%BD%E6%95%B0%EF%BC%89"><span class="toc-number">1.9.5.</span> <span class="toc-text">4.9.5　移动窗口数据计算（rolling()函数）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-10-%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8"><span class="toc-number">1.10.</span> <span class="toc-text">4.10　综合应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-10-1-%E6%A1%88%E4%BE%8B1%EF%BC%9AExcel%E5%A4%9A%E8%A1%A8%E5%90%88%E5%B9%B6"><span class="toc-number">1.10.1.</span> <span class="toc-text">4.10.1　案例1：Excel多表合并</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-10-2-%E6%A1%88%E4%BE%8B2%EF%BC%9A%E8%82%A1%E7%A5%A8%E8%A1%8C%E6%83%85%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90"><span class="toc-number">1.10.2.</span> <span class="toc-text">4.10.2　案例2：股票行情数据分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-11-%E5%B0%8F%E7%BB%93"><span class="toc-number">1.11.</span> <span class="toc-text">4.11　小结</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/09/27/%E6%97%A5%E5%B8%B8%E9%9D%A2%E8%AF%95%E9%A2%98/" title="日积月累"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="日积月累"/></a><div class="content"><a class="title" href="/2022/09/27/%E6%97%A5%E5%B8%B8%E9%9D%A2%E8%AF%95%E9%A2%98/" title="日积月累">日积月累</a><time datetime="2022-09-27T12:26:26.000Z" title="发表于 2022-09-27 20:26:26">2022-09-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/06/%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端基础"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="前端基础"/></a><div class="content"><a class="title" href="/2022/07/06/%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端基础">前端基础</a><time datetime="2022-07-06T06:40:34.000Z" title="发表于 2022-07-06 14:40:34">2022-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/28/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端进阶"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="前端进阶"/></a><div class="content"><a class="title" href="/2022/06/28/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端进阶">前端进阶</a><time datetime="2022-06-27T23:33:45.000Z" title="发表于 2022-06-28 07:33:45">2022-06-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/23/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" title="事件循环"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="事件循环"/></a><div class="content"><a class="title" href="/2022/05/23/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" title="事件循环">事件循环</a><time datetime="2022-05-23T09:10:37.000Z" title="发表于 2022-05-23 17:10:37">2022-05-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/23/%E6%A8%A1%E5%9D%97%E5%8C%96/" title="模块化"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="模块化"/></a><div class="content"><a class="title" href="/2022/03/23/%E6%A8%A1%E5%9D%97%E5%8C%96/" title="模块化">模块化</a><time datetime="2022-03-23T08:50:18.000Z" title="发表于 2022-03-23 16:50:18">2022-03-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 三乘以十的八次幂</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="2963148865" data-server="netease" data-type="playlist" data-mini="true" data-fixed="true" data-preload="auto" data-autoplay="true"> </div><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "e0515f76-f737-4f77-ad57-761c3dc58f50";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (false) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (false) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

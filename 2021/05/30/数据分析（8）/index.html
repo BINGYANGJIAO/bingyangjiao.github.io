@@ -1,0 +1,766 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>数据分析（8）Numpy | 三乘以十的八次幂</title><meta name="keywords" content="python"><meta name="author" content="三乘以十的八次幂"><meta name="copyright" content="三乘以十的八次幂"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="第8章图解数组计算模块NumPyNumPy为数据分析三剑客之一，主要用于数组计算、矩阵运算和科学计算。对于本章的学习，建议初学者灵活学习，重点掌握数组创建、数组的简单操作和计算即可。为了便于理解，本章运用了大量的示意图，用例简单，力求使您能够轻松地融入NumPy的学习中。通过典型案例，让您充分理解NumPy、应用NumPy。下面让我们揭开NumPy神秘的面纱，开启NumPy之旅。 8.1初识Num">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据分析（8）Numpy">
+<meta property="og:url" content="https://jiaobingyang.gitee.io/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/index.html">
+<meta property="og:site_name" content="三乘以十的八次幂">
+<meta property="og:description" content="第8章图解数组计算模块NumPyNumPy为数据分析三剑客之一，主要用于数组计算、矩阵运算和科学计算。对于本章的学习，建议初学者灵活学习，重点掌握数组创建、数组的简单操作和计算即可。为了便于理解，本章运用了大量的示意图，用例简单，力求使您能够轻松地融入NumPy的学习中。通过典型案例，让您充分理解NumPy、应用NumPy。下面让我们揭开NumPy神秘的面纱，开启NumPy之旅。 8.1初识Num">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img1.baidu.com/it/u=3796649019,1786443255&fm=253&fmt=auto&app=138&f=JPEG?w=700&h=455">
+<meta property="article:published_time" content="2021-05-30T06:53:51.000Z">
+<meta property="article:modified_time" content="2022-06-02T13:06:12.222Z">
+<meta property="article:author" content="三乘以十的八次幂">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img1.baidu.com/it/u=3796649019,1786443255&fm=253&fmt=auto&app=138&f=JPEG?w=700&h=455"><link rel="shortcut icon" href="/img/13279652804370799.jpg"><link rel="canonical" href="https://jiaobingyang.gitee.io/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '数据分析（8）Numpy',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-06-02 21:06:12'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/mycss.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13279652804370799.jpg" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">99</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/List/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/List/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page child" href="/List/gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/_data/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于本站</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img1.baidu.com/it/u=3796649019,1786443255&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=700&amp;h=455')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">三乘以十的八次幂</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/List/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/List/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page child" href="/List/gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/_data/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于本站</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">数据分析（8）Numpy</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-05-30T06:53:51.000Z" title="发表于 2021-05-30 14:53:51">2021-05-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-06-02T13:06:12.222Z" title="更新于 2022-06-02 21:06:12">2022-06-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/python/">python</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="数据分析（8）Numpy"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="第8章图解数组计算模块NumPy"><a href="#第8章图解数组计算模块NumPy" class="headerlink" title="第8章图解数组计算模块NumPy"></a>第8章图解数组计算模块NumPy</h1><p>NumPy为数据分析三剑客之一，主要用于数组计算、矩阵运算和科学计算。对于本章的学习，建议初学者灵活学习，重点掌握数组创建、数组的简单操作和计算即可。<br>为了便于理解，本章运用了大量的示意图，用例简单，力求使您能够轻松地融入NumPy的学习中。通过典型案例，让您充分理解NumPy、应用NumPy。<br>下面让我们揭开NumPy神秘的面纱，开启NumPy之旅。</p>
+<h1 id="8-1初识NumPy"><a href="#8-1初识NumPy" class="headerlink" title="8.1初识NumPy"></a>8.1初识NumPy</h1><h2 id="8-1-1NumPy概述"><a href="#8-1-1NumPy概述" class="headerlink" title="8.1.1NumPy概述"></a>8.1.1NumPy概述</h2><p>NumPy（见图8.1），更像是一个魔方（见图8.2），它是Python数组计算、矩阵运算和科学计算的核心库，NumPy这个词来源于Numerical和Python两个单词。NumPy提供了一个高性能的数组对象，让我们轻松创建一维数组、二维数组和多维数组，以及大量的函数和方法，帮助我们轻松地进行数组计算，从而广泛地应用于数据分析、机器学习、图像处理和计算机图形学、数学任务等领域当中。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025110157989.png" alt="image-20211025110157989"></p>
+<p>​                                                                                                            图8.1　NumPy</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025110220048.png" alt="image-20211025110220048"></p>
+<p>​                                                                                                             图8.2　魔方<br>NumPy的用途是以数组的形式对数据进行操作。机器学习中充斥了大量的数组运算，而NumPy使得这些操作变得简单！由于NumPy是C语言实现的，所以其运算速度非常快。具体功能如下。　</p>
+<p>有一个强大的n维数组对象ndarray。　</p>
+<p>广播功能函数。　</p>
+<p>线性代数、傅立叶变换、随机数生成、图形操作等功能。</p>
+<p>整合C&#x2F;C++&#x2F;Fortran代码的工具。</p>
+<h2 id="8-1-2-安装NumPy模块"><a href="#8-1-2-安装NumPy模块" class="headerlink" title="8.1.2　安装NumPy模块"></a>8.1.2　安装NumPy模块</h2><p>安装NumPy有两种方法。</p>
+<h3 id="1．使用pip安装"><a href="#1．使用pip安装" class="headerlink" title="1．使用pip安装"></a>1．使用pip安装</h3><p>安装NumPy最简单的方法是使用pip工具，安装命令如下：</p>
+<p>pip install pip</p>
+<h3 id="2．在PyCharm开发环境中安装"><a href="#2．在PyCharm开发环境中安装" class="headerlink" title="2．在PyCharm开发环境中安装"></a>2．在PyCharm开发环境中安装</h3><p>（1）运行PyCharm，选择File→Settings命令，打开Settings对话框，选择Project Interpreter选项，然后单击添加模块的按钮，如图8.3所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025110322698.png" alt="image-20211025110322698"></p>
+<p>​                                                                                    图8.3　单击添加模块的按钮<br>（2）在搜索栏中输入需要添加的模块名称为numpy，然后选择需要安装的模块，如图8.4所示。单击Install Package按钮即可安装NumPy模块。</p>
+<h3 id="3．安装验证"><a href="#3．安装验证" class="headerlink" title="3．安装验证"></a>3．安装验证</h3><p>测试是否安装成功，程序代码如下：</p>
+<p>01  from numpy import *   #导入numpy库<br>02  print(eye(4))          #生成对角矩阵<br>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025110347905.png" alt="image-20211025110347905"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025111116413.png" alt="image-20211025111116413"></p>
+<p>图8.4　在PyCharm开发环境中安装NumPy模块</p>
+<h2 id="8-1-3-数组相关概念"><a href="#8-1-3-数组相关概念" class="headerlink" title="8.1.3　数组相关概念"></a>8.1.3　数组相关概念</h2><p>学习NumPy前，我们先了解一下数组相关概念。数组可分为一维数组、二维数组、三维数组，其中三维数组是常见的多维数组，如图8.5所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025112546228.png" alt="image-20211025112546228"></p>
+<p>​                                                                                                 图8.5　数组示意图<br>1．一维数组<br>一维数组很简单，基本和Python列表一样，区别在于数组切片针对的是原始数组（这就意味着，如果对数组进行修改，原始数组也会跟着更改）。<br>2．二维数组<br>二维数组本质是以数组作为数组元素的数组。二维数组包括行和列，类似于表格形状，又称为矩阵。<br>3．三维数组<br>三维数组是指维数为3的数组结构，也称矩阵列表。三维数组是最常见的多维数组，由于其可以用来描述三维空间中的位置或状态而被广泛使用。<br>4．轴的概念</p>
+<p>轴是NumPy里的axis，指定某个axis，就是沿着这个axis做相关操作，其中二维数组中两个axis的指向如图8.6所示。<br>对于一维数组，情况有点特殊，它不像二维数组从上向下的操作，而是水平的，因此一维数组其axis&#x3D;0指向如图8.7所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025112732987.png" alt="image-20211025112732987"></p>
+<p>​                                                                                      图8.6　二维数组两个轴</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025112750397.png" alt="image-20211025112750397"></p>
+<p>​                                                                                     图8.7　一维数组一个轴</p>
+<h1 id="8-2-创建数组"><a href="#8-2-创建数组" class="headerlink" title="8.2　创建数组"></a>8.2　创建数组</h1><h2 id="8-2-1-创建简单的数组"><a href="#8-2-1-创建简单的数组" class="headerlink" title="8.2.1　创建简单的数组"></a>8.2.1　创建简单的数组</h2><p>NumPy创建简单的数组主要使用array()函数，语法如下：</p>
+<p>numpy.array(object,dtype&#x3D;None,copy&#x3D;True,order&#x3D;’K’,subok&#x3D;False,ndmin&#x3D;0)<br>参数说明：　</p>
+<p>object：任何具有数组接口方法的对象。　</p>
+<p>dtype：数据类型。　</p>
+<p>copy：布尔型，可选参数，默认值为True，则object对象被复制；否则，只有当__array__返回副本，object参数为嵌套序列，或者需要副本满足数据类型和顺序要求时，才会生成副本。　</p>
+<p>order：元素在内存中的出现顺序，值为K、A、C、F。如果object参数不是数组，则新创建的数组将按行排列（C），如果值为F，则按列排列；如果object参数是一个数组，则C（按行）、F（按列）、A（原顺序）、K（元素在内存中的出现顺序）成立。　</p>
+<p>subok：布尔型。如果值为True，则将传递子类；否则返回的数组将强制为基类数组（默认值）。　</p>
+<p>ndmin：指定生成数组的最小维数。</p>
+<p>【示例01】　演示如何创建数组。（示例位置：资源包\MR\Code\08\01）<br>创建几个简单的数组，效果如图8.8所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025113205539.png" alt="image-20211025113205539"></p>
+<p>​                                                                                                          图8.8　简单数组<br>程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025113400111.png" alt="image-20211025113400111"></p>
+<h3 id="1．为数组指定数据类型"><a href="#1．为数组指定数据类型" class="headerlink" title="1．为数组指定数据类型"></a>1．为数组指定数据类型</h3><p>【示例02】　为数组指定数据类型。（示例位置：资源包\MR\Code\08\02）<br>NumPy支持比Python更多种类的数据类型，通过dtype参数可以指定数组的数据类型，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025113422663.png" alt="image-20211025113422663"></p>
+<p>运行程序，输出结果如下：</p>
+<p>[1. 2. 3.]<br>float64<br>&lt;class ‘numpy.float64’&gt;</p>
+<h3 id="2．数组的复制"><a href="#2．数组的复制" class="headerlink" title="2．数组的复制"></a>2．数组的复制</h3><p>【示例03】　复制数组。（示例位置：资源包\MR\Code\08\03）<br>当运算和处理数组时，为了不影响到原数组，就需要对原数组进行复制，而对复制后的数组进行修改删除等操作都不会影响到原数组。数组的复制可以通过copy参数实现，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025113521420.png" alt="image-20211025113521420"></p>
+<p>运行程序，输出结果如下：</p>
+<p>[1 2 3]<br>[3 2 1]<br>数组n2是数组n1的副本，从运行结果得知：虽然修改了数组n2，但是数组n1没有发生变化。</p>
+<h3 id="3．通过ndmin参数控制最小维数"><a href="#3．通过ndmin参数控制最小维数" class="headerlink" title="3．通过ndmin参数控制最小维数"></a>3．通过ndmin参数控制最小维数</h3><p>数组可分为一维数组、二维数组和多维数组，通过ndmin参数可以控制数组的最小维数。无论给出的数据的维数是多少，ndmin参数都会根据最小维数创建指定维数的数组。</p>
+<p>【示例04】　修改数组的维数。（示例位置：资源包\MR\Code\08\04）<br>ndmin&#x3D;3，虽然给出的数组是一维的，但是同样会创建一个三维数组，程序代码如下：<br>运行程序，输出结果如下：</p>
+<p>[[[1 2 3]]]</p>
+<h2 id="8-2-2-不同方式创建数组"><a href="#8-2-2-不同方式创建数组" class="headerlink" title="8.2.2　不同方式创建数组"></a>8.2.2　不同方式创建数组</h2><h3 id="1．创建指定维度和数据类型未初始化的数组"><a href="#1．创建指定维度和数据类型未初始化的数组" class="headerlink" title="1．创建指定维度和数据类型未初始化的数组"></a>1．创建指定维度和数据类型未初始化的数组</h3><p>【示例05】　创建指定维度和未初始化的数组。（示例位置：资源包\MR\Code\08\05）<br>创建指定维度和数据类型未初始化的数组主要使用empty()函数，程序代码如下：</p>
+<p>01 import numpy as np<br>02 n &#x3D; np.empty([2,3])<br>03 print(n)<br>运行程序，输出结果如下：</p>
+<p>[[2.22519099e-307 2.33647355e-307 1.23077925e-312]<br>[2.33645827e-307 2.67023123e-307 1.69117157e-306]]<br>这里，数组元素为随机值，因为它们未被初始化。如果要改变数组类型，可以使用dtype参数，如整型，dtype&#x3D;int。</p>
+<h3 id="2．创建指定维度（以0填充）的数组"><a href="#2．创建指定维度（以0填充）的数组" class="headerlink" title="2．创建指定维度（以0填充）的数组"></a>2．创建指定维度（以0填充）的数组</h3><p>【示例06】　创建指定维度（以0填充）的数组。（示例位置：资源包\MR\Code\08\06）<br>创建指定维度并以0填充的数组，主要使用zeros()函数，程序代码如下：</p>
+<p>01  import numpy as np<br>02  n &#x3D; np.zeros(3)<br>03  print(n)<br>运行程序，输出结果如下：</p>
+<p>[0. 0. 0.]<br>输出结果默认是浮点型（float）。</p>
+<h3 id="3．创建指定维度（以1填充）的数组"><a href="#3．创建指定维度（以1填充）的数组" class="headerlink" title="3．创建指定维度（以1填充）的数组"></a>3．创建指定维度（以1填充）的数组</h3><p>【示例07】　创建指定维度并以1填充的数组。（示例位置：资源包\MR\Code\08\07）<br>创建指定维度并以1填充的数组，主要使用ones()函数，程序代码如下：</p>
+<p>01 import numpy as np<br>02 n &#x3D; np.ones(3)<br>03 print(n)</p>
+<p>运行程序，输出结果如下：</p>
+<p>[1. 1. 1.]</p>
+<h3 id="4．创建指定维度和类型的数组并以指定值填充"><a href="#4．创建指定维度和类型的数组并以指定值填充" class="headerlink" title="4．创建指定维度和类型的数组并以指定值填充"></a>4．创建指定维度和类型的数组并以指定值填充</h3><p>【示例08】　创建以指定值填充的数组。（示例位置：资源包\MR\Code\08\08）<br>创建指定维度和类型的数组并以指定值填充，主要使用full()函数，程序代码如下：</p>
+<p>01  import numpy as np<br>02  n &#x3D; np.full((3,3), 8)<br>03  print(n)<br>运行程序，输出结果如下：</p>
+<p>[[8 8 8]<br> [8 8 8]<br> [8 8 8]]</p>
+<h2 id="8-2-3-从数值范围创建数组"><a href="#8-2-3-从数值范围创建数组" class="headerlink" title="8.2.3　从数值范围创建数组"></a>8.2.3　从数值范围创建数组</h2><h3 id="1．通过arange-函数创建数组"><a href="#1．通过arange-函数创建数组" class="headerlink" title="1．通过arange()函数创建数组"></a>1．通过arange()函数创建数组</h3><p>arange()函数同Python内置range()函数相似，区别在于返回值，arange()函数返回值是数组，而range()函数返回值是列表。arange()函数的语法如下：</p>
+<p>arange([start,] stop[, step,], dtype&#x3D;None)<br>参数说明：　</p>
+<p>start：起始值，默认值为0。　</p>
+<p>stop：终止值（不包含）。　</p>
+<p>step：步长，默认值为1。　</p>
+<p>dtype：创建数组的数据类型，如果不设置数据类型，则使用输入数据的数据类型。</p>
+<p>【示例09】　通过数值范围创建数组。（示例位置：资源包\MR\Code\08\09）<br>使用arange()函数通过数值范围创建数组，程序代码如下：</p>
+<p>01 import numpy as np<br>02 n&#x3D;np.arange(1,12,2)<br>03 print(n)<br>运行程序，输出结果如下：</p>
+<p>[ 1  3  5  7  9 11]</p>
+<h3 id="2．使用linspace-函数创建等差数列"><a href="#2．使用linspace-函数创建等差数列" class="headerlink" title="2．使用linspace()函数创建等差数列"></a>2．使用linspace()函数创建等差数列</h3><p>首先简单了解一下等差数列，等差数列是指如果一个数列从第二项起，每一项与它的前一项的差等于同一个常数，那么这个数列就叫作等差数列。<br>例如，一般成年男鞋的各种尺码，如图8.9所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025113910259.png" alt="image-20211025113910259"></p>
+<p>​                                                                                         图8.9　男鞋尺码对照表</p>
+<p>马拉松赛前训练，一周每天的训练量（单位：m），如图8.10所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025113928239.png" alt="image-20211025113928239"></p>
+<p>​                                                                                        图8.10　训练计划<br>在Python中创建等差数列可以使用NumPy的linspace()函数，该函数用于创建一个一维的等差数列的数组，它与arange()函数不同，arange()函数是从开始值到结束值的左闭右开区间（即包括开始值不包括结束值），第三个参数（如果存在）是步长；而linspace()函数是从开始值到结束值的闭区间（可以通过参数endpoint&#x3D;False，使结束值不是闭区间），并且第三个参数是值的个数。</p>
+<p>知识胶囊<br>本文经常会提到诸如“左闭右开区间”“左开右闭区间”“闭区间”等，这里简单介绍一下。“</p>
+<p>左闭右开区间”是指包括起始值但不包括终止值的一个数值区间；</p>
+<p>“左开右闭区间”是指不包括起始值但包括终止值的一个个数值区间；</p>
+<p>“闭区间”是指既包括起始值又包括终止值的一个数值区间。</p>
+<p>linspace()函数语法如下：</p>
+<p>linspace(start,stop,num&#x3D;50,endpoint&#x3D;True,retstep&#x3D;False,dtype&#x3D;None)<br>参数说明：　</p>
+<p>start：序列的起始值。　</p>
+<p>stop：序列的终止值，如果endpoint参数的值为True，则该值包含于数列中。　</p>
+<p>num：要生成的等步长的样本数量，默认值为50。　</p>
+<p>endpoint：如果值为True，数列中包含stop参数的值；反之则不包含。默认值为True。　</p>
+<p>retstep：如果值为True，则生成的数组中会显示间距；反之则不显示。　</p>
+<p>dtype：数组的数据类型。</p>
+<p>【示例10】　创建马拉松赛前训练等差数列数组。（示例位置：资源包\MR\Code\08\10）<br>创建马拉松赛前训练等差数列数组，程序代码如下：</p>
+<p>01 import numpy as np<br>02 n1 &#x3D; np.linspace(7500,10000,6)<br>03 print(n1)<br>运行程序，输出结果如下：</p>
+<p>[ 7500.  8000.  8500.  9000.  9500. 10000.]</p>
+<h3 id="3．使用logspace-函数创建等比数列"><a href="#3．使用logspace-函数创建等比数列" class="headerlink" title="3．使用logspace()函数创建等比数列"></a>3．使用logspace()函数创建等比数列</h3><p>首先了解一下等比数列，等比数列是指从第二项起，每一项与它的前一项的比值等于同一个常数的一种数列。<br>例如，在古印度，国王要重赏发明国际象棋的大臣，对他说：我可以满足你的任何要求，大臣说：请给我的棋盘的64个格子都放上小麦，第1个格子放1粒小麦，第2个格子放2粒小麦，第3个格子放4粒小麦，第4个格子放8粒小麦，如图8.11所示。后面每个格子里放的小麦数都是前一个格子里所放小麦数的2倍，直到第64个格子。<br>在Python中创建等比数列可以使用NumPy的logspace()函数，语法如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025114247449.png" alt="image-20211025114247449"></p>
+<p>​                                                                                                            图8.11　棋盘</p>
+<p>numpy.logspace(start, stop, num&#x3D;50, endpoint&#x3D;True, base&#x3D;10.0, dtype&#x3D;None)<br>参数说明：　</p>
+<p>start：序列的起始值。　</p>
+<p>stop：序列的终止值。如果endpoint参数值为True，则该值包含于数列中。　</p>
+<p>num：要生成的等步长的数据样本数量，默认值为50。　</p>
+<p>endpoint：如果值为True，则数列中包含stop参数值；反之则不包含。默认值为True。　</p>
+<p>base：对数log的底数。　</p>
+<p>dtype：数组的数据类型。</p>
+<p>【示例11】　通过logspace()函数解决棋盘放置小麦的问题。（示例位置：资源包\MR\Code\08\11）<br>通过logspace()函数计算棋盘中每个格子里放的小麦数是前一个格子里的2倍，直到第64个格子，每个格子里放多少小麦，程序代码如下：</p>
+<p>01  import numpy as np<br>02  n &#x3D; np.logspace(0,63,64,base&#x3D;2,dtype&#x3D;’int’)<br>03  print(n)<br>运行程序，输出结果如图8.12所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025114355783.png" alt="image-20211025114355783"></p>
+<p>​                                                                                  图8.12　每个格子里放的小麦数</p>
+<p>上述举例出现一个问题：后面大数出现负数，而且都是一样的，这是由于程序中指定的数据类型是int，是32位的，数据范围为-2147483648～2147483647，而我们计算后的数据远远超出了这个范围，因此便出现了溢出现象。解决这一问题，需要指定数据类型为uint64（无符号整数，数据范围为0～18446744073709551615），关键代码如下：</p>
+<p>n &#x3D; np.logspace(0,63,64,base&#x3D;2,dtype&#x3D;’uint64’)<br>运行程序，输出结果如图8.13所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025114438288.png" alt="image-20211025114438288"></p>
+<p>​                                                                                     图8.13　每个格子里放的小麦数<br>以上就是每个格子里需要放的小麦数，可见发明国际象棋的大臣是多么聪明。说明<br>关于NumPy数据类型的详细介绍可参见8.3.1节。</p>
+<h2 id="8-2-4-生成随机数组"><a href="#8-2-4-生成随机数组" class="headerlink" title="8.2.4　生成随机数组"></a>8.2.4　生成随机数组</h2><p>随机数组的生成主要使用NumPy的random模块，下面介绍几种常用的随机生成数组的函数。</p>
+<h3 id="1．rand-函数"><a href="#1．rand-函数" class="headerlink" title="1．rand()函数"></a>1．rand()函数</h3><p>rand()函数用于生成(0,1)之间的随机数组，传入一个值随机生成一维数组，传入一对值则随机生成二维数组，语法如下：</p>
+<p>numpy.random.rand(d0,d1,d2,d3,…,dn)<br>参数d0，d1，…，dn为整数，表示维度，可以为空。</p>
+<p>【示例12】　随机生成0～1的数组。（示例位置：资源包\MR\Code\08\12）<br>随机生成一维数组和二维数组，代码如下：<br>运行程序，输出结果如下：</p>
+<h3 id="2．randn-函数"><a href="#2．randn-函数" class="headerlink" title="2．randn()函数"></a>2．randn()函数</h3><p>randn()函数用于从正态分布中返回随机生成的数组，语法如下：</p>
+<p>numpy.random.randn(d0,d1,d2,d3,…,dn)<br>参数d0，d1，…，dn为整数，表示维度，可以为空。</p>
+<p>【示例13】　随机生成满足正态分布的数组。（示例位置：资源包\MR\Code\08\13）<br>随机生成满足正态分布的数组，程序代码如下：<br>运行程序，输出结果如下：</p>
+<h3 id="3．randint-函数"><a href="#3．randint-函数" class="headerlink" title="3．randint()函数"></a>3．randint()函数</h3><p>randint()函数与NumPy的arange()函数类似。randint()函数用于生成一定范围内的随机数组，左闭右开区间，语法如下：</p>
+<p>numpy.random.randint(low,high&#x3D;None,size&#x3D;None)</p>
+<p>参数说明：　</p>
+<p>low：低值（起始值），整数，且当参数high不为空时，参数low应小于参数high；否则程序会出现错误。　</p>
+<p>high：高值（终止值），整数。</p>
+<p>size：数组维数，整数或者元组，整数表示一维数组，元组表示多维数组。默认值为空，如果为空，则仅返回一个整数。</p>
+<p>【示例14】　生成一定范围内的随机数组。（示例位置：资源包\MR\Code\08\14）<br>生成一定范围内的随机数组，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025114630842.png" alt="image-20211025114630842"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025114646241.png" alt="image-20211025114646241"></p>
+<h3 id="4．normal-函数"><a href="#4．normal-函数" class="headerlink" title="4．normal()函数"></a>4．normal()函数</h3><p>normal()函数用于生成正态分布的随机数，语法如下：</p>
+<p>numpy.random.normal(loc,scale,size)<br>参数说明：　</p>
+<p>loc：正态分布的均值，对应正态分布的中心。loc&#x3D;0说明是一个以y轴为对称轴的正态分布。　</p>
+<p>scale：正态分布的标准差，对应正态分布的宽度，scale值越大，正态分布的曲线越“矮胖”；scale值越小，曲线越“高瘦”。　size：表示数组维数。</p>
+<p>【示例15】　生成正态分布的随机数组。（示例位置：资源包\MR\Code\08\15）<br>生成正态分布的随机数组，程序代码如下：</p>
+<p>01 import numpy as np<br>02 n &#x3D; np.random.normal(0, 0.1, 10)<br>03 print(n)<br>运行程序，输出结果如下：</p>
+<p>[ 0.08530096  0.0404147  -0.00358281  0.05405901 -0.01677737 -0.02448481<br> 0.13410224 -0.09780364  0.06095256 -0.0431846 ]</p>
+<h2 id="8-2-5-从已有的数组中创建数组"><a href="#8-2-5-从已有的数组中创建数组" class="headerlink" title="8.2.5　从已有的数组中创建数组"></a>8.2.5　从已有的数组中创建数组</h2><h3 id="1．asarray-函数"><a href="#1．asarray-函数" class="headerlink" title="1．asarray()函数"></a>1．asarray()函数</h3><p>asarray()函数用于创建数组，其与array()函数类似，语法如下：</p>
+<p>numpy.asarray(a,dtype&#x3D;None,order&#x3D;None)<br>参数说明：　</p>
+<p>a：可以是列表、列表的元组、元组、元组的元组、元组的列表或多维数组。　</p>
+<p>dtype：数组的数据类型。　</p>
+<p>order：值为C和F，分别代表按行排列和按列排列，即数组元素在内存中的出现顺序。</p>
+<p>【示例16】　使用asarray()函数创建数组。（示例位置：资源包\MR\Code\08\16）<br>使用asarray()函数创建数组，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025114735631.png" alt="image-20211025114735631"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025114829679.png" alt="image-20211025114829679"></p>
+<h3 id="2．frombuffer-函数"><a href="#2．frombuffer-函数" class="headerlink" title="2．frombuffer()函数"></a>2．frombuffer()函数</h3><p>NumPy的ndarray()数组对象不能像Python列表一样动态地改变其大小，在做数据采集时很不方便。下面介绍如何通过frombuffer()函数实现动态数组。frombuffer()函数接受buffer输入参数，以流的形式将读入的数据转换为数组。frombuffer()函数语法如下：</p>
+<p>numpy.frombuffer(buffer,dtype&#x3D;float,count&#x3D;-1,offset&#x3D;0)<br>参数说明：　</p>
+<p>buffer：实现了__buffer__方法的对象。　</p>
+<p>dtype：数组的数据类型。　</p>
+<p>count：读取的数据数量，默认值为-1，表示读取所有数据。　</p>
+<p>offset：读取的起始位置，默认值为0。</p>
+<p>【示例17】　将字符串“mingrisoft”转换为数组。（示例位置：资源包\MR\Code\08\17）<br>将字符串“mingrisoft”转换为数组，程序代码如下：</p>
+<p>01 import numpy as np<br>02 n&#x3D;np.frombuffer(b’mingrisoft’,dtype&#x3D;’S1’)<br>03 print(n)<br>关键代码解析：当buffer参数值为字符串时，Python 3默认字符串是Unicode类型，所以要转成Byte string类型，需要在原字符串前加上b。</p>
+<h3 id="3．fromiter-函数"><a href="#3．fromiter-函数" class="headerlink" title="3．fromiter()函数"></a>3．fromiter()函数</h3><p>fromiter()函数用于从可迭代对象中建立数组对象，语法如下：</p>
+<p>numpy.fromiter(iterable,dtype,count&#x3D;-1)</p>
+<p>参数说明：　</p>
+<p>iterable：可迭代对象。　</p>
+<p>dtype：数组的数据类型。　</p>
+<p>count：读取的数据数量，默认值为-1，表示读取所有数据。</p>
+<p>【示例18】　通过可迭代对象创建数组。（示例位置：资源包\MR\Code\08\18）<br>通过可迭代对象创建数组，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025114943273.png" alt="image-20211025114943273"></p>
+<p>运行程序，输出结果如下：</p>
+<p>[0 2 4 6 8]</p>
+<h3 id="4．empty-like-函数"><a href="#4．empty-like-函数" class="headerlink" title="4．empty_like()函数"></a>4．empty_like()函数</h3><p>empty_like()函数用于创建一个与给定数组具有相同维度和数据类型且未初始化的数组，语法如下：</p>
+<p>numpy.empty_like(prototype,dtype&#x3D;None,order&#x3D;’K’,subok&#x3D;True)<br>参数说明：　</p>
+<p>prototype：给定的数组。　</p>
+<p>dtype：覆盖结果的数据类型。　</p>
+<p>order：指定数组的内存布局。其中C（按行）、F（按列）、A（原顺序）、K（数据元素在内存中的出现顺序）。　</p>
+<p>subok：默认情况下，返回的数组被强制为基类数组。如果值为True，则返回子类。</p>
+<p>【示例19】　创建未初始化的数组。（示例位置：资源包\MR\Code\08\19）<br>下面使用empty_like()函数创建一个与给定数组具有相同维数、数据类型以及未初始化的数组，程序代码如下：</p>
+<p>01 import numpy as np</p>
+<p>02 n &#x3D; np.empty_like([[1, 2], [3, 4]])<br>03 print(n)<br>运行程序，输出结果如下：</p>
+<p>[[0 0]<br> [0 0]]</p>
+<h3 id="5．zeros-like-函数"><a href="#5．zeros-like-函数" class="headerlink" title="5．zeros_like()函数"></a>5．zeros_like()函数</h3><p>【示例20】　创建以0填充的数组。（示例位置：资源包\MR\Code\08\20）<br>zeros_like()函数用于创建一个与给定数组维度和数据类型相同，并以0填充的数组，程序代码如下：</p>
+<p>01 import numpy as np<br>02 n &#x3D; np.zeros_like([[0.1,0.2,0.3], [0.4,0.5,0.6]])<br>03 print(n)<br>运行程序，输出结果如下：</p>
+<p>[[0. 0. 0.]<br> [0. 0. 0.]]说明<br>参数说明请参见empty_like()函数。</p>
+<h3 id="6．ones-like-函数"><a href="#6．ones-like-函数" class="headerlink" title="6．ones_like()函数"></a>6．ones_like()函数</h3><p>【示例21】　创建以1填充的数组。（示例位置：资源包\MR\Code\08\21）<br>ones_like()函数用于创建一个与给定数组维度和数据类型相同，并以1填充的数组，程序代码如下：</p>
+<p>01 import numpy as np<br>02 n &#x3D; np.ones_like([[0.1,0.2,0.3], [0.4,0.5,0.6]])</p>
+<p>03 print(n)<br>运行程序，输出结果如下：</p>
+<p>[[1. 1. 1.]<br>[1. 1. 1.]]说明<br>参数说明请参见empty_like()函数。</p>
+<h3 id="7．full-like-函数"><a href="#7．full-like-函数" class="headerlink" title="7．full_like()函数"></a>7．full_like()函数</h3><p>full_like()函数用于创建一个与给定数组维度和数据类型相同，并以指定值填充的数组，语法如下：</p>
+<p>numpy.full_like(a, fill_value, dtype&#x3D;None, order&#x3D;’K’, subok&#x3D;True)<br>参数说明：　</p>
+<p>a：给定的数组。　</p>
+<p>fill_value：填充值。　</p>
+<p>dtype：数组的数据类型，默认值为None，则使用给定数组的数据类型。　</p>
+<p>order：指定数组的内存布局。其中C（按行）、F（按列）、A（原顺序）、K（数组元素在内存中的出现顺序）。　</p>
+<p>subok：默认情况下，返回的数组被强制为基类数组。如果值为True，则返回子类。</p>
+<p>【示例22】　创建以指定值“0.2”填充的数组。（示例位置：资源包\MR\Code\08\22）<br>创建一个与给定数组维度和数据类型相同，并以指定值“0.2”填充的数组，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025115141215.png" alt="image-20211025115141215"></p>
+<p>运行程序，输出结果如下：</p>
+<p>[1 1 1 1 1 1]<br>[0 0 0 0 0 0]<br>[0.2 0.2 0.2 0.2 0.2 0.2]</p>
+<h1 id="8-3-数组的基本操作"><a href="#8-3-数组的基本操作" class="headerlink" title="8.3　数组的基本操作"></a>8.3　数组的基本操作</h1><h3 id="8-3-1-数据类型"><a href="#8-3-1-数据类型" class="headerlink" title="8.3.1　数据类型"></a>8.3.1　数据类型</h3><p>在对数组进行基本操作前，首先了解一下NumPy的数据类型。NumPy的数据类型比Python数据类型增加了更多种类的数值类型，如表8.1所示。为了区别Python数据类型，像bool、int、float、complex、str等数据类型的名称末尾都加了短下画线“_”。</p>
+<p>​                                                                                            表8.1　NumPy数据类型表</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025115201641.png" alt="image-20211025115201641"></p>
+<p>每一种数据类型都有相应的数据转换函数。举例如下：</p>
+<p>np.int8(3.141)</p>
+<p>结果为3。</p>
+<p>np.float64(8)<br>结果为8.0。</p>
+<p>np.float(True)<br>结果为1.0。</p>
+<p>bool(1)<br>结果为True。<br>在创建ndarray数组时，可以直接指定数值类型，关键代码如下：</p>
+<p>a &#x3D; np.arange(8, dtype&#x3D;float)<br>结果为[0. 1. 2. 3. 4. 5. 6. 7.]。</p>
+<p>注意<br>复数不能转换成为整数类型或者浮点数，例如以下的代码会出现错误提示：</p>
+<p>float(8+ 1j)</p>
+<h3 id="8-3-2-数组运算"><a href="#8-3-2-数组运算" class="headerlink" title="8.3.2　数组运算"></a>8.3.2　数组运算</h3><p>不用编写循环即可对数据执行批量运算，这就是NumPy数组运算的特点，NumPy称之为矢量化。大小相等的数组之间的任何算术运算NumPy都可以实现。本节主要介绍简单的数组运算，如加、减、乘、除、幂运算等。下面创建两个简单的NumPy数组，即n1和n2，数组n1包括元素1和2，数组n2包括元素3和4，如图8.14所示。接下来实现这两个数组的运算。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025115248732.png" alt="image-20211025115248732"></p>
+<p>​                                                                                                              图8.14　数组示意图</p>
+<h4 id="1．加法运算"><a href="#1．加法运算" class="headerlink" title="1．加法运算"></a>1．加法运算</h4><p>例如，加法运算是数组中对应位置的元素相加（即每行对应相加），如图8.15所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025115350997.png" alt="image-20211025115350997"></p>
+<p>​                                                                              图8.15　数组加法运算示意图</p>
+<p>【示例23】　数组加法运算。（示例位置：资源包\MR\Code\08\23）<br>在程序中直接将两个数组相加即可，即n1+n2，程序代码如下：<br>运行程序，输出结果如下：</p>
+<p>[4 6]</p>
+<h4 id="2．减法、乘法和除法运算"><a href="#2．减法、乘法和除法运算" class="headerlink" title="2．减法、乘法和除法运算"></a>2．减法、乘法和除法运算</h4><p>除了加法运算，还可以实现数组的减法、乘法和除法，如图8.16所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025115411699.png" alt="image-20211025115411699"></p>
+<p>​                                                                  图8.16　数组的减法、乘法和除法运算示意图</p>
+<p>【示例24】　数组的减法、乘法和除法运算。（示例位置：资源包\MR\Code\06\24）<br>同样，在程序中直接将两个数组相减、相乘或相除即可，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025115431957.png" alt="image-20211025115431957"></p>
+<p>运行程序，输出结果如下：</p>
+<p>[-2 -2]<br>[3 8]<br>[0.33333333 0.5  ]</p>
+<h4 id="3．幂运算"><a href="#3．幂运算" class="headerlink" title="3．幂运算"></a>3．幂运算</h4><p>幂是数组中对应位置元素的幂运算，用两个“*”表示，如图8.17所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025115515999.png" alt="image-20211025115515999"></p>
+<p>​                                                                                   图8.17　数组幂运算示意图</p>
+<p>【示例25】　数组的幂运算。（示例位置：资源包\MR\Code\08\25）<br>从图8.17中得知：数组n1的元素1和数组n2的元素3，通过幂运算得到的是1的3次幂；数组n1的元素2和数组n2的元素4，通过幂运算得到的是2的4次幂，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025115559819.png" alt="image-20211025115559819"></p>
+<p>运行程序，输出结果如下：</p>
+<p>[ 1 16]</p>
+<h4 id="4．比较运算"><a href="#4．比较运算" class="headerlink" title="4．比较运算"></a>4．比较运算</h4><p>【示例26】　数组的比较运算。（示例位置：资源包\MR\Code\08\26）<br>数组的比较运算是数组中对应位置元素的比较运算，比较后的结果是布尔值数组，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025115614452.png" alt="image-20211025115614452"></p>
+<p>运行程序，输出结果如下：</p>
+<p>[False False]<br>[False False]</p>
+<p>[ True  True]<br>[ True  True]</p>
+<h4 id="5．数组的标量运算"><a href="#5．数组的标量运算" class="headerlink" title="5．数组的标量运算"></a>5．数组的标量运算</h4><p>首先了解两个概念，即标量和向量。标量其实就是一个单独的数；而向量是一组数，这组数是顺序排列的，这里我们理解为数组。那么，数组的标量运算也可以理解为是向量与标量之间的运算。<br>例如，马拉松赛前训练，一周里每天的训练量以“米”（m）为单位，下面将其转换为以“千米”为单位，如图8.18所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025115659337.png" alt="image-20211025115659337"></p>
+<p>​                                                                                             图8.18　数组的标量运算示意图</p>
+<p>【示例27】　数组的标量运算。（示例位置：资源包\MR\Code\08\27）<br>在程序中，米转换为千米直接输入n1&#x2F;1000即可，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211025115723224.png" alt="image-20211025115723224"></p>
+<p>运行程序，输出结果如下：</p>
+<p>[ 7500  8000  8500  9000  9500 10000]<br>[ 7.5  8.   8.5  9.   9.5 10. ]<br>上述运算过程，在NumPy中叫作“广播机制”，它是一个非常有用的功能。</p>
+<h3 id="8-3-3-数组的索引和切片"><a href="#8-3-3-数组的索引和切片" class="headerlink" title="8.3.3　数组的索引和切片"></a>8.3.3　数组的索引和切片</h3><p>NumPy数组元素是通过数组的索引和切片来访问和修改的，因此索引和切片是NumPy中最重要、最常用的操作。</p>
+<h4 id="1．索引"><a href="#1．索引" class="headerlink" title="1．索引"></a>1．索引</h4><p>所谓数组的索引，即用于标记数组中对应元素的唯一数字，从0开始，即数组中的第一个元素的索引是0，以此类推。NumPy数组可以使用标准Python语法x[obj]的语法对数组进行索引，其中x是数组，obj是索引。</p>
+<p>【示例28】　获取一维数组中的元素。（示例位置：资源包\MR\Code\08\28）<br>获取一维数组n1中索引为0的元素，程序代码如下：</p>
+<p>01  import numpy as np<br>02  n1&#x3D;np.array([1,2,3])   #创建一维数组<br>03  print(n1[0])           #输出一维数组的第一个元素<br>运行程序，输出结果如下：</p>
+<p>1</p>
+<p>【示例29】　获取二维数组中的元素。（示例位置：资源包\MR\Code\08\29）<br>再举一个例子，通过索引获取二维数组中的元素，程序代码如下：</p>
+<p>01  import numpy as np<br>02  n1&#x3D;np.array([[1,2,3],[4,5,6]])   #创建二维数组<br>03  print(n1[1] [2])                  #输出二维数组中第2行第3列的元素<br>运行程序，输出结果如下：</p>
+<p>6</p>
+<h4 id="2．切片式索引"><a href="#2．切片式索引" class="headerlink" title="2．切片式索引"></a>2．切片式索引</h4><p>数组的切片可以理解为对数组的分割，按照等分或者不等分，将一个数组切割为多个片段，它与Python中列表的切片操作一样。NumPy中的切片用冒号分隔切片参数来进行切片操作，语法如下：</p>
+<p>[start:stop:step]<br>参数说明：　</p>
+<p>start：起始索引。</p>
+<p>stop：终止索引。　</p>
+<p>step：步长。</p>
+<p>【示例30】　实现简单的数组切片操作。（示例位置：资源包\MR\Code\08\30）<br>实现简单的切片操作，对数组n1进行切片式索引操作，如图8.19所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026163649468.png" alt="image-20211026163649468"></p>
+<p>​                                                                                  图8.19　切片式索引示意图<br>程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026163739258.png" alt="image-20211026163739258"></p>
+<p>运行程序，输出结果如下：</p>
+<p>1<br>2<br>[1 2]<br>[2 3]<br>[1 2]<br>切片式索引操作需要注意以下几点。<br>（1）索引是左闭右开区间，如上述代码中的n1[0:2]，只能取到索引从0～1的元素，而取不到索引为2的元素。<br>（2）当没有start参数时，代表从索引0开始取数，如上述代码中的n1[:2]。<br>（3）start、stop和step这3个参数都可以是负数，代表反向索引。以step参数为例，如图8.20所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026163851780.png" alt="image-20211026163851780"></p>
+<p>​                                                                                        图8.20　反向索引示意图</p>
+<p>【示例31】　常用的切片式索引操作。（示例位置：资源包\MR\Code\08\31）<br>常用的切片式索引操作，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026163919986.png" alt="image-20211026163919986"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026163946683.png" alt="image-20211026163946683"></p>
+<h4 id="3．二维数组索引"><a href="#3．二维数组索引" class="headerlink" title="3．二维数组索引"></a>3．二维数组索引</h4><p>二维数组索引可以使用array[n,m]的方式，以逗号分隔，表示第n个数组的，第m个元素。</p>
+<p>【示例32】　二维数组的简单索引操作。（示例位置：资源包\MR\Code\08\32）<br>创建一个3行4列的二维数组，实现简单的索引操作，效果如图8.21所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026164056410.png" alt="image-20211026164056410"></p>
+<p>​                                                                                                图8.21　二维数组索引示意图<br>程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026164124849.png" alt="image-20211026164124849"></p>
+<p>运行程序，输出结果如下：</p>
+<p>[4 5 6 7]<br>6<br>[ 8  9 10 11]<br>上述代码中，n[1]表示第2个数组，n[1,2]表示第2个数组第3个元素，它等同于n[1][2]，表示数组n中第2行第3列的值，实际上n[1] [2]是先索引第一个维度得到一个数组，然后在此基础上再索引。</p>
+<h4 id="4．二维数组切片式索引"><a href="#4．二维数组切片式索引" class="headerlink" title="4．二维数组切片式索引"></a>4．二维数组切片式索引</h4><p>【示例33】　二维数组的切片操作。（示例位置：资源包\MR\Code\08\33）<br>创建一个二维数组，实现各种切片式索引操作，效果如图8.22所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026164351235.png" alt="image-20211026164351235"></p>
+<p>​                                                                            图8.22　二维数组切片式索引示意图</p>
+<p>程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026164653494.png" alt="image-20211026164653494"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026164710619.png" alt="image-20211026164710619"></p>
+<h3 id="8-3-4-数组重塑"><a href="#8-3-4-数组重塑" class="headerlink" title="8.3.4　数组重塑"></a>8.3.4　数组重塑</h3><p>数组重塑实际是更改数组的形状，例如，将原来2行3列的数组重塑为3行4列的数组。在NumPy中主要使用reshape()方法，该方法用于改变数组的形状。</p>
+<h4 id="1．一维数组重塑"><a href="#1．一维数组重塑" class="headerlink" title="1．一维数组重塑"></a>1．一维数组重塑</h4><p>一维数组重塑就是将数组重塑为多行多列的数组。</p>
+<p>【示例34】　将一维数组重塑为二维数组。（示例位置：资源包\MR\Code\08\34）<br>创建一个一维数组，然后通过reshape()方法将其改为2行3列的二维数组，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026164736044.png" alt="image-20211026164736044"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026164756364.png" alt="image-20211026164756364"></p>
+<p>需要注意的是，数组重塑是基于数组元素不发生改变的情况，重塑后的数组所包含的元素个数必须与原数组元素个数相同，如果数组元素发生改变，程序就会报错。</p>
+<p>【示例35】　将一行古诗转换为4行5列的二维数组。（示例位置：资源包\MR\Code\08\35）<br>将一行20列的数据转换为4行5列的二维数组，效果如图8.23所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026164923273.png" alt="image-20211026164923273"></p>
+<p>​                                                                                                 图8.23　数组重塑示意图<br>程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026164947021.png" alt="image-20211026164947021"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026165004423.png" alt="image-20211026165004423"></p>
+<h4 id="2．多维数组重塑"><a href="#2．多维数组重塑" class="headerlink" title="2．多维数组重塑"></a>2．多维数组重塑</h4><p>多维数组重塑同样使用reshape()方法。</p>
+<p>【示例36】　将2行3列的数组重塑为3行2列的数组。（示例位置：资源包\MR\Code\08\36）<br>将2行3列的二维数组重塑为3行2列的二维数组，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026165037961.png" alt="image-20211026165037961"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026165053942.png" alt="image-20211026165053942"></p>
+<h4 id="3．数组转置"><a href="#3．数组转置" class="headerlink" title="3．数组转置"></a>3．数组转置</h4><p>数组转置是指数组的行列转换，可以通过数组的T属性和transpose()函数实现。</p>
+<p>【示例37】　将二维数组中的行列转置。（示例位置：资源包\MR\Code\08\37）<br>通过T属性将4行6列的二维数组中的行变成列，列变成行，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026165138211.png" alt="image-20211026165138211"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026165155864.png" alt="image-20211026165155864"></p>
+<p>【示例38】　转换客户销售数据。（示例位置：资源包\MR\Code\08\38）<br>上述举例可能不太直观，下面再举一个例子，转换客户销售数据，对比效果如图8.24所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026165234909.png" alt="image-20211026165234909"></p>
+<p>​                                                                     图8.24　客户销售数据转换对比示意图<br>程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026165254710.png" alt="image-20211026165254710"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026165309989.png" alt="image-20211026165309989"></p>
+<p>transpose()函数也可以实现数组转置。例如，上述举例用transpose()函数实现，关键代码如下：</p>
+<p>01  n &#x3D; np.array([[‘A’,100],[‘B’,200],[‘C’,300],[‘D’,400],[‘E’,500]])<br>02  print(n.transpose())                           #transpose()函数行列转置<br>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026165407591.png" alt="image-20211026165407591"></p>
+<h3 id="8-3-5-数组的增、删、改、查"><a href="#8-3-5-数组的增、删、改、查" class="headerlink" title="8.3.5　数组的增、删、改、查"></a>8.3.5　数组的增、删、改、查</h3><p>数组增、删、改、查的方法有很多种，下面介绍几种常用的方法。</p>
+<h4 id="1．数组的增加"><a href="#1．数组的增加" class="headerlink" title="1．数组的增加"></a>1．数组的增加</h4><p>数组数据的增加可以按照水平方向增加数据，也可以按照垂直方向增加数据。水平方向增加数据主要使用hstack()函数，垂直方向增加数据主要使用vstack()函数。</p>
+<p>【示例39】　为数组增加数据。（示例位置：资源包\MR\Code\08\39）<br>创建两个二维数组，然后实现数组数据的增加，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026165507946.png" alt="image-20211026165507946"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026165522416.png" alt="image-20211026165522416"></p>
+<h4 id="2．数组的删除"><a href="#2．数组的删除" class="headerlink" title="2．数组的删除"></a>2．数组的删除</h4><p>数组的删除主要使用delete()方法。</p>
+<p>【示例40】　删除指定的数组。（示例位置：资源包\MR\Code\08\40）<br>删除指定的数组，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026165543012.png" alt="image-20211026165543012"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026165601688.png" alt="image-20211026165601688"></p>
+<p>那么，对于不想要的数组或数组元素还可以通过索引和切片方法只选取需要的数组或数组元素。</p>
+<h4 id="3．数组的修改"><a href="#3．数组的修改" class="headerlink" title="3．数组的修改"></a>3．数组的修改</h4><p>修改数组或数组元素时，直接为数组或数组元素赋值即可。</p>
+<p>【示例41】　修改指定的数组。（示例位置：资源包\MR\Code\08\41）<br>修改指定的数组，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026165836901.png" alt="image-20211026165836901"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026165851666.png" alt="image-20211026165851666"></p>
+<h4 id="4．数组的查询"><a href="#4．数组的查询" class="headerlink" title="4．数组的查询"></a>4．数组的查询</h4><p>数组的查询同样可以使用索引和切片方法来获取指定范围的数组或数组元素，还可以通过where()函数查询符合条件的数组或数组元素。where()函数语法如下：</p>
+<p>numpy.where(condition,x,y)<br>上述语法，第一个参数为一个布尔数组，第二个参数和第三个参数可以是标量也可以是数组。满足条件（参数condition），输出参数x，不满足条件输出参数y。</p>
+<p>【示例42】　按指定条件查询数组。（示例位置：资源包\MR\Code\08\42）<br>数组查询，大于5输出2，不大于5输出0，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026165929414.png" alt="image-20211026165929414"></p>
+<p>运行程序，输出结果如下：</p>
+<p>[0 1 2 3 4 5 6 7 8 9]<br>[0 0 0 0 0 0 2 2 2 2]<br>如果不指定参数x和y，则输出满足条件的数组元素的坐</p>
+<p>标。例如，上述举例不指定参数x和y，关键代码如下：</p>
+<p>01  n2&#x3D;n1[np.where(n1&gt;5)]<br>02  print(n2)<br>运行程序，输出结果如下：</p>
+<p>[6 7 8 9]</p>
+<h1 id="8-4-NumPy矩阵的基本操作"><a href="#8-4-NumPy矩阵的基本操作" class="headerlink" title="8.4　NumPy矩阵的基本操作"></a>8.4　NumPy矩阵的基本操作</h1><p>在数学中经常会看到矩阵，而在程序中常用的是数组，可以简单地理解为，矩阵是数学的概念，而数组是计算机程序设计领域的概念。在NumPy中，矩阵是数组的分支，数组和矩阵有些时候是通用的，二维数组也称矩阵。下面简单介绍矩阵的基本操作。</p>
+<h2 id="8-4-1-创建矩阵"><a href="#8-4-1-创建矩阵" class="headerlink" title="8.4.1　创建矩阵"></a>8.4.1　创建矩阵</h2><p>NumPy函数库中存在两种不同的数据类型（矩阵matrix和数组array），它们都可以用于处理行列表示的数组元素，虽然它们看起来很相似，但是在这两种数据类型上执行相同的数学运算，可能得到不同的结果。<br>在NumPy中，矩阵应用十分广泛。例如，每个图像可以被看作像素值矩阵。假设一个像素值仅为0和1，那么5×5大小的图像就是一个5×5的矩阵，如图8.25所示；而3×3大小的图像就是一个3×3的矩阵，如图8.26所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026170015304.png" alt="image-20211026170015304"></p>
+<p>​                                                                                             图8.25　5×5矩阵示意图</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026170035799.png" alt="image-20211026170035799"></p>
+<p>​                                                                                                图8.26　3×3矩阵示意图<br>关于矩阵就简单了解到这里，下面介绍如何在NumPy中创建矩阵。</p>
+<p>【示例43】　创建简单矩阵。（示例位置：资源包\MR\Code\08\43）<br>使用mat()函数创建矩阵，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026170127022.png" alt="image-20211026170127022"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026170143985.png" alt="image-20211026170143985"></p>
+<p>从运行结果得知：mat()函数创建的是矩阵类型，array()函数创建的是数组类型，而用mat()函数创建的矩阵才能进行一些线性代数的操作。</p>
+<p>【示例44】　使用mat()函数创建常见的矩阵。（示例位置：资源包\MR\Code\08\44）<br>下面使用mat()函数创建常见的矩阵。<br>（1）创建一个3×3的0（零）矩阵，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026170213383.png" alt="image-20211026170213383"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026170242743.png" alt="image-20211026170242743"></p>
+<p>（2）创建一个2×4的1矩阵，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026170348020.png" alt="image-20211026170348020"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026170431915.png" alt="image-20211026170431915"></p>
+<p>（3）使用random模块的rand()函数创建一个3×3为0～1随机产生的二维数组，并将其转换为矩阵，程序代码如下：</p>
+<p>01  import numpy as np</p>
+<p>02  data1 &#x3D; np.mat(np.random.rand(3,3))<br>03  print(data1)<br>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026170511819.png" alt="image-20211026170511819"></p>
+<p>（4）创建一个1～8的随机整数矩阵，程序代码如下：</p>
+<p>01 import numpy as np<br>02 data1 &#x3D; np.mat(np.random.randint(1,8,size&#x3D;(3,5)))<br>03 print(data1)<br>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026170540232.png" alt="image-20211026170540232"></p>
+<p>（5）创建对角矩阵，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026170625799.png" alt="image-20211026170625799"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026170642474.png" alt="image-20211026170642474"></p>
+<p>（6）创建对角线矩阵，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026170716487.png" alt="image-20211026170716487"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026170742422.png" alt="image-20211026170742422"></p>
+<p>说明<br>mat()函数只适用于二维矩阵，维数超过2以后，mat()</p>
+<p>函数就不适用了，从这一点来看array()函数更具通用性。</p>
+<h2 id="8-4-2-矩阵运算"><a href="#8-4-2-矩阵运算" class="headerlink" title="8.4.2　矩阵运算"></a>8.4.2　矩阵运算</h2><p>如果两个矩阵大小相同，我们可以使用算术运算符“+”“-”“*”“&#x2F;”对矩阵进行加、减、乘、除的运算。</p>
+<p>【示例45】　矩阵加法运算。（示例位置：资源包\MR\Code\08\45）<br>创建两个矩阵data1和data2，实现矩阵的加法运算，效果如图8.27所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026170836683.png" alt="image-20211026170836683"></p>
+<p>​                                                                  图8.27　矩阵的加法运算示意图<br>程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026170917227.png" alt="image-20211026170917227"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026170933858.png" alt="image-20211026170933858"></p>
+<p>【示例46】　矩阵减法、乘法和除法运算。（示例位置：资源包\MR\Code\08\46）<br>除了加法运算，还可以实现矩阵的减法、乘法和除法运算。接下来实现上述矩阵的减法和除法运算，程序代码如下：<br>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026170952257.png" alt="image-20211026170952257"></p>
+<p>当对上述矩阵实现乘法运算时，程序出现了错误，原因是矩阵的乘法运算，要求左边矩阵的列和右边矩阵的行数要一致。由于上述矩阵data2只有一行，所以导致程序出错。</p>
+<p>【示例47】　修改矩阵并进行乘法运算。（示例位置：资源包\MR\Code\08\47）</p>
+<p>将矩阵data2改为2×2矩阵，再进行矩阵的乘法运算，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026171103706.png" alt="image-20211026171103706"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026171125494.png" alt="image-20211026171125494"></p>
+<p>上述举例，是两个矩阵直接相乘，称之为矩阵相乘。矩阵相乘是第一个矩阵中与该元素行号相同的元素与第二个矩阵中与该元素列号相同的元素，两两相乘后再求和，运算过程如图8.28所示。例如，1×1+2×3&#x3D;7，是第一个矩阵第1行元素与第二个矩阵第1列元素，两两相乘求和得到的。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026171144696.png" alt="image-20211026171144696"></p>
+<p>​                                                                         图8.28　矩阵相乘运算过程示意图<br>数组运算和矩阵运算的一个关键区别是矩阵相乘使用的是点乘。点乘，也称点积，是数组中元素对应位置一一相乘之后求和的操作，在NumPy中专门提供了点乘方法，即dot()方法，该方法返回的是两个数组的点积。</p>
+<p>【示例48】　数组相乘与数组点乘比较。（示例位置：资源包\MR\Code\08\48）<br>数组相乘与数组点乘运算，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026171207973.png" alt="image-20211026171207973"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026171222686.png" alt="image-20211026171222686"></p>
+<p>【示例49】　矩阵元素之间的相乘运算。（示例位置：资源包\MR\Code\08\49）<br>要实现矩阵对应元素之间的相乘可以使用multiply()函数，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026171240997.png" alt="image-20211026171240997"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026173555512.png" alt="image-20211026173555512"></p>
+<h2 id="8-4-3-矩阵转换"><a href="#8-4-3-矩阵转换" class="headerlink" title="8.4.3　矩阵转换"></a>8.4.3　矩阵转换</h2><h3 id="1．矩阵转置"><a href="#1．矩阵转置" class="headerlink" title="1．矩阵转置"></a>1．矩阵转置</h3><p>【示例50】　使用T属性实现矩阵转置。（示例位置：资源包\MR\Code\08\50）<br>矩阵转置与数组转置一样使用T属性，程序代码如下：</p>
+<p>01  import numpy as np<br>02  n1 &#x3D; np.mat(‘1 3 3;4 5 6;7 12 9’)            #创建矩阵，使用分号隔开数据<br>03  print(‘矩阵转置结果为：\n’,n1.T)             #矩阵转置<br>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026173620078.png" alt="image-20211026173620078"></p>
+<h3 id="2．矩阵求逆"><a href="#2．矩阵求逆" class="headerlink" title="2．矩阵求逆"></a>2．矩阵求逆</h3><p>【示例51】　实现矩阵逆运算。（示例位置：资源包\MR\Code\08\51）<br>矩阵要可逆，否则意味着该矩阵为奇异矩阵（即矩阵的行列式的值为0）。矩阵求逆主要使用I属性，程序代码如下：</p>
+<p>01  import numpy as np<br>02  n1 &#x3D; np.mat(‘1 3 3;4 5 6;7 12 9’)       #创建矩阵，使用分号隔开数据<br>03  print(‘矩阵的逆矩阵结果为：\n’,n1.I)    #逆矩阵<br>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026173645127.png" alt="image-20211026173645127"></p>
+<h1 id="8-5-NumPy常用统计分析函数"><a href="#8-5-NumPy常用统计分析函数" class="headerlink" title="8.5　NumPy常用统计分析函数"></a>8.5　NumPy常用统计分析函数</h1><h2 id="8-5-1-数学运算函数"><a href="#8-5-1-数学运算函数" class="headerlink" title="8.5.1　数学运算函数"></a>8.5.1　数学运算函数</h2><p>NumPy包含大量的数学运算的函数，包括三角函数、算术运算函数、复数处理函数等，如表8.2所示。</p>
+<p>​                                                                                        表8.2　数学运算函数</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026173754018.png" alt="image-20211026173754018"></p>
+<p>下面介绍几个常用的数学运算函数。</p>
+<h3 id="1．算术函数"><a href="#1．算术函数" class="headerlink" title="1．算术函数"></a>1．算术函数</h3><h3 id="（1）加、减、乘、除"><a href="#（1）加、减、乘、除" class="headerlink" title="（1）加、减、乘、除"></a>（1）加、减、乘、除</h3><p>NumPy算术函数包含简单的加、减、乘、除运算，如add()函数、subtract()函数、multiply()函数和divide()函数。这里要注意的是，数组必须具有相同的形状或符合数组广播规则。</p>
+<p>【示例52】　数组加、减、乘、除运算。（示例位置：资源包\MR\Code\08\52）<br>数组加、减、乘、除运算，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026173820639.png" alt="image-20211026173820639"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026173836746.png" alt="image-20211026173836746"></p>
+<h3 id="（2）倒数"><a href="#（2）倒数" class="headerlink" title="（2）倒数"></a>（2）倒数</h3><p>reciprocal()函数用于返回数组中各元素的倒数。如4&#x2F;3的倒数是3&#x2F;4。</p>
+<p>【示例53】　计算数组元素的倒数。（示例位置：资源包\MR\Code\08\53）<br>计算数组元素的倒数，程序代码如下：</p>
+<p>01 import numpy as np<br>02 a &#x3D; np.array([0.25, 1.75, 2, 100])<br>03 print(np.reciprocal(a))<br>运行程序，输出结果如下：</p>
+<p>[4.  0.57142857 0.5  0.01  ]</p>
+<h3 id="（3）求幂"><a href="#（3）求幂" class="headerlink" title="（3）求幂"></a>（3）求幂</h3><p>power()函数将第一个数组中的元素作为底数，计算它与第二个数组中相应元素的幂。</p>
+<p>【示例54】　数组元素的幂运算。（示例位置：资源包\MR\Code\08\54）<br>对数组元素幂运算，程序代码如下：</p>
+<p>01 import numpy as np<br>02 n1 &#x3D; np.array([10, 100, 1000])<br>03 print(np.power(n1, 3))<br>04 n2&#x3D; np.array([1, 2, 3])<br>05 print(np.power(n1, n2))<br>运行程序，输出结果如下：</p>
+<p>[  1000  1000000 1000000000]<br>[    10    10000 1000000000]</p>
+<h3 id="（4）取余"><a href="#（4）取余" class="headerlink" title="（4）取余"></a>（4）取余</h3><p>mod()函数用于计算数组之间相应元素相除后的余数。</p>
+<p>【示例55】　对数组元素取余。（示例位置：资源包\MR\Code\08\55）<br>对数组元素取余，程序代码如下：</p>
+<p>01  import numpy as np<br>02  n1 &#x3D; np.array([10, 20, 30])<br>03  n2 &#x3D; np.array([4, 5, -8])<br>04  print(np.mod(n1, n2))<br>运行程序，输出结果如下：</p>
+<p>[ 2  0 -2]</p>
+<p>知识胶囊<br>下面重点介绍NumPy负数取余的算法，公式如下：<br>r&#x3D;a-n*[a&#x2F;&#x2F;n]<br>其中r为余数，a是被除数，n是除数，“&#x2F;&#x2F;”为运算取商时保留整数的下界，即偏向于较小的整数。根据负数取余的3种情况，举例如下：<br>r&#x3D;30-(-8)<em>(30&#x2F;&#x2F;(-8))&#x3D;30-(-8)</em>(-4)&#x3D;30-32&#x3D;-2<br>r&#x3D;-30-(-8)<em>(-30&#x2F;&#x2F;(-8))&#x3D;-30-(-8)</em>(3)&#x3D;-30-24&#x3D;-6<br>r&#x3D;-30-(8)<em>(-30&#x2F;&#x2F;(8))&#x3D;-30-(8)</em>(-4)&#x3D;-30+32&#x3D;2</p>
+<h3 id="2．舍入函数"><a href="#2．舍入函数" class="headerlink" title="2．舍入函数"></a>2．舍入函数</h3><h3 id="（1）四舍五入around-函数"><a href="#（1）四舍五入around-函数" class="headerlink" title="（1）四舍五入around()函数"></a>（1）四舍五入around()函数</h3><p>四舍五入在NumPy中应用比较多，主要使用around()函数，该函数返回指定小数位数的四舍五入值，语法如下：</p>
+<p>numpy.around(a,decimals)<br>参数说明：　</p>
+<p>a：数组。　</p>
+<p>decimals：舍入的小数位数，默认值为0，如果为负，整数将四舍五入到小数点左侧的位置。</p>
+<p>【示例56】　将数组中的一组数字四舍五入。（示例位置：资源包\MR\Code\08\56）<br>将数组中的一组数字四舍五入，程序代码如下：<br>运行程序，输出结果如下：</p>
+<p>[  2.   7. 100.   0.  3.  -2.]<br>[  1.55   6.82 100.    0.12   3.14  -2.35]<br>[  0.  10. 100.   0.  0.  -0.]</p>
+<h3 id="（2）向上取整ceil-函数"><a href="#（2）向上取整ceil-函数" class="headerlink" title="（2）向上取整ceil()函数"></a>（2）向上取整ceil()函数</h3><p>ceil()函数用于返回大于或者等于指定表达式的最小整数，即向上取整。</p>
+<p>【示例57】　对数组元素向上取整。（示例位置：资源包\MR\Code\08\57）<br>对数组元素向上取整，程序代码如下：<br>运行程序，输出结果如下：</p>
+<p>[-1.  2. -0.  1. 15.]</p>
+<h3 id="（3）向下取整floor-函数"><a href="#（3）向下取整floor-函数" class="headerlink" title="（3）向下取整floor()函数"></a>（3）向下取整floor()函数</h3><p>floor()函数用于返回小于或者等于指定表达式的最大整数，即向下取整。</p>
+<p>【示例58】　对数组元素向下取整。（示例位置：资源包\MR\Code\08\58）</p>
+<p>对数组元素向下取整，程序代码如下：</p>
+<p>01  import numpy as np<br>02  n &#x3D; np.array([-1.8, 1.66, -0.2, 0.888, 15])     #创建数组<br>03  print(np.floor(n))                              #向下取整<br>运行程序，输出结果如下：</p>
+<p>[-2.  1. -1.  0. 15.]</p>
+<h3 id="3．三角函数"><a href="#3．三角函数" class="headerlink" title="3．三角函数"></a>3．三角函数</h3><p>NumPy提供了标准的三角函数，即sin()函数、cos()函数和tan()函数。</p>
+<p>【示例59】　计算数组的正弦值、余弦值和正切值。（示例位置：资源包\MR\Code\08\59）<br>计算数组元素的正弦值、余弦值和正切值，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026174155746.png" alt="image-20211026174155746"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026174212800.png" alt="image-20211026174212800"></p>
+<p>arcsin()函数、arccos()函数和arctan()函数用于返回给定角度的sin、cos和tan的反三角函数。这些函数的结果可以通过degrees()函数将弧度转换为角度。</p>
+<p>【示例60】　将弧度转换为角度。（示例位置：资源包\MR\Code\08\60）<br>首先计算不同角度的正弦值，然后使用arcsin()函数计算角度的反正弦，返回值以弧度为单位，最后使用degrees()函数将弧度转换为角度来验证结果，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026174231238.png" alt="image-20211026174231238"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026174311391.png" alt="image-20211026174311391"></p>
+<p>arccos()函数和arctan()函数的用法与arcsin()函数的用法差不多，这里不再举例。</p>
+<h2 id="8-5-2-统计分析函数"><a href="#8-5-2-统计分析函数" class="headerlink" title="8.5.2　统计分析函数"></a>8.5.2　统计分析函数</h2><p>统计分析函数是对整个NumPy数组或某条轴的数据进行统计运算，函数介绍如表8.3所示。</p>
+<p>​                                                                                           表8.3　统计分析函数</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026174357030.png" alt="image-20211026174357030"></p>
+<p>下面介绍几个常用的统计函数。首先创建一个数组，如图8.29所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026174437338.png" alt="image-20211026174437338"></p>
+<p>​                                                                                          图8.29　数组示意图</p>
+<h3 id="1．求和sum-函数"><a href="#1．求和sum-函数" class="headerlink" title="1．求和sum()函数"></a>1．求和sum()函数</h3><p>【示例61】　对数组元素求和。（示例位置：资源包\MR\Code\08\61）<br>对数组元素求和、对数组元素按行和按列求和，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026174535205.png" alt="image-20211026174535205"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026174553779.png" alt="image-20211026174553779"></p>
+<h3 id="2．求平均值mean-函数"><a href="#2．求平均值mean-函数" class="headerlink" title="2．求平均值mean()函数"></a>2．求平均值mean()函数</h3><p>【示例62】　对数组元素求平均值。（示例位置：资源包\MR\Code\08\62）<br>对数组元素求平均值、对数组元素按行求平均值和按列求平均值，关键代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026174622127.png" alt="image-20211026174622127"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026174644781.png" alt="image-20211026174644781"></p>
+<h3 id="3．求最大值max-函数和最小值min-函数"><a href="#3．求最大值max-函数和最小值min-函数" class="headerlink" title="3．求最大值max()函数和最小值min()函数"></a>3．求最大值max()函数和最小值min()函数</h3><p>【示例63】　对数组元素求最大值和最小值。（示例位置：资源包\MR\Code\08\63）<br>对数组元素求最大值和最小值，关键代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026174704524.png" alt="image-20211026174704524"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026174733324.png" alt="image-20211026174733324"></p>
+<p>对二维数组求最大值在实际应用中非常广泛。例如，统计销售冠军。</p>
+<h3 id="4．求加权平均average-函数"><a href="#4．求加权平均average-函数" class="headerlink" title="4．求加权平均average()函数"></a>4．求加权平均average()函数</h3><p>在日常生活中，常用平均数表示一组数据的“平均水平”。在一组数据里，一个数据出现的次数称为权。将一组数据与出现的次数相乘再平均就是“加权平均”。加权平均能够反映一组数据中各个数据的重要程度，以及对整体趋势的影响。加权平均在日常生活应用非常广泛，如考试成绩、股票价格、竞技比赛等。</p>
+<p>【示例64】　计算电商各活动销售的加权平均价。（示例位置：资源包\MR\Code\08\64）<br>某电商在开学季、6.18、双十一、双十二等活动价格均不同，下面计算加权平均价，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026174836425.png" alt="image-20211026174836425"></p>
+<p>运行程序，输出结果如下：</p>
+<p>加权平均价：<br>34.84920634920635</p>
+<h3 id="5．中位数median-函数"><a href="#5．中位数median-函数" class="headerlink" title="5．中位数median()函数"></a>5．中位数median()函数</h3><p>中位数用来衡量数据取值的中等水平或一般水平，可以避免极端值的影响。在数据处理过程中，当数据中存在少量异常值时，它不受其影响，基于这一特点，一般使用中位数来评价分析结果。<br>那么，什么是中位数？将各个变量值按大小顺序排列起来，形成一个数列，居于数列中间位置的那个数即为中位数。例如，1、2、3、4、5这5个数，中位数就是中间的数字3，而1、2、3、4、5、6这6个数，中位数则是中间两个数的平均值，即3.5。</p>
+<p>知识胶囊<br>中位数与平均数不同，它不受异常值的影响。例如，将1、2、3、4、5、6改为1、2、3、4、5、288，中位数依然是3.5。</p>
+<p>【示例65】　计算电商活动价格的中位数。（示例位置：资源包\MR\Code\08\65）<br>计算电商在开学季、6.18、双十一、双十二等活动价格的中位数，程序代码如下：<br>运行程序，输出结果如下：</p>
+<p>数组排序：<br>[33.6 34.5 36. 37.8 39. 39.8]数组中位数为：<br>36.9</p>
+<h3 id="6．方差、标准差"><a href="#6．方差、标准差" class="headerlink" title="6．方差、标准差"></a>6．方差、标准差</h3><p>方差、标准差的定义在第4章已经介绍过了，这里不再赘述，直接进入主题。</p>
+<p>【示例66】　求数组的方差和标准差。（示例位置：资源包\MR\Code\08\66）<br>在NumPy中实现方差和标准差，程序代码如下：<br>运行程序，输出结果如下：</p>
+<p>数组方差：<br>5.168055555555551数组标准差：<br>2.2733357771247853</p>
+<h2 id="8-5-3-数组的排序"><a href="#8-5-3-数组的排序" class="headerlink" title="8.5.3　数组的排序"></a>8.5.3　数组的排序</h2><p>数组的排序是对数组元素进行排序。</p>
+<h3 id="1．sort-函数"><a href="#1．sort-函数" class="headerlink" title="1．sort()函数"></a>1．sort()函数</h3><p>使用sort()函数进行排序，直接改变原数组，参数axis指定按行排序还是按列排序。</p>
+<p>【示例67】　对数组元素按行和列排序。（示例位置：资源包\MR\Code\08\67）<br>对数组元素排序，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026175022606.png" alt="image-20211026175022606"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026175038158.png" alt="image-20211026175038158"></p>
+<h3 id="2．argsort-函数"><a href="#2．argsort-函数" class="headerlink" title="2．argsort()函数"></a>2．argsort()函数</h3><p>使用argsort()函数对数组进行排序，返回升序排序之后数组值从小到大的索引值。</p>
+<p>【示例68】　对数组元素升序排序。（示例位置：资源包\MR\Code\08\68）<br>对数组元素排序，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026175100199.png" alt="image-20211026175100199"></p>
+<p>运行程序，输出结果如下：</p>
+<p>升序排序后的索引值：<br>[6 3 2 0 5 8 1 4 7]<br>排序后的顺序重构原数组：<br>[1 2 3 4 5 6 7 8 9]</p>
+<h3 id="3．lexsort-函数"><a href="#3．lexsort-函数" class="headerlink" title="3．lexsort()函数"></a>3．lexsort()函数</h3><p>lexsort()函数用于对多个序列进行排序。可以把它当作是对电子表格进行排序，每一列代表一个序列，排序时优先照顾靠后的列。</p>
+<p>【示例69】　通过排序解决成绩相同学生的录取问题。（示例位置：资源包\MR\Code\08\69）<br>某重点高中，精英班录取学生按照总成绩录取。由于名额有限，因此当总成绩相同时，数学成绩高的优先录取；当总成绩和数学成绩都相同时，按照英语成绩高的优先录取。下面使用lexsort()函数对学生成绩进行排序，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026175145965.png" alt="image-20211026175145965"></p>
+<p>运行程序，输出结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026175200074.png" alt="image-20211026175200074"></p>
+<p>上述举例，按照数学、英语和总分进行升序排序，总成绩620分的两名同学，按照数学成绩高的优先录取原则进行第一轮排序，总分615分的两名同学，同时他们的数学成绩也相同，则按照英语成绩高的优先录取原则进行第二轮排序。</p>
+<h1 id="8-6-综合应用"><a href="#8-6-综合应用" class="headerlink" title="8.6　综合应用"></a>8.6　综合应用</h1><h2 id="8-6-1-案例1：NumPy实现正态分布"><a href="#8-6-1-案例1：NumPy实现正态分布" class="headerlink" title="8.6.1　案例1：NumPy实现正态分布"></a>8.6.1　案例1：NumPy实现正态分布</h2><p>案例位置：资源包\MR\Code\08\example\01<br>首先简单了解一下什么是正态分布。正态分布，也称“常态分布”，又名高斯分布，它在数据分析的许多方面有着重大的影响力。<br>正态分布是应用最广泛、最常见的一种数据分布形式。正态分布像一只倒扣的钟，两头低，中间高，左右对称，大部分数据集中在平均值附近，小部分在两端。例如，学生成绩的分布，高分和低分的成绩一般是少数，分布在两端，而大部分成绩集中在中间，如图8.30所示。<br>下面使用NumPy生成均值为0，标准差为0.1的一维正态分布样本1000个，并用图表显示出来，效果如图8.31所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026175247307.png" alt="image-20211026175247307"></p>
+<p>​                                                                             图8.30　学生成绩正态分布示意图</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026175307086.png" alt="image-20211026175307086"></p>
+<p>​                                                                                               图8.31　正态分布图</p>
+<p>程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026175329461.png" alt="image-20211026175329461"></p>
+<h2 id="8-6-2-案例2：NumPy用于图像灰度处理"><a href="#8-6-2-案例2：NumPy用于图像灰度处理" class="headerlink" title="8.6.2　案例2：NumPy用于图像灰度处理"></a>8.6.2　案例2：NumPy用于图像灰度处理</h2><p>案例位置：资源包\MR\Code\08\example\02<br>首先了解一下图像，图像其实是由若干像素组成，每一个像素都有明确的位置和被分配的颜色值，因此一张图像也就构成了一个像素矩阵。例如，一张灰度图片的像素块，如图8.32所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026175347296.png" alt="image-20211026175347296"></p>
+<p>​                                                                                      图8.32　灰度图片像素矩阵示意图<br>从图8.32得知：灰度图的数据是一个二维数组，颜色取值为0～255，其中，0为黑色，255为白色。从0～255逐渐由暗色变为亮色。由此可见，图像灰度处理是不是就可以通过数组计算来实现呢？<br>接下来，了解一个公式，RGB转换成灰度图像的常用公式：</p>
+<p>Gray &#x3D; R<em>0.299 + G</em>0.587 + B*0.114<br>其中，Gray表示灰度值，R、G、B表示红、绿、蓝颜色值，0.299、0.587、0.114表示灰度公式的固定值。</p>
+<p>下面使用NumPy结合Matplotlib实现图像的灰度处理，程序代码如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026175446668.png" alt="image-20211026175446668"></p>
+<p>上述代码，显示灰度图时，需要在imshow()函数中设置参数cmap&#x3D;”gray”。<br>运行程序，对比效果如图8.33和图8.34所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026175502299.png" alt="image-20211026175502299"></p>
+<p>​                                                                                                    图8.33　原图</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/image-20211026175527183.png" alt="image-20211026175527183"></p>
+<p>​                                                                                                          图8.34　灰度图像</p>
+<h1 id="8-7-小结"><a href="#8-7-小结" class="headerlink" title="8.7　小结"></a>8.7　小结</h1><p>通过本章的学习，能够掌握NumPy的常用操作，即从数组创建到数组的基本操作和运算。对于数据统计分析来说，这些内容已经足够了；而对于人工智能、机器学习，还需要更加深入地学习NumPy相关知识。另外，当数据量非常大时，NumPy可以带来百倍以上的速度提升。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://jiaobingyang.gitee.io">三乘以十的八次幂</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://jiaobingyang.gitee.io/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/">https://jiaobingyang.gitee.io/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%888%EF%BC%89/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://jiaobingyang.gitee.io" target="_blank">三乘以十的八次幂</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/python/">python</a></div><div class="post_share"><div class="social-share" data-image="https://img1.baidu.com/it/u=3796649019,1786443255&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=700&amp;h=455" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081333.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081333.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081350.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081350.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%889%EF%BC%89/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img0.baidu.com/it/u=3159172942,2257139948&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=790&amp;h=470" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">数据分析（9）</div></div></a></div><div class="next-post pull-right"><a href="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%887%EF%BC%89/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.baidu.com/it/u=86028500,1800130667&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=889&amp;h=500" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">数据分析（7）</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%881-3%EF%BC%89/" title="数据分析（1-3）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.baidu.com/it/u=2952638880,3324182124&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-30</div><div class="title">数据分析（1-3）</div></div></a></div><div><a href="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%887%EF%BC%89/" title="数据分析（7）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.baidu.com/it/u=86028500,1800130667&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-30</div><div class="title">数据分析（7）</div></div></a></div><div><a href="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%885%EF%BC%89/" title="数据分析（5）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.baidu.com/it/u=3843742074,4293285046&fm=253&fmt=auto&app=138&f=JPEG?w=822&h=500" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-30</div><div class="title">数据分析（5）</div></div></a></div><div><a href="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%889%EF%BC%89/" title="数据分析（9）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img0.baidu.com/it/u=3159172942,2257139948&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=470" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-30</div><div class="title">数据分析（9）</div></div></a></div><div><a href="/2017/06/20/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" title="面向对象编程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.baidu.com/it/u=2952638880,3324182124&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2017-06-20</div><div class="title">面向对象编程</div></div></a></div><div><a href="/2021/05/30/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%884%EF%BC%89/" title="数据分析（4）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img0.baidu.com/it/u=3046384215,884063302&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=233" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-30</div><div class="title">数据分析（4）</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13279652804370799.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="avatar"/></div><div class="author-info__name">三乘以十的八次幂</div><div class="author-info__description">死亡如风，常伴吾身</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">99</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/BINGYANGJIAO/bingyangjiao.github.io"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/BINGYANGJIAO/bingyangjiao.github.io" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:781250021@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">兴趣爱好才是最大的动力，何不与我共同攀知识高峰，品翘楚美人！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC8%E7%AB%A0%E5%9B%BE%E8%A7%A3%E6%95%B0%E7%BB%84%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%9D%97NumPy"><span class="toc-number">1.</span> <span class="toc-text">第8章图解数组计算模块NumPy</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-1%E5%88%9D%E8%AF%86NumPy"><span class="toc-number">2.</span> <span class="toc-text">8.1初识NumPy</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#8-1-1NumPy%E6%A6%82%E8%BF%B0"><span class="toc-number">2.1.</span> <span class="toc-text">8.1.1NumPy概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-1-2-%E5%AE%89%E8%A3%85NumPy%E6%A8%A1%E5%9D%97"><span class="toc-number">2.2.</span> <span class="toc-text">8.1.2　安装NumPy模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%8E%E4%BD%BF%E7%94%A8pip%E5%AE%89%E8%A3%85"><span class="toc-number">2.2.1.</span> <span class="toc-text">1．使用pip安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%BC%8E%E5%9C%A8PyCharm%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E4%B8%AD%E5%AE%89%E8%A3%85"><span class="toc-number">2.2.2.</span> <span class="toc-text">2．在PyCharm开发环境中安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%BC%8E%E5%AE%89%E8%A3%85%E9%AA%8C%E8%AF%81"><span class="toc-number">2.2.3.</span> <span class="toc-text">3．安装验证</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-1-3-%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="toc-number">2.3.</span> <span class="toc-text">8.1.3　数组相关概念</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-2-%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84"><span class="toc-number">3.</span> <span class="toc-text">8.2　创建数组</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#8-2-1-%E5%88%9B%E5%BB%BA%E7%AE%80%E5%8D%95%E7%9A%84%E6%95%B0%E7%BB%84"><span class="toc-number">3.1.</span> <span class="toc-text">8.2.1　创建简单的数组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%8E%E4%B8%BA%E6%95%B0%E7%BB%84%E6%8C%87%E5%AE%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.1.1.</span> <span class="toc-text">1．为数组指定数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%BC%8E%E6%95%B0%E7%BB%84%E7%9A%84%E5%A4%8D%E5%88%B6"><span class="toc-number">3.1.2.</span> <span class="toc-text">2．数组的复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%BC%8E%E9%80%9A%E8%BF%87ndmin%E5%8F%82%E6%95%B0%E6%8E%A7%E5%88%B6%E6%9C%80%E5%B0%8F%E7%BB%B4%E6%95%B0"><span class="toc-number">3.1.3.</span> <span class="toc-text">3．通过ndmin参数控制最小维数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-2-2-%E4%B8%8D%E5%90%8C%E6%96%B9%E5%BC%8F%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84"><span class="toc-number">3.2.</span> <span class="toc-text">8.2.2　不同方式创建数组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%8E%E5%88%9B%E5%BB%BA%E6%8C%87%E5%AE%9A%E7%BB%B4%E5%BA%A6%E5%92%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%9C%AA%E5%88%9D%E5%A7%8B%E5%8C%96%E7%9A%84%E6%95%B0%E7%BB%84"><span class="toc-number">3.2.1.</span> <span class="toc-text">1．创建指定维度和数据类型未初始化的数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%BC%8E%E5%88%9B%E5%BB%BA%E6%8C%87%E5%AE%9A%E7%BB%B4%E5%BA%A6%EF%BC%88%E4%BB%A50%E5%A1%AB%E5%85%85%EF%BC%89%E7%9A%84%E6%95%B0%E7%BB%84"><span class="toc-number">3.2.2.</span> <span class="toc-text">2．创建指定维度（以0填充）的数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%BC%8E%E5%88%9B%E5%BB%BA%E6%8C%87%E5%AE%9A%E7%BB%B4%E5%BA%A6%EF%BC%88%E4%BB%A51%E5%A1%AB%E5%85%85%EF%BC%89%E7%9A%84%E6%95%B0%E7%BB%84"><span class="toc-number">3.2.3.</span> <span class="toc-text">3．创建指定维度（以1填充）的数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%EF%BC%8E%E5%88%9B%E5%BB%BA%E6%8C%87%E5%AE%9A%E7%BB%B4%E5%BA%A6%E5%92%8C%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%95%B0%E7%BB%84%E5%B9%B6%E4%BB%A5%E6%8C%87%E5%AE%9A%E5%80%BC%E5%A1%AB%E5%85%85"><span class="toc-number">3.2.4.</span> <span class="toc-text">4．创建指定维度和类型的数组并以指定值填充</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-2-3-%E4%BB%8E%E6%95%B0%E5%80%BC%E8%8C%83%E5%9B%B4%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84"><span class="toc-number">3.3.</span> <span class="toc-text">8.2.3　从数值范围创建数组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%8E%E9%80%9A%E8%BF%87arange-%E5%87%BD%E6%95%B0%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84"><span class="toc-number">3.3.1.</span> <span class="toc-text">1．通过arange()函数创建数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%BC%8E%E4%BD%BF%E7%94%A8linspace-%E5%87%BD%E6%95%B0%E5%88%9B%E5%BB%BA%E7%AD%89%E5%B7%AE%E6%95%B0%E5%88%97"><span class="toc-number">3.3.2.</span> <span class="toc-text">2．使用linspace()函数创建等差数列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%BC%8E%E4%BD%BF%E7%94%A8logspace-%E5%87%BD%E6%95%B0%E5%88%9B%E5%BB%BA%E7%AD%89%E6%AF%94%E6%95%B0%E5%88%97"><span class="toc-number">3.3.3.</span> <span class="toc-text">3．使用logspace()函数创建等比数列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-2-4-%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%BB%84"><span class="toc-number">3.4.</span> <span class="toc-text">8.2.4　生成随机数组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%8Erand-%E5%87%BD%E6%95%B0"><span class="toc-number">3.4.1.</span> <span class="toc-text">1．rand()函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%BC%8Erandn-%E5%87%BD%E6%95%B0"><span class="toc-number">3.4.2.</span> <span class="toc-text">2．randn()函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%BC%8Erandint-%E5%87%BD%E6%95%B0"><span class="toc-number">3.4.3.</span> <span class="toc-text">3．randint()函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%EF%BC%8Enormal-%E5%87%BD%E6%95%B0"><span class="toc-number">3.4.4.</span> <span class="toc-text">4．normal()函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-2-5-%E4%BB%8E%E5%B7%B2%E6%9C%89%E7%9A%84%E6%95%B0%E7%BB%84%E4%B8%AD%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84"><span class="toc-number">3.5.</span> <span class="toc-text">8.2.5　从已有的数组中创建数组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%8Easarray-%E5%87%BD%E6%95%B0"><span class="toc-number">3.5.1.</span> <span class="toc-text">1．asarray()函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%BC%8Efrombuffer-%E5%87%BD%E6%95%B0"><span class="toc-number">3.5.2.</span> <span class="toc-text">2．frombuffer()函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%BC%8Efromiter-%E5%87%BD%E6%95%B0"><span class="toc-number">3.5.3.</span> <span class="toc-text">3．fromiter()函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%EF%BC%8Eempty-like-%E5%87%BD%E6%95%B0"><span class="toc-number">3.5.4.</span> <span class="toc-text">4．empty_like()函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%EF%BC%8Ezeros-like-%E5%87%BD%E6%95%B0"><span class="toc-number">3.5.5.</span> <span class="toc-text">5．zeros_like()函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6%EF%BC%8Eones-like-%E5%87%BD%E6%95%B0"><span class="toc-number">3.5.6.</span> <span class="toc-text">6．ones_like()函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%EF%BC%8Efull-like-%E5%87%BD%E6%95%B0"><span class="toc-number">3.5.7.</span> <span class="toc-text">7．full_like()函数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-3-%E6%95%B0%E7%BB%84%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">4.</span> <span class="toc-text">8.3　数组的基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-1-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">4.0.1.</span> <span class="toc-text">8.3.1　数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-2-%E6%95%B0%E7%BB%84%E8%BF%90%E7%AE%97"><span class="toc-number">4.0.2.</span> <span class="toc-text">8.3.2　数组运算</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%EF%BC%8E%E5%8A%A0%E6%B3%95%E8%BF%90%E7%AE%97"><span class="toc-number">4.0.2.1.</span> <span class="toc-text">1．加法运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%EF%BC%8E%E5%87%8F%E6%B3%95%E3%80%81%E4%B9%98%E6%B3%95%E5%92%8C%E9%99%A4%E6%B3%95%E8%BF%90%E7%AE%97"><span class="toc-number">4.0.2.2.</span> <span class="toc-text">2．减法、乘法和除法运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%EF%BC%8E%E5%B9%82%E8%BF%90%E7%AE%97"><span class="toc-number">4.0.2.3.</span> <span class="toc-text">3．幂运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%EF%BC%8E%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97"><span class="toc-number">4.0.2.4.</span> <span class="toc-text">4．比较运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%EF%BC%8E%E6%95%B0%E7%BB%84%E7%9A%84%E6%A0%87%E9%87%8F%E8%BF%90%E7%AE%97"><span class="toc-number">4.0.2.5.</span> <span class="toc-text">5．数组的标量运算</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-3-%E6%95%B0%E7%BB%84%E7%9A%84%E7%B4%A2%E5%BC%95%E5%92%8C%E5%88%87%E7%89%87"><span class="toc-number">4.0.3.</span> <span class="toc-text">8.3.3　数组的索引和切片</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%EF%BC%8E%E7%B4%A2%E5%BC%95"><span class="toc-number">4.0.3.1.</span> <span class="toc-text">1．索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%EF%BC%8E%E5%88%87%E7%89%87%E5%BC%8F%E7%B4%A2%E5%BC%95"><span class="toc-number">4.0.3.2.</span> <span class="toc-text">2．切片式索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%EF%BC%8E%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E7%B4%A2%E5%BC%95"><span class="toc-number">4.0.3.3.</span> <span class="toc-text">3．二维数组索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%EF%BC%8E%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E5%88%87%E7%89%87%E5%BC%8F%E7%B4%A2%E5%BC%95"><span class="toc-number">4.0.3.4.</span> <span class="toc-text">4．二维数组切片式索引</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-4-%E6%95%B0%E7%BB%84%E9%87%8D%E5%A1%91"><span class="toc-number">4.0.4.</span> <span class="toc-text">8.3.4　数组重塑</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%EF%BC%8E%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E9%87%8D%E5%A1%91"><span class="toc-number">4.0.4.1.</span> <span class="toc-text">1．一维数组重塑</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%EF%BC%8E%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84%E9%87%8D%E5%A1%91"><span class="toc-number">4.0.4.2.</span> <span class="toc-text">2．多维数组重塑</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%EF%BC%8E%E6%95%B0%E7%BB%84%E8%BD%AC%E7%BD%AE"><span class="toc-number">4.0.4.3.</span> <span class="toc-text">3．数组转置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-5-%E6%95%B0%E7%BB%84%E7%9A%84%E5%A2%9E%E3%80%81%E5%88%A0%E3%80%81%E6%94%B9%E3%80%81%E6%9F%A5"><span class="toc-number">4.0.5.</span> <span class="toc-text">8.3.5　数组的增、删、改、查</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%EF%BC%8E%E6%95%B0%E7%BB%84%E7%9A%84%E5%A2%9E%E5%8A%A0"><span class="toc-number">4.0.5.1.</span> <span class="toc-text">1．数组的增加</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%EF%BC%8E%E6%95%B0%E7%BB%84%E7%9A%84%E5%88%A0%E9%99%A4"><span class="toc-number">4.0.5.2.</span> <span class="toc-text">2．数组的删除</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%EF%BC%8E%E6%95%B0%E7%BB%84%E7%9A%84%E4%BF%AE%E6%94%B9"><span class="toc-number">4.0.5.3.</span> <span class="toc-text">3．数组的修改</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%EF%BC%8E%E6%95%B0%E7%BB%84%E7%9A%84%E6%9F%A5%E8%AF%A2"><span class="toc-number">4.0.5.4.</span> <span class="toc-text">4．数组的查询</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-4-NumPy%E7%9F%A9%E9%98%B5%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">5.</span> <span class="toc-text">8.4　NumPy矩阵的基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#8-4-1-%E5%88%9B%E5%BB%BA%E7%9F%A9%E9%98%B5"><span class="toc-number">5.1.</span> <span class="toc-text">8.4.1　创建矩阵</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-4-2-%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97"><span class="toc-number">5.2.</span> <span class="toc-text">8.4.2　矩阵运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-4-3-%E7%9F%A9%E9%98%B5%E8%BD%AC%E6%8D%A2"><span class="toc-number">5.3.</span> <span class="toc-text">8.4.3　矩阵转换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%8E%E7%9F%A9%E9%98%B5%E8%BD%AC%E7%BD%AE"><span class="toc-number">5.3.1.</span> <span class="toc-text">1．矩阵转置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%BC%8E%E7%9F%A9%E9%98%B5%E6%B1%82%E9%80%86"><span class="toc-number">5.3.2.</span> <span class="toc-text">2．矩阵求逆</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-5-NumPy%E5%B8%B8%E7%94%A8%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90%E5%87%BD%E6%95%B0"><span class="toc-number">6.</span> <span class="toc-text">8.5　NumPy常用统计分析函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#8-5-1-%E6%95%B0%E5%AD%A6%E8%BF%90%E7%AE%97%E5%87%BD%E6%95%B0"><span class="toc-number">6.1.</span> <span class="toc-text">8.5.1　数学运算函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%8E%E7%AE%97%E6%9C%AF%E5%87%BD%E6%95%B0"><span class="toc-number">6.1.1.</span> <span class="toc-text">1．算术函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%8A%A0%E3%80%81%E5%87%8F%E3%80%81%E4%B9%98%E3%80%81%E9%99%A4"><span class="toc-number">6.1.2.</span> <span class="toc-text">（1）加、减、乘、除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E5%80%92%E6%95%B0"><span class="toc-number">6.1.3.</span> <span class="toc-text">（2）倒数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E6%B1%82%E5%B9%82"><span class="toc-number">6.1.4.</span> <span class="toc-text">（3）求幂</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%8F%96%E4%BD%99"><span class="toc-number">6.1.5.</span> <span class="toc-text">（4）取余</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%BC%8E%E8%88%8D%E5%85%A5%E5%87%BD%E6%95%B0"><span class="toc-number">6.1.6.</span> <span class="toc-text">2．舍入函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%9B%9B%E8%88%8D%E4%BA%94%E5%85%A5around-%E5%87%BD%E6%95%B0"><span class="toc-number">6.1.7.</span> <span class="toc-text">（1）四舍五入around()函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E5%90%91%E4%B8%8A%E5%8F%96%E6%95%B4ceil-%E5%87%BD%E6%95%B0"><span class="toc-number">6.1.8.</span> <span class="toc-text">（2）向上取整ceil()函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E5%90%91%E4%B8%8B%E5%8F%96%E6%95%B4floor-%E5%87%BD%E6%95%B0"><span class="toc-number">6.1.9.</span> <span class="toc-text">（3）向下取整floor()函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%BC%8E%E4%B8%89%E8%A7%92%E5%87%BD%E6%95%B0"><span class="toc-number">6.1.10.</span> <span class="toc-text">3．三角函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-5-2-%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90%E5%87%BD%E6%95%B0"><span class="toc-number">6.2.</span> <span class="toc-text">8.5.2　统计分析函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%8E%E6%B1%82%E5%92%8Csum-%E5%87%BD%E6%95%B0"><span class="toc-number">6.2.1.</span> <span class="toc-text">1．求和sum()函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%BC%8E%E6%B1%82%E5%B9%B3%E5%9D%87%E5%80%BCmean-%E5%87%BD%E6%95%B0"><span class="toc-number">6.2.2.</span> <span class="toc-text">2．求平均值mean()函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%BC%8E%E6%B1%82%E6%9C%80%E5%A4%A7%E5%80%BCmax-%E5%87%BD%E6%95%B0%E5%92%8C%E6%9C%80%E5%B0%8F%E5%80%BCmin-%E5%87%BD%E6%95%B0"><span class="toc-number">6.2.3.</span> <span class="toc-text">3．求最大值max()函数和最小值min()函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%EF%BC%8E%E6%B1%82%E5%8A%A0%E6%9D%83%E5%B9%B3%E5%9D%87average-%E5%87%BD%E6%95%B0"><span class="toc-number">6.2.4.</span> <span class="toc-text">4．求加权平均average()函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%EF%BC%8E%E4%B8%AD%E4%BD%8D%E6%95%B0median-%E5%87%BD%E6%95%B0"><span class="toc-number">6.2.5.</span> <span class="toc-text">5．中位数median()函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6%EF%BC%8E%E6%96%B9%E5%B7%AE%E3%80%81%E6%A0%87%E5%87%86%E5%B7%AE"><span class="toc-number">6.2.6.</span> <span class="toc-text">6．方差、标准差</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-5-3-%E6%95%B0%E7%BB%84%E7%9A%84%E6%8E%92%E5%BA%8F"><span class="toc-number">6.3.</span> <span class="toc-text">8.5.3　数组的排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%8Esort-%E5%87%BD%E6%95%B0"><span class="toc-number">6.3.1.</span> <span class="toc-text">1．sort()函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%BC%8Eargsort-%E5%87%BD%E6%95%B0"><span class="toc-number">6.3.2.</span> <span class="toc-text">2．argsort()函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%BC%8Elexsort-%E5%87%BD%E6%95%B0"><span class="toc-number">6.3.3.</span> <span class="toc-text">3．lexsort()函数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-6-%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8"><span class="toc-number">7.</span> <span class="toc-text">8.6　综合应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#8-6-1-%E6%A1%88%E4%BE%8B1%EF%BC%9ANumPy%E5%AE%9E%E7%8E%B0%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83"><span class="toc-number">7.1.</span> <span class="toc-text">8.6.1　案例1：NumPy实现正态分布</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-6-2-%E6%A1%88%E4%BE%8B2%EF%BC%9ANumPy%E7%94%A8%E4%BA%8E%E5%9B%BE%E5%83%8F%E7%81%B0%E5%BA%A6%E5%A4%84%E7%90%86"><span class="toc-number">7.2.</span> <span class="toc-text">8.6.2　案例2：NumPy用于图像灰度处理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-7-%E5%B0%8F%E7%BB%93"><span class="toc-number">8.</span> <span class="toc-text">8.7　小结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/09/27/%E6%97%A5%E5%B8%B8%E9%9D%A2%E8%AF%95%E9%A2%98/" title="日积月累"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="日积月累"/></a><div class="content"><a class="title" href="/2022/09/27/%E6%97%A5%E5%B8%B8%E9%9D%A2%E8%AF%95%E9%A2%98/" title="日积月累">日积月累</a><time datetime="2022-09-27T12:26:26.000Z" title="发表于 2022-09-27 20:26:26">2022-09-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/06/%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端基础"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="前端基础"/></a><div class="content"><a class="title" href="/2022/07/06/%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端基础">前端基础</a><time datetime="2022-07-06T06:40:34.000Z" title="发表于 2022-07-06 14:40:34">2022-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/28/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端进阶"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="前端进阶"/></a><div class="content"><a class="title" href="/2022/06/28/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端进阶">前端进阶</a><time datetime="2022-06-27T23:33:45.000Z" title="发表于 2022-06-28 07:33:45">2022-06-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/23/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" title="事件循环"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="事件循环"/></a><div class="content"><a class="title" href="/2022/05/23/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" title="事件循环">事件循环</a><time datetime="2022-05-23T09:10:37.000Z" title="发表于 2022-05-23 17:10:37">2022-05-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/23/%E6%A8%A1%E5%9D%97%E5%8C%96/" title="模块化"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="模块化"/></a><div class="content"><a class="title" href="/2022/03/23/%E6%A8%A1%E5%9D%97%E5%8C%96/" title="模块化">模块化</a><time datetime="2022-03-23T08:50:18.000Z" title="发表于 2022-03-23 16:50:18">2022-03-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 三乘以十的八次幂</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="2963148865" data-server="netease" data-type="playlist" data-mini="true" data-fixed="true" data-preload="auto" data-autoplay="true"> </div><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "e0515f76-f737-4f77-ad57-761c3dc58f50";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (false) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (false) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

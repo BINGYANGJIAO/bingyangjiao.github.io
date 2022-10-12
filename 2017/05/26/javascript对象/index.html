@@ -1,0 +1,339 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>javascript对象 | 三乘以十的八次幂</title><meta name="keywords" content="javascript"><meta name="author" content="三乘以十的八次幂"><meta name="copyright" content="三乘以十的八次幂"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="对象对象是一种复合值，它汇聚多个值并允许它们按名字存储和获取这些值。对象是一个属性的无序集合，每个属性都有名字和值。 1）创建对象对象可以通过对象字面量、new关键字和object.create()函数来创建。 对象字面量创建对象最简单的方式是js代码中直接包含对象字面量。对象字面量的最简单形式是包含在一对花括号中的一组逗号分隔的“键:值”对。属性名是js标识符或字符串字面量。属性值是任何js的表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript对象">
+<meta property="og:url" content="https://jiaobingyang.gitee.io/2017/05/26/javascript%E5%AF%B9%E8%B1%A1/index.html">
+<meta property="og:site_name" content="三乘以十的八次幂">
+<meta property="og:description" content="对象对象是一种复合值，它汇聚多个值并允许它们按名字存储和获取这些值。对象是一个属性的无序集合，每个属性都有名字和值。 1）创建对象对象可以通过对象字面量、new关键字和object.create()函数来创建。 对象字面量创建对象最简单的方式是js代码中直接包含对象字面量。对象字面量的最简单形式是包含在一对花括号中的一组逗号分隔的“键:值”对。属性名是js标识符或字符串字面量。属性值是任何js的表">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img1.baidu.com/it/u=2034218277,3798913723&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800">
+<meta property="article:published_time" content="2017-05-26T02:54:56.000Z">
+<meta property="article:modified_time" content="2022-05-26T11:38:46.781Z">
+<meta property="article:author" content="三乘以十的八次幂">
+<meta property="article:tag" content="javascript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img1.baidu.com/it/u=2034218277,3798913723&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800"><link rel="shortcut icon" href="/img/13279652804370799.jpg"><link rel="canonical" href="https://jiaobingyang.gitee.io/2017/05/26/javascript%E5%AF%B9%E8%B1%A1/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'javascript对象',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-05-26 19:38:46'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/mycss.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13279652804370799.jpg" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">99</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/List/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/List/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page child" href="/List/gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/_data/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于本站</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img1.baidu.com/it/u=2034218277,3798913723&amp;fm=253&amp;fmt=auto&amp;app=120&amp;f=JPEG?w=1422&amp;h=800')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">三乘以十的八次幂</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/List/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/List/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page child" href="/List/gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/_data/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于本站</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">javascript对象</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2017-05-26T02:54:56.000Z" title="发表于 2017-05-26 10:54:56">2017-05-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-26T11:38:46.781Z" title="更新于 2022-05-26 19:38:46">2022-05-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/javascript/">javascript</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="javascript对象"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h1><p>对象是一种复合值，它汇聚多个值并允许它们按名字存储和获取这些值。对象是一个属性的无序集合，每个属性都有名字和值。</p>
+<h2 id="1）创建对象"><a href="#1）创建对象" class="headerlink" title="1）创建对象"></a>1）创建对象</h2><p>对象可以通过对象字面量、new关键字和object.create()函数来创建。</p>
+<h3 id="对象字面量"><a href="#对象字面量" class="headerlink" title="对象字面量"></a>对象字面量</h3><p>创建对象最简单的方式是js代码中直接包含对象字面量。对象字面量的最简单形式是包含在一对花括号中的一组逗号分隔的“键:值”对。属性名是js标识符或字符串字面量。属性值是任何js的表达式，这个表达式的值会变成属性的值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let empty = &#123;&#125;</span><br><span class="line">let point = &#123;x:0,y:0&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用New创建对象"><a href="#使用New创建对象" class="headerlink" title="使用New创建对象"></a>使用New创建对象</h3><p>new操作符用于创建和初始化一个新对象。new关键字后面必须跟一个函数调用。以这种方式使用的函数被称为构造函数，目的是初始化新创建的对象。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let o = new Object(); //&#123;&#125;</span><br><span class="line">let a = new Array();//[]</span><br></pre></td></tr></table></figure>
+
+<h3 id="Object-create"><a href="#Object-create" class="headerlink" title="Object.create()"></a>Object.create()</h3><p>ECMAScript 5 定义了一个名为 <code>Object.create()</code> 的方法，它创建一个新对象，其中第一个参数是这个对象的原型。<code>Object.create()</code> 提供第二个可选参数，用以对对象的属性进行进一步描述。<code>Object.create()</code> 是一个静态函数，而不是提供给某个对象调用的方法。使用它的方法很简单，只须传入所需的原型对象即可。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var person = Object.create(Object.prototype);</span><br><span class="line">person.name = &quot;stone&quot;;</span><br><span class="line">person.age = 28;</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>var person = Object.create(Object.prototype);</code> 也等价于 <code>var person = &#123;&#125;;</code> 。</p>
+<h2 id="2）原型"><a href="#2）原型" class="headerlink" title="2）原型"></a>2）原型</h2><p>所有通过对象字面量创建的对象都具有同一个原型对象，并可以通过 JavaScript 代码 <code>Object.prototype</code> 获得对原型对象的引用。通过关键字 <code>new</code> 和构造函数调用创建的对象的原型就是构造函数的 <code>prototype</code> 属性的值。因此，同使用 <code>&#123;&#125;</code> 创建对象一样，通过 <code>new Object()</code> 创建的对象也继承自 <code>Object.prototype</code>。同样，通过 <code>new Array()</code> 创建的对象的原型就是 <code>Array.prototype</code>，通过 <code>new Date()</code> 创建的对象的原型就是 <code>Date.prototype</code>。</p>
+<p>没有原型的对象为数不多，<code>Object.prototype</code> 就是其中之一。它不继承任何属性。其他原型对象都是普通对象，普通对象都具有原型。所有的内置构造函数（以及大部分自定义的构造函数）都具有一个继承自 <code>Object.prototype</code> 的原型。例如，<code>Date.prototype</code> 的属性继承自 <code>Object.prototype</code>，因此由 <code>new Date()</code> 创建的 <code>Date</code> 对象的属性同时继承自 <code>Date.prototype</code> 和 <code>Object.prototype</code>。</p>
+<h2 id="3）查询或设置属性"><a href="#3）查询或设置属性" class="headerlink" title="3）查询或设置属性"></a>3）查询或设置属性</h2><p>前面有提到过，可以通过点 <code>.</code> 或方括号 <code>[]</code> 运算符来获取属性的值。对于点 <code>.</code> 来说，左侧应当是一个对象，右侧必须是一个以属性名称命名的简单标识符。对于方括号来说 <code>[]</code> ，方括号内必须是一个计算结果为字符串的表达式，这个字符串就是属性的名称。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 推荐写法</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(person.<span class="property">name</span>);   <span class="comment">// &quot;stone&quot;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(person.<span class="property">age</span>);    <span class="comment">// &quot;28&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 也可以写成</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(person[<span class="string">&quot;name&quot;</span>]);    <span class="comment">// stone</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(person[<span class="string">&quot;age&quot;</span>]);     <span class="comment">// 28</span></span><br></pre></td></tr></table></figure>
+
+<p>和获取属性的值写法一样，通过点和方括号也可以创建属性或给属性赋值，但需要将它们放在赋值表达式的左侧。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 推荐写法</span></span><br><span class="line">person.<span class="property">name</span> = <span class="string">&quot;sophie&quot;</span>; <span class="comment">// 赋值</span></span><br><span class="line">person.<span class="property">age</span> = <span class="number">30</span>;        <span class="comment">// 赋值</span></span><br><span class="line">person.<span class="property">weight</span> = <span class="number">38</span>;     <span class="comment">// 创建</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 也可以写成</span></span><br><span class="line">person[<span class="string">&quot;name&quot;</span>] = <span class="string">&quot;sophie&quot;</span>;  <span class="comment">// 赋值</span></span><br><span class="line">person[<span class="string">&quot;age&quot;</span>] = <span class="number">30</span>;         <span class="comment">// 赋值</span></span><br><span class="line">person[<span class="string">&quot;weight&quot;</span>] = <span class="number">38</span>;      <span class="comment">// 创建</span></span><br></pre></td></tr></table></figure>
+
+<p>当使用方括号时，方括号内的表达式必须返回字符串。更严格地讲，表达式必须返回字符串或返回一个可以转换为字符串的值。</p>
+<p>查看一个对象本身的所有属性，可以使用<code>Object.keys</code>方法。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;</span><br><span class="line">  key1: 1,</span><br><span class="line">  key2: 2</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Object.keys(obj);</span><br><span class="line">// [&#x27;key1&#x27;, &#x27;key2&#x27;]</span><br></pre></td></tr></table></figure>
+
+<h2 id="4）属性的访问错误"><a href="#4）属性的访问错误" class="headerlink" title="4）属性的访问错误"></a>4）属性的访问错误</h2><p>查询一个不存在的属性并不会报错，如果在对象 <code>o</code> 自身的属性或继承的属性中均未找到属性 <code>x</code>，属性访问表达式 <code>o.x</code> 返回 <code>undefined</code>。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;&#125;;</span><br><span class="line">person.<span class="property">wife</span>;    <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>但是，如果对象不存在，那么试图查询这个不存在的对象的属性就会报错。<code>null</code> 和 <code>undefined</code> 值都没有属性，因此查询这些值的属性会报错。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;&#125;;</span><br><span class="line">person.<span class="property">wife</span>.<span class="property">name</span>;   <span class="comment">// Uncaught TypeError: Cannot read property &#x27;name&#x27; of undefined.</span></span><br></pre></td></tr></table></figure>
+
+<p>除非确定 <code>person</code> 和 <code>person.wife</code> 都是对象，否则不能这样写表达式 <code>person.wife.name</code>，因为会报「未捕获的错误类型」，下面提供了两种避免出错的方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 冗余但易懂的写法</span></span><br><span class="line"><span class="keyword">var</span> name;</span><br><span class="line"><span class="keyword">if</span> (person) &#123;</span><br><span class="line">    <span class="keyword">if</span> (person.<span class="property">wife</span>) </span><br><span class="line">        name = person.<span class="property">wife</span>.<span class="property">name</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 简练又常用的写法（推荐写法）</span></span><br><span class="line"><span class="keyword">var</span> name = person &amp;&amp; person.<span class="property">wife</span> &amp;&amp; person.<span class="property">wife</span>.<span class="property">name</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5）删除属性"><a href="#5）删除属性" class="headerlink" title="5）删除属性"></a>5）删除属性</h2><p>delete操作符用于从对象中移除属性。它唯一的操作数应该是一个属性访问表达式。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123; p: 1 &#125;;</span><br><span class="line">Object.keys(obj) // [&quot;p&quot;]</span><br><span class="line"></span><br><span class="line">delete obj.p // true</span><br><span class="line">obj.p // undefined</span><br><span class="line">Object.keys(obj) // []</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>delete</code>命令删除对象<code>obj</code>的<code>p</code>属性。删除后，再读取<code>p</code>属性就会返回<code>undefined</code>，而且<code>Object.keys</code>方法的返回值也不再包括该属性。</p>
+<p><strong>注意，删除一个不存在的属性，<code>delete</code>不报错，而且返回<code>true</code>。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;&#125;;</span><br><span class="line">delete obj.p // true</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，对象<code>obj</code>并没有<code>p</code>属性，但是<code>delete</code>命令照样返回<code>true</code>。因此，不能根据<code>delete</code>命令的结果，认定某个属性是存在的。</p>
+<p>另外，需要注意的是，<code>delete</code>命令只能删除对象本身的属性，无法删除继承的属性。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;&#125;;</span><br><span class="line">delete obj.toString // true</span><br><span class="line">obj.toString // function toString() &#123; [native code] &#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>toString</code>是对象<code>obj</code>继承的属性，虽然<code>delete</code>命令返回<code>true</code>，但该属性并没有被删除，依然存在。这个例子还说明，即使<code>delete</code>返回<code>true</code>，该属性依然可能读取到值。</p>
+<h2 id="6）检测属性"><a href="#6）检测属性" class="headerlink" title="6）检测属性"></a>6）检测属性</h2><p>JavaScript 对象可以看做属性的集合，我们经常会检测集合中成员的所属关系（判断某个属性是否存在于某个对象中）。可以通过 <code>in</code> 运算符、<code>hasOwnPreperty()</code> 和 <code>propertyIsEnumerable()</code> 来完成这个工作，甚至仅通过属性查询也可以做到这一点。</p>
+<p><code>in</code> 运算符的左侧是属性名（字符串），右侧是对象。如果对象的自有属性或继承属性中包含这个属性则返回 <code>true</code>。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123; <span class="attr">x</span>: <span class="number">1</span> &#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;x&quot;</span> <span class="keyword">in</span> o);          <span class="comment">// true，x是o的属性</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;y&quot;</span> <span class="keyword">in</span> o);          <span class="comment">// false，y不是o的属性</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;toString&quot;</span> <span class="keyword">in</span> o);   <span class="comment">// true，toString是继承属性</span></span><br></pre></td></tr></table></figure>
+
+<p>对象的 <code>hasOwnProperty()</code> 方法用来检测给定的名字是否是对象的自有属性。对于继承属性它将返回 <code>false</code>。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123; <span class="attr">x</span>: <span class="number">1</span> &#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(o.<span class="title function_">hasOwnProperty</span>(<span class="string">&quot;x&quot;</span>));          <span class="comment">// true，x是o的自有属性</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(o.<span class="title function_">hasOwnProperty</span>(<span class="string">&quot;y&quot;</span>));          <span class="comment">// false，y不是o的属性</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(o.<span class="title function_">hasOwnProperty</span>(<span class="string">&quot;toString&quot;</span>));   <span class="comment">// false，toString是继承属性</span></span><br></pre></td></tr></table></figure>
+
+<p><code>propertyIsEnumerable()</code> 是 <code>hasOwnProperty()</code> 的增强版，只有检测到是自有属性且这个属性的可枚举性（enumerable attribute）为 <code>true</code> 时它才返回 <code>true</code>。某些内置属性是不可枚举的。通常由 JavaScript 代码创建的属性都是可枚举的，除非在 ECMAScript 5 中使用一个特殊的方法来改变属性的可枚举性。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = <span class="title function_">inherit</span>(&#123; <span class="attr">y</span>: <span class="number">2</span> &#125;);</span><br><span class="line">o.<span class="property">x</span> = <span class="number">1</span>;</span><br><span class="line">o.<span class="title function_">propertyIsEnumerable</span>(<span class="string">&quot;x&quot;</span>);    <span class="comment">// true:，x是o的自有属性，可枚举</span></span><br><span class="line">o.<span class="title function_">propertyIsEnumerable</span>(<span class="string">&quot;y&quot;</span>);    <span class="comment">// false，y是继承属性</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="title function_">propertyIsEnumerable</span>(<span class="string">&quot;toString&quot;</span>);  <span class="comment">// false，不可枚举</span></span><br></pre></td></tr></table></figure>
+
+<p>除了使用 <code>in</code> 运算符之外，另一种更简便的方法是使用 <code>!==</code> 判断一个属性是否是 <code>undefined</code>。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123; <span class="attr">x</span>: <span class="number">1</span> &#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(o.<span class="property">x</span> !== <span class="literal">undefined</span>);              <span class="comment">// true，x是o的属性</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(o.<span class="property">y</span> !== <span class="literal">undefined</span>);              <span class="comment">// false，y不是o的属性</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(o.<span class="property">toString</span> !== <span class="literal">undefined</span>);       <span class="comment">// true，toString是继承属性</span></span><br></pre></td></tr></table></figure>
+
+<p>然而有一种场景只能使用 <code>in</code> 运算符而不能使用上述属性访问的方式。<code>in</code> 可以区分不存在的属性和存在但值为 <code>undefined</code> 的属性。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123; <span class="attr">x</span>: <span class="literal">undefined</span> &#125;        <span class="comment">// 属性被显式赋值为undefined</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(o.<span class="property">x</span> !== <span class="literal">undefined</span>); <span class="comment">// false，属性存在，但值为undefined</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(o.<span class="property">y</span> !== <span class="literal">undefined</span>); <span class="comment">// false，属性不存在</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;x&quot;</span> <span class="keyword">in</span> o);          <span class="comment">// true，属性存在</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;y&quot;</span> <span class="keyword">in</span> o);          <span class="comment">// false，属性不存在</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">delete</span> o.<span class="property">x</span>);        <span class="comment">// true，删除了属性x</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;x&quot;</span> <span class="keyword">in</span> o);          <span class="comment">// false，属性不再存在</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="7）枚举属性"><a href="#7）枚举属性" class="headerlink" title="7）枚举属性"></a>7）枚举属性</h2><p>除了检测对象的属性是否存在，我们还会经常遍历对象的属性。通常使用 <code>for-in</code> 循环遍历，ECMAScript 5 提供了两个更好用的替代方案。</p>
+<p><code>for-in</code> 循环可以在循环体中遍历对象中所有可枚举的属性（包括自有属性和继承的属性），把属性名称赋值给循环变量。对象继承的内置方法不可枚举的，但在代码中给对象添加的属性都是可枚举的。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;a: 1, b: 2, c: 3&#125;;</span><br><span class="line"></span><br><span class="line">for (var i in obj) &#123;</span><br><span class="line">  console.log(&#x27;键名：&#x27;, i);</span><br><span class="line">  console.log(&#x27;键值：&#x27;, obj[i]);</span><br><span class="line">&#125;</span><br><span class="line">// 键名： a</span><br><span class="line">// 键值： 1</span><br><span class="line">// 键名： b</span><br><span class="line">// 键值： 2</span><br><span class="line">// 键名： c</span><br><span class="line">// 键值： 3</span><br></pre></td></tr></table></figure>
+
+<p><code>for...in</code>循环有两个使用注意点。</p>
+<ul>
+<li>它遍历的是对象所有可遍历（enumerable）的属性，会跳过不可遍历的属性。</li>
+<li>它不仅遍历对象自身的属性，还遍历继承的属性。</li>
+</ul>
+<p>举例来说，对象都继承了<code>toString</code>属性，但是<code>for...in</code>循环不会遍历到这个属性。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">// toString 属性是存在的</span><br><span class="line">obj.toString // toString() &#123; [native code] &#125;</span><br><span class="line"></span><br><span class="line">for (var p in obj) &#123;</span><br><span class="line">  console.log(p);</span><br><span class="line">&#125; // 没有任何输出</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，对象<code>obj</code>继承了<code>toString</code>属性，该属性不会被<code>for...in</code>循环遍历到，因为它默认是“不可遍历”的。关于对象属性</p>
+<p>的可遍历性，参见《标准库》章节中 Object 一章的介绍。</p>
+<p>如果继承的属性是可遍历的，那么就会被<code>for...in</code>循环遍历到。但是，一般情况下，都是只想遍历对象自身的属性，所以使</p>
+<p>用<code>for...in</code>的时候，应该结合使用<code>hasOwnProperty</code>方法，在循环内部判断一下，某个属性是否为对象自身的属性。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var person = &#123; name: &#x27;老张&#x27; &#125;;</span><br><span class="line"></span><br><span class="line">for (var key in person) &#123;</span><br><span class="line">  if (person.hasOwnProperty(key)) &#123;</span><br><span class="line">    console.log(key);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// name</span><br></pre></td></tr></table></figure>
+
+<h2 id="8）属性的-getter-和-setter"><a href="#8）属性的-getter-和-setter" class="headerlink" title="8）属性的 getter 和 setter"></a>8）属性的 <code>getter</code> 和 <code>setter</code></h2><p>我们知道，对象属性是由名字、值和一组特性（attribute）构成的。在 ECMAScript 5 中，属性值可以用一个或两个方法替代，这两个方法就是 <code>getter</code> 和 <code>setter</code>。由 <code>getter</code> 和 <code>setter</code> 定义的属性称做「存取器属性（accessor property）」，它不同于「数据属性（data property）」，数据属性只有一个简单的值。</p>
+<p>当程序查询存取器属性的值时，JavaScript 调用 <code>getter</code> 方法。这个方法的返回值就是属性存取表达式的值。当程序设置一个存取器属性的值时，JavaScript 调用 <code>setter</code> 方法，将赋值表达式右侧的值当做参数传入 <code>setter</code>。从某种意义上讲，这个方法负责「设置」属性值。可以忽略 <code>setter</code> 方法的返回值。</p>
+<p>和数据属性不同，存取器属性不具有可写性（writable attribute）。如果属性同时具有 <code>getter</code> 和 <code>setter</code> 方法，那么它是一个读&#x2F;写属性。如果它只有 <code>getter</code> 方法，那么它是一个只读属性。如果它只有 <code>setter</code> 方法，那么它是一个只写属性，读取只写属性总是返回 <code>undefined</code>。定义存取器属性最简单的方法是使用对象直接量语法的一种扩展写法。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">    <span class="comment">// 普通的数据属性</span></span><br><span class="line">    <span class="attr">data_prop</span>: value,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 存取器属性都是成对定义的函数</span></span><br><span class="line">    <span class="keyword">get</span> <span class="title function_">accessor_prop</span>() &#123; <span class="comment">/*这里是函数体 */</span> &#125;,</span><br><span class="line">    <span class="keyword">set</span> <span class="title function_">accessor_prop</span>(<span class="params">value</span>) &#123; <span class="comment">/* 这里是函数体*/</span> &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>存取器属性定义为一个或两个和属性同名的函数，这个函数定义没有使用 <code>function</code> 关键字，而是使用 <code>get</code> 或 <code>set</code>。注意，这里没有使用冒号将属性名和函数体分隔开，但在函数体的结束和下一个方法或数据属性之间有逗号分隔。</p>
+<h2 id="9）序列化对象（JSON）"><a href="#9）序列化对象（JSON）" class="headerlink" title="9）序列化对象（JSON）"></a>9）序列化对象（JSON）</h2><p>对象序列化（serialization）是指将对象的状态转换为字符串，也可将字符串还原为对象。ECMAScript 5 提供了内置函数 <code>JSON.stringify()</code> 和 <code>JSON.parse()</code> 用来序列化和还原 JavaScript 对象。这些方法都使用 JSON 作为数据交换格式，JSON 的全称是「JavaScript 对象表示法（JavaScript Object Notation）」，它的语法和 JavaScript 对象与数组直接量的语法非常相近。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">o = &#123;<span class="attr">x</span>:<span class="number">1</span>, <span class="attr">y</span>:&#123;<span class="attr">z</span>:[<span class="literal">false</span>,<span class="literal">null</span>,<span class="string">&quot;&quot;</span>]&#125;&#125;;       <span class="comment">// 定义一个对象</span></span><br><span class="line">s = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(o);                  <span class="comment">// s是 &#x27;&#123;&quot;x&quot;:1,&quot;y&quot;:&#123;&quot;z&quot;:[false,null,&quot;&quot;]&#125;&#125;&#x27;</span></span><br><span class="line">p = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(s);                      <span class="comment">// p是o的深拷贝</span></span><br></pre></td></tr></table></figure>
+
+<p>ECMAScript 5 中的这些函数的本地实现和 <a target="_blank" rel="noopener" href="https://github.com/douglascrockford/JSON-js">https://github.com/douglascrockford/JSON-js</a> 中的公共域 ECMAScript 3 版本的实现非常类似，或者说完全一样，因此可以通过引入 <code>json2.js</code> 模块在 ECMAScript 3 的环境中使用 ECMAScript 5 中的这些函数。</p>
+<p>JSON 的语法是 JavaScript 语法的子集，它并不能表示 JavaScript 里的所有值。它支持对象、数组、字符串、无穷大数字、<code>true</code>、<code>false</code> 和 <code>null</code>，可以序列化和还原它们。<code>NaN</code>、<code>Infinity</code> 和 <code>-Infinity</code> 序列化的结果是 <code>null</code>，日期对象序列化的结果是 ISO 格式的日期字符串（参照 <code>Date.toJSON()</code> 函数），但 <code>JSON.parse()</code> 依然保留它们的字符串形态，而不会将它们还原为原始日期对象。函数、<code>RegExp</code>、<code>Error</code> 对象和 <code>undefined</code> 值不能序列化和还原。<code>JSON.stringify()</code> 只能序列化对象可枚举的自有属性。对于一个不能序列化的属性来说，在序列化后的输出字符串中会将这个属性省略掉。<code>JSON.stringify()</code> 和 <code>JSON.parse()</code> 都可以接收第二个可选参数，通过传入需要序列化或还原的属性列表来定制自定义的序列化或还原操作。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://jiaobingyang.gitee.io">三乘以十的八次幂</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://jiaobingyang.gitee.io/2017/05/26/javascript%E5%AF%B9%E8%B1%A1/">https://jiaobingyang.gitee.io/2017/05/26/javascript%E5%AF%B9%E8%B1%A1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://jiaobingyang.gitee.io" target="_blank">三乘以十的八次幂</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/javascript/">javascript</a></div><div class="post_share"><div class="social-share" data-image="https://img1.baidu.com/it/u=2034218277,3798913723&amp;fm=253&amp;fmt=auto&amp;app=120&amp;f=JPEG?w=1422&amp;h=800" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081333.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081333.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081350.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220624081350.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2017/05/26/javascript%E5%87%BD%E6%95%B0/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img1.baidu.com/it/u=3573567130,3115501667&amp;fm=253&amp;fmt=auto&amp;app=120&amp;f=JPEG?w=1280&amp;h=800" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">javascript函数</div></div></a></div><div class="next-post pull-right"><a href="/2017/05/16/%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.baidu.com/it/u=2952638880,3324182124&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=800&amp;h=500" onerror="onerror=null;src='/img/wallhaven-e76roo.png'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">原型和原型链</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2017/05/26/javascript%E5%87%BD%E6%95%B0/" title="javascript函数"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img1.baidu.com/it/u=3573567130,3115501667&fm=253&fmt=auto&app=120&f=JPEG?w=1280&h=800" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2017-05-26</div><div class="title">javascript函数</div></div></a></div><div><a href="/2017/05/05/javascript%E5%AD%97%E7%AC%A6%E4%B8%B2/" title="javascript字符串"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2.baidu.com/it/u=203840827,1100704486&fm=253&fmt=auto&app=138&f=PNG?w=500&h=313" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2017-05-05</div><div class="title">javascript字符串</div></div></a></div><div><a href="/2017/05/14/javascript%E6%95%B0%E7%BB%84/" title="javascript数组"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img0.baidu.com/it/u=1795835256,1026023622&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2017-05-14</div><div class="title">javascript数组</div></div></a></div><div><a href="/2017/04/23/javascript%E7%B1%BB%E5%9E%8B%E3%80%81%E5%80%BC%E5%92%8C%E5%8F%98%E9%87%8F/" title="javascript类型、值和变量"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img1.baidu.com/it/u=611738635,3583713525&fm=253&fmt=auto&app=120&f=JPEG?w=800&h=500" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2017-04-23</div><div class="title">javascript类型、值和变量</div></div></a></div><div><a href="/2017/04/23/javascript%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8C%E6%93%8D%E4%BD%9C%E7%AC%A6/" title="javascript表达式和操作符"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img0.baidu.com/it/u=2287769419,267238363&fm=253&fmt=auto&app=138&f=JPEG?w=658&h=411" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2017-04-23</div><div class="title">javascript表达式和操作符</div></div></a></div><div><a href="/2017/04/22/javascript%E8%AF%8D%E6%B3%95%E7%BB%93%E6%9E%84/" title="javascript词法结构"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img0.baidu.com/it/u=512340543,3139277133&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=281" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2017-04-22</div><div class="title">javascript词法结构</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13279652804370799.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="avatar"/></div><div class="author-info__name">三乘以十的八次幂</div><div class="author-info__description">死亡如风，常伴吾身</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">99</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/BINGYANGJIAO/bingyangjiao.github.io"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/BINGYANGJIAO/bingyangjiao.github.io" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:781250021@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">兴趣爱好才是最大的动力，何不与我共同攀知识高峰，品翘楚美人！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.</span> <span class="toc-text">对象</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%EF%BC%89%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.1.</span> <span class="toc-text">1）创建对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E5%AD%97%E9%9D%A2%E9%87%8F"><span class="toc-number">1.1.1.</span> <span class="toc-text">对象字面量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8New%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.1.2.</span> <span class="toc-text">使用New创建对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-create"><span class="toc-number">1.1.3.</span> <span class="toc-text">Object.create()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%EF%BC%89%E5%8E%9F%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">2）原型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%EF%BC%89%E6%9F%A5%E8%AF%A2%E6%88%96%E8%AE%BE%E7%BD%AE%E5%B1%9E%E6%80%A7"><span class="toc-number">1.3.</span> <span class="toc-text">3）查询或设置属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%EF%BC%89%E5%B1%9E%E6%80%A7%E7%9A%84%E8%AE%BF%E9%97%AE%E9%94%99%E8%AF%AF"><span class="toc-number">1.4.</span> <span class="toc-text">4）属性的访问错误</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%EF%BC%89%E5%88%A0%E9%99%A4%E5%B1%9E%E6%80%A7"><span class="toc-number">1.5.</span> <span class="toc-text">5）删除属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%EF%BC%89%E6%A3%80%E6%B5%8B%E5%B1%9E%E6%80%A7"><span class="toc-number">1.6.</span> <span class="toc-text">6）检测属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7%EF%BC%89%E6%9E%9A%E4%B8%BE%E5%B1%9E%E6%80%A7"><span class="toc-number">1.7.</span> <span class="toc-text">7）枚举属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8%EF%BC%89%E5%B1%9E%E6%80%A7%E7%9A%84-getter-%E5%92%8C-setter"><span class="toc-number">1.8.</span> <span class="toc-text">8）属性的 getter 和 setter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9%EF%BC%89%E5%BA%8F%E5%88%97%E5%8C%96%E5%AF%B9%E8%B1%A1%EF%BC%88JSON%EF%BC%89"><span class="toc-number">1.9.</span> <span class="toc-text">9）序列化对象（JSON）</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/09/27/%E6%97%A5%E5%B8%B8%E9%9D%A2%E8%AF%95%E9%A2%98/" title="日积月累"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="日积月累"/></a><div class="content"><a class="title" href="/2022/09/27/%E6%97%A5%E5%B8%B8%E9%9D%A2%E8%AF%95%E9%A2%98/" title="日积月累">日积月累</a><time datetime="2022-09-27T12:26:26.000Z" title="发表于 2022-09-27 20:26:26">2022-09-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/06/%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端基础"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="前端基础"/></a><div class="content"><a class="title" href="/2022/07/06/%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端基础">前端基础</a><time datetime="2022-07-06T06:40:34.000Z" title="发表于 2022-07-06 14:40:34">2022-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/28/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端进阶"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="前端进阶"/></a><div class="content"><a class="title" href="/2022/06/28/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/" title="前端进阶">前端进阶</a><time datetime="2022-06-27T23:33:45.000Z" title="发表于 2022-06-28 07:33:45">2022-06-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/23/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" title="事件循环"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="事件循环"/></a><div class="content"><a class="title" href="/2022/05/23/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" title="事件循环">事件循环</a><time datetime="2022-05-23T09:10:37.000Z" title="发表于 2022-05-23 17:10:37">2022-05-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/23/%E6%A8%A1%E5%9D%97%E5%8C%96/" title="模块化"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/13280497753579408.jpg" onerror="this.onerror=null;this.src='/img/wallhaven-e76roo.png'" alt="模块化"/></a><div class="content"><a class="title" href="/2022/03/23/%E6%A8%A1%E5%9D%97%E5%8C%96/" title="模块化">模块化</a><time datetime="2022-03-23T08:50:18.000Z" title="发表于 2022-03-23 16:50:18">2022-03-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 三乘以十的八次幂</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="2963148865" data-server="netease" data-type="playlist" data-mini="true" data-fixed="true" data-preload="auto" data-autoplay="true"> </div><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "e0515f76-f737-4f77-ad57-761c3dc58f50";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (false) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (false) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
